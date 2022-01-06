@@ -2,7 +2,7 @@
 
 
 
-# Projects
+# Project
 
 project(SA_MathsProto)
 

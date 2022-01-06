@@ -51,6 +51,9 @@ SA_Setup_Maths_Target(SA_Maths)
 ## Add SA_Maths's tests to build tree.
 option(SA_MATHS_BUILD_TESTS_OPT "Should build SA_Maths tests" OFF)
 
+## Add SA_Maths's tests to build tree.
+option(SA_MATHS_BUILD_BENCHMARK_OPT "Should build SA_Maths benchmark" OFF)
+
 
 
 # Entrypoints
