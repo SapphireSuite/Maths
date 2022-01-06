@@ -17,8 +17,8 @@ function(SA_Setup_Maths_Target mathsTarget)
 
 	## Include directories
 
-	target_include_directories(${mathsTarget} PUBLIC Include)
-	target_include_directories(${mathsTarget} PRIVATE Include/SA)
+	target_include_directories(${mathsTarget} PUBLIC "${CMAKE_SOURCE_DIR}/Include")
+	target_include_directories(${mathsTarget} PRIVATE "${CMAKE_SOURCE_DIR}/Include/SA")
 
 
 	## Compile features
