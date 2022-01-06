@@ -11,51 +11,54 @@ message("SA_Maths Main directory: ${CMAKE_SOURCE_DIR}")
 
 
 
-# Inputs
+# Setup target
 
-file(GLOB_RECURSE SA_MATHS_SOURCES "Source/*")
+function(SA_Setup_Maths_Target mathsTarget)
+
+	## Include directories
+
+	target_include_directories(${mathsTarget} PUBLIC Include)
+	target_include_directories(${mathsTarget} PRIVATE Include/SA)
+
+
+	## Compile features
+
+	### Standard
+	target_compile_features(${mathsTarget} PUBLIC c_std_11)
+	target_compile_features(${mathsTarget} PUBLIC cxx_std_20)
+
+	### SA_Maths module implementation preprocessor.
+	target_compile_definitions(${mathsTarget} PUBLIC SA_MATHS_IMPL)
+
+
+endfunction()
 
 
 
 # Library
 
-## Add Static library
+## Input.
+file(GLOB_RECURSE SA_MATHS_SOURCES "Source/*")
+
+## Static library.
 add_library(SA_Maths STATIC ${SA_MATHS_SOURCES})
-
-
-## Include directories
-
-target_include_directories(SA_Maths PUBLIC Include)
-target_include_directories(SA_Maths PRIVATE Include/SA)
-
-
-## Compile features
-
-### Standard
-target_compile_features(SA_Maths PUBLIC c_std_11)
-target_compile_features(SA_Maths PUBLIC cxx_std_20)
-
-### SA_Maths module implementation preprocessor.
-target_compile_definitions(SA_Maths PUBLIC SA_MATHS_IMPL)
+SA_Setup_Maths_Target(SA_Maths)
 
 
 
 # Options
 
 ## Add SA_Maths's tests to build tree.
-option(SA_MATHS_BUILD_TESTS "Should build SA_Maths tests" OFF)
-
-
-
-# Tests
-
-### Enable testing for this directory and below.
-enable_testing()
+option(SA_MATHS_BUILD_TESTS_OPT "Should build SA_Maths tests" OFF)
 
 
 
 # Entrypoints
 
-if(SA_MATHS_BUILD_TESTS)
+if(SA_MATHS_BUILD_TESTS_OPT)
+
+	### Enable testing for this directory and below.
+	enable_testing()
+
 	add_subdirectory(Tests)
 endif()
