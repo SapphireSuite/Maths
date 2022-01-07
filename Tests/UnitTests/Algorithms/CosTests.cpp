@@ -17,7 +17,7 @@ namespace Sa::UT::Cos
 		EXPECT_EQ(Maths::Cos<float>(Maths::PiOv2<float>) - std::numeric_limits<float>::epsilon() <= 0.0f, true);
 
 		EXPECT_EQ(Maths::Cos<float>(Degf{ 40 }), float{ 0.76604444311897801 });
-		EXPECT_EQ(Maths::Cos<float>(0.69813170079773179), float{ 0.76604444311897801 });
+		EXPECT_EQ(Maths::Cos<float>(0.69813170079773179_rad), float{ 0.76604444311897801 });
 	}
 
 	TEST(TrigoTest, CosinusDouble)
@@ -28,6 +28,6 @@ namespace Sa::UT::Cos
 		EXPECT_EQ(Maths::Cos<double>(Maths::PiOv2<double>) - std::numeric_limits<double>::epsilon() <= 0.0, true);
 
 		EXPECT_EQ(Maths::Cos<double>(Degd{ 40 }), 0.76604444311897801);
-		EXPECT_EQ(Maths::Cos<double>(0.69813170079773179), 0.76604444311897801);
+		EXPECT_EQ(Maths::Cos<double>(0.69813170079773179_rad), 0.76604444311897801);
 	}
 }

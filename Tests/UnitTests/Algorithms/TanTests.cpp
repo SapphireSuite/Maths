@@ -16,7 +16,7 @@ namespace Sa::UT::Tan
 		EXPECT_FLOAT_EQ(Maths::Tan<float>(Maths::PiOv3<float>), float{ 1.7320508075688767 });
 		EXPECT_EQ(Maths::Tan<float>(-Maths::PiOv6<float>), float{ -0.57735026918962573 });
 		EXPECT_FLOAT_EQ(Maths::Tan<float>(40_deg), float{ 0.83909963117727993 });
-		EXPECT_FLOAT_EQ(Maths::Tan<float>(0.69813170079773179), float{ 0.83909963117727993 });
+		EXPECT_FLOAT_EQ(Maths::Tan<float>(0.69813170079773179_rad), float{ 0.83909963117727993 });
 	}
 
 	TEST(TrigoTest, TangentDouble)
@@ -28,6 +28,6 @@ namespace Sa::UT::Tan
 		EXPECT_EQ(Maths::Tan<double>(Maths::PiOv3<double>), 1.7320508075688767);
 		EXPECT_EQ(Maths::Tan<double>(-Maths::PiOv6<double>), -0.57735026918962573);
 		EXPECT_EQ(Maths::Tan<double>(40_deg), 0.83909963117727993);
-		EXPECT_EQ(Maths::Tan<double>(0.69813170079773179), 0.83909963117727993);
+		EXPECT_EQ(Maths::Tan<double>(0.69813170079773179_rad), 0.83909963117727993);
 	}
 }
