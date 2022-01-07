@@ -118,7 +118,7 @@ namespace Sa
 			// Sin Step ratio.
 			TScalar sinRatio = Sin(angleStep) / sin;
 
-			float s0 = Cos(angleStep) - dot * sinRatio;
+			TScalar s0 = Cos(angleStep) - dot * sinRatio;
 
 			return s0 * _start + sinRatio * _end * endSign;
 		}

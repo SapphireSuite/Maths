@@ -213,8 +213,7 @@ namespace Sa::UT::Vector2
 
 		const Vec2T slerp_res05(TypeParam{ 0.0 }, v1.Length());
 
-		// TODO: Fix precision for double.
-		//EXPECT_EQ(Vec2T::SLerp(v1, v2, 0.5f), slerp_res05);
+		EXPECT_EQ(Vec2T::SLerp(v1, v2, 0.5f), slerp_res05);
 	}
 
 	TYPED_TEST(Vector2Test, Operators)
