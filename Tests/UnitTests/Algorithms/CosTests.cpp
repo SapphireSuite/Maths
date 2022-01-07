@@ -14,7 +14,7 @@ namespace Sa::UT::Cos
 		EXPECT_EQ(Maths::Cos<float>(Maths::Pi<float>), -1.0f);
 		
 		//EXPECT_FLOAT_EQ(Maths::Cos<float>(Maths::PiOv2<float>), 0.0);
-		EXPECT_TRUE(Maths::Cos<float>(Maths::PiOv2<float>) - std::numeric_limits<float>::epsilon() <= 0.0f);
+		EXPECT_NEAR(Maths::Cos<float>(Maths::PiOv2<float>), 0.0f, std::numeric_limits<float>::epsilon());
 
 		EXPECT_EQ(Maths::Cos<float>(Degf{ 40 }), float{ 0.76604444311897801 });
 		EXPECT_EQ(Maths::Cos<float>(0.69813170079773179_rad), float{ 0.76604444311897801 });
@@ -27,7 +27,7 @@ namespace Sa::UT::Cos
 		EXPECT_EQ(Maths::Cos(0.0_rad), 1.0);
 
 		//EXPECT_EQ(Maths::Cos<double>(Maths::Pi<double>), -1.0);
-		EXPECT_TRUE(Maths::Cos<double>(Maths::PiOv2<double>) - std::numeric_limits<double>::epsilon() <= 0.0);
+		EXPECT_NEAR(Maths::Cos<double>(Maths::PiOv2<double>), 0.0, std::numeric_limits<double>::epsilon());
 
 		EXPECT_EQ(Maths::Cos<double>(Degd{ 40 }), 0.76604444311897801);
 		EXPECT_EQ(Maths::Cos<double>(0.69813170079773179_rad), 0.76604444311897801);
