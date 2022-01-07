@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include <SA/Maths/Algorithms/Equals.hpp>
+#include <SA/Maths/Algorithms/Lerp.hpp>
 
 namespace Sa::UT::Lerp
 {
@@ -16,22 +16,21 @@ namespace Sa::UT::Lerp
 
 	TYPED_TEST(LerpTest, Lerp)
 	{
-		EXPECT_EQ(Maths::Lerp(TestTypes{ 1.0 }, TestTypes{ 5.0 }, 0.0f), TestTypes{ 1.0 });
-		EXPECT_EQ(Maths::Lerp(TestTypes{ 1.0 }, TestTypes{ 5.0 }, 1.0f), TestTypes{ 5.0 });
-		EXPECT_EQ(Maths::Lerp(TestTypes{ 1.0 }, TestTypes{ 5.0 }, 0.5f), TestTypes{ 3.0 });
+		EXPECT_EQ(Maths::Lerp(TypeParam{ 1.0 }, TypeParam{ 5.0 }, 0.0f), TypeParam{  1.0f });
+		EXPECT_EQ(Maths::Lerp(TypeParam{ 1.0 }, TypeParam{ 5.0 }, 1.0f), TypeParam{ 5.0f });
+		EXPECT_EQ(Maths::Lerp(TypeParam{ 1.0 }, TypeParam{ 5.0 }, 0.5f), TypeParam{ 3.0f });
 
-		EXPECT_EQ(Maths::Lerp(TestTypes{ 1.0 }, TestTypes{ 5.0 }, -1.0f), TestTypes{ 1.0 });
-		EXPECT_EQ(Maths::Lerp(TestTypes{ 1.0 }, TestTypes{ 5.0 }, 2.0f), TestTypes{ 5.0 });
+		EXPECT_EQ(Maths::Lerp(TypeParam{ 1.0 }, TypeParam{ 5.0 }, -1.0f), TypeParam{ 1.0f });
+		EXPECT_EQ(Maths::Lerp(TypeParam{ 1.0 }, TypeParam{ 5.0 }, 2.0f), TypeParam{ 5.0f });
 	}
 
 	TYPED_TEST(LerpTest, LerpUnclamped)
 	{
-		EXPECT_EQ(Maths::LerpUnclamped(TestTypes{ 1.0 }, TestTypes{ 5.0 }, 0.0f), TestTypes{ 1.0 });
-		EXPECT_EQ(Maths::LerpUnclamped(TestTypes{ 1.0 }, TestTypes{ 5.0 }, 1.0f), TestTypes{ 5.0 });
-		EXPECT_EQ(Maths::LerpUnclamped(TestTypes{ 1.0 }, TestTypes{ 5.0 }, 0.5f), TestTypes{ 3.0 });
-		EXPECT_EQ(Maths::LerpUnclamped(TestTypes{ 1.0 }, TestTypes{ 5.0 }, -1.0f), TestTypes{ -3.0 });
-		EXPECT_EQ(Maths::LerpUnclamped(TestTypes{ 1.0 }, TestTypes{ 5.0 }, 2.0f), TestTypes{ 9.0 });
-
+		EXPECT_EQ(Maths::LerpUnclamped(TypeParam{ 1.0 }, TypeParam{ 5.0 }, 0.0f), TypeParam{ 1.0 });
+		EXPECT_EQ(Maths::LerpUnclamped(TypeParam{ 1.0 }, TypeParam{ 5.0 }, 1.0f), TypeParam{ 5.0 });
+		EXPECT_EQ(Maths::LerpUnclamped(TypeParam{ 1.0 }, TypeParam{ 5.0 }, 0.5f), TypeParam{ 3.0 });
+		EXPECT_EQ(Maths::LerpUnclamped(TypeParam{ 1.0 }, TypeParam{ 5.0 }, -1.0f), TypeParam{ -3.0 });
+		EXPECT_EQ(Maths::LerpUnclamped(TypeParam{ 1.0 }, TypeParam{ 5.0 }, 2.0f), TypeParam{ 9.0 });
 	}
 
 	TYPED_TEST(LerpTest, SLerp)

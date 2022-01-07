@@ -9,7 +9,6 @@
 
 #include <SA/Maths/Algorithms/Cos.hpp>
 #include <SA/Maths/Algorithms/Sin.hpp>
-#include <SA/Maths/Algorithms/Equals.hpp>
 
 /**
 *	\file Lerp.hpp
