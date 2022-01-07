@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 
 #include <SA/Maths/Space/Vector2.hpp>
+#include <SA/Maths/Space/Vector3.hpp>
 
 namespace Sa::UT::Vector2
 {
@@ -82,12 +83,12 @@ namespace Sa::UT::Vector2
 		EXPECT_EQ(v4.y, v1.y);
 
 
-		//// From Vec3.
-		//const Vec3<TypeParam> v5(TypeParam{ 12.48 }, TypeParam{ 1.2358 }, TypeParam{ 4.26 });
+		// From Vec3.
+		const Vec3<TypeParam> v5(TypeParam{ 12.48 }, TypeParam{ 1.2358 }, TypeParam{ 4.26 });
 
-		//const Vec2T v6(v5);
-		//EXPECT_EQ(v6.x, v5.x);
-		//EXPECT_EQ(v6.y, v5.y);
+		const Vec2T v6(v5);
+		EXPECT_EQ(v6.x, v5.x);
+		EXPECT_EQ(v6.y, v5.y);
 	}
 
 	TYPED_TEST(Vector2Test, Equals)
