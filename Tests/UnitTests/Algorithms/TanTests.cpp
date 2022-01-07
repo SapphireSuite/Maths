@@ -11,7 +11,7 @@ namespace Sa::UT::Tan
 	{
 		// TODO: Comparison not working ?
 		//EXPECT_EQ(Maths::Tan<float>(Maths::Pi<float>), 0.0f);
-		EXPECT_EQ(Maths::Tan<float>(Maths::Pi<float>) - std::numeric_limits<float>::epsilon() <= 0.0f, true);
+		EXPECT_TRUE(Maths::Tan<float>(Maths::Pi<float>) - std::numeric_limits<float>::epsilon() <= 0.0f);
 		
 		EXPECT_FLOAT_EQ(Maths::Tan<float>(Maths::PiOv3<float>), float{ 1.7320508075688767 });
 		EXPECT_EQ(Maths::Tan<float>(-Maths::PiOv6<float>), float{ -0.57735026918962573 });
@@ -27,7 +27,7 @@ namespace Sa::UT::Tan
 	{
 		// TODO: Comparison not working ?
 		//EXPECT_EQ(Maths::Tan<double>(Maths::Pi<double>), 0.0f);
-		EXPECT_EQ(Maths::Tan<double>(Maths::Pi<double>) - std::numeric_limits<double>::epsilon() <= 0.0f, true);
+		EXPECT_TRUE(Maths::Tan<double>(Maths::Pi<double>) - std::numeric_limits<double>::epsilon() <= 0.0f);
 
 		EXPECT_EQ(Maths::Tan<double>(Maths::PiOv3<double>), 1.7320508075688767);
 		EXPECT_EQ(Maths::Tan<double>(-Maths::PiOv6<double>), -0.57735026918962573);

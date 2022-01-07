@@ -3,7 +3,6 @@
 #include <gtest/gtest.h>
 
 #include <SA/Maths/Algorithms/Equals.hpp>
-using namespace Sa;
 
 namespace Sa::UT::Lerp
 {

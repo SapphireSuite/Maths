@@ -13,7 +13,7 @@ namespace Sa::UT::Sin
 
 		// TODO: Comparison not working ?
 		//EXPECT_FLOAT_EQ(Maths::Sin<float>(Maths::Pi<float>), 0.0f);
-		EXPECT_EQ(Maths::Sin<float>(Maths::Pi<float>) - std::numeric_limits<float>::epsilon() <= 0.0f, true);
+		EXPECT_TRUE(Maths::Sin<float>(Maths::Pi<float>) - std::numeric_limits<float>::epsilon() <= 0.0f);
 
 		EXPECT_EQ(Maths::Sin<float>(Maths::PiOv2<float>), 1.0f);
 		EXPECT_EQ(Maths::Sin<float>(-Maths::PiOv2<float>), -1.0f);
@@ -30,7 +30,7 @@ namespace Sa::UT::Sin
 
 		// TODO: Comparison not working ?
 		//EXPECT_DOUBLE_EQ(Maths::Sin<double>(Maths::Pi<double>), 0.0);
-		EXPECT_EQ(Maths::Sin<double>(Maths::Pi<double>) - std::numeric_limits<double>::epsilon() <= 0.0f, true);
+		EXPECT_TRUE(Maths::Sin<double>(Maths::Pi<double>) - std::numeric_limits<double>::epsilon() <= 0.0);
 
 		EXPECT_EQ(Maths::Sin<double>(Maths::PiOv2<double>), 1.0);
 		EXPECT_EQ(Maths::Sin<double>(-Maths::PiOv2<double>), -1.0);

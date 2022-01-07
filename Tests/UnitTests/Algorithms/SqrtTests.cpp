@@ -17,8 +17,6 @@ namespace Sa::UT::Sqrt
 
 	TYPED_TEST(SqrtTest, Main)
 	{
-		auto aaa = std::sqrt(2.0);
-
 		EXPECT_EQ(TypeParam{ 0.0 }, Maths::Sqrt(TypeParam{ 0.0 }));
 		EXPECT_EQ(TypeParam{ 1.0 }, Maths::Sqrt(TypeParam{ 1.0 }));
 		EXPECT_EQ(TypeParam{ 1.4142135623730951 }, Maths::Sqrt(TypeParam{ 2.0 }));
