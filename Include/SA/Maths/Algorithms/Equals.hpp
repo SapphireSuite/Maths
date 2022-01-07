@@ -24,7 +24,7 @@ namespace Sa
 		*	\return	True on equality, otherwise false.
 		*/
 		template <typename T, typename EpsT = T>
-		bool Equals(const T& _lhs, const T& _rhs, EpsT _epsilon)
+		bool Equals(const T& _lhs, const T& _rhs, EpsT _epsilon = std::numeric_limits<EpsT>::epsilon())
 		{
 			// Don't use std::abs for unsigned compatibility.
 
@@ -44,7 +44,7 @@ namespace Sa
 		*	\return Whether _in is equal to 0.
 		*/
 		template <typename T, typename EpsT = T>
-		constexpr bool Equals0(T _in, EpsT _epsilon = std::numeric_limits<T>::epsilon()) noexcept
+		constexpr bool Equals0(T _in, EpsT _epsilon = std::numeric_limits<EpsT>::epsilon()) noexcept
 		{
 			return Equals(_in, T{ 0 }, _epsilon);
 		}
@@ -62,7 +62,7 @@ namespace Sa
 		*	\return Whether _in is equal to 1.
 		*/
 		template <typename T, typename EpsT = T>
-		constexpr bool Equals1(T _in, EpsT _epsilon = std::numeric_limits<T>::epsilon()) noexcept
+		constexpr bool Equals1(T _in, EpsT _epsilon = std::numeric_limits<EpsT>::epsilon()) noexcept
 		{
 			return Equals(_in, T{ 1 }, _epsilon);
 		}
