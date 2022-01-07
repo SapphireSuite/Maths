@@ -15,7 +15,7 @@ namespace Sa
 
 	template <typename T>
 	template <typename TIn>
-	constexpr Deg<T>::Deg(Rad<TIn> _rad) noexcept : mHandle{ static_cast<T>(_rad.Handle() * Maths::RadToDeg) }
+	constexpr Deg<T>::Deg(Rad<TIn> _rad) noexcept : mHandle{ static_cast<T>(_rad.Handle() * Maths::RadToDeg<T>) }
 	{
 	}
 

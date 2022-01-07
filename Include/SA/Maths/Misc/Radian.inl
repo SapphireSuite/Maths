@@ -15,7 +15,7 @@ namespace Sa
 
 	template <typename T>
 	template <typename TIn>
-	constexpr Rad<T>::Rad(Deg<TIn> _deg) noexcept : mHandle{ static_cast<T>(_deg.Handle() * Maths::DegToRad) }
+	constexpr Rad<T>::Rad(Deg<TIn> _deg) noexcept : mHandle{ static_cast<T>(_deg.Handle() * Maths::DegToRad<T>) }
 	{
 	}
 
@@ -36,12 +36,12 @@ namespace Sa
 	template <typename T>
 	void Rad<T>::Clamp() noexcept
 	{
-		mHandle = std::fmod(mHandle, static_cast<T>(Maths::PiX2));
+		mHandle = std::fmod(mHandle, Maths::PiX2<T>);
 
-		if (mHandle < -static_cast<T>(Maths::Pi))
-			mHandle += static_cast<T>(Maths::PiX2);
-		else if (mHandle > static_cast<T>(Maths::Pi))
-			mHandle -= static_cast<T>(Maths::PiX2);
+		if (mHandle < -Maths::Pi<T>)
+			mHandle += Maths::PiX2<T>;
+		else if (mHandle > Maths::Pi<T>)
+			mHandle -= Maths::PiX2<T>;
 	}
 
 

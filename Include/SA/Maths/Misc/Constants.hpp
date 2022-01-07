@@ -20,28 +20,36 @@ namespace Sa
 	namespace Maths
 	{
 		/// PI constant.
-		static constexpr double Pi = 3.1415926535897932384;
+		template <typename T = double>
+		static constexpr T Pi = T{ 3.1415926535897932384 };
 
 		/// 2 * PI constant.
-		static constexpr double PiX2 = 2.0 * Pi;
+		template <typename T = double>
+		static constexpr T PiX2 = T{ 2.0 } *Pi<T>;
 
 		/// PI / 2 constant.
-		static constexpr double PiOv2 = Pi / 2.0;
+		template <typename T = double>
+		static constexpr T PiOv2 = Pi<T> / T{ 2.0 };
 
 		/// PI / 3 constant.
-		static constexpr double PiOv3 = Pi / 3.0;
+		template <typename T = double>
+		static constexpr T PiOv3 = Pi<T> / T{ 3.0 };
 
 		/// PI / 4 constant.
-		static constexpr double PiOv4 = Pi / 4.0;
+		template <typename T>
+		static constexpr T PiOv4 = Pi<T> / T{ 4.0 };
 
 		/// PI / 6 constant.
-		static constexpr double PiOv6 = Pi / 6.0;
+		template <typename T = double>
+		static constexpr T PiOv6 = Pi<T> / T{ 6.0 };
 
 		/// Conversion constant to convert degree to radian.
-		static constexpr double DegToRad = Pi / 180.0;
+		template <typename T = double>
+		static constexpr T DegToRad = Pi<T> / T{ 180.0 };
 
 		/// Conversion constant to convert radian to degree.
-		static constexpr double RadToDeg = 180.0 / Pi;
+		template <typename T = double>
+		static constexpr T RadToDeg = T{ 180.0 } / Pi<T>;
 	}
 }
 

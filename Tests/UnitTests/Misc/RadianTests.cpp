@@ -26,7 +26,7 @@ namespace Sa::UT::Radian
 
 		const Deg<TypeParam> d4 = TypeParam{ 180.0 };
 		const Rad<TypeParam> r4 = d4;
-		EXPECT_EQ(r4.Handle(), TypeParam{ Maths::Pi });
+		EXPECT_EQ(r4.Handle(), Maths::Pi<TypeParam>);
 	}
 
 	TEST(Radian, CastConstructor)
@@ -61,7 +61,7 @@ namespace Sa::UT::Radian
 
 	TYPED_TEST(RadianTest, Clamp)
 	{
-		const TypeParam piT = TypeParam{ Maths::Pi };
+		const TypeParam piT = Maths::Pi<TypeParam>;
 		const TypeParam baseVal = TypeParam{ 1.26 };
 		const TypeParam clampedVal = TypeParam{ 1.8815926535897933 };
 
@@ -88,9 +88,9 @@ namespace Sa::UT::Radian
 
 	TYPED_TEST(RadianTest, OperatorSelfMinus)
 	{
-		const Rad<TypeParam> r1 = TypeParam{ Maths::Pi };
+		const Rad<TypeParam> r1 = Maths::Pi<TypeParam>;
 
-		EXPECT_EQ(-r1, TypeParam{ -Maths::Pi });
+		EXPECT_EQ(-r1, -Maths::Pi<TypeParam>);
 
 		// Ensure correct conversion.
 		const Deg<TypeParam> d1 = -r1;
@@ -99,14 +99,14 @@ namespace Sa::UT::Radian
 
 	TYPED_TEST(RadianTest, OperatorPlus)
 	{
-		const Rad<TypeParam> r1 = TypeParam{ Maths::PiOv2 };
-		const Rad<TypeParam> r2 = TypeParam{ Maths::PiOv4 };
+		const Rad<TypeParam> r1 = Maths::PiOv2<TypeParam>;
+		const Rad<TypeParam> r2 = Maths::PiOv4<TypeParam>;
 
-		EXPECT_EQ(r1 + r2, TypeParam{ Maths::PiOv2 + Maths::PiOv4 });
+		EXPECT_EQ(r1 + r2, Maths::PiOv2<TypeParam> +Maths::PiOv4<TypeParam>);
 
 		// Ensure correct conversion.
 		const Deg<TypeParam> d1 = r1 + r2;
-		EXPECT_EQ(d1, TypeParam{ (Maths::PiOv2 + Maths::PiOv4) * Maths::RadToDeg });
+		EXPECT_EQ(d1, (Maths::PiOv2<TypeParam> +Maths::PiOv4<TypeParam>) * Maths::RadToDeg<TypeParam>);
 
 		Rad<TypeParam> r3 = r1;
 		r3 += r2;
@@ -115,14 +115,14 @@ namespace Sa::UT::Radian
 
 	TYPED_TEST(RadianTest, OperatorMinus)
 	{
-		const Rad<TypeParam> r1 = TypeParam{ Maths::PiOv2 };
-		const Rad<TypeParam> r2 = TypeParam{ Maths::PiOv4 };
+		const Rad<TypeParam> r1 = Maths::PiOv2<TypeParam>;
+		const Rad<TypeParam> r2 = Maths::PiOv4<TypeParam>;
 
-		EXPECT_EQ(r1 - r2, TypeParam{ Maths::PiOv2 - Maths::PiOv4 });
+		EXPECT_EQ(r1 - r2, Maths::PiOv2<TypeParam> -Maths::PiOv4<TypeParam>);
 
 		// Ensure correct conversion.
 		const Deg<TypeParam> d1 = r1 - r2;
-		EXPECT_EQ(d1, TypeParam{ (Maths::PiOv2 - Maths::PiOv4) * Maths::RadToDeg });
+		EXPECT_EQ(d1, (Maths::PiOv2<TypeParam> -Maths::PiOv4<TypeParam>) * Maths::RadToDeg<TypeParam>);
 
 		Rad<TypeParam> r3 = r1;
 		r3 -= r2;
@@ -131,9 +131,9 @@ namespace Sa::UT::Radian
 
 	TYPED_TEST(RadianTest, OperatorScale)
 	{
-		const Rad<TypeParam> r1 = TypeParam{ Maths::PiOv2};
+		const Rad<TypeParam> r1 = Maths::PiOv2<TypeParam>;
 
-		EXPECT_EQ(r1 * 2, TypeParam{ Maths::Pi });
+		EXPECT_EQ(r1 * 2, Maths::Pi<TypeParam>);
 
 		// Ensure correct conversion.
 		const Deg<TypeParam> d1 = r1 * 2;
@@ -146,9 +146,9 @@ namespace Sa::UT::Radian
 
 	TYPED_TEST(RadianTest, OperatorUnScale)
 	{
-		const Rad<TypeParam> r1 = TypeParam{ Maths::Pi };
+		const Rad<TypeParam> r1 = Maths::Pi<TypeParam>;
 
-		EXPECT_EQ(r1 / 2, TypeParam{ Maths::PiOv2 });
+		EXPECT_EQ(r1 / 2, Maths::PiOv2<TypeParam>);
 
 		// Ensure correct conversion.
 		const Deg<TypeParam> d1 = r1 / 2;

@@ -24,7 +24,7 @@ namespace Sa::UT::Degree
 		const Deg<TypeParam> d2 = d2_val;
 		EXPECT_EQ(d2.Handle(), d2_val);
 
-		const Rad<TypeParam> r4 = TypeParam{ Maths::Pi };
+		const Rad<TypeParam> r4 = Maths::Pi<TypeParam>;
 		const Deg<TypeParam> d4 = r4;
 		EXPECT_EQ(d4.Handle(), 180);
 	}
@@ -99,7 +99,7 @@ namespace Sa::UT::Degree
 
 		// Ensure correct conversion.
 		const Rad<TypeParam> r1 = -d1;
-		EXPECT_EQ(r1, TypeParam{ -Maths::Pi });
+		EXPECT_EQ(r1, -Maths::Pi<TypeParam>);
 	}
 
 	TYPED_TEST(DegreeTest, OperatorPlus)
@@ -111,7 +111,7 @@ namespace Sa::UT::Degree
 
 		// Ensure correct conversion.
 		const Rad<TypeParam> r1 = d1 + d2;
-		EXPECT_EQ(r1, TypeParam{ Maths::Pi });
+		EXPECT_EQ(r1, Maths::Pi<TypeParam>);
 
 		Deg<TypeParam> d3 = d1;
 		d3 += d2;
@@ -127,7 +127,7 @@ namespace Sa::UT::Degree
 
 		// Ensure correct conversion.
 		const Rad<TypeParam> r1 = d1 - d2;
-		EXPECT_EQ(r1, TypeParam{ Maths::Pi });
+		EXPECT_EQ(r1, Maths::Pi<TypeParam>);
 
 		Deg<TypeParam> d3 = d1;
 		d3 -= d2;
@@ -142,7 +142,7 @@ namespace Sa::UT::Degree
 
 		// Ensure correct conversion.
 		const Rad<TypeParam> r1 = d1 * 2;
-		EXPECT_EQ(r1, TypeParam{ Maths::Pi });
+		EXPECT_EQ(r1, Maths::Pi<TypeParam>);
 
 		Deg<TypeParam> d3 = d1;
 		d3 *= 2;
@@ -157,7 +157,7 @@ namespace Sa::UT::Degree
 
 		// Ensure correct conversion.
 		const Rad<TypeParam> r1 = d1 / 2;
-		EXPECT_EQ(r1, TypeParam{ Maths::PiOv2 });
+		EXPECT_EQ(r1, Maths::PiOv2<TypeParam>);
 
 		Deg<TypeParam> d3 = d1;
 		d3 /= 2;
