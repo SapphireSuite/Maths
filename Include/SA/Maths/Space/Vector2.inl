@@ -163,7 +163,7 @@ namespace Sa
 	template <typename T>
 	constexpr bool Vec2<T>::IsNormalized() const noexcept
 	{
-		return Maths::Equals(SqrLength(), T{ 1.0 });
+		return Maths::Equals1(SqrLength());
 	}
 
 //}

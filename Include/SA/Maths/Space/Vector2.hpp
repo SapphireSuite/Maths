@@ -6,11 +6,11 @@
 #define SAPPHIRE_MATHS_VECTOR2_GUARD
 
 #include <SA/Maths/Misc/Degree.hpp>
-#include <SA/Maths/Algorithms/Sqrt.hpp>
-#include <SA/Maths/Algorithms/Equals.hpp>
 #include <SA/Maths/Algorithms/Cos.hpp>
 #include <SA/Maths/Algorithms/Tan.hpp>
+#include <SA/Maths/Algorithms/Sqrt.hpp>
 #include <SA/Maths/Algorithms/Lerp.hpp>
+#include <SA/Maths/Algorithms/Equals.hpp>
 
 /**
 *	\file Vector2.hpp
