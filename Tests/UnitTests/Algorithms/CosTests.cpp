@@ -7,7 +7,7 @@
 
 namespace Sa::UT::Cos
 {
-	TEST(TrigoTest, CosinusFloat)
+	TEST(Cosinus, CosinusFloat)
 	{
 		EXPECT_EQ(Maths::Cos(0.0_rad), 1.0f);
 
@@ -18,9 +18,11 @@ namespace Sa::UT::Cos
 
 		EXPECT_EQ(Maths::Cos<float>(Degf{ 40 }), float{ 0.76604444311897801 });
 		EXPECT_EQ(Maths::Cos<float>(0.69813170079773179_rad), float{ 0.76604444311897801 });
+
+		EXPECT_EQ(Maths::ACos(float{ 0.76604444311897801 }), Radf(0.69813170079773179_rad));
 	}
 
-	TEST(TrigoTest, CosinusDouble)
+	TEST(Cosinus, CosinusDouble)
 	{
 		EXPECT_EQ(Maths::Cos(0.0_rad), 1.0);
 
@@ -29,5 +31,7 @@ namespace Sa::UT::Cos
 
 		EXPECT_EQ(Maths::Cos<double>(Degd{ 40 }), 0.76604444311897801);
 		EXPECT_EQ(Maths::Cos<double>(0.69813170079773179_rad), 0.76604444311897801);
+		
+		EXPECT_EQ(Maths::ACos(0.76604444311897801), 0.69813170079773179_rad);
 	}
 }

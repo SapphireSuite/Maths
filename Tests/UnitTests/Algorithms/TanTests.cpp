@@ -7,7 +7,7 @@
 
 namespace Sa::UT::Tan
 {
-	TEST(TrigoTest, TangentFloat)
+	TEST(Tangent, TangentFloat)
 	{
 		// TODO: Comparison not working ?
 		//EXPECT_EQ(Maths::Tan<float>(Maths::Pi<float>), 0.0f);
@@ -17,9 +17,13 @@ namespace Sa::UT::Tan
 		EXPECT_EQ(Maths::Tan<float>(-Maths::PiOv6<float>), float{ -0.57735026918962573 });
 		EXPECT_FLOAT_EQ(Maths::Tan<float>(40_deg), float{ 0.83909963117727993 });
 		EXPECT_FLOAT_EQ(Maths::Tan<float>(0.69813170079773179_rad), float{ 0.83909963117727993 });
+
+		EXPECT_EQ(Maths::ATan(float{ 0.83909963117727993 }), Radf(0.69813170079773179_rad));
+
+		// TODO: Add ATan2 test.
 	}
 
-	TEST(TrigoTest, TangentDouble)
+	TEST(Tangent, TangentDouble)
 	{
 		// TODO: Comparison not working ?
 		//EXPECT_EQ(Maths::Tan<double>(Maths::Pi<double>), 0.0f);
@@ -29,5 +33,9 @@ namespace Sa::UT::Tan
 		EXPECT_EQ(Maths::Tan<double>(-Maths::PiOv6<double>), -0.57735026918962573);
 		EXPECT_EQ(Maths::Tan<double>(40_deg), 0.83909963117727993);
 		EXPECT_EQ(Maths::Tan<double>(0.69813170079773179_rad), 0.83909963117727993);
+		
+		EXPECT_EQ(Maths::ATan(0.83909963117727993), 0.69813170079773179_rad);
+
+		// TODO: Add ATan2 test.
 	}
 }

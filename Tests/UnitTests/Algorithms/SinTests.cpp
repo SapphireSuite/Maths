@@ -7,7 +7,7 @@
 
 namespace Sa::UT::Sin
 {
-	TEST(TrigoTest, SinusFloat)
+	TEST(Sinus, SinusFloat)
 	{
 		EXPECT_EQ(Maths::Sin(0.0_rad), 0.0f);
 
@@ -20,9 +20,11 @@ namespace Sa::UT::Sin
 
 		EXPECT_FLOAT_EQ(Maths::Sin<float>(Degf{ 40 }), float{ 0.64278760968653925 });
 		EXPECT_FLOAT_EQ(Maths::Sin<float>(0.69813170079773179_rad), float{ 0.64278760968653925 });
+		
+		EXPECT_EQ(Maths::ASin(float{ 0.64278760968653925 }), Radf(0.69813170079773179_rad));
 	}
 
-	TEST(TrigoTest, SinusDouble)
+	TEST(Sinus, SinusDouble)
 	{
 		EXPECT_EQ(Maths::Sin(0.0_rad), 0.0);
 
@@ -35,5 +37,7 @@ namespace Sa::UT::Sin
 
 		EXPECT_EQ(Maths::Sin<double>(Degd{ 40 }), 0.64278760968653925);
 		EXPECT_EQ(Maths::Sin<double>(0.69813170079773179_rad), 0.64278760968653925);
+		
+		EXPECT_EQ(Maths::ASin(0.64278760968653925), 0.69813170079773179_rad);
 	}
 }
