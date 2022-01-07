@@ -18,35 +18,35 @@ namespace Sa::UT::Vector2
 
 	TYPED_TEST(Vector2Test, Constants)
 	{
-		EXPECT_EQ(Vec2T::Zero.x, TypeParam{ 0 });
-		EXPECT_EQ(Vec2T::Zero.y, TypeParam{ 0 });
+		EXPECT_EQ(Vec2T::Zero.x, 0);
+		EXPECT_EQ(Vec2T::Zero.y, 0);
 
-		EXPECT_EQ(Vec2T::One.x, TypeParam{ 1 });
-		EXPECT_EQ(Vec2T::One.y, TypeParam{ 1 });
+		EXPECT_EQ(Vec2T::One.x, 1);
+		EXPECT_EQ(Vec2T::One.y, 1);
 
 
 		// X Axis.
-		EXPECT_EQ(Vec2T::Right.x, TypeParam{ 1 });
-		EXPECT_EQ(Vec2T::Right.y, TypeParam{ 0 });
+		EXPECT_EQ(Vec2T::Right.x, 1);
+		EXPECT_EQ(Vec2T::Right.y, 0);
 
-		EXPECT_EQ(Vec2T::Left.x, TypeParam{ -1 });
-		EXPECT_EQ(Vec2T::Left.y, TypeParam{ 0 });
+		EXPECT_EQ(Vec2T::Left.x, -1);
+		EXPECT_EQ(Vec2T::Left.y, 0);
 
 
 		// Y Axis.
-		EXPECT_EQ(Vec2T::Up.x, TypeParam{ 0 });
-		EXPECT_EQ(Vec2T::Up.y, TypeParam{ 1 });
+		EXPECT_EQ(Vec2T::Up.x, 0);
+		EXPECT_EQ(Vec2T::Up.y, 1);
 
-		EXPECT_EQ(Vec2T::Down.x, TypeParam{ 0 });
-		EXPECT_EQ(Vec2T::Down.y, TypeParam{ -1 });
+		EXPECT_EQ(Vec2T::Down.x, 0);
+		EXPECT_EQ(Vec2T::Down.y, -1);
 	}
 
 	TYPED_TEST(Vector2Test, Constructors)
 	{
 		// Default constructor.
 		const Vec2T v0;
-		EXPECT_EQ(v0.x, TypeParam{ 0 });
-		EXPECT_EQ(v0.y, TypeParam{ 0 });
+		EXPECT_EQ(v0.x, 0);
+		EXPECT_EQ(v0.y, 0);
 
 
 		// Value constructor.
