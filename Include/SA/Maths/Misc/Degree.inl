@@ -29,7 +29,7 @@ namespace Sa
 	template <typename T>
 	constexpr bool Deg<T>::Equals(Deg<T> _other, T _epsilon) const noexcept
 	{
-		return std::abs(mHandle - _other.mHandle) <= _epsilon;
+		return Maths::Equals(mHandle, _other.mHandle, _epsilon);
 	}
 
 	template <typename T>

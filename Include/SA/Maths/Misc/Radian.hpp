@@ -6,10 +6,10 @@
 #define SAPPHIRE_MATHS_RADIAN_GUARD
 
 #include <cmath>
-#include <limits>
 #include <cstdint>
 
 #include <SA/Maths/Misc/Constants.hpp>
+#include <SA/Maths/Algorithms/Equals.hpp>
 
 /**
 *	\file Radian.hpp

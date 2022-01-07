@@ -6,10 +6,10 @@
 #define SAPPHIRE_MATHS_DEGREE_GUARD
 
 #include <cmath>
-#include <limits>
 #include <cstdint>
 
 #include <SA/Maths/Misc/Constants.hpp>
+#include <SA/Maths/Algorithms/Equals.hpp>
 
 /**
 *	\file Degree.hpp
