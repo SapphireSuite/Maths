@@ -71,6 +71,7 @@ namespace Sa
 	template <typename T>
 	Deg<T> Deg<T>::operator/(T _scale) const
 	{
+		// TODO: Debug.
 		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale Degree by 0 (division by 0).");
 
 		return Deg(mHandle / _scale);
@@ -104,6 +105,7 @@ namespace Sa
 	template <typename T>
 	Deg<T>& Deg<T>::operator/=(T _scale)
 	{
+		// TODO: Debug.
 		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale Deg<" << typeid(T).name() << "> by 0 (division by 0).");
 
 		mHandle /= _scale;

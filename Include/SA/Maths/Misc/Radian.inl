@@ -72,6 +72,7 @@ namespace Sa
 	template <typename T>
 	Rad<T> Rad<T>::operator/(T _scale) const
 	{
+		// TODO: Debug.
 		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale Radian by 0 (division by 0).");
 
 		return Rad(mHandle / _scale);
@@ -105,6 +106,7 @@ namespace Sa
 	template <typename T>
 	Rad<T>& Rad<T>::operator/=(T _scale)
 	{
+		// TODO: Debug.
 		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale Rad<" << typeid(T).name() << "> by 0 (division by 0).");
 
 		mHandle /= _scale;
