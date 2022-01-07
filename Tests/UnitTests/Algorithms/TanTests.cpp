@@ -19,7 +19,7 @@ namespace Sa::UT::Tan
 
 		EXPECT_EQ(Maths::ATan(float{ 0.83909963117727993 }), Radf(0.69813170079773179_rad));
 
-		// TODO: Add ATan2 test.
+		EXPECT_EQ(Maths::ATan2(1.215f, 6.25f), float{ 0.19200519160533092 });
 	}
 
 	TEST(Tangent, TangentDouble)
@@ -34,6 +34,6 @@ namespace Sa::UT::Tan
 		
 		EXPECT_EQ(Maths::ATan(0.83909963117727993), 0.69813170079773179_rad);
 
-		// TODO: Add ATan2 test.
+		EXPECT_EQ(Maths::ATan2(1.215, 6.25), 0.19200519160533092);
 	}
 }
