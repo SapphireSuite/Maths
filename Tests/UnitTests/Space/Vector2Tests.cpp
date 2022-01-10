@@ -109,7 +109,7 @@ namespace Sa::UT::Vector2
 		const Vec2T v2(TypeParam{ 145.87 }, TypeParam{ 51.32 });
 
 		EXPECT_FALSE(v1.IsZero());
-		EXPECT_TRUE(Vec2f::Zero.IsZero());
+		EXPECT_TRUE(Vec2T::Zero.IsZero());
 
 		EXPECT_TRUE(v1.Equals(v1));
 		EXPECT_FALSE(v1.Equals(v2));

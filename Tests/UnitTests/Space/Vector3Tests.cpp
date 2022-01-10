@@ -12,7 +12,9 @@ namespace Sa
 	template <typename T>
 	std::ostream& operator<<(std::ostream& _os, const Vec3<T>& _v)
 	{
-		return _os << "X: " + std::to_string(_v.x) + "\tY: " + std::to_string(_v.y) + "\tZ: " + std::to_string(_v.z);
+		return _os << "X: " + std::to_string(_v.x) +
+			"\tY: " + std::to_string(_v.y) +
+			"\tZ: " + std::to_string(_v.z);
 	}
 }
 
@@ -141,7 +143,7 @@ namespace Sa::UT::Vector3
 		const Vec3T v2(TypeParam{ 145.87 }, TypeParam{ 51.32 }, TypeParam{ -48.2 });
 
 		EXPECT_FALSE(v1.IsZero());
-		EXPECT_TRUE(Vec2f::Zero.IsZero());
+		EXPECT_TRUE(Vec3T::Zero.IsZero());
 
 		EXPECT_TRUE(v1.Equals(v1));
 		EXPECT_FALSE(v1.Equals(v2));
