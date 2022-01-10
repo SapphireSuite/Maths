@@ -162,6 +162,13 @@ namespace Sa::UT::Degree
 		EXPECT_EQ(d3, d1 / 2);
 	}
 
+	TYPED_TEST(DegreeTest, OperatorCast)
+	{
+		const TypeParam val = TypeParam{ 92.2155 };
+		const DegT d1 = val;
+
+		EXPECT_EQ(static_cast<TypeParam>(d1), val);
+	}
 
 	TEST(Degree, Literals)
 	{

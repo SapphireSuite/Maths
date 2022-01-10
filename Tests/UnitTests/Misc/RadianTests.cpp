@@ -157,6 +157,13 @@ namespace Sa::UT::Radian
 		EXPECT_EQ(r3, r1 / 2);
 	}
 
+	TYPED_TEST(RadianTest, OperatorCast)
+	{
+		const TypeParam val = TypeParam{ 92.2155 };
+		const RadT r1 = val;
+
+		EXPECT_EQ(static_cast<TypeParam>(r1), val);
+	}
 
 	TEST(Radian, Literals)
 	{

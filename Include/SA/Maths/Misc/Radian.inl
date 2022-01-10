@@ -128,6 +128,13 @@ namespace Sa
 	}
 
 
+	template <typename T>
+	constexpr Rad<T>::operator T() const noexcept
+	{
+		return mHandle;
+	}
+
+
 #if SA_LOGGING
 
 	template <typename T>

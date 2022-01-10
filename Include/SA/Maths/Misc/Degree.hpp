@@ -187,6 +187,14 @@ namespace Sa
 		constexpr bool operator!=(Deg _rhs) const noexcept;
 
 
+		/**
+		*	\brief Access the handled value.
+		*
+		*	\return handle as \c float without conversion.
+		*/
+		explicit constexpr operator T() const noexcept;
+
+
 	#if SA_LOGGING
 
 		/**
