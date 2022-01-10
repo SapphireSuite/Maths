@@ -242,42 +242,16 @@ namespace Sa::UT::Vector3
 		EXPECT_EQ(Vec3T::LerpUnclamped(v1, v2, -1.0f), ulerp_res1);
 	}
 
-
-	TEST(Vector3, SLerpFloat)
+	TYPED_TEST(Vector3Test, SLerp)
 	{
-		const Vec3f v1(2.0f, 2.0f, 0.0f);
-		const Vec3f v2(-2.0f, 2.0f, 0.0f);
+		const Vec3T v1(TypeParam{ 2.0 }, TypeParam{ 2.0 }, TypeParam{ 0.0 });
+		const Vec3T v2(TypeParam{ -2.0 }, TypeParam{ 2.0 }, TypeParam{ 0.0 });
 
-		const Vec3f slerp = Vec3f::SLerp(v1, v2, 0.5f);
-		const Vec3f slerp_res05(0.0f, v1.Length(), 0.0f);
-
-		EXPECT_EQ(slerp, slerp_res05);
+		const Vec3T slerp = Vec3T::SLerp(v1, v2, 0.5f);
+		const Vec3T slerp_res05(TypeParam{ 0.0 }, v1.Length(), TypeParam{ 0.0 });
+		
+		EXPECT_VEC3_NEAR(slerp, slerp_res05, 0.000001);
 	}
-
-	TEST(Vector3, SLerpDouble)
-	{
-		const Vec3d v1(2.0, 2.0, 0.0);
-		const Vec3d v2(-2.0, 2.0, 0.0);
-
-		const Vec3d slerp = Vec3d::SLerp(v1, v2, 0.5f);
-		const Vec3d slerp_res05(0.0, v1.Length(), 0.0);
-
-		//EXPECT_EQ(slerp, slerp_res05);
-		EXPECT_NEAR(slerp.x, slerp_res05.x, std::numeric_limits<double>::epsilon());
-		EXPECT_DOUBLE_EQ(slerp.y, slerp_res05.y);
-		EXPECT_DOUBLE_EQ(slerp.z, slerp_res05.z);
-	}
-
-	//TYPED_TEST(Vector3Test, SLerp)
-	//{
-	//	const Vec3T v1(TypeParam{ 2.0 }, TypeParam{ 2.0 }, TypeParam{ 0.0 });
-	//	const Vec3T v2(TypeParam{ -2.0 }, TypeParam{ 2.0 }, TypeParam{ 0.0 });
-
-	//	const Vec3T slerp = Vec3T::SLerp(v1, v2, 0.5f);
-	//	const Vec3T slerp_res05(TypeParam{ 0.0 }, v1.Length(), TypeParam{ 0.0 });
-	//	
-	//	EXPECT_EQ(slerp, slerp_res05);
-	//}
 
 	TYPED_TEST(Vector3Test, Operators)
 	{

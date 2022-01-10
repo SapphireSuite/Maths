@@ -20,3 +20,13 @@ namespace Sa
 
 /// Google Test typedef helper.
 #define Vec3T Vec3<TypeParam>
+
+#define EXPECT_VEC3_NEAR(_v1, _v2, eps)\
+{\
+	auto v1V = (_v1);\
+	auto v2V = (_v2);\
+\
+	EXPECT_NEAR(v1V.x, v2V.x, eps);\
+	EXPECT_NEAR(v1V.y, v2V.y, eps);\
+	EXPECT_NEAR(v1V.z, v2V.z, eps);\
+}
