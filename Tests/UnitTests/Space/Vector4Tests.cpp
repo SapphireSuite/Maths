@@ -6,6 +6,19 @@
 #include <SA/Maths/Space/Vector3.hpp>
 #include <SA/Maths/Space/Vector4.hpp>
 
+namespace Sa
+{
+	/* Must be declared in Sa:: */
+	template <typename T>
+	std::ostream& operator<<(std::ostream& _os, const Vec4<T>& _v)
+	{
+		return _os << "X: " + std::to_string(_v.x) +
+			"\tY: " + std::to_string(_v.y) +
+			"\tZ: " + std::to_string(_v.z) +
+			"\tW: " + std::to_string(_v.w);
+	}
+}
+
 namespace Sa::UT::Vector4
 {
 	#define Vec4T Vec4<TypeParam>

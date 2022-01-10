@@ -6,7 +6,6 @@
 #define SAPPHIRE_MATHS_DEGREE_GUARD
 
 #include <cmath>
-#include <cstdint>
 
 #include <SA/Maths/Misc/Constants.hpp>
 #include <SA/Maths/Algorithms/Equals.hpp>
@@ -221,7 +220,7 @@ namespace Sa
 	*
 	*	\return \c Degree without maths-conversion.
 	*/
-	constexpr Degf operator""_deg(uint64_t _lit) noexcept;
+	constexpr Degf operator""_deg(unsigned long long _lit) noexcept;
 
 	/**
 	*	\brief _deg \b literal operator.

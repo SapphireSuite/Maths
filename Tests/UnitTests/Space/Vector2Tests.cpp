@@ -1,9 +1,21 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
+#include <ostream>
+
 #include <gtest/gtest.h>
 
 #include <SA/Maths/Space/Vector2.hpp>
 #include <SA/Maths/Space/Vector3.hpp>
+
+namespace Sa
+{
+	/* Must be declared in Sa:: */
+	template <typename T>
+	std::ostream& operator<<(std::ostream& _os, const Vec2<T>& _v)
+	{
+		return _os << "X: " + std::to_string(_v.x) + "\tY: " + std::to_string(_v.y);
+	}
+}
 
 namespace Sa::UT::Vector2
 {
@@ -207,15 +219,42 @@ namespace Sa::UT::Vector2
 		EXPECT_EQ(Vec2T::LerpUnclamped(v1, v2, -1.0f), ulerp_res1);
 	}
 
-	TYPED_TEST(Vector2Test, SLerp)
+	TEST(Vector2, SLerpFloat)
 	{
-		const Vec2T v1(TypeParam{ 2.0 }, TypeParam{ 2.0 });
-		const Vec2T v2(TypeParam{ -2.0 }, TypeParam{ 2.0 });
+		const Vec2f v1(2.0f, 2.0f);
+		const Vec2f v2(-2.0f, 2.0f);
 
-		const Vec2T slerp_res05(TypeParam{ 0.0 }, v1.Length());
+		const Vec2f slerp = Vec2f::SLerp(v1, v2, 0.5f);
+		const Vec2f slerp_res05(0.0f, v1.Length());
 
-		EXPECT_EQ(Vec2T::SLerp(v1, v2, 0.5f), slerp_res05);
+		EXPECT_EQ(slerp, slerp_res05);
 	}
+
+	TEST(Vector2, SLerpDouble)
+	{
+		const Vec2d v1(2.0, 2.0);
+		const Vec2d v2(-2.0, 2.0);
+
+		const Vec2d slerp = Vec2d::SLerp(v1, v2, 0.5f);
+		const Vec2d slerp_res05(0.0, v1.Length());
+
+		//EXPECT_EQ(slerp, slerp_res05);
+		EXPECT_NEAR(slerp.x, slerp_res05.x, std::numeric_limits<double>::epsilon());
+		EXPECT_DOUBLE_EQ(slerp.y, slerp_res05.y);
+	}
+
+	//TYPED_TEST(Vector2Test, SLerp)
+	//{
+	//	const Vec2T v1(TypeParam{ 2.0 }, TypeParam{ 2.0 });
+	//	const Vec2T v2(TypeParam{ -2.0 }, TypeParam{ 2.0 });
+
+	//	const Vec2T slerp = Vec2T::SLerp(v1, v2, 0.5f);
+	//	const Vec2T slerp_res05(TypeParam{ 0.0 }, v1.Length());
+
+	//	//EXPECT_EQ(slerp, slerp_res05);
+	//	//EXPECT_TRUE(Maths::Equals(slerp.x, slerp_res05.x));
+	//	//EXPECT_TRUE(Maths::Equals(slerp.y, slerp_res05.y));
+	//}
 
 	TYPED_TEST(Vector2Test, Operators)
 	{

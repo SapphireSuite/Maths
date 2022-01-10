@@ -30,7 +30,7 @@ env:
 jobs:
 
   ctests_win:
-    name: Default
+    name: ${{ matrix.config }} ${{ matrix.compiler }}
 
     # Setup environment.
     runs-on: windows-latest
@@ -49,8 +49,6 @@ jobs:
         compiler:
           - Clang
 
-        compiler_v: [10]
-        
         gen:
           - Ninja
 
@@ -60,15 +58,6 @@ jobs:
 
         - name: "[Action] Checkout repository"
           uses: actions/checkout@v2
-
-
-        # Install Clang.
-        - name: "[Package] Install LLVM and Clang"
-          if: ${{ matrix.compiler == 'Clang' }}
-          run: |
-              choco install -y llvm --version=${{ matrix.compiler_v }}.0.0
-              echo "CC=C:/Program Files/LLVM/bin/clang" >> $GITHUB_ENV
-              echo "CXX=C:/Program Files/LLVM/bin/clang++" >> $GITHUB_ENV
 
 
         # Install CMake.
@@ -102,7 +91,7 @@ jobs:
 
 
   ctests_win_VS:
-    name: Visual Studio
+    name: ${{ matrix.config }} VS ${{ matrix.compiler }}
 
     # Setup environment.
     runs-on: windows-latest
@@ -120,12 +109,12 @@ jobs:
 
         compiler:
           - MSVC
-          - Clang
+          #- ClangCl
 
         gen:
-          - Visual Studio 15 2017
+          #- Visual Studio 15 2017
           - Visual Studio 16 2019
-          - Visual Studio 17 2022
+          #- Visual Studio 17 2022
 
 
     # Steps execution.
@@ -138,8 +127,8 @@ jobs:
 
 
         # Install Clang.
-        - name: "[Command] Install LLVM and Clang"
-          if: ${{ matrix.compiler == 'Clang' }}
+        - name: "[Command] Install LLVM and ClangCl"
+          if: ${{ matrix.compiler == 'ClangCl' }}
           run: |
               echo "CC=clang-cl" >> $GITHUB_ENV
               echo "CXX=clang-cl" >> $GITHUB_ENV
@@ -166,7 +155,7 @@ jobs:
 
         # Visual Studio with ClangCl
         - name: Generate Project - ClangCl
-          if: ${{ matrix.compiler == 'Clang' }}
+          if: ${{ matrix.compiler == 'ClangCl' }}
           run: cmake -B Build/VS2019/${{ matrix.config }} -DCMAKE_BUILD_TYPE=${{ matrix.config }} ${{ env.CMAKE_OPTIONS }} -G "${GEN}" -A x64 -T "ClangCl"
 
         - name: Build Project

@@ -29,8 +29,8 @@ namespace Sa::UT::Cos
 		//EXPECT_EQ(Maths::Cos<double>(Maths::Pi<double>), -1.0);
 		EXPECT_NEAR(Maths::Cos<double>(Maths::PiOv2<double>), 0.0, std::numeric_limits<double>::epsilon());
 
-		EXPECT_EQ(Maths::Cos<double>(Degd{ 40 }), 0.76604444311897801);
-		EXPECT_EQ(Maths::Cos<double>(0.69813170079773179_rad), 0.76604444311897801);
+		EXPECT_DOUBLE_EQ(Maths::Cos<double>(Degd{ 40 }), 0.76604444311897801);
+		EXPECT_DOUBLE_EQ(Maths::Cos<double>(0.69813170079773179_rad), 0.76604444311897801);
 		
 		EXPECT_EQ(Maths::ACos(0.76604444311897801), 0.69813170079773179_rad);
 	}

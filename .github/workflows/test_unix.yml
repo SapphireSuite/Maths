@@ -30,7 +30,7 @@ env:
 jobs:
 
   ctests_unix:
-    name: Default
+    name: ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.compiler_v }}
 
     # Setup environment.
     runs-on: ubuntu-latest

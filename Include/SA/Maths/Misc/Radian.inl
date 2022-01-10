@@ -139,7 +139,7 @@ namespace Sa
 #endif
 
 
-	constexpr Radf operator""_rad(uint64_t _lit) noexcept
+	constexpr Radf operator""_rad(unsigned long long _lit) noexcept
 	{
 		return Radf(static_cast<float>(_lit));
 	}

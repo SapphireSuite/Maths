@@ -6,7 +6,6 @@
 #define SAPPHIRE_MATHS_RADIAN_GUARD
 
 #include <cmath>
-#include <cstdint>
 
 #include <SA/Maths/Misc/Constants.hpp>
 #include <SA/Maths/Algorithms/Equals.hpp>
@@ -220,7 +219,7 @@ namespace Sa
 	*
 	*	\return \c Radian without maths-conversion.
 	*/
-	constexpr Radf operator""_rad(uint64_t _lit) noexcept;
+	constexpr Radf operator""_rad(unsigned long long _lit) noexcept;
 
 	/**
 	*	\brief _rad \b literal operator.

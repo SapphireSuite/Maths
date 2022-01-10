@@ -138,7 +138,7 @@ namespace Sa
 #endif
 
 
-	constexpr Degf operator""_deg(uint64_t _lit) noexcept
+	constexpr Degf operator""_deg(unsigned long long _lit) noexcept
 	{
 		return Degf(static_cast<float>(_lit));
 	}
