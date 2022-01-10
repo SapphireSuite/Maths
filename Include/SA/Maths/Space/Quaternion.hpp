@@ -5,6 +5,8 @@
 #ifndef SAPPHIRE_MATHS_QUATERNION_GUARD
 #define SAPPHIRE_MATHS_QUATERNION_GUARD
 
+#include <cstdint>
+
 #include <SA/Maths/Misc/Degree.hpp>
 #include <SA/Maths/Algorithms/Cos.hpp>
 #include <SA/Maths/Algorithms/Sin.hpp>
