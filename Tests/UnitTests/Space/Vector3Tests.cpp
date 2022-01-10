@@ -4,6 +4,7 @@
 
 #include <SA/Maths/Space/Vector2.hpp>
 #include <SA/Maths/Space/Vector3.hpp>
+#include <SA/Maths/Space/Vector4.hpp>
 
 namespace Sa::UT::Vector3
 {
@@ -115,13 +116,13 @@ namespace Sa::UT::Vector3
 		EXPECT_EQ(v6.z, v6Z);
 
 
-		//// From Vec4.
-		//const Vec4<TypeParam> v7(UTH::Rand(-100.0f, 100.0f), UTH::Rand(-100.0f, 100.0f), UTH::Rand(-100.0f, 100.0f), UTH::Rand(-100.0f, 100.0f));
+		// From Vec4.
+		const Vec4<TypeParam> v7(TypeParam{ 36.25 }, TypeParam{ 7896.2 }, TypeParam{ 115.21 }, TypeParam{ 99.441 });
 
-		//const Vec3T v8(v7);
-		//EXPECT_EQ(v8.x, v7.x);
-		//EXPECT_EQ(v8.y, v7.y);
-		//EXPECT_EQ(v8.z, v7.z);
+		const Vec3T v8(v7);
+		EXPECT_EQ(v8.x, v7.x);
+		EXPECT_EQ(v8.y, v7.y);
+		EXPECT_EQ(v8.z, v7.z);
 	}
 
 	TYPED_TEST(Vector3Test, Equals)
@@ -332,6 +333,6 @@ namespace Sa::UT::Vector3
 		EXPECT_EQ(v1[2], v1.z);
 
 		EXPECT_EQ(v1.Data(), &v1.x);
-		EXPECT_EQ(const_cast<Vec3T&>(v1).Data(), &const_cast<Vec3T&>(v1).x);
+		EXPECT_EQ(const_cast<Vec3T&>(v1).Data(), &v1.x);
 	}
 }

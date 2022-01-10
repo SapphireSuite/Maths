@@ -295,6 +295,6 @@ namespace Sa::UT::Vector2
 		EXPECT_EQ(v1[1], v1.y);
 
 		EXPECT_EQ(v1.Data(), &v1.x);
-		EXPECT_EQ(const_cast<Vec2T&>(v1).Data(), &const_cast<Vec2T&>(v1).x);
+		EXPECT_EQ(const_cast<Vec2T&>(v1).Data(), &v1.x);
 	}
 }
