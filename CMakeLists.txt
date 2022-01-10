@@ -43,6 +43,13 @@ target_link_libraries(SA_Maths PUBLIC SA_Support)
 # Options
 
 ## Add SA_Maths's tests to build tree.
+option(SA_MATHS_INTRINSICS_OPT "Should build using intrinsics" ON)
+
+if(SA_MATHS_INTRINSICS_OPT)
+	target_compile_definitions(SA_Maths PUBLIC SA_MATHS_INTRINSICS_OPT)
+endif()
+
+## Add SA_Maths's tests to build tree.
 option(SA_MATHS_BUILD_TESTS_OPT "Should build SA_Maths tests" OFF)
 
 ## Add SA_Maths's tests to build tree.

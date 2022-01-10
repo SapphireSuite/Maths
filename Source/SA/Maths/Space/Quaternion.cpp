@@ -6,7 +6,7 @@
 
 namespace Sa
 {
-#if SA_INTRISC_SSE // SIMD float.
+#if SA_MATHS_INTRINSICS_OPT && SA_INTRISC_SSE // SIMD float.
 
 	template <>
 	float Quatf::SqrLength() const noexcept
@@ -22,7 +22,8 @@ namespace Sa
 	template <>
 	Quatf& Quatf::Normalize() noexcept
 	{
-		SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
+		// TODO: Debug.
+		//SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
 
 		const __m128 lenP = _mm_set_ps1(Length());
 		const __m128 pack = _mm_load_ps(&w);
@@ -36,7 +37,8 @@ namespace Sa
 	template <>
 	Quatf Quatf::GetNormalized() const noexcept
 	{
-		SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
+		// TODO: Debug.
+		//SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
 
 		Quat res;
 
@@ -52,8 +54,9 @@ namespace Sa
 	template <>
 	Quatf Quatf::Rotate(const Quatf& _other) const noexcept
 	{
-		SA_WARN(IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. This quaternion is not normalized!");
-		SA_WARN(_other.IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. Other quaternion is not normalized!");
+		// TODO: Debug.
+		//SA_WARN(IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. This quaternion is not normalized!");
+		//SA_WARN(_other.IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. Other quaternion is not normalized!");
 
 		Quat res;
 
@@ -117,19 +120,42 @@ namespace Sa
 		float fTotal[8];
 		_mm256_store_ps(fTotal, _mm256_mul_ps(pDbl, _mm256_add_ps(_mm256_mul_ps(p1, p2), _mm256_mul_ps(p3, p4))));
 
+
 		// Pitch - X axis.
-		result.x = Maths::ATan2(fTotal[1], 1.0f - fTotal[0]); // atan2(sinPitch, cosPitch).
+		{
+			float cosPitch = 1.0f - fTotal[0];
+
+			// Handle floating-point precision.
+			if (Maths::Equals0(cosPitch))
+				cosPitch = 0.0f;
+
+			result.x = Maths::ATan2(fTotal[1], cosPitch); // atan2(sinPitch, cosPitch).
+		}
 
 
 		// Yaw - Y axis.
-		if (std::abs(fTotal[2]) > 1.0f) // 90 degrees if out of range.
-			result.y = static_cast<float>(Maths::Sign(fTotal[2]) * Maths::PiOv4 * Maths::RadToDeg);
-		else
-			result.y = Maths::ASin(fTotal[2]);
+		{
+			float sinYaw = fTotal[2];
 
+			// Handle floating-point precision.
+			if (Maths::Equals1(sinYaw))
+				sinYaw = 1.0f;
+
+			if (std::abs(sinYaw) > 1.0f) // 90 degrees if out of range.
+				result.y = std::copysign(Maths::PiOv4<float> *Maths::RadToDeg<float>, sinYaw);
+			else
+				result.y = Maths::ASin(sinYaw);
+		}
+
+
+		float cosRoll = 1.0f - fTotal[3];
+
+		// Handle floating-point precision.
+		if (Maths::Equals0(cosRoll))
+			cosRoll = 0.0f;
 
 		// Roll - Z axis.
-		result.z = Maths::ATan2(fTotal[4], 1.0f - fTotal[3]); // atan2(sinRoll, cosRoll).
+		result.z = Maths::ATan2(fTotal[4], cosRoll); // atan2(sinRoll, cosRoll).
 
 		return result;
 	}
@@ -139,7 +165,7 @@ namespace Sa
 	{
 		Quat res;
 
-		const Vec3<Radf> halfRadAngles = Vec3f(_angles) * 0.5f * static_cast<float>(Maths::DegToRad);
+		const Vec3<Radf> halfRadAngles = Vec3f(_angles) * 0.5f * Maths::DegToRad<float>;
 
 		const float cosPitch = Maths::Cos(halfRadAngles.x);
 		const float sinPitch = Maths::Sin(halfRadAngles.x);
@@ -186,7 +212,8 @@ namespace Sa
 	template <>
 	Quatf Quatf::operator/(float _scale) const noexcept
 	{
-		SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
 
 		Quatf res;
 
@@ -240,7 +267,8 @@ namespace Sa
 	template <>
 	Quatf& Quatf::operator/=(float _scale) noexcept
 	{
-		SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
 
 		const __m128 scP = _mm_set_ps1(_scale);
 		const __m128 pack = _mm_load_ps(&w);
@@ -281,10 +309,11 @@ namespace Sa
 	{
 		Quatf res;
 
-		SA_WARN(!Sa::Equals0(_rhs.w), Maths, L"Inverse scale W by 0!");
-		SA_WARN(!Sa::Equals0(_rhs.x), Maths, L"Inverse scale X Axis by 0!");
-		SA_WARN(!Sa::Equals0(_rhs.y), Maths, L"Inverse scale Y Axis by 0!");
-		SA_WARN(!Sa::Equals0(_rhs.z), Maths, L"Inverse scale Z Axis by 0!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_rhs.w), Maths, L"Inverse scale W by 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.x), Maths, L"Inverse scale X Axis by 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.y), Maths, L"Inverse scale Y Axis by 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.z), Maths, L"Inverse scale Z Axis by 0!");
 
 		const __m128 lPack = _mm_set_ps1(_lhs);
 		const __m128 rPack = _mm_load_ps(&_rhs.w);
@@ -296,7 +325,7 @@ namespace Sa
 
 #endif
 
-#if SA_INTRISC_AVX // SIMD double
+#if SA_MATHS_INTRINSICS_OPT && SA_INTRISC_AVX // SIMD double
 
 	template <>
 	double Quatd::SqrLength() const noexcept
@@ -312,7 +341,8 @@ namespace Sa
 	template <>
 	Quatd& Quatd::Normalize() noexcept
 	{
-		SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
+		// TODO: Debug.
+		//SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
 
 		const __m256d lenP = _mm256_set1_pd(Length());
 		const __m256d pack = _mm256_load_pd(&w);
@@ -326,7 +356,8 @@ namespace Sa
 	template <>
 	Quatd Quatd::GetNormalized() const noexcept
 	{
-		SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
+		// TODO: Debug.
+		//SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
 
 		Quat res;
 
@@ -342,8 +373,9 @@ namespace Sa
 	template <>
 	Quatd Quatd::Rotate(const Quatd& _other) const noexcept
 	{
-		SA_WARN(IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. This quaternion is not normalized!");
-		SA_WARN(_other.IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. Other quaternion is not normalized!");
+		// TODO: Debug.
+		//SA_WARN(IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. This quaternion is not normalized!");
+		//SA_WARN(_other.IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. Other quaternion is not normalized!");
 
 		Quat res;
 
@@ -407,41 +439,44 @@ namespace Sa
 		double dTotal[4];
 		_mm256_store_pd(dTotal, _mm256_mul_pd(pDbl, _mm256_add_pd(_mm256_mul_pd(p1, p2), _mm256_mul_pd(p3, p4))));
 
-
-		double cosPitch = 1.0 - dTotal[0];
-
-		// Handle double precision.
-		if (Sa::Equals0(cosPitch))
-			cosPitch = 0.0f;
-
-		double cosRoll = 1.0 - dTotal[2];
-
-		// Handle double precision.
-		if (Sa::Equals0(cosRoll))
-			cosRoll = 0.0f;
-
 		
 		// Pitch - X axis.
-		result.x = Maths::ATan2(dTotal[1], cosPitch); // atan2(sinPitch, cosPitch).
+		{
+			double cosPitch = 1.0 - dTotal[0];
+
+			// Handle floating-point precision.
+			if (Maths::Equals0(cosPitch))
+				cosPitch = 0.0;
+
+			result.x = Maths::ATan2(dTotal[1], cosPitch); // atan2(sinPitch, cosPitch).
+		}
 
 
 		// Yaw - Y axis.
 		{
 			double sinYaw = 2.0 * (w * y - z * x);
 
-			// Handle double precision.
-			if (Sa::Equals1(sinYaw))
+			// Handle floating-point precision.
+			if (Maths::Equals1(sinYaw))
 				sinYaw = 1.0;
 
 			if (std::abs(sinYaw) > 1.0) // 90 degrees if out of range.
-				result.y = Maths::Sign(sinYaw) * Maths::PiOv4 * Maths::RadToDeg;
+				result.y = std::copysign(Maths::PiOv4<double> * Maths::RadToDeg<double>, sinYaw);
 			else
 				result.y = Maths::ASin(sinYaw);
 		}
 
 
 		// Roll - Z axis.
-		result.z = Maths::ATan2(dTotal[3], cosRoll); // atan2(sinRoll, cosRoll).
+		{
+			double cosRoll = 1.0 - dTotal[2];
+
+			// Handle floating-point precision.
+			if (Maths::Equals0(cosRoll))
+				cosRoll = 0.0;
+
+			result.z = Maths::ATan2(dTotal[3], cosRoll); // atan2(sinRoll, cosRoll).
+		}
 
 		return result;
 	}
@@ -451,7 +486,7 @@ namespace Sa
 	{
 		Quat res;
 
-		const Vec3<Radd> halfRadAngles = Vec3d(_angles) * 0.5 * Maths::DegToRad;
+		const Vec3<Radd> halfRadAngles = Vec3d(_angles) * 0.5 * Maths::DegToRad<double>;
 
 		const double cosPitch = Maths::Cos(halfRadAngles.x);
 		const double sinPitch = Maths::Sin(halfRadAngles.x);
@@ -498,7 +533,8 @@ namespace Sa
 	template <>
 	Quatd Quatd::operator/(double _scale) const noexcept
 	{
-		SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
 		
 		Quat res;
 
@@ -552,7 +588,8 @@ namespace Sa
 	template <>
 	Quatd& Quatd::operator/=(double _scale) noexcept
 	{
-		SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
 
 		const __m256d scP = _mm256_set1_pd(_scale);
 		const __m256d pack = _mm256_load_pd(&w);
@@ -591,10 +628,11 @@ namespace Sa
 	template <>
 	Quatd operator/(double _lhs, const Quatd& _rhs) noexcept
 	{
-		SA_WARN(!Sa::Equals0(_rhs.w), Maths, L"Inverse scale W by 0!");
-		SA_WARN(!Sa::Equals0(_rhs.x), Maths, L"Inverse scale X Axis by 0!");
-		SA_WARN(!Sa::Equals0(_rhs.y), Maths, L"Inverse scale Y Axis by 0!");
-		SA_WARN(!Sa::Equals0(_rhs.z), Maths, L"Inverse scale Z Axis by 0!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_rhs.w), Maths, L"Inverse scale W by 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.x), Maths, L"Inverse scale X Axis by 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.y), Maths, L"Inverse scale Y Axis by 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.z), Maths, L"Inverse scale Z Axis by 0!");
 
 		Quatd res;
 
