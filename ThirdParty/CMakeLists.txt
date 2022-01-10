@@ -3,4 +3,8 @@
 
 # Entrypoints
 
-add_subdirectory(Support)
+if(NOT TARGET Support)
+
+	add_subdirectory(Support)
+
+endif()
