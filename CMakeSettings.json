@@ -32,7 +32,14 @@
       "cmakeCommandArgs": "",
       "buildCommandArgs": "-v",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x64_x64" ]
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "variables": [
+        {
+          "name": "SA_MATHS_BUILD_TESTS_OPT",
+          "value": "True",
+          "type": "BOOL"
+        }
+      ]
     },
     {
       "name": "ClangCl-Debug-x64",

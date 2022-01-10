@@ -18,7 +18,7 @@ add_executable(SA_MathsProto "main.cpp")
 # Dependencies
 
 ### Add library dependencies.
-target_link_libraries(SA_MathsProto PRIVATE SA_Maths_Test)
+target_link_libraries(SA_MathsProto PRIVATE SA_Maths)
 
 
 

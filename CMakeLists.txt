@@ -11,30 +11,6 @@ message("SA_Maths Main directory: ${CMAKE_SOURCE_DIR}")
 
 
 
-# Setup target
-
-function(SA_Setup_Maths_Target mathsTarget)
-
-	## Include directories
-
-	target_include_directories(${mathsTarget} PUBLIC "${CMAKE_SOURCE_DIR}/Include")
-	target_include_directories(${mathsTarget} PRIVATE "${CMAKE_SOURCE_DIR}/Include/SA")
-
-
-	## Compile features
-
-	### Standard
-	target_compile_features(${mathsTarget} PUBLIC c_std_11)
-	target_compile_features(${mathsTarget} PUBLIC cxx_std_20)
-
-	### SA_Maths module implementation preprocessor.
-	target_compile_definitions(${mathsTarget} PUBLIC SA_MATHS_IMPL)
-
-
-endfunction()
-
-
-
 # Library
 
 ## Input.
@@ -42,7 +18,25 @@ file(GLOB_RECURSE SA_MATHS_SOURCES "Source/*")
 
 ## Static library.
 add_library(SA_Maths STATIC ${SA_MATHS_SOURCES})
-SA_Setup_Maths_Target(SA_Maths)
+
+## Include directories
+
+target_include_directories(SA_Maths PUBLIC Include)
+target_include_directories(SA_Maths PRIVATE Include/SA)
+
+## Compile features
+
+### Standard
+target_compile_features(SA_Maths PUBLIC c_std_11)
+target_compile_features(SA_Maths PUBLIC cxx_std_20)
+
+### SA_Maths module implementation preprocessor.
+target_compile_definitions(SA_Maths PUBLIC SA_MATHS_IMPL)
+
+## Link libraries
+
+### Add SA Support.
+target_link_libraries(SA_Maths PUBLIC SA_Support)
 
 
 
@@ -57,6 +51,8 @@ option(SA_MATHS_BUILD_BENCHMARK_OPT "Should build SA_Maths benchmark" OFF)
 
 
 # Entrypoints
+
+add_subdirectory(ThirdParty)
 
 if(SA_MATHS_BUILD_TESTS_OPT)
 

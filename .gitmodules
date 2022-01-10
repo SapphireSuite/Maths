@@ -1,0 +1,3 @@
+[submodule "ThirdParty/Support"]
+	path = ThirdParty/Support
+	url = https://github.com/SapphireSuite/Support.git

@@ -37,7 +37,7 @@ add_executable(SA_MathsBenchmark ${SA_MATHS_BENCHMARK_SOURCES})
 # Dependencies
 
 ### Add library dependencies.
-target_link_libraries(SA_MathsBenchmark PRIVATE SA_Maths_Test)
+target_link_libraries(SA_MathsBenchmark PRIVATE SA_Maths)
 
 ### Google test module dependency.
 target_link_libraries(SA_MathsBenchmark PRIVATE benchmark::benchmark)
