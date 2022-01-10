@@ -61,6 +61,8 @@ jobs:
 
         - name: "[Action] Checkout repository"
           uses: actions/checkout@v2
+          with:
+            submodules: recursive
 
 
          # Install GCC.
