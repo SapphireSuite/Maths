@@ -1,9 +1,7 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
-#include <gtest/gtest.h>
-
-#include <SA/Maths/Misc/Radian.hpp>
-#include <SA/Maths/Misc/Degree.hpp>
+#include "RadianTests.hpp"
+#include "DegreeTests.hpp"
 
 namespace Sa::UT::Radian
 {
@@ -17,15 +15,15 @@ namespace Sa::UT::Radian
 
 	TYPED_TEST(RadianTest, Constructors)
 	{
-		const Rad<TypeParam> r1;
+		const RadT r1;
 		EXPECT_EQ(r1.Handle(), 0);
 
 		const TypeParam r2_val = TypeParam{ 2.56 };
-		const Rad<TypeParam> r2 = r2_val;
+		const RadT r2 = r2_val;
 		EXPECT_EQ(r2.Handle(), r2_val);
 
 		const Deg<TypeParam> d4 = TypeParam{ 180.0 };
-		const Rad<TypeParam> r4 = d4;
+		const RadT r4 = d4;
 		EXPECT_EQ(r4.Handle(), Maths::Pi<TypeParam>);
 	}
 
@@ -42,9 +40,9 @@ namespace Sa::UT::Radian
 
 	TYPED_TEST(RadianTest, Equals)
 	{
-		const Rad<TypeParam> r1 = TypeParam{ 1.3 };
-		const Rad<TypeParam> r2 = TypeParam{ 4.0 };
-		const Rad<TypeParam> r3 = TypeParam{ 1.3 } + std::numeric_limits<TypeParam>::epsilon();
+		const RadT r1 = TypeParam{ 1.3 };
+		const RadT r2 = TypeParam{ 4.0 };
+		const RadT r3 = TypeParam{ 1.3 } + std::numeric_limits<TypeParam>::epsilon();
 
 		EXPECT_FALSE(r1.Equals(r2));
 		EXPECT_TRUE(r1.Equals(r1));
@@ -65,30 +63,30 @@ namespace Sa::UT::Radian
 		const TypeParam baseVal = TypeParam{ 1.26 };
 		const TypeParam clampedVal = TypeParam{ 1.8815926535897933 };
 
-		Rad<TypeParam> r1 = baseVal;
+		RadT r1 = baseVal;
 		r1.Clamp();
 		EXPECT_EQ(r1, baseVal);
 
-		Rad<TypeParam> r2 = piT + baseVal;
+		RadT r2 = piT + baseVal;
 		r2.Clamp();
 		EXPECT_EQ(r2, -clampedVal);
 
-		Rad<TypeParam> r3 = 3 * piT + baseVal;
+		RadT r3 = 3 * piT + baseVal;
 		r3.Clamp();
 		EXPECT_EQ(r3, -clampedVal);
 
-		Rad<TypeParam> r4 = -piT - baseVal;
+		RadT r4 = -piT - baseVal;
 		r4.Clamp();
 		EXPECT_EQ(r4, clampedVal);
 
-		Rad<TypeParam> r5 = -3 * piT - baseVal;
+		RadT r5 = -3 * piT - baseVal;
 		r5.Clamp();
 		EXPECT_EQ(r5, clampedVal);
 	}
 
 	TYPED_TEST(RadianTest, OperatorSelfMinus)
 	{
-		const Rad<TypeParam> r1 = Maths::Pi<TypeParam>;
+		const RadT r1 = Maths::Pi<TypeParam>;
 
 		EXPECT_EQ(-r1, -Maths::Pi<TypeParam>);
 
@@ -99,8 +97,8 @@ namespace Sa::UT::Radian
 
 	TYPED_TEST(RadianTest, OperatorPlus)
 	{
-		const Rad<TypeParam> r1 = Maths::PiOv2<TypeParam>;
-		const Rad<TypeParam> r2 = Maths::PiOv4<TypeParam>;
+		const RadT r1 = Maths::PiOv2<TypeParam>;
+		const RadT r2 = Maths::PiOv4<TypeParam>;
 
 		EXPECT_EQ(r1 + r2, Maths::PiOv2<TypeParam> +Maths::PiOv4<TypeParam>);
 
@@ -108,15 +106,15 @@ namespace Sa::UT::Radian
 		const Deg<TypeParam> d1 = r1 + r2;
 		EXPECT_EQ(d1, (Maths::PiOv2<TypeParam> +Maths::PiOv4<TypeParam>) * Maths::RadToDeg<TypeParam>);
 
-		Rad<TypeParam> r3 = r1;
+		RadT r3 = r1;
 		r3 += r2;
 		EXPECT_EQ(r3, r1 + r2);
 	}
 
 	TYPED_TEST(RadianTest, OperatorMinus)
 	{
-		const Rad<TypeParam> r1 = Maths::PiOv2<TypeParam>;
-		const Rad<TypeParam> r2 = Maths::PiOv4<TypeParam>;
+		const RadT r1 = Maths::PiOv2<TypeParam>;
+		const RadT r2 = Maths::PiOv4<TypeParam>;
 
 		EXPECT_EQ(r1 - r2, Maths::PiOv2<TypeParam> -Maths::PiOv4<TypeParam>);
 
@@ -124,14 +122,14 @@ namespace Sa::UT::Radian
 		const Deg<TypeParam> d1 = r1 - r2;
 		EXPECT_EQ(d1, (Maths::PiOv2<TypeParam> -Maths::PiOv4<TypeParam>) * Maths::RadToDeg<TypeParam>);
 
-		Rad<TypeParam> r3 = r1;
+		RadT r3 = r1;
 		r3 -= r2;
 		EXPECT_EQ(r3, r1 - r2);
 	}
 
 	TYPED_TEST(RadianTest, OperatorScale)
 	{
-		const Rad<TypeParam> r1 = Maths::PiOv2<TypeParam>;
+		const RadT r1 = Maths::PiOv2<TypeParam>;
 
 		EXPECT_EQ(r1 * 2, Maths::Pi<TypeParam>);
 
@@ -139,14 +137,14 @@ namespace Sa::UT::Radian
 		const Deg<TypeParam> d1 = r1 * 2;
 		EXPECT_EQ(d1, TypeParam{ 180.0 });
 
-		Rad<TypeParam> r3 = r1;
+		RadT r3 = r1;
 		r3 *= 2;
 		EXPECT_EQ(r3, r1 * 2);
 	}
 
 	TYPED_TEST(RadianTest, OperatorUnScale)
 	{
-		const Rad<TypeParam> r1 = Maths::Pi<TypeParam>;
+		const RadT r1 = Maths::Pi<TypeParam>;
 
 		EXPECT_EQ(r1 / 2, Maths::PiOv2<TypeParam>);
 
@@ -154,7 +152,7 @@ namespace Sa::UT::Radian
 		const Deg<TypeParam> d1 = r1 / 2;
 		EXPECT_EQ(d1, TypeParam{ 90.0 });
 
-		Rad<TypeParam> r3 = r1;
+		RadT r3 = r1;
 		r3 /= 2;
 		EXPECT_EQ(r3, r1 / 2);
 	}

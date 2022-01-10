@@ -1,27 +1,12 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
-#include <gtest/gtest.h>
+#include "Vector3Tests.hpp"
 
 #include <SA/Maths/Space/Vector2.hpp>
-#include <SA/Maths/Space/Vector3.hpp>
 #include <SA/Maths/Space/Vector4.hpp>
-
-namespace Sa
-{
-	/* Must be declared in Sa:: */
-	template <typename T>
-	std::ostream& operator<<(std::ostream& _os, const Vec3<T>& _v)
-	{
-		return _os << "X: " + std::to_string(_v.x) +
-			"\tY: " + std::to_string(_v.y) +
-			"\tZ: " + std::to_string(_v.z);
-	}
-}
 
 namespace Sa::UT::Vector3
 {
-	#define Vec3T Vec3<TypeParam>
-
 	template <typename T>
 	class Vector3Test : public testing::Test
 	{
