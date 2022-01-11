@@ -9,7 +9,7 @@
 
 namespace Sa::Benchmark
 {
-    static bool randomInit = []() { srand(time(0)); return true; }();
+    static bool randomInit = []() { srand((unsigned int)time(nullptr)); return true; }();
 
     template <typename T>
     static T Rand(T _min = T(0), T _max = T(1))
