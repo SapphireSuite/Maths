@@ -1,5 +1,10 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
+#pragma once
+
+#ifndef SAPPHIRE_MATHS_UT_VECTOR4_TESTS_GUARD
+#define SAPPHIRE_MATHS_UT_VECTOR4_TESTS_GUARD
+
 #include <ostream>
 
 #include <gtest/gtest.h>
@@ -32,3 +37,5 @@ namespace Sa
 	EXPECT_NEAR(v1V.z, v2V.z, eps);\
 	EXPECT_NEAR(v1V.w, v2V.w, eps);\
 }
+
+#endif // GUARD

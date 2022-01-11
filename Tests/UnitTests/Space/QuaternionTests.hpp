@@ -1,5 +1,10 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
+#pragma once
+
+#ifndef SAPPHIRE_MATHS_UT_QUATERNION_TESTS_GUARD
+#define SAPPHIRE_MATHS_UT_QUATERNION_TESTS_GUARD
+
 #include <ostream>
 
 #include <gtest/gtest.h>
@@ -32,3 +37,5 @@ namespace Sa
 	EXPECT_NEAR(q1V.y, q2V.y, eps);\
 	EXPECT_NEAR(q1V.z, q2V.z, eps);\
 }
+
+#endif // GUARD

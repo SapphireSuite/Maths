@@ -1,5 +1,10 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
+#pragma once
+
+#ifndef SAPPHIRE_MATHS_UT_RADIAN_TESTS_GUARD
+#define SAPPHIRE_MATHS_UT_RADIAN_TESTS_GUARD
+
 #include <ostream>
 
 #include <gtest/gtest.h>
@@ -18,3 +23,5 @@ namespace Sa
 
 /// Google Test typedef helper.
 #define RadT Rad<TypeParam>
+
+#endif // GUARD

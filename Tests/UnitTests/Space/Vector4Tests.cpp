@@ -1,6 +1,6 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
-#include "Vector4Tests .hpp"
+#include "Vector4Tests.hpp"
 
 #include <SA/Maths/Space/Vector2.hpp>
 #include <SA/Maths/Space/Vector3.hpp>
