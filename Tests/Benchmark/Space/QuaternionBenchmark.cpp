@@ -2,38 +2,18 @@
 
 #include <benchmark/benchmark.h>
 
-#include <SA/Maths/Space/Quaternion.hpp>
-#include <SA/Maths/Space/Vector3.hpp>
+#include "QuaternionBenchmark.hpp"
+#include "Vector3Benchmark.hpp"
 
 namespace Sa::Benchmark
 {
-    template <typename T>
-    const Quat<T> q1(
-        T{ 0.65379899684951437 },
-        T{ 0.49198400932684733 },
-        T{ -0.57343602132006610 },
-        T{ -0.040862400050191698 }
-    );
-
-    template <typename T>
-    const Quat<T> q2(
-        T{ 0.28456911695921927 },
-        T{ 0.055287819843885436 },
-        T{ -0.16261099422502870 },
-        T{ -0.94314438937370981 }
-    );
-
-    template <typename T>
-    const Quat<T> q3(T{ 13.21 }, T{ 1.346 }, T{ 55.21 }, T{ 75.21 });
-
-
     template <typename T>
     static void Quat_SqrLength(benchmark::State& _state)
     {
         T x = T();
 
         for (auto _ : _state)
-            benchmark::DoNotOptimize(x += q3<T>.SqrLength());
+            benchmark::DoNotOptimize(x += RQuat.SqrLength());
     }
 
     BENCHMARK_TEMPLATE(Quat_SqrLength, float);
@@ -46,7 +26,7 @@ namespace Sa::Benchmark
         Quat<T> qres;
 
         for (auto _ : _state)
-            benchmark::DoNotOptimize(qres += q3<T>.GetNormalized());
+            benchmark::DoNotOptimize(qres += RQuat.GetNormalized());
     }
 
     BENCHMARK_TEMPLATE(Quat_GetNormalized, float);
@@ -59,7 +39,9 @@ namespace Sa::Benchmark
         Quat<T> qres;
 
         for (auto _ : _state)
-            benchmark::DoNotOptimize(qres += q1<T>.Rotate(q2<T>));
+        {
+            benchmark::DoNotOptimize(qres += RQuat.Rotate(RQuat));
+        }
     }
 
     BENCHMARK_TEMPLATE(Quat_Rotate, float);
@@ -72,7 +54,7 @@ namespace Sa::Benchmark
         T dot = T();
 
         for (auto _ : _state)
-            benchmark::DoNotOptimize(dot += Quat<T>::Dot(q1<T>, q2<T>));
+            benchmark::DoNotOptimize(dot += Quat<T>::Dot(RQuat, RQuat));
     }
 
     BENCHMARK_TEMPLATE(Quat_Dot, float);
@@ -85,7 +67,7 @@ namespace Sa::Benchmark
         Vec3<Deg<T>> euler;
 
         for (auto _ : _state)
-            benchmark::DoNotOptimize(euler += q1<T>.ToEuler());
+            benchmark::DoNotOptimize(euler += RQuat.ToEuler());
     }
 
     BENCHMARK_TEMPLATE(Quat_ToEuler, float);
@@ -96,10 +78,9 @@ namespace Sa::Benchmark
     static void Quat_FromEuler(benchmark::State& _state)
     {
         Quat<T> qres;
-        const Vec3<Deg<T>> euler(43.21_deg, 33.21_deg, 136.23_deg);
 
         for (auto _ : _state)
-            benchmark::DoNotOptimize(qres += Quat<T>::FromEuler(euler));
+            benchmark::DoNotOptimize(qres += Quat<T>::FromEuler(RVec3));
     }
 
     BENCHMARK_TEMPLATE(Quat_FromEuler, float);
@@ -112,7 +93,7 @@ namespace Sa::Benchmark
         Quat<T> qres;
 
         for (auto _ : _state)
-            benchmark::DoNotOptimize(qres += q1<T> + q2<T>);
+            benchmark::DoNotOptimize(qres += RQuat + RQuat);
     }
 
     BENCHMARK_TEMPLATE(Quat_OperatorPlus, float);
@@ -125,7 +106,7 @@ namespace Sa::Benchmark
         Quat<T> qres;
 
         for (auto _ : _state)
-            benchmark::DoNotOptimize(qres += q1<T> * q2<T>);
+            benchmark::DoNotOptimize(qres += RQuat * RQuat);
     }
 
     BENCHMARK_TEMPLATE(Quat_OperatorMult, float);
