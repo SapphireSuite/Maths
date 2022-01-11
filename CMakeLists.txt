@@ -51,24 +51,45 @@ target_link_libraries(SA_Maths PUBLIC SA_Support)
 
 # Options
 
-## Add SA_Maths's tests to build tree.
+## Add SA_Maths's intrinsics implementation.
 option(SA_MATHS_INTRINSICS_OPT "Should build using intrinsics" ON)
 
 if(SA_MATHS_INTRINSICS_OPT)
+
 	target_compile_definitions(SA_Maths PUBLIC SA_MATHS_INTRINSICS_OPT)
+
+	if(NOT TARGET Support)
+
+		# Fetch SA_Support.
+		include(FetchContent)
+
+		message("Fetching SA_Support...")
+
+		FetchContent_Declare(
+			SA_Support
+			GIT_REPOSITORY https://github.com/SapphireSuite/Support.git
+			GIT_TAG        v1.1
+		)
+
+		FetchContent_MakeAvailable(SA_Support)
+
+	endif()
+
+	SA_SetupIntrinsicsFlags(SA_Maths PUBLIC)
+
 endif()
+
 
 ## Add SA_Maths's tests to build tree.
 option(SA_MATHS_BUILD_TESTS_OPT "Should build SA_Maths tests" OFF)
 
-## Add SA_Maths's tests to build tree.
+
+## Add SA_Maths's benchmark to build tree.
 option(SA_MATHS_BUILD_BENCHMARK_OPT "Should build SA_Maths benchmark" OFF)
 
 
 
 # Entrypoints
-
-add_subdirectory(ThirdParty)
 
 if(SA_MATHS_BUILD_TESTS_OPT)
 
