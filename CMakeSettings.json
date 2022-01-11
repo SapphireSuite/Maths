@@ -15,11 +15,6 @@
           "name": "SA_MATHS_BUILD_TESTS_OPT",
           "value": "True",
           "type": "BOOL"
-        },
-        {
-          "name": "SA_MATHS_BUILD_BENCHMARK_OPT",
-          "value": "False",
-          "type": "BOOL"
         }
       ]
     },
@@ -36,6 +31,11 @@
       "variables": [
         {
           "name": "SA_MATHS_BUILD_TESTS_OPT",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "SA_MATHS_BUILD_BENCHMARK_OPT",
           "value": "True",
           "type": "BOOL"
         }
@@ -72,6 +72,11 @@
       "variables": [
         {
           "name": "SA_MATHS_BUILD_TESTS_OPT",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "SA_MATHS_BUILD_BENCHMARK_OPT",
           "value": "True",
           "type": "BOOL"
         }
