@@ -5,7 +5,7 @@
 #include <SA/Maths/Space/Quaternion.hpp>
 #include <SA/Maths/Space/Vector3.hpp>
 
-namespace Sa::Benchmark::Quaternion
+namespace Sa::Benchmark
 {
     template <typename T>
     const Quat<T> q1(
@@ -28,7 +28,7 @@ namespace Sa::Benchmark::Quaternion
 
 
     template <typename T>
-    static void SqrLength(benchmark::State& _state)
+    static void Quat_SqrLength(benchmark::State& _state)
     {
         T x = T();
 
@@ -36,12 +36,12 @@ namespace Sa::Benchmark::Quaternion
             benchmark::DoNotOptimize(x += q3<T>.SqrLength());
     }
 
-    BENCHMARK_TEMPLATE(SqrLength, float);
-    BENCHMARK_TEMPLATE(SqrLength, double);
+    BENCHMARK_TEMPLATE(Quat_SqrLength, float);
+    BENCHMARK_TEMPLATE(Quat_SqrLength, double);
 
 
     template <typename T>
-    static void GetNormalized(benchmark::State& _state)
+    static void Quat_GetNormalized(benchmark::State& _state)
     {
         Quat<T> qres;
 
@@ -49,12 +49,12 @@ namespace Sa::Benchmark::Quaternion
             benchmark::DoNotOptimize(qres += q3<T>.GetNormalized());
     }
 
-    BENCHMARK_TEMPLATE(GetNormalized, float);
-    BENCHMARK_TEMPLATE(GetNormalized, double);
+    BENCHMARK_TEMPLATE(Quat_GetNormalized, float);
+    BENCHMARK_TEMPLATE(Quat_GetNormalized, double);
 
 
     template <typename T>
-    static void Rotate(benchmark::State& _state)
+    static void Quat_Rotate(benchmark::State& _state)
     {
         Quat<T> qres;
 
@@ -62,12 +62,12 @@ namespace Sa::Benchmark::Quaternion
             benchmark::DoNotOptimize(qres += q1<T>.Rotate(q2<T>));
     }
 
-    BENCHMARK_TEMPLATE(Rotate, float);
-    BENCHMARK_TEMPLATE(Rotate, double);
+    BENCHMARK_TEMPLATE(Quat_Rotate, float);
+    BENCHMARK_TEMPLATE(Quat_Rotate, double);
 
 
     template <typename T>
-    static void Dot(benchmark::State& _state)
+    static void Quat_Dot(benchmark::State& _state)
     {
         T dot = T();
 
@@ -75,12 +75,12 @@ namespace Sa::Benchmark::Quaternion
             benchmark::DoNotOptimize(dot += Quat<T>::Dot(q1<T>, q2<T>));
     }
 
-    BENCHMARK_TEMPLATE(Dot, float);
-    BENCHMARK_TEMPLATE(Dot, double);
+    BENCHMARK_TEMPLATE(Quat_Dot, float);
+    BENCHMARK_TEMPLATE(Quat_Dot, double);
 
 
     template <typename T>
-    static void ToEuler(benchmark::State& _state)
+    static void Quat_ToEuler(benchmark::State& _state)
     {
         Vec3<Deg<T>> euler;
 
@@ -88,26 +88,26 @@ namespace Sa::Benchmark::Quaternion
             benchmark::DoNotOptimize(euler += q1<T>.ToEuler());
     }
 
-    BENCHMARK_TEMPLATE(ToEuler, float);
-    BENCHMARK_TEMPLATE(ToEuler, double);
+    BENCHMARK_TEMPLATE(Quat_ToEuler, float);
+    BENCHMARK_TEMPLATE(Quat_ToEuler, double);
 
 
     template <typename T>
-    static void FromEuler(benchmark::State& _state)
+    static void Quat_FromEuler(benchmark::State& _state)
     {
-       Quat<T> qres;
-       const Vec3<Deg<T>> euler(43.21_deg, 33.21_deg, 136.23_deg);
+        Quat<T> qres;
+        const Vec3<Deg<T>> euler(43.21_deg, 33.21_deg, 136.23_deg);
 
         for (auto _ : _state)
             benchmark::DoNotOptimize(qres += Quat<T>::FromEuler(euler));
     }
 
-    BENCHMARK_TEMPLATE(FromEuler, float);
-    BENCHMARK_TEMPLATE(FromEuler, double);
+    BENCHMARK_TEMPLATE(Quat_FromEuler, float);
+    BENCHMARK_TEMPLATE(Quat_FromEuler, double);
 
 
     template <typename T>
-    static void OperatorPlus(benchmark::State& _state)
+    static void Quat_OperatorPlus(benchmark::State& _state)
     {
         Quat<T> qres;
 
@@ -115,12 +115,12 @@ namespace Sa::Benchmark::Quaternion
             benchmark::DoNotOptimize(qres += q1<T> + q2<T>);
     }
 
-    BENCHMARK_TEMPLATE(OperatorPlus, float);
-    BENCHMARK_TEMPLATE(OperatorPlus, double);
+    BENCHMARK_TEMPLATE(Quat_OperatorPlus, float);
+    BENCHMARK_TEMPLATE(Quat_OperatorPlus, double);
 
 
     template <typename T>
-    static void OperatorMult(benchmark::State& _state)
+    static void Quat_OperatorMult(benchmark::State& _state)
     {
         Quat<T> qres;
 
@@ -128,6 +128,6 @@ namespace Sa::Benchmark::Quaternion
             benchmark::DoNotOptimize(qres += q1<T> * q2<T>);
     }
 
-    BENCHMARK_TEMPLATE(OperatorMult, float);
-    BENCHMARK_TEMPLATE(OperatorMult, double);
+    BENCHMARK_TEMPLATE(Quat_OperatorMult, float);
+    BENCHMARK_TEMPLATE(Quat_OperatorMult, double);
 }
