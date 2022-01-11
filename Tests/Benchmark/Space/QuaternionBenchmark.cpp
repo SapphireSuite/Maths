@@ -5,6 +5,8 @@
 #include "QuaternionBenchmark.hpp"
 #include "Vector3Benchmark.hpp"
 
+#if SA_MATHS_QUATERNION_SIMD
+
 namespace Sa::Benchmark
 {
     template <typename T>
@@ -112,3 +114,5 @@ namespace Sa::Benchmark
     BENCHMARK_TEMPLATE(Quat_OperatorMult, float);
     BENCHMARK_TEMPLATE(Quat_OperatorMult, double);
 }
+
+#endif

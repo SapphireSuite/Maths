@@ -7,6 +7,8 @@
 
 #include <cstdint>
 
+#include <SA/Maths/Config.hpp>
+
 #include <SA/Maths/Misc/Degree.hpp>
 #include <SA/Maths/Algorithms/Cos.hpp>
 #include <SA/Maths/Algorithms/Sin.hpp>
@@ -15,7 +17,11 @@
 #include <SA/Maths/Algorithms/Lerp.hpp>
 #include <SA/Maths/Algorithms/Equals.hpp>
 
-#include <SA/Support/Intrinsics.hpp>
+#if SA_MATHS_INTRINSICS_OPT
+
+	#include <SA/Support/Intrinsics.hpp>
+
+#endif
 
 /**
 *	\file Quaternion.hpp
@@ -745,7 +751,7 @@ namespace Sa
 	/// \cond Internal
 	
 
-#if SA_MATHS_INTRINSICS_OPT && SA_INTRISC_SSE	// SIMD float
+#if SA_MATHS_QUATERNION_SIMD && SA_MATHS_INTRINSICS_OPT && SA_INTRISC_SSE	// SIMD float
 
 	template <>
 	float Quatf::SqrLength() const noexcept;
@@ -802,7 +808,7 @@ namespace Sa
 
 #endif
 
-#if SA_MATHS_INTRINSICS_OPT && SA_INTRISC_AVX // SIMD double
+#if SA_MATHS_QUATERNION_SIMD && SA_MATHS_INTRINSICS_OPT && SA_INTRISC_AVX // SIMD double
 
 	template <>
 	double Quatd::SqrLength() const noexcept;
