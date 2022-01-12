@@ -11,6 +11,7 @@ on:
       - dev
       - dev_*
       - '!dev_osx'
+      - '!dev_macos'
       - '!dev_unix'
 
 
