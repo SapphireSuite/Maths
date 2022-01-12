@@ -42,11 +42,6 @@ target_compile_features(SA_Maths PUBLIC cxx_std_20)
 ### SA_Maths module implementation preprocessor.
 target_compile_definitions(SA_Maths PUBLIC SA_MATHS_IMPL)
 
-## Link libraries
-
-### Add SA Support.
-target_link_libraries(SA_Maths PUBLIC SA_Support)
-
 
 
 # Options
@@ -76,6 +71,9 @@ if(SA_MATHS_INTRINSICS_OPT)
 	endif()
 
 	SA_SetupIntrinsicsFlags(SA_Maths PUBLIC)
+
+	### Add SA Support.
+	target_link_libraries(SA_Maths PUBLIC SA_Support)
 
 endif()
 
