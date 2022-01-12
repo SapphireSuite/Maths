@@ -19,6 +19,7 @@ namespace Sa::Benchmark
             benchmark::DoNotOptimize(x += RMat4.Determinant());
     }
 
+    BENCHMARK_TEMPLATE(Mat4_Determinant, int32_t);
     BENCHMARK_TEMPLATE(Mat4_Determinant, float);
     BENCHMARK_TEMPLATE(Mat4_Determinant, double);
 
@@ -32,6 +33,7 @@ namespace Sa::Benchmark
             benchmark::DoNotOptimize(mres += RMat4.GetInversed());
     }
 
+    //BENCHMARK_TEMPLATE(Mat4_GetInversed, int32_t); // No int test with inverse.
     BENCHMARK_TEMPLATE(Mat4_GetInversed, float);
     BENCHMARK_TEMPLATE(Mat4_GetInversed, double);
 
@@ -45,6 +47,7 @@ namespace Sa::Benchmark
             benchmark::DoNotOptimize(mres += RMat4.ApplyScale(RVec3));
     }
 
+    BENCHMARK_TEMPLATE(Mat4_ApplyScale, int32_t);
     BENCHMARK_TEMPLATE(Mat4_ApplyScale, float);
     BENCHMARK_TEMPLATE(Mat4_ApplyScale, double);
 
@@ -58,6 +61,7 @@ namespace Sa::Benchmark
             benchmark::DoNotOptimize(mres += RMat4.MakeRotation(RQuat));
     }
 
+    BENCHMARK_TEMPLATE(Mat4_MakeRotation, int32_t);
     BENCHMARK_TEMPLATE(Mat4_MakeRotation, float);
     BENCHMARK_TEMPLATE(Mat4_MakeRotation, double);
 
@@ -71,6 +75,7 @@ namespace Sa::Benchmark
             benchmark::DoNotOptimize(mres += RMat4 * Rand<T>());
     }
 
+    BENCHMARK_TEMPLATE(Mat4_OpMultScalar, int32_t);
     BENCHMARK_TEMPLATE(Mat4_OpMultScalar, float);
     BENCHMARK_TEMPLATE(Mat4_OpMultScalar, double);
 
@@ -84,6 +89,7 @@ namespace Sa::Benchmark
             benchmark::DoNotOptimize(mres += RMat4 + RMat4);
     }
 
+    BENCHMARK_TEMPLATE(Mat4_OpAdd, int32_t);
     BENCHMARK_TEMPLATE(Mat4_OpAdd, float);
     BENCHMARK_TEMPLATE(Mat4_OpAdd, double);
 
@@ -97,6 +103,7 @@ namespace Sa::Benchmark
             benchmark::DoNotOptimize(mres += RMat4 * RMat4);
     }
 
+    BENCHMARK_TEMPLATE(Mat4_OpMult, int32_t);
     BENCHMARK_TEMPLATE(Mat4_OpMult, float);
     BENCHMARK_TEMPLATE(Mat4_OpMult, double);
 
@@ -110,6 +117,7 @@ namespace Sa::Benchmark
             benchmark::DoNotOptimize(vres += RMat4 * RVec3);
     }
 
+    BENCHMARK_TEMPLATE(Mat4_OpMultVec3, int32_t);
     BENCHMARK_TEMPLATE(Mat4_OpMultVec3, float);
     BENCHMARK_TEMPLATE(Mat4_OpMultVec3, double);
 }
