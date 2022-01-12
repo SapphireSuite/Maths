@@ -725,7 +725,7 @@ namespace Sa
 	template <typename T, MatrixMajor major>
 	Vec3<T> Mat4<T, major>::operator*(const Vec3<T>& _rhs) const noexcept
 	{
-		return Vec3(
+		return Vec3<T>(
 			e00 * _rhs.x + e01 * _rhs.y + e02 * _rhs.z,
 			e10 * _rhs.x + e11 * _rhs.y + e12 * _rhs.z,
 			e20 * _rhs.x + e21 * _rhs.y + e22 * _rhs.z
@@ -735,7 +735,7 @@ namespace Sa
 	template <typename T, MatrixMajor major>
 	Vec4<T> Mat4<T, major>::operator*(const Vec4<T>& _rhs) const noexcept
 	{
-		return Vec4(
+		return Vec4<T>(
 			e00 * _rhs.x + e01 * _rhs.y + e02 * _rhs.z + e03 * _rhs.w,
 			e10 * _rhs.x + e11 * _rhs.y + e12 * _rhs.z + e13 * _rhs.w,
 			e20 * _rhs.x + e21 * _rhs.y + e22 * _rhs.z + e23 * _rhs.w,

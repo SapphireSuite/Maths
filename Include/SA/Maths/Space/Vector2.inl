@@ -440,6 +440,6 @@ namespace Sa
 		//SA_WARN(!Sa::Equals0(_rhs.x), Maths, L"Inverse scale X Axis by 0!");
 		//SA_WARN(!Sa::Equals0(_rhs.y), Maths, L"Inverse scale Y Axis by 0!");
 
-		return Vec2(_lhs / _rhs.x, _lhs / _rhs.y);
+		return Vec2<T>(_lhs / _rhs.x, _lhs / _rhs.y);
 	}
 }
