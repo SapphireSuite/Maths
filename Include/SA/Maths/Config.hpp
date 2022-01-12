@@ -43,7 +43,7 @@
 *	Whether to use SIMD implementation for Quaternion.
 *	Default is disabled. Benchmark has shown that compiler already optimize calcultation at its best.
 */
-#define SA_MATHS_QUATERNION_SIMD 0
+#define SA_MATHS_QUATERNION_SIMD 0 && SA_MATHS_INTRINSICS_OPT
 
 
 /** \} */

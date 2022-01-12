@@ -6,7 +6,7 @@
 
 namespace Sa
 {
-#if SA_MATHS_QUATERNION_SIMD && SA_MATHS_INTRINSICS_OPT && SA_INTRISC_SSE // SIMD float.
+#if SA_MATHS_QUATERNION_SIMD && SA_INTRISC_SSE // SIMD float.
 
 	template <>
 	float Quatf::SqrLength() const noexcept
@@ -325,7 +325,7 @@ namespace Sa
 
 #endif
 
-#if SA_MATHS_QUATERNION_SIMD && SA_MATHS_INTRINSICS_OPT && SA_INTRISC_AVX // SIMD double
+#if SA_MATHS_QUATERNION_SIMD && SA_INTRISC_AVX // SIMD double
 
 	template <>
 	double Quatd::SqrLength() const noexcept
