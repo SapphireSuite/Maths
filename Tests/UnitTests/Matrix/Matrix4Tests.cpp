@@ -1,8 +1,12 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
 #include "Matrix4Tests.hpp"
+#include "../Space/QuaternionTests.hpp"
 
 #include <SA/Maths/Matrix/MatrixMajor.hpp>
+
+#include <SA/Maths/Space/Vector3.hpp>
+#include <SA/Maths/Space/Vector4.hpp>
 
 namespace Sa::UT::Matrix4
 {
@@ -375,6 +379,344 @@ namespace Sa::UT::Matrix4
 		}
 	}
 
+	TYPED_TEST(Matrix4Test, Lerp)
+	{
+		const Mat4T m1(
+			(TT)2.0, (TT)2.0, (TT)0.0, (TT)30.0,
+			(TT)6.0, (TT)10.0, (TT)16.0, (TT)26.0,
+			(TT)46.0, (TT)12.0, (TT)70.0, (TT)2.0,
+			(TT)9.0, (TT)18.0, (TT)0.0, (TT)31.0
+		);
+
+		const Mat4T m2(
+			(TT)-2.0, (TT)4.0, (TT)8.0, (TT)94.0,
+			(TT)4.0, (TT)-60.0, (TT)10.0, (TT)32.0,
+			(TT)1.0, (TT)8.0, (TT)-10.0, (TT)41.0,
+			(TT)20.0, (TT)1.0, (TT)4., (TT)13.0
+		);
+
+
+		const Mat4T lerp_res05(
+			(TT)0.0, (TT)3.0, (TT)4.0, (TT)62.0,
+			(TT)5.0, (TT)-25.0, (TT)13.0, (TT)29.0,
+			(TT)23.5, (TT)10.0, (TT)30.0, (TT)21.5,
+			(TT)14.5, (TT)9.5, (TT)2.0, (TT)22.0
+		);
+
+		EXPECT_EQ(Mat4T::Lerp(m1, m2, 0.5f), lerp_res05);
+
+		EXPECT_EQ(Mat4T::Lerp(m1, m2, 2.0f), m2);
+
+
+		const Mat4T ulerp_res1(
+			(TT)6.0, (TT)0.0, (TT)-8.0f, (TT)-34.0f,
+			(TT)8.0, (TT)80.0, (TT)22.0, (TT)20.0,
+			(TT)91.0, (TT)16.0, (TT)150.0, (TT)-37.0,
+			(TT)-2.0, (TT)35.0, (TT)-4.0, (TT)49.0
+		);
+
+		EXPECT_EQ(Mat4T::LerpUnclamped(m1, m2, -1.0f), ulerp_res1);
+	}
+
+	TYPED_TEST(Matrix4Test, Transform)
+	{
+		// Translation.
+		const Vec3<TT> vTr((TT)10.0412, (TT)2.361, (TT)12.35);
+
+		const Mat4T mTr(
+			1, 0, 0, vTr.x,
+			0, 1, 0, vTr.y,
+			0, 0, 1, vTr.z,
+			0, 0, 0, 1
+		);
+
+		EXPECT_EQ(Mat4T::MakeTranslation(vTr), mTr);
+
+
+		Mat4T mTr2 = Mat4T::Identity;
+		mTr2.ApplyTranslation(vTr);
+		EXPECT_EQ(mTr2, mTr);
+
+
+		// Rotation.
+
+		/**
+		*	Precomputed values
+		*	https://www.wolframalpha.com/input/?i=Quaternion%280.653799%2C+0.491984%2C+-0.573436%2C+-0.0408624%29
+		*/
+		const Quat<TT> q1(
+			(TT)0.65379899684951437,
+			(TT)0.49198400932684733,
+			(TT)-0.57343602132006610,
+			(TT)-0.040862400050191698
+		);
+
+		const Mat4T mRot(
+			(TT)0.339003, (TT)-0.510811, (TT)-0.790031, 0,
+			(TT)-0.617674, (TT)0.512564, (TT)-0.596453, 0,
+			(TT)0.709616, (TT)0.690181, (TT)-0.141754, 0,
+			0, 0, 0, 1
+		);
+
+
+		if constexpr (std::is_floating_point_v<TT>) // No test for int types.
+			EXPECT_MAT4_NEAR(Mat4T::MakeRotation(q1), mRot, 0.000001);
+
+
+		// Scale.
+		const Vec3<TT> vScale((TT)2.215, (TT)5.31, (TT)996.2);
+
+		Mat4T mScale = Mat4T::Identity;
+		mScale.e00 *= vScale.x;
+		mScale.e11 *= vScale.y;
+		mScale.e22 *= vScale.z;
+		EXPECT_EQ(Mat4T::MakeScale(vScale), mScale);
+
+
+		// Translation + Rotation.
+
+		Mat4T mTrRot = mRot;
+		mTrRot.e03 = vTr.x;
+		mTrRot.e13 = vTr.y;
+		mTrRot.e23 = vTr.z;
+
+		if constexpr (std::is_floating_point_v<TT>) // No test for int types.
+			EXPECT_MAT4_NEAR(Mat4T::MakeTransform(vTr, q1), mTrRot, 0.000001);
+
+
+		// Translation + Scale.
+		Mat4T mTrScale = mScale;
+		mTrScale.e03 = vTr.x;
+		mTrScale.e13 = vTr.y;
+		mTrScale.e23 = vTr.z;
+		EXPECT_EQ(Mat4T::MakeTransform(vTr, vScale), mTrScale);
+
+
+		// Rotation + Scale.
+		const Mat4T mRotScale = mScale * mRot;
+
+		if constexpr (std::is_floating_point_v<TT>) // No test for int types.
+			EXPECT_MAT4_NEAR(Mat4T::MakeTransform(q1, vScale), mRotScale, 0.001);
+
+
+		// Translation + Rotation + Scale.
+		Mat4T mTrRotScale = mRotScale;
+		mTrRotScale.e03 = vTr.x;
+		mTrRotScale.e13 = vTr.y;
+		mTrRotScale.e23 = vTr.z;
+
+		if constexpr (std::is_floating_point_v<TT>) // No test for int types.
+			EXPECT_MAT4_NEAR(Mat4T::MakeTransform(vTr, q1, vScale), mTrRotScale, 0.001)
+	}
+
+	TYPED_TEST(Matrix4Test, Operators)
+	{
+		const Mat4T m1(
+			(TT)6.314, (TT)165.2, (TT)4236.0, (TT)99.4,
+			(TT)46.25, (TT)77.51, (TT)16.25, (TT)78.25,
+			(TT)653.0, (TT)11.21, (TT)15.36, (TT)9.64,
+			(TT)1.26, (TT)22.32, (TT)56.214, (TT)32.215
+		);
+
+		// Minus self.
+		const Mat4T mm1(
+			-m1.e00, -m1.e01, -m1.e02, -m1.e03,
+			-m1.e10, -m1.e11, -m1.e12, -m1.e13,
+			-m1.e20, -m1.e21, -m1.e22, -m1.e23,
+			-m1.e30, -m1.e31, -m1.e32, -m1.e33
+		);
+
+		EXPECT_EQ(-m1, mm1);
+
+
+		// Scale.
+		TT scale = (TT)6.21;
+
+		const Mat4T sm1(
+			m1.e00 * scale, m1.e01 * scale, m1.e02 * scale, m1.e03 * scale,
+			m1.e10 * scale, m1.e11 * scale, m1.e12 * scale, m1.e13 * scale,
+			m1.e20 * scale, m1.e21 * scale, m1.e22 * scale, m1.e23 * scale,
+			m1.e30 * scale, m1.e31 * scale, m1.e32 * scale, m1.e33 * scale
+		);
+
+		EXPECT_EQ(m1 * scale, sm1);
+		EXPECT_EQ(scale * m1, sm1);
+
+
+		// Unscale.
+		const Mat4T usm1(
+			m1.e00 / scale, m1.e01 / scale, m1.e02 / scale, m1.e03 / scale,
+			m1.e10 / scale, m1.e11 / scale, m1.e12 / scale, m1.e13 / scale,
+			m1.e20 / scale, m1.e21 / scale, m1.e22 / scale, m1.e23 / scale,
+			m1.e30 / scale, m1.e31 / scale, m1.e32 / scale, m1.e33 / scale
+		);
+		const Mat4T susm1(
+			scale / m1.e00, scale / m1.e01, scale / m1.e02, scale / m1.e03,
+			scale / m1.e10, scale / m1.e11, scale / m1.e12, scale / m1.e13,
+			scale / m1.e20, scale / m1.e21, scale / m1.e22, scale / m1.e23,
+			scale / m1.e30, scale / m1.e31, scale / m1.e32, scale / m1.e33
+		);
+
+		EXPECT_EQ(m1 / scale, usm1);
+		EXPECT_EQ(scale / m1, susm1);
+
+
+		// Vector transform
+		const Vec3<TT> v1((TT)10.0412, (TT)2.361, (TT)12.35);
+
+		Vec3<TT> v1_res(
+			m1.e00 * v1.x + m1.e01 * v1.y + m1.e02 * v1.z,
+			m1.e10 * v1.x + m1.e11 * v1.y + m1.e12 * v1.z,
+			m1.e20 * v1.x + m1.e21 * v1.y + m1.e22 * v1.z
+		);
+
+		EXPECT_EQ(m1 * v1, v1_res);
+
+		const Vec4<TT> v2 (v1, (TT)35.21);
+		Vec4<TT> v2_res(
+			m1.e00 * v2.x + m1.e01 * v2.y + m1.e02 * v2.z + m1.e03 * v2.w,
+			m1.e10 * v2.x + m1.e11 * v2.y + m1.e12 * v2.z + m1.e13 * v2.w,
+			m1.e20 * v2.x + m1.e21 * v2.y + m1.e22 * v2.z + m1.e23 * v2.w,
+			m1.e30 * v2.x + m1.e31 * v2.y + m1.e32 * v2.z + m1.e33 * v2.w
+		);
+
+		EXPECT_EQ(m1 * v2, v2_res);
+
+
+		// Mat4 operators
+		const Mat4T m2(
+			(TT)336.65, (TT)23.6, (TT)11.68, (TT)3.34,
+			(TT)98.55, (TT)462.3, (TT)5.984, (TT)223.35,
+			(TT)796.335, (TT)11.457, (TT)22.32, (TT)795.354,
+			(TT)11.1235, (TT)943.489, (TT)13.324, (TT)48.3335
+		);
+
+		const Mat4T m1pm2(
+			m1.e00 + m2.e00, m1.e01 + m2.e01, m1.e02 + m2.e02, m1.e03 + m2.e03,
+			m1.e10 + m2.e10, m1.e11 + m2.e11, m1.e12 + m2.e12, m1.e13 + m2.e13,
+			m1.e20 + m2.e20, m1.e21 + m2.e21, m1.e22 + m2.e22, m1.e23 + m2.e23,
+			m1.e30 + m2.e30, m1.e31 + m2.e31, m1.e32 + m2.e32, m1.e33 + m2.e33
+		);
+		EXPECT_EQ(m1 + m2, m1pm2);
+
+		const Mat4T m1mm2(
+			m1.e00 - m2.e00, m1.e01 - m2.e01, m1.e02 - m2.e02, m1.e03 - m2.e03,
+			m1.e10 - m2.e10, m1.e11 - m2.e11, m1.e12 - m2.e12, m1.e13 - m2.e13,
+			m1.e20 - m2.e20, m1.e21 - m2.e21, m1.e22 - m2.e22, m1.e23 - m2.e23,
+			m1.e30 - m2.e30, m1.e31 - m2.e31, m1.e32 - m2.e32, m1.e33 - m2.e33
+		);
+		EXPECT_EQ(m1 - m2, m1mm2);
+
+		/**
+		*	Precomputed matrix.
+		*	https://www.wolframalpha.com/input/?i=%7B%7B5.26%2C+48.25%2C+12.36%2C+6.25%7D%2C%7B148.2%2C+12.36%2C+68.2%2C+17.36%7D%2C%7B9.25%2C+12.3%2C+46.27%2C+9.15%7D%2C%7B27.1%2C+7.4%2C+11.2%2C+4.23%7D%7D
+		*/
+		const Mat4T m3(
+			(TT)5.26, (TT)48.25, (TT)12.36, (TT)6.25,
+			(TT)148.2, (TT)12.36, (TT)68.2, (TT)17.36,
+			(TT)9.25, (TT)12.3, (TT)46.27, (TT)9.15,
+			(TT)27.1, (TT)7.4, (TT)11.2, (TT)4.23
+		);
+
+		/**
+		*	Precomputed matrix.
+		*	https://www.wolframalpha.com/input/?i=%7B%7B98.0%2C+1324.0%2C+3.25%2C+6.21%7D%2C%7B63.25%2C+10.2%2C+1.25%2C+8.12%7D%2C%7B47.2%2C+6.21%2C+614.0%2C+45.31%7D%2C%7B5.36%2C+14.2%2C+3.22%2C+7.25%7D%7D
+		*/
+		const Mat4T m4(
+			(TT)98.0, (TT)1324.0, (TT)3.25, (TT)6.21,
+			(TT)63.25, (TT)10.2, (TT)1.25, (TT)8.12,
+			(TT)47.2, (TT)6.21, (TT)614.0, (TT)45.31,
+			(TT)5.36, (TT)14.2, (TT)3.22, (TT)7.25
+		);
+
+		/**
+		*	Precomputed matrix.
+		*	https://www.wolframalpha.com/input/?i2d=true&i=%7B%7B5.26%2C48.25%2C12.36%2C6.25%7D%2C%7B148.2%2C12.36%2C68.2%2C17.36%7D%2C%7B9.25%2C12.3%2C46.27%2C9.15%7D%2C%7B27.1%2C7.4%2C11.2%2C4.23%7D%7D*%7B%7B98.0%2C1324.0%2C3.25%2C6.21%7D%2C%7B63.25%2C10.2%2C1.25%2C8.12%7D%2C%7B47.2%2C6.21%2C614.0%2C45.31%7D%2C%7B5.36%2C14.2%2C3.22%2C7.25%7D%7D
+		*/
+		Mat4T m3multm4;
+		Mat4T m3divm4;
+
+		if constexpr (std::is_integral_v<TT>)
+		{
+			m3multm4 = Mat4T(
+				4108, 7256, 7449, 996,
+				18541, 196718, 42259, 4163,
+				3845, 12438, 28310, 2283,
+				3624, 35940, 6854, 741
+			);
+
+			EXPECT_EQ(m3 * m4, m3multm4);
+		}
+		else
+		{
+			m3multm4 = Mat4T(
+				(TT)4184.1845, (TT)7621.8956, (TT)7686.5725, (TT)1029.7987,
+				(TT)18617.457031, (TT)197012.906250, (TT)42427.796875, (TT)4236.687012,
+				(TT)3917.463135, (TT)12789.726562, (TT)28484.681641, (TT)2320.149902,
+				(TT)3675.163086, (TT)36085.500000, (TT)6987.745605, (TT)766.518494
+			);
+
+			EXPECT_MAT4_NEAR(m3 * m4, m3multm4, 0.003);
+
+			m3divm4 = Mat4T(
+				(TT)0.028285, (TT)-0.038804, (TT)0.015961, (TT)0.781553,
+				(TT)0.000656, (TT)2.336921, (TT)0.111128, (TT)-0.917945,
+				(TT)0.000305, (TT)0.025881, (TT)0.071171, (TT)0.788025,
+				(TT)0.002203, (TT)0.411019, (TT)0.017325, (TT)0.012946
+			);
+
+			EXPECT_MAT4_NEAR(m3 / m4, m3divm4, 0.003);
+		}
+
+
+		// op *= scalar.
+		Mat4T m5 = m1;
+		m5 *= scale;
+		EXPECT_EQ(m5, sm1);
+
+
+		// op /= scalar.
+		Mat4T m6 = m1;
+		m6 /= scale;
+		EXPECT_EQ(m6, usm1);
+
+
+		// op += Mat.
+		Mat4T m7 = m1;
+		m7 += m2;
+		EXPECT_EQ(m7, m1pm2);
+
+		// op -= Mat.
+		Mat4T m8 = m1;
+		m8 -= m2;
+		EXPECT_EQ(m8, m1mm2);
+
+
+		// op *= Mat.
+		Mat4T m9 = m3;
+		m9 *= m4;
+		EXPECT_MAT4_NEAR(m9, m3multm4, 0.003);
+
+
+		// op /= Mat.
+		if constexpr (std::is_floating_point_v<TT>)
+		{
+			Mat4T m10 = m3;
+			m10 /= m4;
+			EXPECT_MAT4_NEAR(m10, m3divm4, 0.003);
+		}
+	}
+
+	TYPED_TEST(Matrix4Test, Accessors)
+	{
+		const Mat4T m1(
+			(TT)6.314, (TT)165.2, (TT)4236.0, (TT)99.4,
+			(TT)46.25, (TT)77.51, (TT)16.25, (TT)78.25,
+			(TT)653.0, (TT)11.21, (TT)15.36, (TT)9.64,
+			(TT)1.26, (TT)22.32, (TT)56.214, (TT)32.215
+		);
+	}
+
 	TEST(Matrix4, Majors)
 	{
 		float e00 = 6.314f;
@@ -448,5 +790,244 @@ namespace Sa::UT::Matrix4
 		EXPECT_EQ(dm1[13], dm2[7]);
 		EXPECT_EQ(dm1[14], dm2[11]);
 		EXPECT_EQ(dm1[15], dm2[15]);
+	}
+
+	TEST(Matrix4, AccessorsRow)
+	{
+		const Mat4<float, MatMaj::Row> m1(
+			6.314f, 165.2f, 4236.0f, 99.4f,
+			46.25f, 77.51f, 16.25f, 78.25f,
+			653.0f, 11.21f, 15.36f, 9.64f,
+			1.26f, 22.32f, 56.214f, 32.215f
+		);
+
+		EXPECT_EQ(m1[0], m1.e00);
+		EXPECT_EQ(m1[1], m1.e01);
+		EXPECT_EQ(m1[2], m1.e02);
+		EXPECT_EQ(m1[3], m1.e03);
+		EXPECT_EQ(m1[4], m1.e10);
+		EXPECT_EQ(m1[5], m1.e11);
+		EXPECT_EQ(m1[6], m1.e12);
+		EXPECT_EQ(m1[7], m1.e13);
+		EXPECT_EQ(m1[8], m1.e20);
+		EXPECT_EQ(m1[9], m1.e21);
+		EXPECT_EQ(m1[10], m1.e22);
+		EXPECT_EQ(m1[11], m1.e23);
+		EXPECT_EQ(m1[12], m1.e30);
+		EXPECT_EQ(m1[13], m1.e31);
+		EXPECT_EQ(m1[14], m1.e32);
+		EXPECT_EQ(m1[15], m1.e33);
+
+		EXPECT_EQ(m1.At(0), m1.e00);
+		EXPECT_EQ(m1.At(1), m1.e01);
+		EXPECT_EQ(m1.At(2), m1.e02);
+		EXPECT_EQ(m1.At(3), m1.e03);
+		EXPECT_EQ(m1.At(4), m1.e10);
+		EXPECT_EQ(m1.At(5), m1.e11);
+		EXPECT_EQ(m1.At(6), m1.e12);
+		EXPECT_EQ(m1.At(7), m1.e13);
+		EXPECT_EQ(m1.At(8), m1.e20);
+		EXPECT_EQ(m1.At(9), m1.e21);
+		EXPECT_EQ(m1.At(10), m1.e22);
+		EXPECT_EQ(m1.At(11), m1.e23);
+		EXPECT_EQ(m1.At(12), m1.e30);
+		EXPECT_EQ(m1.At(13), m1.e31);
+		EXPECT_EQ(m1.At(14), m1.e32);
+		EXPECT_EQ(m1.At(15), m1.e33);
+
+		EXPECT_EQ(m1.At(0, 0), m1.e00);
+		EXPECT_EQ(m1.At(0, 1), m1.e01);
+		EXPECT_EQ(m1.At(0, 2), m1.e02);
+		EXPECT_EQ(m1.At(0, 3), m1.e03);
+		EXPECT_EQ(m1.At(1, 0), m1.e10);
+		EXPECT_EQ(m1.At(1, 1), m1.e11);
+		EXPECT_EQ(m1.At(1, 2), m1.e12);
+		EXPECT_EQ(m1.At(1, 3), m1.e13);
+		EXPECT_EQ(m1.At(2, 0), m1.e20);
+		EXPECT_EQ(m1.At(2, 1), m1.e21);
+		EXPECT_EQ(m1.At(2, 2), m1.e22);
+		EXPECT_EQ(m1.At(2, 3), m1.e23);
+		EXPECT_EQ(m1.At(3, 0), m1.e30);
+		EXPECT_EQ(m1.At(3, 1), m1.e31);
+		EXPECT_EQ(m1.At(3, 2), m1.e32);
+		EXPECT_EQ(m1.At(3, 3), m1.e33);
+
+		EXPECT_EQ(m1.Data(), &m1.e00);
+
+		// Const.
+
+		const Mat4<float, MatMaj::Row>& cm1 = m1;
+
+		EXPECT_EQ(cm1[0], cm1.e00);
+		EXPECT_EQ(cm1[1], cm1.e01);
+		EXPECT_EQ(cm1[2], cm1.e02);
+		EXPECT_EQ(cm1[3], cm1.e03);
+		EXPECT_EQ(cm1[4], cm1.e10);
+		EXPECT_EQ(cm1[5], cm1.e11);
+		EXPECT_EQ(cm1[6], cm1.e12);
+		EXPECT_EQ(cm1[7], cm1.e13);
+		EXPECT_EQ(cm1[8], cm1.e20);
+		EXPECT_EQ(cm1[9], cm1.e21);
+		EXPECT_EQ(cm1[10], cm1.e22);
+		EXPECT_EQ(cm1[11], cm1.e23);
+		EXPECT_EQ(cm1[12], cm1.e30);
+		EXPECT_EQ(cm1[13], cm1.e31);
+		EXPECT_EQ(cm1[14], cm1.e32);
+		EXPECT_EQ(cm1[15], cm1.e33);
+
+		EXPECT_EQ(cm1.At(0), cm1.e00);
+		EXPECT_EQ(cm1.At(1), cm1.e01);
+		EXPECT_EQ(cm1.At(2), cm1.e02);
+		EXPECT_EQ(cm1.At(3), cm1.e03);
+		EXPECT_EQ(cm1.At(4), cm1.e10);
+		EXPECT_EQ(cm1.At(5), cm1.e11);
+		EXPECT_EQ(cm1.At(6), cm1.e12);
+		EXPECT_EQ(cm1.At(7), cm1.e13);
+		EXPECT_EQ(cm1.At(8), cm1.e20);
+		EXPECT_EQ(cm1.At(9), cm1.e21);
+		EXPECT_EQ(cm1.At(10), cm1.e22);
+		EXPECT_EQ(cm1.At(11), cm1.e23);
+		EXPECT_EQ(cm1.At(12), cm1.e30);
+		EXPECT_EQ(cm1.At(13), cm1.e31);
+		EXPECT_EQ(cm1.At(14), cm1.e32);
+		EXPECT_EQ(cm1.At(15), cm1.e33);
+
+		EXPECT_EQ(cm1.At(0, 0), cm1.e00);
+		EXPECT_EQ(cm1.At(0, 1), cm1.e01);
+		EXPECT_EQ(cm1.At(0, 2), cm1.e02);
+		EXPECT_EQ(cm1.At(0, 3), cm1.e03);
+		EXPECT_EQ(cm1.At(1, 0), cm1.e10);
+		EXPECT_EQ(cm1.At(1, 1), cm1.e11);
+		EXPECT_EQ(cm1.At(1, 2), cm1.e12);
+		EXPECT_EQ(cm1.At(1, 3), cm1.e13);
+		EXPECT_EQ(cm1.At(2, 0), cm1.e20);
+		EXPECT_EQ(cm1.At(2, 1), cm1.e21);
+		EXPECT_EQ(cm1.At(2, 2), cm1.e22);
+		EXPECT_EQ(cm1.At(2, 3), cm1.e23);
+		EXPECT_EQ(cm1.At(3, 0), cm1.e30);
+		EXPECT_EQ(cm1.At(3, 1), cm1.e31);
+		EXPECT_EQ(cm1.At(3, 2), cm1.e32);
+		EXPECT_EQ(cm1.At(3, 3), cm1.e33);
+
+		EXPECT_EQ(cm1.Data(), &cm1.e00);
+	}
+
+	TEST(Matrix4, AccessorsColumn)
+	{
+		const Mat4<float, MatMaj::Column> m1(
+			6.314f, 165.2f, 4236.0f, 99.4f,
+			46.25f, 77.51f, 16.25f, 78.25f,
+			653.0f, 11.21f, 15.36f, 9.64f,
+			1.26f, 22.32f, 56.214f, 32.215f
+		);
+
+		EXPECT_EQ(m1[0], m1.e00);
+		EXPECT_EQ(m1[1], m1.e10);
+		EXPECT_EQ(m1[2], m1.e20);
+		EXPECT_EQ(m1[3], m1.e30);
+		EXPECT_EQ(m1[4], m1.e01);
+		EXPECT_EQ(m1[5], m1.e11);
+		EXPECT_EQ(m1[6], m1.e21);
+		EXPECT_EQ(m1[7], m1.e31);
+		EXPECT_EQ(m1[8], m1.e02);
+		EXPECT_EQ(m1[9], m1.e12);
+		EXPECT_EQ(m1[10], m1.e22);
+		EXPECT_EQ(m1[11], m1.e32);
+		EXPECT_EQ(m1[12], m1.e03);
+		EXPECT_EQ(m1[13], m1.e13);
+		EXPECT_EQ(m1[14], m1.e23);
+		EXPECT_EQ(m1[15], m1.e33);
+
+		EXPECT_EQ(m1.At(0), m1.e00);
+		EXPECT_EQ(m1.At(1), m1.e10);
+		EXPECT_EQ(m1.At(2), m1.e20);
+		EXPECT_EQ(m1.At(3), m1.e30);
+		EXPECT_EQ(m1.At(4), m1.e01);
+		EXPECT_EQ(m1.At(5), m1.e11);
+		EXPECT_EQ(m1.At(6), m1.e21);
+		EXPECT_EQ(m1.At(7), m1.e31);
+		EXPECT_EQ(m1.At(8), m1.e02);
+		EXPECT_EQ(m1.At(9), m1.e12);
+		EXPECT_EQ(m1.At(10), m1.e22);
+		EXPECT_EQ(m1.At(11), m1.e32);
+		EXPECT_EQ(m1.At(12), m1.e03);
+		EXPECT_EQ(m1.At(13), m1.e13);
+		EXPECT_EQ(m1.At(14), m1.e23);
+		EXPECT_EQ(m1.At(15), m1.e33);
+
+		EXPECT_EQ(m1.At(0, 0), m1.e00);
+		EXPECT_EQ(m1.At(0, 1), m1.e10);
+		EXPECT_EQ(m1.At(0, 2), m1.e20);
+		EXPECT_EQ(m1.At(0, 3), m1.e30);
+		EXPECT_EQ(m1.At(1, 0), m1.e01);
+		EXPECT_EQ(m1.At(1, 1), m1.e11);
+		EXPECT_EQ(m1.At(1, 2), m1.e21);
+		EXPECT_EQ(m1.At(1, 3), m1.e31);
+		EXPECT_EQ(m1.At(2, 0), m1.e02);
+		EXPECT_EQ(m1.At(2, 1), m1.e12);
+		EXPECT_EQ(m1.At(2, 2), m1.e22);
+		EXPECT_EQ(m1.At(2, 3), m1.e32);
+		EXPECT_EQ(m1.At(3, 0), m1.e03);
+		EXPECT_EQ(m1.At(3, 1), m1.e13);
+		EXPECT_EQ(m1.At(3, 2), m1.e23);
+		EXPECT_EQ(m1.At(3, 3), m1.e33);
+
+		EXPECT_EQ(m1.Data(), &m1.e00);
+
+
+		const Mat4<float, MatMaj::Column>& cm1 = m1;
+
+		EXPECT_EQ(cm1[0], cm1.e00);
+		EXPECT_EQ(cm1[1], cm1.e10);
+		EXPECT_EQ(cm1[2], cm1.e20);
+		EXPECT_EQ(cm1[3], cm1.e30);
+		EXPECT_EQ(cm1[4], cm1.e01);
+		EXPECT_EQ(cm1[5], cm1.e11);
+		EXPECT_EQ(cm1[6], cm1.e21);
+		EXPECT_EQ(cm1[7], cm1.e31);
+		EXPECT_EQ(cm1[8], cm1.e02);
+		EXPECT_EQ(cm1[9], cm1.e12);
+		EXPECT_EQ(cm1[10], cm1.e22);
+		EXPECT_EQ(cm1[11], cm1.e32);
+		EXPECT_EQ(cm1[12], cm1.e03);
+		EXPECT_EQ(cm1[13], cm1.e13);
+		EXPECT_EQ(cm1[14], cm1.e23);
+		EXPECT_EQ(cm1[15], cm1.e33);
+
+		EXPECT_EQ(cm1.At(0), cm1.e00);
+		EXPECT_EQ(cm1.At(1), cm1.e10);
+		EXPECT_EQ(cm1.At(2), cm1.e20);
+		EXPECT_EQ(cm1.At(3), cm1.e30);
+		EXPECT_EQ(cm1.At(4), cm1.e01);
+		EXPECT_EQ(cm1.At(5), cm1.e11);
+		EXPECT_EQ(cm1.At(6), cm1.e21);
+		EXPECT_EQ(cm1.At(7), cm1.e31);
+		EXPECT_EQ(cm1.At(8), cm1.e02);
+		EXPECT_EQ(cm1.At(9), cm1.e12);
+		EXPECT_EQ(cm1.At(10), cm1.e22);
+		EXPECT_EQ(cm1.At(11), cm1.e32);
+		EXPECT_EQ(cm1.At(12), cm1.e03);
+		EXPECT_EQ(cm1.At(13), cm1.e13);
+		EXPECT_EQ(cm1.At(14), cm1.e23);
+		EXPECT_EQ(cm1.At(15), cm1.e33);
+
+		EXPECT_EQ(cm1.At(0, 0), cm1.e00);
+		EXPECT_EQ(cm1.At(0, 1), cm1.e10);
+		EXPECT_EQ(cm1.At(0, 2), cm1.e20);
+		EXPECT_EQ(cm1.At(0, 3), cm1.e30);
+		EXPECT_EQ(cm1.At(1, 0), cm1.e01);
+		EXPECT_EQ(cm1.At(1, 1), cm1.e11);
+		EXPECT_EQ(cm1.At(1, 2), cm1.e21);
+		EXPECT_EQ(cm1.At(1, 3), cm1.e31);
+		EXPECT_EQ(cm1.At(2, 0), cm1.e02);
+		EXPECT_EQ(cm1.At(2, 1), cm1.e12);
+		EXPECT_EQ(cm1.At(2, 2), cm1.e22);
+		EXPECT_EQ(cm1.At(2, 3), cm1.e32);
+		EXPECT_EQ(cm1.At(3, 0), cm1.e03);
+		EXPECT_EQ(cm1.At(3, 1), cm1.e13);
+		EXPECT_EQ(cm1.At(3, 2), cm1.e23);
+		EXPECT_EQ(cm1.At(3, 3), cm1.e33);
+
+		EXPECT_EQ(cm1.Data(), &cm1.e00);
 	}
 }
