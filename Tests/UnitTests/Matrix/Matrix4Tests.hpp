@@ -44,7 +44,7 @@ namespace Sa
 }
 
 /// Google Test typedef helper.
-#define Mat4T Mat4<TypeParam::Type, TypeParam::major>
+#define Mat4T Mat4<typename TypeParam::T, TypeParam::major>
 
 #define EXPECT_MAT4_NEAR(_m1, _m2, eps)\
 {\
