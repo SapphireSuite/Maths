@@ -29,7 +29,60 @@ env:
 # Job matrix
 jobs:
 
-  ctests_unix:
+  ctests_Xcode:
+    name: ${{ matrix.config }} Xcode ${{ matrix.xcode_v }}
+
+    # Setup environment.
+    runs-on: macos-latest
+
+    strategy:
+
+      # Don't cancel jobs on failure.
+      fail-fast: false
+
+      matrix:
+
+        config:
+          - Debug
+          - Release
+
+        xcode_v: [11.7, 12.5, 13.2, latest-stable]
+
+    # Steps execution.
+    steps:
+
+        - name: "[Action] Checkout repository"
+          uses: actions/checkout@v2
+          with:
+            submodules: recursive
+
+
+        # Install Xcode.
+        - name: "[Action] Install Xcode"
+          uses: maxim-lobanov/setup-xcode@v1
+          with:
+            xcode-version: ${{ matrix.xcode_v }}
+
+
+        # Install CMake.
+        - name: "[Action] Install CMake"
+          uses: jwlawson/actions-setup-cmake@v1.8
+          with:
+            cmake-version: ${{ env.CMAKE_V }}
+
+
+        # Deploy & Build & Test
+        - name: Generate Project
+          run: cmake -B Build/${{ matrix.gen }}/${{ matrix.config }} -DCMAKE_BUILD_TYPE=${{ matrix.config }} ${{ env.CMAKE_OPTIONS }}
+
+        - name: Build Project
+          run: cmake --build Build/${{ matrix.gen }}/${{ matrix.config }} --config ${{ matrix.config }} --verbose
+
+        - name: Run CTests
+          run: cd Build/${{ matrix.gen }}/${{ matrix.config }} && ctest -C ${{ matrix.config }} -V
+
+
+  ctests_macos:
     name: ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.compiler_v }}
 
     # Setup environment.
@@ -48,9 +101,8 @@ jobs:
 
         compiler:
           - GNU
-          #- AppleClang
 
-        compiler_v: [10]
+        compiler_v: [9, 10, 11]
 
         gen:
           - Ninja
