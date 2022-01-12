@@ -668,7 +668,7 @@ namespace Sa
 		//SA_WARN(!Sa::Equals0(_rhs.y), Maths, L"Inverse scale Y Axis by 0!");
 		//SA_WARN(!Sa::Equals0(_rhs.z), Maths, L"Inverse scale Z Axis by 0!");
 
-		return Quat(
+		return Quat<T>(
 			_lhs / _rhs.w,
 			_lhs / _rhs.x,
 			_lhs / _rhs.y,
