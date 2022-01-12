@@ -13,11 +13,11 @@ namespace Sa
 //{ Row Major
 
 	template <>
-	RMat4i RMat4i::operator*(int32 _scale) const noexcept
+	RMat4i RMat4i::operator*(int32_t _scale) const noexcept
 	{
 		Mat4 res;
-		int32* const fres = res.Data();
-		const int32* const data = Data();
+		int32_t* const fres = res.Data();
+		const int32_t* const data = Data();
 
 		const __m256i sPack = _mm256_set1_epi32(_scale);
 
@@ -33,13 +33,14 @@ namespace Sa
 #if SA_INTRISC_SVML
 
 	template <>
-	RMat4i RMat4i::operator/(int32 _scale) const noexcept
+	RMat4i RMat4i::operator/(int32_t _scale) const noexcept
 	{
-		SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale matrix by 0 (division by 0)!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale matrix by 0 (division by 0)!");
 
 		Mat4 res;
-		int32* const fres = res.Data();
-		const int32* const data = Data();
+		int32_t* const fres = res.Data();
+		const int32_t* const data = Data();
 
 		const __m256i sPack = _mm256_set1_epi32(_scale);
 
@@ -58,9 +59,9 @@ namespace Sa
 	RMat4i RMat4i::operator+(const RMat4i& _rhs) const noexcept
 	{
 		Mat4 res;
-		int32* const fres = res.Data();
-		const int32* const ldata = Data();
-		const int32* const rdata = _rhs.Data();
+		int32_t* const fres = res.Data();
+		const int32_t* const ldata = Data();
+		const int32_t* const rdata = _rhs.Data();
 
 		// Add row 0 and 1.
 		reinterpret_cast<__m256i&>(fres[0]) = 
@@ -77,9 +78,9 @@ namespace Sa
 	RMat4i RMat4i::operator-(const RMat4i& _rhs) const noexcept
 	{
 		Mat4 res;
-		int32* const fres = res.Data();
-		const int32* const ldata = Data();
-		const int32* const rdata = _rhs.Data();
+		int32_t* const fres = res.Data();
+		const int32_t* const ldata = Data();
+		const int32_t* const rdata = _rhs.Data();
 
 		// Sub row 0 and 1.
 		reinterpret_cast<__m256i&>(fres[0]) = 
@@ -96,7 +97,7 @@ namespace Sa
 	RMat4i RMat4i::operator*(const RMat4i& _rhs) const noexcept
 	{
 		Mat4 res;
-		int32* const data = res.Data();
+		int32_t* const data = res.Data();
 
 		const __m256i lp00 = _mm256_set_epi32(e10, e10, e10, e10, e00, e00, e00, e00);
 		const __m256i lp01 = _mm256_set_epi32(e30, e30, e30, e30, e20, e20, e20, e20);
@@ -129,14 +130,14 @@ namespace Sa
 
 
 	template <>
-	Vec3<int32> RMat4i::operator*(const Vec3<int32>& _rhs) const noexcept
+	Vec3<int32_t> RMat4i::operator*(const Vec3<int32_t>& _rhs) const noexcept
 	{
 		// Compute first 8 elems.
 		const __m256i p0 = _mm256_set_epi32(e12, e02, e21, e11, e01, e20, e10, e00);
 		const __m256i pScale = _mm256_set_epi32(_rhs.z, _rhs.z, _rhs.y, _rhs.y, _rhs.y, _rhs.x, _rhs.x, _rhs.x);
 
 		const __m256i pTotal = _mm256_mullo_epi32(pScale, p0);
-		const int32* const ires = reinterpret_cast<const int32*>(&pTotal);
+		const int32_t* const ires = reinterpret_cast<const int32_t*>(&pTotal);
 
 		return Vec3i(
 			ires[0] + ires[3] + ires[6],
@@ -146,7 +147,7 @@ namespace Sa
 	}
 
 	template <>
-	Vec4<int32> RMat4i::operator*(const Vec4<int32>& _rhs) const noexcept
+	Vec4<int32_t> RMat4i::operator*(const Vec4<int32_t>& _rhs) const noexcept
 	{
 		const __m256i pScaleXY = _mm256_set_epi32(_rhs.y, _rhs.y, _rhs.y, _rhs.y, _rhs.x, _rhs.x, _rhs.x, _rhs.x);
 		const __m256i pScaleZW = _mm256_set_epi32(_rhs.w, _rhs.w, _rhs.w, _rhs.w, _rhs.z, _rhs.z, _rhs.z, _rhs.z);
@@ -166,9 +167,9 @@ namespace Sa
 
 
 	template <>
-	RMat4i& RMat4i::operator*=(int32 _scale) noexcept
+	RMat4i& RMat4i::operator*=(int32_t _scale) noexcept
 	{
-		int32* const data = Data();
+		int32_t* const data = Data();
 
 		const __m256i sPack = _mm256_set1_epi32(_scale);
 
@@ -184,11 +185,12 @@ namespace Sa
 #if SA_INTRISC_SVML
 
 	template <>
-	RMat4i& RMat4i::operator/=(int32 _scale) noexcept
+	RMat4i& RMat4i::operator/=(int32_t _scale) noexcept
 	{
-		SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale matrix by 0 (division by 0)!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale matrix by 0 (division by 0)!");
 
-		int32* const data = Data();
+		int32_t* const data = Data();
 
 		const __m256i sPack = _mm256_set1_epi32(_scale);
 
@@ -206,8 +208,8 @@ namespace Sa
 	template <>
 	RMat4i& RMat4i::operator+=(const RMat4i& _rhs) noexcept
 	{
-		int32* const ldata = Data();
-		const int32* const rdata = _rhs.Data();
+		int32_t* const ldata = Data();
+		const int32_t* const rdata = _rhs.Data();
 
 		// Add row 0 and 1.
 		reinterpret_cast<__m256i&>(ldata[0]) =
@@ -223,8 +225,8 @@ namespace Sa
 	template <>
 	RMat4i& RMat4i::operator-=(const RMat4i& _rhs) noexcept
 	{
-		int32* const ldata = Data();
-		const int32* const rdata = _rhs.Data();
+		int32_t* const ldata = Data();
+		const int32_t* const rdata = _rhs.Data();
 
 		// Sub row 0 and 1.
 		reinterpret_cast<__m256i&>(ldata[0]) =
@@ -241,11 +243,11 @@ namespace Sa
 //{ Column Major
 
 	template <>
-	CMat4i CMat4i::operator*(int32 _scale) const noexcept
+	CMat4i CMat4i::operator*(int32_t _scale) const noexcept
 	{
 		Mat4 res;
-		int32* const fres = res.Data();
-		const int32* const data = Data();
+		int32_t* const fres = res.Data();
+		const int32_t* const data = Data();
 
 		const __m256i sPack = _mm256_set1_epi32(_scale);
 
@@ -261,13 +263,14 @@ namespace Sa
 #if SA_INTRISC_SVML
 
 	template <>
-	CMat4i CMat4i::operator/(int32 _scale) const noexcept
+	CMat4i CMat4i::operator/(int32_t _scale) const noexcept
 	{
-		SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale matrix by 0 (division by 0)!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale matrix by 0 (division by 0)!");
 
 		Mat4 res;
-		int32* const fres = res.Data();
-		const int32* const data = Data();
+		int32_t* const fres = res.Data();
+		const int32_t* const data = Data();
 
 		const __m256i sPack = _mm256_set1_epi32(_scale);
 
@@ -286,9 +289,9 @@ namespace Sa
 	CMat4i CMat4i::operator+(const CMat4i& _rhs) const noexcept
 	{
 		Mat4 res;
-		int32* const fres = res.Data();
-		const int32* const ldata = Data();
-		const int32* const rdata = _rhs.Data();
+		int32_t* const fres = res.Data();
+		const int32_t* const ldata = Data();
+		const int32_t* const rdata = _rhs.Data();
 
 		// Add row 0 and 1.
 		reinterpret_cast<__m256i&>(fres[0]) =
@@ -305,9 +308,9 @@ namespace Sa
 	CMat4i CMat4i::operator-(const CMat4i& _rhs) const noexcept
 	{
 		Mat4 res;
-		int32* const fres = res.Data();
-		const int32* const ldata = Data();
-		const int32* const rdata = _rhs.Data();
+		int32_t* const fres = res.Data();
+		const int32_t* const ldata = Data();
+		const int32_t* const rdata = _rhs.Data();
 
 		// Sub row 0 and 1.
 		reinterpret_cast<__m256i&>(fres[0]) =
@@ -324,7 +327,7 @@ namespace Sa
 	CMat4i CMat4i::operator*(const CMat4i& _rhs) const noexcept
 	{
 		Mat4 res;
-		int32* const data = res.Data();
+		int32_t* const data = res.Data();
 
 		const __m256i rp00 = _mm256_set_epi32(_rhs.e01, _rhs.e01, _rhs.e01, _rhs.e01, _rhs.e00, _rhs.e00, _rhs.e00, _rhs.e00);
 		const __m256i rp01 = _mm256_set_epi32(_rhs.e03, _rhs.e03, _rhs.e03, _rhs.e03, _rhs.e02, _rhs.e02, _rhs.e02, _rhs.e02);
@@ -357,14 +360,14 @@ namespace Sa
 
 
 	template <>
-	Vec3<int32> CMat4i::operator*(const Vec3<int32>& _rhs) const noexcept
+	Vec3<int32_t> CMat4i::operator*(const Vec3<int32_t>& _rhs) const noexcept
 	{
 		// Compute first 8 elems.
 		const __m256i p0 = _mm256_set_epi32(e12, e02, e21, e11, e01, e20, e10, e00);
 		const __m256i pScale = _mm256_set_epi32(_rhs.z, _rhs.z, _rhs.y, _rhs.y, _rhs.y, _rhs.x, _rhs.x, _rhs.x);
 
 		const __m256i pTotal = _mm256_mullo_epi32(pScale, p0);
-		const int32* const ires = reinterpret_cast<const int32*>(&pTotal);
+		const int32_t* const ires = reinterpret_cast<const int32_t*>(&pTotal);
 
 		return Vec3i(
 			ires[0] + ires[3] + ires[6],
@@ -374,7 +377,7 @@ namespace Sa
 	}
 
 	template <>
-	Vec4<int32> CMat4i::operator*(const Vec4<int32>& _rhs) const noexcept
+	Vec4<int32_t> CMat4i::operator*(const Vec4<int32_t>& _rhs) const noexcept
 	{
 		const __m256i pScaleXY = _mm256_set_epi32(_rhs.y, _rhs.y, _rhs.y, _rhs.y, _rhs.x, _rhs.x, _rhs.x, _rhs.x);
 		const __m256i pScaleZW = _mm256_set_epi32(_rhs.w, _rhs.w, _rhs.w, _rhs.w, _rhs.z, _rhs.z, _rhs.z, _rhs.z);
@@ -394,9 +397,9 @@ namespace Sa
 
 
 	template <>
-	CMat4i& CMat4i::operator*=(int32 _scale) noexcept
+	CMat4i& CMat4i::operator*=(int32_t _scale) noexcept
 	{
-		int32* const data = Data();
+		int32_t* const data = Data();
 
 		const __m256i sPack = _mm256_set1_epi32(_scale);
 
@@ -412,11 +415,12 @@ namespace Sa
 #if SA_INTRISC_SVML
 
 	template <>
-	CMat4i& CMat4i::operator/=(int32 _scale) noexcept
+	CMat4i& CMat4i::operator/=(int32_t _scale) noexcept
 	{
-		SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale matrix by 0 (division by 0)!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale matrix by 0 (division by 0)!");
 
-		int32* const data = Data();
+		int32_t* const data = Data();
 
 		const __m256i sPack = _mm256_set1_epi32(_scale);
 
@@ -434,8 +438,8 @@ namespace Sa
 	template <>
 	CMat4i& CMat4i::operator+=(const CMat4i& _rhs) noexcept
 	{
-		int32* const ldata = Data();
-		const int32* const rdata = _rhs.Data();
+		int32_t* const ldata = Data();
+		const int32_t* const rdata = _rhs.Data();
 
 		// Add row 0 and 1.
 		reinterpret_cast<__m256i&>(ldata[0]) =
@@ -451,8 +455,8 @@ namespace Sa
 	template <>
 	CMat4i& CMat4i::operator-=(const CMat4i& _rhs) noexcept
 	{
-		int32* const ldata = Data();
-		const int32* const rdata = _rhs.Data();
+		int32_t* const ldata = Data();
+		const int32_t* const rdata = _rhs.Data();
 
 		// Sub row 0 and 1.
 		reinterpret_cast<__m256i&>(ldata[0]) =
@@ -526,7 +530,8 @@ namespace Sa
 		float* const data = res.Data();
 		const float det = Determinant();
 
-		SA_WARN(!Sa::Equals0(det), Maths, L"Inverse matrix with determinant == 0");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(det), Maths, L"Inverse matrix with determinant == 0");
 
 		const float invDet = 1.0f / det;
 		const __m256 invDetP = _mm256_set1_ps(invDet);
@@ -909,7 +914,8 @@ namespace Sa
 	template <>
 	RMat4f RMat4f::MakeRotation(const Quat<float>& _rot) noexcept
 	{
-		SA_WARN(_rot.IsNormalized(), Maths, L"Quaternion should be normalized!");
+		// TODO: Debug.
+		//SA_WARN(_rot.IsNormalized(), Maths, L"Quaternion should be normalized!");
 
 		/*
 			return Mat3f(
@@ -980,7 +986,8 @@ namespace Sa
 	template <>
 	RMat4f RMat4f::operator/(float _scale) const noexcept
 	{
-		SA_WARN(!Sa::Equals0(_scale), L"Unscale matrix by 0 (division by 0)!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_scale), L"Unscale matrix by 0 (division by 0)!");
 
 		Mat4 res;
 		float* const fres = res.Data();
@@ -1180,22 +1187,23 @@ namespace Sa
 	template <>
 	RMat4f operator/(float _lhs, const RMat4f& _rhs) noexcept
 	{
-		SA_WARN(!Sa::Equals0(_rhs.e00), Maths, L"Inverse scale matrix e00 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e01), Maths, L"Inverse scale matrix e01 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e02), Maths, L"Inverse scale matrix e02 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e03), Maths, L"Inverse scale matrix e03 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e10), Maths, L"Inverse scale matrix e10 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e11), Maths, L"Inverse scale matrix e11 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e12), Maths, L"Inverse scale matrix e12 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e13), Maths, L"Inverse scale matrix e13 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e20), Maths, L"Inverse scale matrix e20 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e21), Maths, L"Inverse scale matrix e21 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e22), Maths, L"Inverse scale matrix e22 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e23), Maths, L"Inverse scale matrix e23 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e30), Maths, L"Inverse scale matrix e30 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e31), Maths, L"Inverse scale matrix e31 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e32), Maths, L"Inverse scale matrix e32 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e33), Maths, L"Inverse scale matrix e33 == 0!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_rhs.e00), Maths, L"Inverse scale matrix e00 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e01), Maths, L"Inverse scale matrix e01 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e02), Maths, L"Inverse scale matrix e02 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e03), Maths, L"Inverse scale matrix e03 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e10), Maths, L"Inverse scale matrix e10 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e11), Maths, L"Inverse scale matrix e11 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e12), Maths, L"Inverse scale matrix e12 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e13), Maths, L"Inverse scale matrix e13 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e20), Maths, L"Inverse scale matrix e20 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e21), Maths, L"Inverse scale matrix e21 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e22), Maths, L"Inverse scale matrix e22 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e23), Maths, L"Inverse scale matrix e23 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e30), Maths, L"Inverse scale matrix e30 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e31), Maths, L"Inverse scale matrix e31 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e32), Maths, L"Inverse scale matrix e32 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e33), Maths, L"Inverse scale matrix e33 == 0!");
 
 
 		RMat4f res;
@@ -1301,7 +1309,8 @@ namespace Sa
 	template <>
 	CMat4f CMat4f::MakeRotation(const Quat<float>& _rot) noexcept
 	{
-		SA_WARN(_rot.IsNormalized(), Maths, L"Quaternion should be normalized!");
+		// TODO: Debug.
+		//SA_WARN(_rot.IsNormalized(), Maths, L"Quaternion should be normalized!");
 
 		/*
 			return Mat3f(
@@ -1371,7 +1380,8 @@ namespace Sa
 	template <>
 	CMat4f CMat4f::operator/(float _scale) const noexcept
 	{
-		SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale matrix by 0 (division by 0)!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale matrix by 0 (division by 0)!");
 
 		Mat4 res;
 		float* const fres = res.Data();
@@ -1570,22 +1580,23 @@ namespace Sa
 	template <>
 	CMat4f operator/(float _lhs, const CMat4f& _rhs) noexcept
 	{
-		SA_WARN(!Sa::Equals0(_rhs.e00), Maths, L"Inverse scale matrix e00 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e01), Maths, L"Inverse scale matrix e01 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e02), Maths, L"Inverse scale matrix e02 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e03), Maths, L"Inverse scale matrix e03 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e10), Maths, L"Inverse scale matrix e10 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e11), Maths, L"Inverse scale matrix e11 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e12), Maths, L"Inverse scale matrix e12 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e13), Maths, L"Inverse scale matrix e13 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e20), Maths, L"Inverse scale matrix e20 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e21), Maths, L"Inverse scale matrix e21 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e22), Maths, L"Inverse scale matrix e22 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e23), Maths, L"Inverse scale matrix e23 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e30), Maths, L"Inverse scale matrix e30 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e31), Maths, L"Inverse scale matrix e31 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e32), Maths, L"Inverse scale matrix e32 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e33), Maths, L"Inverse scale matrix e33 == 0!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_rhs.e00), Maths, L"Inverse scale matrix e00 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e01), Maths, L"Inverse scale matrix e01 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e02), Maths, L"Inverse scale matrix e02 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e03), Maths, L"Inverse scale matrix e03 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e10), Maths, L"Inverse scale matrix e10 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e11), Maths, L"Inverse scale matrix e11 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e12), Maths, L"Inverse scale matrix e12 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e13), Maths, L"Inverse scale matrix e13 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e20), Maths, L"Inverse scale matrix e20 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e21), Maths, L"Inverse scale matrix e21 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e22), Maths, L"Inverse scale matrix e22 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e23), Maths, L"Inverse scale matrix e23 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e30), Maths, L"Inverse scale matrix e30 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e31), Maths, L"Inverse scale matrix e31 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e32), Maths, L"Inverse scale matrix e32 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e33), Maths, L"Inverse scale matrix e33 == 0!");
 
 
 		CMat4f res;
@@ -1661,7 +1672,8 @@ namespace Sa
 		double* const data = res.Data();
 		const double det = Determinant();
 
-		SA_WARN(!Sa::Equals0(det), Maths, L"Inverse matrix with determinant == 0");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(det), Maths, L"Inverse matrix with determinant == 0");
 
 		const double invDet = 1.0f / det;
 		const __m256d invDetP = _mm256_set1_pd(invDet);
@@ -2116,7 +2128,8 @@ namespace Sa
 	template <>
 	RMat4d RMat4d::MakeRotation(const Quat<double>& _rot) noexcept
 	{
-		SA_WARN(_rot.IsNormalized(), Maths, L"Quaternion should be normalized!");
+		// TODO: Debug.
+		//SA_WARN(_rot.IsNormalized(), Maths, L"Quaternion should be normalized!");
 
 		/*
 			return Mat3f(
@@ -2448,22 +2461,23 @@ namespace Sa
 	template <>
 	RMat4d operator/(double _lhs, const RMat4d& _rhs) noexcept
 	{
-		SA_WARN(!Sa::Equals0(_rhs.e00), Maths, L"Inverse scale matrix e00 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e01), Maths, L"Inverse scale matrix e01 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e02), Maths, L"Inverse scale matrix e02 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e03), Maths, L"Inverse scale matrix e03 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e10), Maths, L"Inverse scale matrix e10 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e11), Maths, L"Inverse scale matrix e11 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e12), Maths, L"Inverse scale matrix e12 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e13), Maths, L"Inverse scale matrix e13 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e20), Maths, L"Inverse scale matrix e20 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e21), Maths, L"Inverse scale matrix e21 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e22), Maths, L"Inverse scale matrix e22 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e23), Maths, L"Inverse scale matrix e23 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e30), Maths, L"Inverse scale matrix e30 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e31), Maths, L"Inverse scale matrix e31 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e32), Maths, L"Inverse scale matrix e32 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e33), Maths, L"Inverse scale matrix e33 == 0!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_rhs.e00), Maths, L"Inverse scale matrix e00 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e01), Maths, L"Inverse scale matrix e01 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e02), Maths, L"Inverse scale matrix e02 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e03), Maths, L"Inverse scale matrix e03 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e10), Maths, L"Inverse scale matrix e10 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e11), Maths, L"Inverse scale matrix e11 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e12), Maths, L"Inverse scale matrix e12 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e13), Maths, L"Inverse scale matrix e13 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e20), Maths, L"Inverse scale matrix e20 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e21), Maths, L"Inverse scale matrix e21 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e22), Maths, L"Inverse scale matrix e22 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e23), Maths, L"Inverse scale matrix e23 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e30), Maths, L"Inverse scale matrix e30 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e31), Maths, L"Inverse scale matrix e31 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e32), Maths, L"Inverse scale matrix e32 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e33), Maths, L"Inverse scale matrix e33 == 0!");
 
 		RMat4d res;
 		double* const fres = res.Data();
@@ -2572,7 +2586,8 @@ namespace Sa
 	template <>
 	CMat4d CMat4d::MakeRotation(const Quat<double>& _rot) noexcept
 	{
-		SA_WARN(_rot.IsNormalized(), Maths, L"Quaternion should be normalized!");
+		// TODO: Debug.
+		//SA_WARN(_rot.IsNormalized(), Maths, L"Quaternion should be normalized!");
 
 		/*
 			return Mat3f(
@@ -2905,22 +2920,23 @@ namespace Sa
 	template <>
 	CMat4d operator/(double _lhs, const CMat4d& _rhs) noexcept
 	{
-		SA_WARN(!Sa::Equals0(_rhs.e00), Maths, L"Inverse scale matrix e00 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e01), Maths, L"Inverse scale matrix e01 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e02), Maths, L"Inverse scale matrix e02 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e03), Maths, L"Inverse scale matrix e03 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e10), Maths, L"Inverse scale matrix e10 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e11), Maths, L"Inverse scale matrix e11 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e12), Maths, L"Inverse scale matrix e12 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e13), Maths, L"Inverse scale matrix e13 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e20), Maths, L"Inverse scale matrix e20 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e21), Maths, L"Inverse scale matrix e21 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e22), Maths, L"Inverse scale matrix e22 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e23), Maths, L"Inverse scale matrix e23 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e30), Maths, L"Inverse scale matrix e30 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e31), Maths, L"Inverse scale matrix e31 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e32), Maths, L"Inverse scale matrix e32 == 0!");
-		SA_WARN(!Sa::Equals0(_rhs.e33), Maths, L"Inverse scale matrix e33 == 0!");
+		// TODO: Debug.
+		//SA_WARN(!Sa::Equals0(_rhs.e00), Maths, L"Inverse scale matrix e00 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e01), Maths, L"Inverse scale matrix e01 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e02), Maths, L"Inverse scale matrix e02 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e03), Maths, L"Inverse scale matrix e03 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e10), Maths, L"Inverse scale matrix e10 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e11), Maths, L"Inverse scale matrix e11 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e12), Maths, L"Inverse scale matrix e12 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e13), Maths, L"Inverse scale matrix e13 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e20), Maths, L"Inverse scale matrix e20 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e21), Maths, L"Inverse scale matrix e21 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e22), Maths, L"Inverse scale matrix e22 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e23), Maths, L"Inverse scale matrix e23 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e30), Maths, L"Inverse scale matrix e30 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e31), Maths, L"Inverse scale matrix e31 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e32), Maths, L"Inverse scale matrix e32 == 0!");
+		//SA_WARN(!Sa::Equals0(_rhs.e33), Maths, L"Inverse scale matrix e33 == 0!");
 
 		CMat4d res;
 		double* const fres = res.Data();

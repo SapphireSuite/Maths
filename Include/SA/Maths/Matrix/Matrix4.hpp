@@ -681,11 +681,11 @@ namespace Sa
 //{ Row Major
 
 	template <>
-	RMat4i RMat4i::operator*(int32 _scale) const noexcept;
+	RMat4i RMat4i::operator*(int32_t _scale) const noexcept;
 
 #if SA_INTRISC_SVML
 	template <>
-	RMat4i RMat4i::operator/(int32 _scale) const noexcept;
+	RMat4i RMat4i::operator/(int32_t _scale) const noexcept;
 #endif
 
 	template <>
@@ -699,18 +699,18 @@ namespace Sa
 
 
 	template <>
-	Vec3<int32> RMat4i::operator*(const Vec3<int32>& _rhs) const noexcept;
+	Vec3<int32_t> RMat4i::operator*(const Vec3<int32_t>& _rhs) const noexcept;
 
 	template <>
-	Vec4<int32> RMat4i::operator*(const Vec4<int32>& _rhs) const noexcept;
+	Vec4<int32_t> RMat4i::operator*(const Vec4<int32_t>& _rhs) const noexcept;
 
 
 	template <>
-	RMat4i& RMat4i::operator*=(int32 _scale) noexcept;
+	RMat4i& RMat4i::operator*=(int32_t _scale) noexcept;
 
 #if SA_INTRISC_SVML
 	template <>
-	RMat4i& RMat4i::operator/=(int32 _scale) noexcept;
+	RMat4i& RMat4i::operator/=(int32_t _scale) noexcept;
 #endif
 
 	template <>
@@ -724,11 +724,11 @@ namespace Sa
 //{ Column Major
 
 	template <>
-	CMat4i CMat4i::operator*(int32 _scale) const noexcept;
+	CMat4i CMat4i::operator*(int32_t _scale) const noexcept;
 
 #if SA_INTRISC_SVML
 	template <>
-	CMat4i CMat4i::operator/(int32 _scale) const noexcept;
+	CMat4i CMat4i::operator/(int32_t _scale) const noexcept;
 #endif
 
 	template <>
@@ -742,18 +742,18 @@ namespace Sa
 
 
 	template <>
-	Vec3<int32> CMat4i::operator*(const Vec3<int32>& _rhs) const noexcept;
+	Vec3<int32_t> CMat4i::operator*(const Vec3<int32_t>& _rhs) const noexcept;
 
 	template <>
-	Vec4<int32> CMat4i::operator*(const Vec4<int32>& _rhs) const noexcept;
+	Vec4<int32_t> CMat4i::operator*(const Vec4<int32_t>& _rhs) const noexcept;
 
 
 	template <>
-	CMat4i& CMat4i::operator*=(int32 _scale) noexcept;
+	CMat4i& CMat4i::operator*=(int32_t _scale) noexcept;
 
 #if SA_INTRISC_SVML
 	template <>
-	CMat4i& CMat4i::operator/=(int32 _scale) noexcept;
+	CMat4i& CMat4i::operator/=(int32_t _scale) noexcept;
 #endif
 
 	template <>

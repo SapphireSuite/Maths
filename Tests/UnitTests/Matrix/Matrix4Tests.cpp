@@ -2,6 +2,8 @@
 
 #include "Matrix4Tests.hpp"
 #include "../Space/QuaternionTests.hpp"
+#include "../Space/Vector3Tests.hpp"
+#include "../Space/Vector4Tests.hpp"
 
 #include <SA/Maths/Matrix/MatrixMajor.hpp>
 
@@ -358,7 +360,7 @@ namespace Sa::UT::Matrix4
 			EXPECT_EQ(det, -209914);
 		}
 		else if constexpr(std::is_same_v<T, float>)
-			EXPECT_NEAR(det, (T)-237488.906250, (T)0.000001);
+			EXPECT_NEAR(det, (T)-237488.906250, (T)0.05); // SIMD float impl loss precision.
 		else
 			EXPECT_NEAR(det, (T)-237488.906250, (T)0.1);
 
@@ -594,7 +596,8 @@ namespace Sa::UT::Matrix4
 			m1.e30 * v2.x + m1.e31 * v2.y + m1.e32 * v2.z + m1.e33 * v2.w
 		);
 
-		EXPECT_EQ(m1 * v2, v2_res);
+		//EXPECT_EQ(m1 * v2, v2_res);
+		EXPECT_VEC4_NEAR(m1 * v2, v2_res, (T)0.01); // SIMD float impl loss precision.
 
 
 		// Mat4 operators
