@@ -1,6 +1,6 @@
 # Copyright (c) 2022 Sapphire's Suite. All Rights Reserved.
 
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.16)
 
 
 # Project
@@ -63,7 +63,7 @@ if(SA_MATHS_INTRINSICS_OPT)
 		FetchContent_Declare(
 			SA_Support
 			GIT_REPOSITORY https://github.com/SapphireSuite/Support.git
-			GIT_TAG        v1.1
+			GIT_TAG        v1.2
 		)
 
 		FetchContent_MakeAvailable(SA_Support)
