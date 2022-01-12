@@ -14,7 +14,7 @@
 #include <SA/Maths/Algorithms/Lerp.hpp>
 #include <SA/Maths/Algorithms/Equals.hpp>
 
-#if SA_MATHS_MAT4_SIMD
+#if SA_MATHS_MATRIX4_SIMD
 
 	#include <SA/Support/Intrinsics.hpp>
 	//#include <SA/Support/Pragma.hpp>
@@ -54,7 +54,7 @@ namespace Sa
 	*	\tparam T	Type of the matrix.
 	*/
 
-#if SA_MATHS_MAT4_SIMD && SA_INTRISC
+#if SA_MATHS_MATRIX4_SIMD && SA_INTRISC
 
 	//// Disable padding struct warning.
 	//SA_PRAGMA_SDWARN_MSVC(4324)
@@ -676,7 +676,7 @@ namespace Sa
 
 	/// \cond Internal
 
-#if SA_MATHS_MAT4_SIMD && SA_INTRISC_AVX // SIMD int32
+#if SA_MATHS_MATRIX4_SIMD && SA_INTRISC_AVX // SIMD int32
 
 //{ Row Major
 
@@ -766,7 +766,7 @@ namespace Sa
 
 #endif
 
-#if SA_MATHS_MAT4_SIMD && SA_INTRISC_SSE // SIMD float
+#if SA_MATHS_MATRIX4_SIMD && SA_INTRISC_SSE // SIMD float
 
 //{ Row Major
 
@@ -886,7 +886,7 @@ namespace Sa
 
 #endif
 
-#if SA_MATHS_MAT4_SIMD && SA_INTRISC_AVX // SIMD double
+#if SA_MATHS_MATRIX4_SIMD && SA_INTRISC_AVX // SIMD double
 
 //{ Row Major
 

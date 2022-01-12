@@ -56,7 +56,7 @@
 *	Whether to use SIMD implementation for Matrix4.
 *	Default is disabled. Benchmark has shown that compiler already optimize calcultation at its best.
 */
-#define SA_MATHS_MAT4_SIMD 1 && SA_MATHS_INTRINSICS_OPT
+#define SA_MATHS_MATRIX4_SIMD 1 && SA_MATHS_INTRINSICS_OPT
 
 /** \} */
 

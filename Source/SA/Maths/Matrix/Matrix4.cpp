@@ -8,7 +8,7 @@
 
 namespace Sa
 {
-#if SA_MATHS_MAT4_SIMD && SA_INTRISC_AVX // SIMD int32
+#if SA_MATHS_MATRIX4_SIMD && SA_INTRISC_AVX // SIMD int32
 
 //{ Row Major
 
@@ -473,7 +473,7 @@ namespace Sa
 
 #endif
 
-#if SA_MATHS_MAT4_SIMD && SA_INTRISC_SSE // SIMD float
+#if SA_MATHS_MATRIX4_SIMD && SA_INTRISC_SSE // SIMD float
 
 //{ Row Major
 
@@ -1618,7 +1618,7 @@ namespace Sa
 
 #endif
 
-#if SA_MATHS_MAT4_SIMD && SA_INTRISC_AVX // SIMD double
+#if SA_MATHS_MATRIX4_SIMD && SA_INTRISC_AVX // SIMD double
 
 //{ Row Major
 
