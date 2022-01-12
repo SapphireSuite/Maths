@@ -11,8 +11,12 @@ namespace Sa::Benchmark
 {
     static bool randomInit = []() { srand((unsigned int)time(nullptr)); return true; }();
 
+    /**
+    *   Ensure no division by 0.
+    */
+
     template <typename T>
-    static T Rand(T _min = T(0), T _max = T(1))
+    static T Rand(T _min = T(1), T _max = T(100))
     {
         return _min + static_cast<T>(rand()) / (static_cast<T> (RAND_MAX / (_max - _min)));
     }
