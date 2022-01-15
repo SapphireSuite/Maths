@@ -17,7 +17,7 @@
 #if SA_MATHS_MATRIX3_SIMD
 
 	#include <SA/Support/Intrinsics.hpp>
-	//#include <SA/Support/Pragma.hpp>
+	#include <SA/Support/Pragma.hpp>
 
 #endif
 
@@ -53,8 +53,8 @@ namespace Sa
 
 #if SA_MATHS_MATRIX3_SIMD && SA_INTRISC
 
-	//// Disable padding struct warning.
-	//SA_PRAGMA_SDWARN_MSVC(4324)
+	// Disable padding struct warning.
+	SA_PRAGMA_SDWARN_MSVC(4324)
 
 	template <typename T, MatrixMajor major = MatrixMajor::Default>
 	struct alignas(32) Mat3 : public Intl::Mat3_Base<T, major>
@@ -530,7 +530,7 @@ namespace Sa
 #if SA_MATHS_MATRIX3_SIMD && SA_INTRISC
 
 	// Disable padding struct warning.
-	//SA_PRAGMA_EDWARN_MSVC()
+	SA_PRAGMA_EDWARN_MSVC()
 
 #endif
 
