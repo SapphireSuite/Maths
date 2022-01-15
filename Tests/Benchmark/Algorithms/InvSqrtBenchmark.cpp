@@ -13,7 +13,7 @@
 
 #include "../Tools/Random.hpp"
 
-#define SA_MATHS_BENCHMARK_INV_SQRT 1
+#define SA_MATHS_BENCHMARK_INV_SQRT 0
 
 #if SA_MATHS_BENCHMARK_INV_SQRT
 
