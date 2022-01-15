@@ -1,14 +1,10 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
 #include "Matrix4Tests.hpp"
+#include "Matrix3Tests.hpp"
 #include "../Space/QuaternionTests.hpp"
 #include "../Space/Vector3Tests.hpp"
 #include "../Space/Vector4Tests.hpp"
-
-#include <SA/Maths/Matrix/MatrixMajor.hpp>
-
-#include <SA/Maths/Space/Vector3.hpp>
-#include <SA/Maths/Space/Vector4.hpp>
 
 namespace Sa::UT::Matrix4
 {
@@ -233,41 +229,43 @@ namespace Sa::UT::Matrix4
 
 	TYPED_TEST(Matrix4Test, FromMat3Constructors)
 	{
-		//T m1e00 = static_cast<T>(6.314);
-		//T m1e01 = static_cast<T>(165.2);
-		//T m1e02 = static_cast<T>(4236.0);
-		//T m1e10 = static_cast<T>(46.25);
-		//T m1e11 = static_cast<T>(77.51);
-		//T m1e12 = static_cast<T>(16.25);
-		//T m1e20 = static_cast<T>(653.0);
-		//T m1e21 = static_cast<T>(11.21);
-		//T m1e22 = static_cast<T>(15.36);
+		using T = typename TypeParam::T;
 
-		//const Mat3T m1(
-		//	m1e00, m1e01, m1e02,
-		//	m1e10, m1e11, m1e12,
-		//	m1e20, m1e21, m1e22,
-		//);
+		T m1e00 = static_cast<T>(6.314);
+		T m1e01 = static_cast<T>(165.2);
+		T m1e02 = static_cast<T>(4236.0);
+		T m1e10 = static_cast<T>(46.25);
+		T m1e11 = static_cast<T>(77.51);
+		T m1e12 = static_cast<T>(16.25);
+		T m1e20 = static_cast<T>(653.0);
+		T m1e21 = static_cast<T>(11.21);
+		T m1e22 = static_cast<T>(15.36);
+
+		const Mat3T m1(
+			m1e00, m1e01, m1e02,
+			m1e10, m1e11, m1e12,
+			m1e20, m1e21, m1e22
+		);
 
 
-		//const Mat4T m2(m1);
+		const Mat4T m2(m1);
 
-		//EXPECT_EQ(m2.e00, m1.e00);
-		//EXPECT_EQ(m2.e01, m1.e01);
-		//EXPECT_EQ(m2.e02, m1.e02);
-		//EXPECT_EQ(m2.e03, 0);
-		//EXPECT_EQ(m2.e10, m1.e10);
-		//EXPECT_EQ(m2.e11, m1.e11);
-		//EXPECT_EQ(m2.e12, m1.e12);
-		//EXPECT_EQ(m2.e13, 0);
-		//EXPECT_EQ(m2.e20, m1.e20);
-		//EXPECT_EQ(m2.e21, m1.e21);
-		//EXPECT_EQ(m2.e22, m1.e22);
-		//EXPECT_EQ(m2.e23, 0);
-		//EXPECT_EQ(m2.e30, 0);
-		//EXPECT_EQ(m2.e31, 0);
-		//EXPECT_EQ(m2.e32, 0);
-		//EXPECT_EQ(m2.e33, 1); // Default fill with identity.
+		EXPECT_EQ(m2.e00, m1.e00);
+		EXPECT_EQ(m2.e01, m1.e01);
+		EXPECT_EQ(m2.e02, m1.e02);
+		EXPECT_EQ(m2.e03, 0);
+		EXPECT_EQ(m2.e10, m1.e10);
+		EXPECT_EQ(m2.e11, m1.e11);
+		EXPECT_EQ(m2.e12, m1.e12);
+		EXPECT_EQ(m2.e13, 0);
+		EXPECT_EQ(m2.e20, m1.e20);
+		EXPECT_EQ(m2.e21, m1.e21);
+		EXPECT_EQ(m2.e22, m1.e22);
+		EXPECT_EQ(m2.e23, 0);
+		EXPECT_EQ(m2.e30, 0);
+		EXPECT_EQ(m2.e31, 0);
+		EXPECT_EQ(m2.e32, 0);
+		EXPECT_EQ(m2.e33, 1); // Default fill with identity.
 	}
 
 	TYPED_TEST(Matrix4Test, Equals)
@@ -802,7 +800,8 @@ namespace Sa::UT::Matrix4
 
 	TEST(Matrix4, AccessorsRow)
 	{
-		const Mat4<float, MatMaj::Row> m1(
+		// Test non-const access.
+		Mat4<float, MatMaj::Row> m1(
 			6.314f, 165.2f, 4236.0f, 99.4f,
 			46.25f, 77.51f, 16.25f, 78.25f,
 			653.0f, 11.21f, 15.36f, 9.64f,
@@ -922,7 +921,8 @@ namespace Sa::UT::Matrix4
 
 	TEST(Matrix4, AccessorsColumn)
 	{
-		const Mat4<float, MatMaj::Column> m1(
+		// Test non-const access.
+		Mat4<float, MatMaj::Column> m1(
 			6.314f, 165.2f, 4236.0f, 99.4f,
 			46.25f, 77.51f, 16.25f, 78.25f,
 			653.0f, 11.21f, 15.36f, 9.64f,

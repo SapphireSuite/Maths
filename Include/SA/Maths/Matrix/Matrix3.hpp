@@ -116,15 +116,16 @@ namespace Sa
 		template <typename TIn, MatrixMajor majorIn>
 		constexpr Mat3(const Mat3<TIn, majorIn>& _other) noexcept;
 
-		///**
-		//*	\brief \e Value constructor from another Mat4 type.
-		//*
-		//*	\tparam TIn			Type of the input Mat4.
-		//*
-		//*	\param[in] _other	Mat4 to construct from.
-		//*/
-		//template <typename TIn>
-		//constexpr Mat3(const Mat4<TIn, major>& _other) noexcept;
+		/**
+		*	\brief \e Value constructor from another Mat4 type.
+		*
+		*	\tparam TIn			Type of the input Mat4.
+		*	\tparam majorIn		Major of the input Mat3.
+		*
+		*	\param[in] _other	Mat4 to construct from.
+		*/
+		template <typename TIn, MatrixMajor majorIn>
+		constexpr Mat3(const Mat4<TIn, majorIn>& _other) noexcept;
 
 //}
 
@@ -572,7 +573,7 @@ namespace Sa
 	using Matrix3 = Mat3<T, major>;
 
 	/// Alias for int32 Matrix3.
-	using Matrix3i = Matrix3<int32>;
+	using Matrix3i = Matrix3<int32_t>;
 
 	/// Alias for float Matrix3.
 	using Matrix3f = Matrix3<float>;

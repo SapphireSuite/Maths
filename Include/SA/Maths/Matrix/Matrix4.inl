@@ -38,17 +38,17 @@ namespace Sa
 	{
 	}
 
-	//template <typename T, MatrixMajor major>
-	//template <typename TIn>
-	//constexpr Mat4<T, major>::Mat4(const Mat3<TIn, major>& _other) noexcept :
-	//	Intl::Mat4_Base<T, major>(
-	//		static_cast<T>(_other.e00), static_cast<T>(_other.e01), static_cast<T>(_other.e02), T(0),
-	//		static_cast<T>(_other.e10), static_cast<T>(_other.e11), static_cast<T>(_other.e12), T(0),
-	//		static_cast<T>(_other.e20), static_cast<T>(_other.e21), static_cast<T>(_other.e22), T(0),
-	//		T(0), T(0), T(0), T(1)
-	//	)
-	//{
-	//}
+	template <typename T, MatrixMajor major>
+	template <typename TIn, MatrixMajor majorIn>
+	constexpr Mat4<T, major>::Mat4(const Mat3<TIn, majorIn>& _other) noexcept :
+		Intl::Mat4_Base<T, major>(
+			static_cast<T>(_other.e00), static_cast<T>(_other.e01), static_cast<T>(_other.e02), T(0),
+			static_cast<T>(_other.e10), static_cast<T>(_other.e11), static_cast<T>(_other.e12), T(0),
+			static_cast<T>(_other.e20), static_cast<T>(_other.e21), static_cast<T>(_other.e22), T(0),
+			T(0), T(0), T(0), T(1)
+		)
+	{
+	}
 
 //}
 
