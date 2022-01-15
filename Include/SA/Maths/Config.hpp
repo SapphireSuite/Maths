@@ -48,7 +48,7 @@
 /**
 *	Whether to use SIMD implementation for Inverse Square Root.
 */
-#define SA_MATHS_INV_SQRT_SIMD 0 && SA_MATHS_INTRINSICS_OPT
+#define SA_MATHS_INV_SQRT_SIMD 1 && SA_MATHS_INTRINSICS_OPT
 
 
 /**
