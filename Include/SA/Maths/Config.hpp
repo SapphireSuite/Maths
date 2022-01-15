@@ -53,6 +53,13 @@
 
 
 /**
+*	Whether to use SIMD implementation for Matrix3.
+*	Default is disabled. Benchmark has shown that compiler already optimize calcultation at its best.
+*/
+#define SA_MATHS_MATRIX3_SIMD 0 && SA_MATHS_INTRINSICS_OPT
+
+
+/**
 *	Whether to use SIMD implementation for Matrix4.
 *	Default is disabled. Benchmark has shown that compiler already optimize calcultation at its best.
 */
