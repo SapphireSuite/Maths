@@ -46,6 +46,12 @@
 
 
 /**
+*	Whether to use SIMD implementation for Inverse Square Root.
+*/
+#define SA_MATHS_INV_SQRT_SIMD 0 && SA_MATHS_INTRINSICS_OPT
+
+
+/**
 *	Whether to use SIMD implementation for Quaternion.
 *	Default is disabled. Benchmark has shown that compiler already optimize calcultation at its best.
 */
