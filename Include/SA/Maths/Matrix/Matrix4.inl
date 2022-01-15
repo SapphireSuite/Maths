@@ -27,8 +27,8 @@ namespace Sa
 //{ Constructors
 
 	template <typename T, MatrixMajor major>
-	template <typename TIn>
-	constexpr Mat4<T, major>::Mat4(const Mat4<TIn, major>& _other) noexcept :
+	template <typename TIn, MatrixMajor majorIn>
+	constexpr Mat4<T, major>::Mat4(const Mat4<TIn, majorIn>& _other) noexcept :
 		Intl::Mat4_Base<T, major>(
 			static_cast<T>(_other.e00), static_cast<T>(_other.e01), static_cast<T>(_other.e02), static_cast<T>(_other.e03),
 			static_cast<T>(_other.e10), static_cast<T>(_other.e11), static_cast<T>(_other.e12), static_cast<T>(_other.e13),
@@ -628,6 +628,33 @@ namespace Sa
 //}
 
 //{ Operators
+
+	template <typename T, MatrixMajor major>
+	template <typename TIn, MatrixMajor majorIn>
+	Mat4<T, major>& Mat4<T, major>::operator=(const Mat4<TIn, majorIn> _rhs) noexcept
+	{
+		e00 = static_cast<T>(_rhs.e00);
+		e01 = static_cast<T>(_rhs.e01);
+		e02 = static_cast<T>(_rhs.e02);
+		e03 = static_cast<T>(_rhs.e03);
+
+		e10 = static_cast<T>(_rhs.e10);
+		e11 = static_cast<T>(_rhs.e11);
+		e12 = static_cast<T>(_rhs.e12);
+		e13 = static_cast<T>(_rhs.e13);
+
+		e20 = static_cast<T>(_rhs.e20);
+		e21 = static_cast<T>(_rhs.e21);
+		e22 = static_cast<T>(_rhs.e22);
+		e23 = static_cast<T>(_rhs.e23);
+
+		e30 = static_cast<T>(_rhs.e30);
+		e31 = static_cast<T>(_rhs.e31);
+		e32 = static_cast<T>(_rhs.e32);
+		e33 = static_cast<T>(_rhs.e33);
+
+		return *this;
+	}
 
 	template <typename T, MatrixMajor major>
 	constexpr Mat4<T, major> Mat4<T, major>::operator-() const noexcept

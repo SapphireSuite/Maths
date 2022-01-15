@@ -121,11 +121,12 @@ namespace Sa
 		*	\brief \e Value constructor from another Mat4 type.
 		*
 		*	\tparam TIn			Type of the input Mat4.
+		*	\tparam majorIn		Major of the input Mat4.
 		*
 		*	\param[in] _other	Mat4 to construct from.
 		*/
-		template <typename TIn>
-		constexpr Mat4(const Mat4<TIn, major>& _other) noexcept;
+		template <typename TIn, MatrixMajor majorIn>
+		constexpr Mat4(const Mat4<TIn, majorIn>& _other) noexcept;
 
 		///**
 		//*	\brief \e Value constructor from another Mat3 type.
@@ -446,8 +447,17 @@ namespace Sa
 //}
 
 //{ Operators
-
-		using Intl::Mat4_Base<T, major>::operator=;
+		
+		/**
+		*	\brief \e Assignment operator from another Mat4 type.
+		*
+		*	\tparam TIn			Type of the input Mat4.
+		*	\tparam majorIn		Major of the input Mat4.
+		*
+		*	\param[in] _other	Mat4 to assign from.
+		*/
+		template <typename TIn, MatrixMajor majorIn>
+		Mat4& operator=(const Mat4<TIn, majorIn> _rhs) noexcept;
 
 		/**
 		*	\brief \e Getter of the opposite signed matrix.
@@ -603,6 +613,13 @@ namespace Sa
 
 #endif
 	};
+
+#if SA_MATHS_MATRIX4_SIMD && SA_INTRISC
+
+	// Disable padding struct warning.
+	//SA_PRAGMA_EDWARN_MSVC()
+
+#endif
 
 
 	/**
