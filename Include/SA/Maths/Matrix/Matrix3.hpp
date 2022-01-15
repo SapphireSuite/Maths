@@ -609,11 +609,11 @@ namespace Sa
 //{ Row Major
 
 	template <>
-	RMat3i RMat3i::operator*(int32 _scale) const noexcept;
+	RMat3i RMat3i::operator*(int32_t _scale) const noexcept;
 
 #if SA_INTRISC_SVML
 	template <>
-	RMat3i RMat3i::operator/(int32 _scale) const noexcept;
+	RMat3i RMat3i::operator/(int32_t _scale) const noexcept;
 #endif
 
 	template <>
@@ -627,15 +627,15 @@ namespace Sa
 
 
 	template <>
-	Vec3<int32> RMat3i::operator*(const Vec3<int32>& _rhs) const noexcept;
+	Vec3<int32_t> RMat3i::operator*(const Vec3<int32_t>& _rhs) const noexcept;
 
 
 	template <>
-	RMat3i& RMat3i::operator*=(int32 _scale) noexcept;
+	RMat3i& RMat3i::operator*=(int32_t _scale) noexcept;
 
 #if SA_INTRISC_SVML
 	template <>
-	RMat3i& RMat3i::operator/=(int32 _scale) noexcept;
+	RMat3i& RMat3i::operator/=(int32_t _scale) noexcept;
 #endif
 
 	template <>
@@ -649,11 +649,11 @@ namespace Sa
 //{ Column Major
 
 	template <>
-	CMat3i CMat3i::operator*(int32 _scale) const noexcept;
+	CMat3i CMat3i::operator*(int32_t _scale) const noexcept;
 
 #if SA_INTRISC_SVML
 	template <>
-	CMat3i CMat3i::operator/(int32 _scale) const noexcept;
+	CMat3i CMat3i::operator/(int32_t _scale) const noexcept;
 #endif
 
 	template <>
@@ -667,15 +667,15 @@ namespace Sa
 
 
 	template <>
-	Vec3<int32> CMat3i::operator*(const Vec3<int32>& _rhs) const noexcept;
+	Vec3<int32_t> CMat3i::operator*(const Vec3<int32_t>& _rhs) const noexcept;
 
 
 	template <>
-	CMat3i& CMat3i::operator*=(int32 _scale) noexcept;
+	CMat3i& CMat3i::operator*=(int32_t _scale) noexcept;
 
 #if SA_INTRISC_SVML
 	template <>
-	CMat3i& CMat3i::operator/=(int32 _scale) noexcept;
+	CMat3i& CMat3i::operator/=(int32_t _scale) noexcept;
 #endif
 
 	template <>
