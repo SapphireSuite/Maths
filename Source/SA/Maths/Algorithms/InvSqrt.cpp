@@ -7,7 +7,7 @@
 namespace Sa::Maths
 {
 	template <>
-	float InvSqrt(float _in)
+	float InvSqrt(float _in) noexcept
 	{
 #if SA_MATHS_INV_SQRT_SIMD
 
@@ -33,7 +33,7 @@ namespace Sa::Maths
 	}
 
 	template <>
-	double InvSqrt(double _in)
+	double InvSqrt(double _in) noexcept
 	{
 #if SA_MATHS_INV_SQRT_SIMD
 

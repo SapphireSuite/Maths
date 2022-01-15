@@ -39,10 +39,10 @@ namespace Sa
 		}
 
 		template <>
-		float InvSqrt(float _in);
+		float InvSqrt(float _in) noexcept;
 
 		template <>
-		double InvSqrt(double _in);
+		double InvSqrt(double _in) noexcept;
 	}
 }
 
