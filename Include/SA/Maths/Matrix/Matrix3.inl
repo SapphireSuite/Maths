@@ -269,22 +269,22 @@ namespace Sa
 
 		// Sources: https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation
 
-		const T XW2 = 2.0f * _rot.x * _rot.w;
-		const T XX2 = 2.0f * _rot.x * _rot.x;
-		const T XY2 = 2.0f * _rot.x * _rot.y;
-		const T XZ2 = 2.0f * _rot.x * _rot.z;
+		const T XW2 = T(2) * _rot.x * _rot.w;
+		const T XX2 = T(2) * _rot.x * _rot.x;
+		const T XY2 = T(2) * _rot.x * _rot.y;
+		const T XZ2 = T(2) * _rot.x * _rot.z;
 
-		const T YW2 = 2.0f * _rot.y * _rot.w;
-		const T YY2 = 2.0f * _rot.y * _rot.y;
-		const T YZ2 = 2.0f * _rot.y * _rot.z;
+		const T YW2 = T(2) * _rot.y * _rot.w;
+		const T YY2 = T(2) * _rot.y * _rot.y;
+		const T YZ2 = T(2) * _rot.y * _rot.z;
 
-		const T ZW2 = 2.0f * _rot.z * _rot.w;
-		const T ZZ2 = 2.0f * _rot.z * _rot.z;
+		const T ZW2 = T(2) * _rot.z * _rot.w;
+		const T ZZ2 = T(2) * _rot.z * _rot.z;
 
 		return Mat3(
-			1.0f - YY2 - ZZ2, XY2 - ZW2, XZ2 + YW2,
-			XY2 + ZW2, 1.0f - XX2 - ZZ2, YZ2 - XW2,
-			XZ2 - YW2, YZ2 + XW2, 1.0f - XX2 - YY2
+			T(1) - YY2 - ZZ2, XY2 - ZW2, XZ2 + YW2,
+			XY2 + ZW2, T(1) - XX2 - ZZ2, YZ2 - XW2,
+			XZ2 - YW2, YZ2 + XW2, T(1) - XX2 - YY2
 		);
 	}
 
