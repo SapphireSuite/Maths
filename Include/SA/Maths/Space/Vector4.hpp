@@ -5,12 +5,11 @@
 #ifndef SAPPHIRE_MATHS_VECTOR4_GUARD
 #define SAPPHIRE_MATHS_VECTOR4_GUARD
 
+#include <cstdint>
 #include <limits>
 
 #include <SA/Maths/Algorithms/Equals.hpp>
 
-//#include <SA/Maths/Algorithms/Sqrt.hpp>
-//#include <SA/Maths/Algorithms/Lerp.hpp>
 
 /**
 *	\file Vector4.hpp

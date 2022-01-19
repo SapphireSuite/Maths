@@ -5,6 +5,8 @@
 #ifndef SAPPHIRE_MATHS_VECTOR2_GUARD
 #define SAPPHIRE_MATHS_VECTOR2_GUARD
 
+#include <cstdint>
+
 #include <SA/Maths/Angle/Degree.hpp>
 #include <SA/Maths/Algorithms/Cos.hpp>
 #include <SA/Maths/Algorithms/Tan.hpp>
