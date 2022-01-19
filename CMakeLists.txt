@@ -53,17 +53,17 @@ if(SA_MATHS_INTRINSICS_OPT)
 
 	target_compile_definitions(SA_Maths PUBLIC SA_MATHS_INTRINSICS_OPT)
 
-	if(NOT TARGET Support)
-
-		# Fetch SA_Support.
-		include(FetchContent)
+	# Fetch SA_Support.
+	if(NOT TARGET SA_Support)
 
 		message("Fetching SA_Support...")
+
+		include(FetchContent)
 
 		FetchContent_Declare(
 			SA_Support
 			GIT_REPOSITORY https://github.com/SapphireSuite/Support.git
-			GIT_TAG        v1.2
+			GIT_TAG        main
 		)
 
 		FetchContent_MakeAvailable(SA_Support)
