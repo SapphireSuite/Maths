@@ -47,7 +47,7 @@ target_compile_definitions(SA_Maths PUBLIC SA_MATHS_IMPL)
 # Options
 
 ## Add SA_Maths's intrinsics implementation.
-option(SA_MATHS_INTRINSICS_OPT "Should build using intrinsics" ON)
+option(SA_MATHS_INTRINSICS_OPT "Should build using intrinsics" OFF)
 
 if(SA_MATHS_INTRINSICS_OPT)
 

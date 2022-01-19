@@ -2,7 +2,23 @@
 
 
 ### Add Max warning level for tests.
-SA_SetupMaxWarningLevel(SA_Maths)
+if(MSVC)
+
+	if(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang") # ClangCl
+
+		target_compile_options(SA_Maths PUBLIC -W4)
+
+	else()
+
+		target_compile_options(SA_Maths PUBLIC /W4)
+
+	endif()
+
+else()
+
+	target_compile_options(SA_Maths PUBLIC -Wall -Wextra)
+
+endif()
 
 
 
