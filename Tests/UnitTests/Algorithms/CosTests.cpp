@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include <SA/Maths/Misc/Degree.hpp>
+#include <SA/Maths/Angle/Degree.hpp>
 #include <SA/Maths/Algorithms/Cos.hpp>
 
 namespace Sa::UT::Cos

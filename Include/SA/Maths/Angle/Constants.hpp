@@ -10,7 +10,7 @@
 * 
 *	\brief Maths \b Constants definition file.
 * 
-*	\ingroup Maths_Misc
+*	\ingroup Maths_Angle
 *	\{
 */
 

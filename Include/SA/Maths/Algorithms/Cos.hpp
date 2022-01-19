@@ -5,7 +5,7 @@
 #ifndef SAPPHIRE_MATHS_COS_GUARD
 #define SAPPHIRE_MATHS_COS_GUARD
 
-#include <SA/Maths/Misc/Radian.hpp>
+#include <SA/Maths/Angle/Radian.hpp>
 
 /**
 *	\file Cos.hpp

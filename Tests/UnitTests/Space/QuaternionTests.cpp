@@ -3,8 +3,8 @@
 #include "QuaternionTests.hpp"
 
 #include "Vector3Tests.hpp"
-#include "../Misc/DegreeTests.hpp"
-#include "../Misc/RadianTests.hpp"
+#include "../Angle/DegreeTests.hpp"
+#include "../Angle/RadianTests.hpp"
 
 namespace Sa::UT::Quaternion
 {

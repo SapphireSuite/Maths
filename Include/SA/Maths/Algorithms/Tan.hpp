@@ -5,7 +5,7 @@
 #ifndef SAPPHIRE_MATHS_TAN_GUARD
 #define SAPPHIRE_MATHS_TAN_GUARD
 
-#include <SA/Maths/Misc/Radian.hpp>
+#include <SA/Maths/Angle/Radian.hpp>
 
 /**
 *	\file Tan.hpp

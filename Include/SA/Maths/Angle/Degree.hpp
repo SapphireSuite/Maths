@@ -7,7 +7,7 @@
 
 #include <cmath>
 
-#include <SA/Maths/Misc/Constants.hpp>
+#include <SA/Maths/Angle/Constants.hpp>
 #include <SA/Maths/Algorithms/Equals.hpp>
 
 /**
@@ -15,7 +15,7 @@
 *
 *	\brief \b Degree type implementation.
 *
-*	\ingroup Maths_Misc
+*	\ingroup Maths_Angle
 *	\{
 */
 
@@ -243,6 +243,6 @@ namespace Sa
 
 /** \} */
 
-#include <SA/Maths/Misc/Degree.inl>
+#include <SA/Maths/Angle/Degree.inl>
 
 #endif // GUARD

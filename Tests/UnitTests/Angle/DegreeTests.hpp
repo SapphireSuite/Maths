@@ -9,7 +9,7 @@
 
 #include <gtest/gtest.h>
 
-#include <SA/Maths/Misc/Degree.hpp>
+#include <SA/Maths/Angle/Degree.hpp>
 
 namespace Sa
 {

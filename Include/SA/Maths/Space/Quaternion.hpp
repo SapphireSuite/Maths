@@ -9,7 +9,7 @@
 
 #include <SA/Maths/Config.hpp>
 
-#include <SA/Maths/Misc/Degree.hpp>
+#include <SA/Maths/Angle/Degree.hpp>
 #include <SA/Maths/Algorithms/Cos.hpp>
 #include <SA/Maths/Algorithms/Sin.hpp>
 #include <SA/Maths/Algorithms/Tan.hpp>

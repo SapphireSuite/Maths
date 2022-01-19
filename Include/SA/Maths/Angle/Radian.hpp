@@ -7,7 +7,7 @@
 
 #include <cmath>
 
-#include <SA/Maths/Misc/Constants.hpp>
+#include <SA/Maths/Angle/Constants.hpp>
 #include <SA/Maths/Algorithms/Equals.hpp>
 
 /**
@@ -15,7 +15,7 @@
 *
 *	\brief \b Radian type implementation.
 *
-*	\ingroup Maths_Misc
+*	\ingroup Maths_Angle
 *	\{
 */
 
@@ -242,6 +242,6 @@ namespace Sa
 
 /** \} */
 
-#include <SA/Maths/Misc/Radian.inl>
+#include <SA/Maths/Angle/Radian.inl>
 
 #endif // GUARD

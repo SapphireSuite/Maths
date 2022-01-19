@@ -39,8 +39,8 @@
 */
 
 /**
-*	\defgroup Maths_Misc Misc
-*	Sapphire Suite's Maths Misc.
+*	\defgroup Maths_Angle Angle
+*	Sapphire Suite's Angle Angle.
 *	\ingroup Maths
 */
 

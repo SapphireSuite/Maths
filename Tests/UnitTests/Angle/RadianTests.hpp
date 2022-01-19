@@ -9,7 +9,7 @@
 
 #include <gtest/gtest.h>
 
-#include <SA/Maths/Misc/Radian.hpp>
+#include <SA/Maths/Angle/Radian.hpp>
 
 namespace Sa
 {

@@ -5,7 +5,7 @@
 #ifndef SAPPHIRE_MATHS_VECTOR3_GUARD
 #define SAPPHIRE_MATHS_VECTOR3_GUARD
 
-#include <SA/Maths/Misc/Degree.hpp>
+#include <SA/Maths/Angle/Degree.hpp>
 #include <SA/Maths/Algorithms/Cos.hpp>
 #include <SA/Maths/Algorithms/Sqrt.hpp>
 #include <SA/Maths/Algorithms/Lerp.hpp>
