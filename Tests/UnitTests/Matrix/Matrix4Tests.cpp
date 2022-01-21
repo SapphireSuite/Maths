@@ -773,10 +773,19 @@ namespace Sa::UT::Matrix4
 		EXPECT_EQ(m1.e32, m2.e32);
 		EXPECT_EQ(m1.e33, m2.e33);
 
+
+		// Auto conversion.
+		const Mat4<float, MatrixMajor::Column> cm1 = m1;
+		const Mat4<float, MatrixMajor::Row> rm2 = m2;
+
+		EXPECT_EQ(cm1, m2);
+		EXPECT_EQ(rm2, m1);
+
+
+		// Different memory.
 		const float* const dm1 = m1.Data();
 		const float* const dm2 = m2.Data();
 
-		// Different memory.
 		EXPECT_EQ(dm1[0], dm2[0]);
 		EXPECT_EQ(dm1[1], dm2[4]);
 		EXPECT_EQ(dm1[2], dm2[8]);

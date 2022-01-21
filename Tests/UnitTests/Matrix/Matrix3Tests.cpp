@@ -602,10 +602,19 @@ namespace Sa::UT::Matrix3
 		EXPECT_EQ(m1.e21, m2.e21);
 		EXPECT_EQ(m1.e22, m2.e22);
 
+
+		// Auto conversion.
+		const Mat3<float, MatrixMajor::Column> cm1 = m1;
+		const Mat3<float, MatrixMajor::Row> rm2 = m2;
+
+		EXPECT_EQ(cm1, m2);
+		EXPECT_EQ(rm2, m1);
+
+
+		// Different memory.
 		const float* const dm1 = m1.Data();
 		const float* const dm2 = m2.Data();
 
-		// Different memory.
 		EXPECT_EQ(dm1[0], dm2[0]);
 		EXPECT_EQ(dm1[1], dm2[3]);
 		EXPECT_EQ(dm1[2], dm2[6]);
