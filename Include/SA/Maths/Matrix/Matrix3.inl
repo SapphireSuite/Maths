@@ -329,6 +329,25 @@ namespace Sa
 //{ Operators
 
 	template <typename T, MatrixMajor major>
+	template <typename TIn, MatrixMajor majorIn>
+	Mat3<T, major>& Mat3<T, major>::operator=(const Mat3<TIn, majorIn> _rhs) noexcept
+	{
+		e00 = static_cast<T>(_rhs.e00);
+		e01 = static_cast<T>(_rhs.e01);
+		e02 = static_cast<T>(_rhs.e02);
+
+		e10 = static_cast<T>(_rhs.e10);
+		e11 = static_cast<T>(_rhs.e11);
+		e12 = static_cast<T>(_rhs.e12);
+
+		e20 = static_cast<T>(_rhs.e20);
+		e21 = static_cast<T>(_rhs.e21);
+		e22 = static_cast<T>(_rhs.e22);
+
+		return *this;
+	}
+
+	template <typename T, MatrixMajor major>
 	constexpr Mat3<T, major> Mat3<T, major>::operator-() const noexcept
 	{
 		// Allows constexpr

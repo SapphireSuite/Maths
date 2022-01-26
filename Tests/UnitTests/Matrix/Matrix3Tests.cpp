@@ -110,11 +110,13 @@ namespace Sa::UT::Matrix3
 		uint32_t m2e21 = 11u;
 		uint32_t m2e22 = 22u;
 
-		const Mat3T m2(Mat3<uint32_t, TypeParam::major>(
+		Mat3<uint32_t, TypeParam::major> mInt(
 			m2e00, m2e01, m2e02,
 			m2e10, m2e11, m2e12,
 			m2e20, m2e21, m2e22
-		));
+		);
+
+		const Mat3T m2(mInt);
 
 		EXPECT_EQ(m2.e00, (T)m2e00);
 		EXPECT_EQ(m2.e01, (T)m2e01);
@@ -125,6 +127,13 @@ namespace Sa::UT::Matrix3
 		EXPECT_EQ(m2.e20, (T)m2e20);
 		EXPECT_EQ(m2.e21, (T)m2e21);
 		EXPECT_EQ(m2.e22, (T)m2e22);
+
+
+		// Assignment cast operator.
+		Mat3T m3;
+		m3 = mInt;
+
+		EXPECT_EQ(m2, m3);
 	}
 
 	TYPED_TEST(Matrix3Test, CopyConstructors)

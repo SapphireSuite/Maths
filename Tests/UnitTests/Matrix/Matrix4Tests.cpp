@@ -154,12 +154,14 @@ namespace Sa::UT::Matrix4
 		uint32_t m2e32 = 13u;
 		uint32_t m2e33 = 48u;
 
-		const Mat4T m2(Mat4<uint32_t, TypeParam::major>(
+		Mat4<uint32_t, TypeParam::major> mInt(
 			m2e00, m2e01, m2e02, m2e03,
 			m2e10, m2e11, m2e12, m2e13,
 			m2e20, m2e21, m2e22, m2e23,
 			m2e30, m2e31, m2e32, m2e33
-		));
+		);
+
+		const Mat4T m2(mInt);
 
 		EXPECT_EQ(m2.e00, (T)m2e00);
 		EXPECT_EQ(m2.e01, (T)m2e01);
@@ -177,6 +179,13 @@ namespace Sa::UT::Matrix4
 		EXPECT_EQ(m2.e31, (T)m2e31);
 		EXPECT_EQ(m2.e32, (T)m2e32);
 		EXPECT_EQ(m2.e33, (T)m2e33);
+
+
+		// Assignment cast operator.
+		Mat4T m3;
+		m3 = mInt;
+
+		EXPECT_EQ(m2, m3);
 	}
 
 	TYPED_TEST(Matrix4Test, CopyConstructors)
