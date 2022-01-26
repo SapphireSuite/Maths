@@ -240,6 +240,11 @@ namespace Sa
 	constexpr Degd operator""_deg(long double _lit) noexcept;
 }
 
+/**
+*	\example DegreeTests.cpp
+*	Examples and Unitary Tests for Deg.
+*/
+
 
 /** \} */
 

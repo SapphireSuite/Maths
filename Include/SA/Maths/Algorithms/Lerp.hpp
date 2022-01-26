@@ -146,6 +146,11 @@ namespace Sa
 	}
 }
 
+/**
+*	\example LerpTests.cpp
+*	Examples and Unitary Tests for Lerp.
+*/
+
 
 /** \} */
 

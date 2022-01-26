@@ -17,7 +17,6 @@
 #if SA_MATHS_MATRIX4_SIMD
 
 	#include <SA/Support/Intrinsics.hpp>
-	//#include <SA/Support/Pragma.hpp>
 
 #endif
 
@@ -55,9 +54,6 @@ namespace Sa
 	*/
 
 #if SA_MATHS_MATRIX4_SIMD && SA_INTRISC
-
-	//// Disable padding struct warning.
-	//SA_PRAGMA_SDWARN_MSVC(4324)
 
 	template <typename T, MatrixMajor major = MatrixMajor::Default>
 	struct alignas(32) Mat4 : public Intl::Mat4_Base<T, major>
@@ -455,7 +451,7 @@ namespace Sa
 		*	\tparam TIn			Type of the input Mat4.
 		*	\tparam majorIn		Major of the input Mat4.
 		*
-		*	\param[in] _other	Mat4 to assign from.
+		*	\param[in] _rhs		Mat4 to assign from.
 		*/
 		template <typename TIn, MatrixMajor majorIn>
 		Mat4& operator=(const Mat4<TIn, majorIn> _rhs) noexcept;
@@ -1026,6 +1022,11 @@ namespace Sa
 
 	/// \endcond
 }
+
+/**
+*	\example Matrix4Tests.cpp
+*	Examples and Unitary Tests for Mat4.
+*/
 
 
 /** \} */

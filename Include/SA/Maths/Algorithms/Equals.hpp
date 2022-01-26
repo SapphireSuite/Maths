@@ -7,6 +7,16 @@
 
 #include <limits>
 
+/**
+*	\file Equals.hpp
+*
+*	\brief \b Equals method implementation.
+*
+*	\ingroup Maths_Algorithms
+*	\{
+*/
+
+
 namespace Sa
 {
 	namespace Maths
@@ -68,5 +78,13 @@ namespace Sa
 		}
 	}
 }
+
+/**
+*	\example EqualsTests.cpp
+*	Examples and Unitary Tests for Equals.
+*/
+
+
+/** \} */
 
 #endif // GUARD

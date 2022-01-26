@@ -658,6 +658,11 @@ namespace Sa
 //}
 }
 
+/**
+*	\example Vector2Tests.cpp
+*	Examples and Unitary Tests for Vec2.
+*/
+
 
 /** \} */
 

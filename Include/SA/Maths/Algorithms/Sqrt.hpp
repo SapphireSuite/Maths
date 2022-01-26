@@ -41,6 +41,11 @@ namespace Sa
 	}
 }
 
+/**
+*	\example SqrtTests.cpp
+*	Examples and Unitary Tests for Sqrt.
+*/
+
 
 /** \} */
 

@@ -378,7 +378,7 @@ namespace Sa
 		*	\tparam TIn			Type of the input Mat3.
 		*	\tparam majorIn		Major of the input Mat3.
 		*
-		*	\param[in] _other	Mat3 to assign from.
+		*	\param[in] _rhs		Mat3 to assign from.
 		*/
 		template <typename TIn, MatrixMajor majorIn>
 		Mat3& operator=(const Mat3<TIn, majorIn> _rhs) noexcept;
@@ -914,6 +914,11 @@ namespace Sa
 
 	/// \endcond
 }
+
+/**
+*	\example Matrix3Tests.cpp
+*	Examples and Unitary Tests for Mat3.
+*/
 
 
 /** \} */

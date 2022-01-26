@@ -672,6 +672,11 @@ namespace Sa
 //}
 }
 
+/**
+*	\example Vector3Tests.cpp
+*	Examples and Unitary Tests for Vec3.
+*/
+
 
 /** \} */
 

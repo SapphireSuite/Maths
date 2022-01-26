@@ -49,6 +49,11 @@ namespace Sa
 	}
 }
 
+/**
+*	\example SinTests.cpp
+*	Examples and Unitary Tests for Sin.
+*/
+
 
 /** \} */
 

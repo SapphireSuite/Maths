@@ -869,6 +869,11 @@ namespace Sa
 	/// \endcond
 }
 
+/**
+*	\example QuaternionTests.cpp
+*	Examples and Unitary Tests for Quat.
+*/
+
 
 /** \} */
 

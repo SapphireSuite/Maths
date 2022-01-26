@@ -50,6 +50,11 @@ namespace Sa
 	}
 }
 
+/**
+*	\example CosTests.cpp
+*	Examples and Unitary Tests for Cos.
+*/
+
 
 /** \} */
 

@@ -64,6 +64,11 @@ namespace Sa
 	}
 }
 
+/**
+*	\example TanTests.cpp
+*	Examples and Unitary Tests for Tan.
+*/
+
 
 /** \} */
 

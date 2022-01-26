@@ -239,6 +239,11 @@ namespace Sa
 	constexpr Radd operator""_rad(long double _lit) noexcept;
 }
 
+/**
+*	\example RadianTests.cpp
+*	Examples and Unitary Tests for Rad.
+*/
+
 
 /** \} */
 

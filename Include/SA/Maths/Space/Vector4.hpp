@@ -272,6 +272,11 @@ namespace Sa
 //}
 }
 
+/**
+*	\example Vector4Tests.cpp
+*	Examples and Unitary Tests for Vec4.
+*/
+
 
 /** \} */
 
