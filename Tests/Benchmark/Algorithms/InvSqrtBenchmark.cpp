@@ -13,12 +13,14 @@
 
 #include "../Tools/Random.hpp"
 
-#define SA_MATHS_BENCHMARK_INV_SQRT 0
+#define SA_MATHS_BENCHMARK_INV_SQRT (0 || SA_CI)
 
 #if SA_MATHS_BENCHMARK_INV_SQRT
 
 namespace Sa::Benchmark
 {
+#if !SA_MATHS_INTRINSICS_OPT
+
 //{ STD
 
 	template <typename T>
@@ -41,6 +43,7 @@ namespace Sa::Benchmark
 
 //}
 
+#else
 
 //{ Fast
 
@@ -108,6 +111,9 @@ namespace Sa::Benchmark
 
 //}
 
+
+//{ SIMD
+
 #if SA_INTRISC_SSE
 
 	/**
@@ -149,6 +155,11 @@ namespace Sa::Benchmark
 	BENCHMARK_TEMPLATE(BM_InvSqrt_SIMD, float);
 
 #endif
+
+//}
+
+#endif
+
 }
 
 #endif

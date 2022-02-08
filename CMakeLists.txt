@@ -7,16 +7,16 @@ cmake_minimum_required(VERSION 3.16)
 
 project(SA_Maths)
 
-message("SA_Maths Main directory: ${CMAKE_SOURCE_DIR}")
+message("SA_Maths Main directory: ${CMAKE_CURRENT_SOURCE_DIR}")
 
 
 
 # Outputs
 
 ### Setup output directory
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Bin)		# .exe
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Libs)	# .lib / .a
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Libs)	# .dll / .so
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)		# .exe
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)		# .lib / .a
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)		# .dll / .so
 
 
 
@@ -41,6 +41,11 @@ target_compile_features(SA_Maths PUBLIC cxx_std_20)
 
 ### SA_Maths module implementation preprocessor.
 target_compile_definitions(SA_Maths PUBLIC SA_MATHS_IMPL)
+
+### Continuous integration preprocessor.
+if(SA_CI)
+	target_compile_definitions(SA_Maths PUBLIC SA_CI)
+endif()
 
 
 

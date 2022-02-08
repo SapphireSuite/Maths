@@ -5,7 +5,7 @@
 #include "QuaternionBenchmark.hpp"
 #include "Vector3Benchmark.hpp"
 
-#if SA_MATHS_QUATERNION_SIMD
+#if SA_MATHS_QUATERNION_SIMD || SA_CI
 
 namespace Sa::Benchmark
 {
