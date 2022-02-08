@@ -142,7 +142,7 @@ namespace Sa
 				sinYaw = 1.0f;
 
 			if (std::abs(sinYaw) > 1.0f) // 90 degrees if out of range.
-				result.y = std::copysign(Maths::PiOv4<float> *Maths::RadToDeg<float>, sinYaw);
+				result.y = std::copysign(Maths::PiOv4<float> * Maths::RadToDeg<float>, sinYaw);
 			else
 				result.y = Maths::ASin(sinYaw);
 		}
