@@ -393,6 +393,7 @@ namespace Sa::UT::Matrix3
 
 		// Rotation + Scale.
 		const Mat3T mRotScale = mScale * mRot;
+		(void)mRotScale;
 
 		if constexpr (std::is_floating_point_v<T>) // No test for int types.
 			EXPECT_MAT3_NEAR((Mat3T::MakeTransform(q1, vScale)), mRotScale, 0.001);
@@ -519,8 +520,6 @@ namespace Sa::UT::Matrix3
 		}
 		else
 		{
-			auto aaa = m3 * m4;
-
 			m3multm4 = Mat3T(
 				(T)4150.6845, (T)7533.1456, (T)7666.4475,
 				(T)18524.41, (T)196766.394, (T)42371.9,

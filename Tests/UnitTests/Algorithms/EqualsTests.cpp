@@ -24,7 +24,9 @@ namespace Sa::UT::Equals
 
 		// float / double test only.
 		if constexpr (std::is_floating_point_v<TypeParam>)
+		{
 			EXPECT_FALSE(Maths::Equals(defaultVal, defaultVal + 2 * epsilon));
+		}
 		
 		EXPECT_TRUE(Maths::Equals(defaultVal, defaultVal + 1, TypeParam{ 1 }));
 		EXPECT_FALSE(Maths::Equals(defaultVal, defaultVal + 1, epsilon));
