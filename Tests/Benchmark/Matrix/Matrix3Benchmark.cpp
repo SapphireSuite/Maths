@@ -6,7 +6,7 @@
 #include "../Space/Vector3Benchmark.hpp"
 #include "../Space/QuaternionBenchmark.hpp"
 
-#if SA_MATHS_MATRIX3_SIMD
+#if SA_MATHS_MATRIX3_SIMD || SA_CI
 
 namespace Sa::Benchmark
 {

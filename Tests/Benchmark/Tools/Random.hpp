@@ -5,6 +5,7 @@
 #ifndef SAPPHIRE_MATHS_RANDOM_BENCHMARK_GUARD
 #define SAPPHIRE_MATHS_RANDOM_BENCHMARK_GUARD
 
+#include <ctime>
 #include <cstdlib>
 
 namespace Sa::Benchmark
