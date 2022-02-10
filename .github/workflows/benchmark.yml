@@ -30,6 +30,7 @@ jobs:
 
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         compiler_v: [9, 10, 11]
         option_SIMD: [ON, OFF]
@@ -56,6 +57,7 @@ jobs:
 
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         compiler_v: [9, 10, 11, 12]
         option_SIMD: [ON, OFF]
@@ -84,6 +86,7 @@ jobs:
 
     runs-on: windows-2016
     strategy:
+      fail-fast: false
       matrix:
         option_SIMD: [ON, OFF]
 
@@ -104,6 +107,7 @@ jobs:
 
     runs-on: windows-latest
     strategy:
+      fail-fast: false
       matrix:
         option_SIMD: [ON, OFF]
 
@@ -124,6 +128,7 @@ jobs:
 
     runs-on: windows-2022
     strategy:
+      fail-fast: false
       matrix:
         option_SIMD: [ON, OFF]
 
