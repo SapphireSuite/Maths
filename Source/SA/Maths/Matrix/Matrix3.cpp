@@ -13,6 +13,7 @@ namespace Sa
 //{ Row Major
 
 	template <>
+	template <>
 	RMat3i RMat3i::operator*(int32_t _scale) const noexcept
 	{
 		Mat3 res;
@@ -30,6 +31,7 @@ namespace Sa
 
 #if SA_INTRISC_SVML
 
+	template <>
 	template <>
 	RMat3i RMat3i::operator/(int32_t _scale) const
 	{
@@ -129,6 +131,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat3i& RMat3i::operator*=(int32_t _scale) noexcept
 	{
 		const __m256i sPack = _mm256_set1_epi32(_scale);
@@ -144,6 +147,7 @@ namespace Sa
 
 #if SA_INTRISC_SVML
 
+	template <>
 	template <>
 	RMat3i& RMat3i::operator/=(int32_t _scale)
 	{
@@ -191,6 +195,7 @@ namespace Sa
 //{ Column Major
 
 	template <>
+	template <>
 	CMat3i CMat3i::operator*(int32_t _scale) const noexcept
 	{
 		Mat3 res;
@@ -208,6 +213,7 @@ namespace Sa
 
 #if SA_INTRISC_SVML
 
+	template <>
 	template <>
 	CMat3i CMat3i::operator/(int32_t _scale) const
 	{
@@ -306,6 +312,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat3i& CMat3i::operator*=(int32_t _scale) noexcept
 	{
 		const __m256i sPack = _mm256_set1_epi32(_scale);
@@ -321,6 +328,7 @@ namespace Sa
 
 #if SA_INTRISC_SVML
 
+	template <>
 	template <>
 	CMat3i& CMat3i::operator/=(int32_t _scale)
 	{
@@ -494,6 +502,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat3f RMat3f::operator*(float _scale) const noexcept
 	{
 		Mat3 res;
@@ -509,6 +518,7 @@ namespace Sa
 		return res;
 	}
 
+	template <>
 	template <>
 	RMat3f RMat3f::operator/(float _scale) const
 	{
@@ -604,6 +614,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat3f& RMat3f::operator*=(float _scale) noexcept
 	{
 		const __m256 sPack = _mm256_set1_ps(_scale);
@@ -618,6 +629,7 @@ namespace Sa
 		return *this;
 	}
 
+	template <>
 	template <>
 	RMat3f& RMat3f::operator/=(float _scale)
 	{
@@ -815,6 +827,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat3f CMat3f::operator*(float _scale) const noexcept
 	{
 		Mat3 res;
@@ -830,6 +843,7 @@ namespace Sa
 		return res;
 	}
 
+	template <>
 	template <>
 	CMat3f CMat3f::operator/(float _scale) const
 	{
@@ -925,6 +939,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat3f& CMat3f::operator*=(float _scale) noexcept
 	{
 		const __m256 sPack = _mm256_set1_ps(_scale);
@@ -939,6 +954,7 @@ namespace Sa
 		return *this;
 	}
 
+	template <>
 	template <>
 	CMat3f& CMat3f::operator/=(float _scale)
 	{
@@ -1182,6 +1198,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat3d RMat3d::operator*(double _scale) const noexcept
 	{
 		Mat3 res;
@@ -1200,6 +1217,7 @@ namespace Sa
 		return res;
 	}
 
+	template <>
 	template <>
 	RMat3d RMat3d::operator/(double _scale) const
 	{
@@ -1319,6 +1337,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat3d& RMat3d::operator*=(double _scale) noexcept
 	{
 		const __m256d sPack = _mm256_set1_pd(_scale);
@@ -1337,6 +1356,7 @@ namespace Sa
 		return *this;
 	}
 
+	template <>
 	template <>
 	RMat3d& RMat3d::operator/=(double _scale)
 	{
@@ -1591,6 +1611,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat3d CMat3d::operator*(double _scale) const noexcept
 	{
 		Mat3 res;
@@ -1609,6 +1630,7 @@ namespace Sa
 		return res;
 	}
 
+	template <>
 	template <>
 	CMat3d CMat3d::operator/(double _scale) const
 	{
@@ -1729,6 +1751,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat3d& CMat3d::operator*=(double _scale) noexcept
 	{
 		const __m256d sPack = _mm256_set1_pd(_scale);
@@ -1747,6 +1770,7 @@ namespace Sa
 		return *this;
 	}
 
+	template <>
 	template <>
 	CMat3d& CMat3d::operator/=(double _scale)
 	{

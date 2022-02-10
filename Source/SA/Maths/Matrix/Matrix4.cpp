@@ -13,6 +13,7 @@ namespace Sa
 //{ Row Major
 
 	template <>
+	template <>
 	RMat4i RMat4i::operator*(int32_t _scale) const noexcept
 	{
 		Mat4 res;
@@ -32,6 +33,7 @@ namespace Sa
 
 #if SA_INTRISC_SVML
 
+	template <>
 	template <>
 	RMat4i RMat4i::operator/(int32_t _scale) const
 	{
@@ -166,6 +168,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat4i& RMat4i::operator*=(int32_t _scale) noexcept
 	{
 		int32_t* const data = Data();
@@ -183,6 +186,7 @@ namespace Sa
 
 #if SA_INTRISC_SVML
 
+	template <>
 	template <>
 	RMat4i& RMat4i::operator/=(int32_t _scale)
 	{
@@ -241,6 +245,7 @@ namespace Sa
 //{ Column Major
 
 	template <>
+	template <>
 	CMat4i CMat4i::operator*(int32_t _scale) const noexcept
 	{
 		Mat4 res;
@@ -260,6 +265,7 @@ namespace Sa
 
 #if SA_INTRISC_SVML
 
+	template <>
 	template <>
 	CMat4i CMat4i::operator/(int32_t _scale) const
 	{
@@ -394,6 +400,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat4i& CMat4i::operator*=(int32_t _scale) noexcept
 	{
 		int32_t* const data = Data();
@@ -411,6 +418,7 @@ namespace Sa
 
 #if SA_INTRISC_SVML
 
+	template <>
 	template <>
 	CMat4i& CMat4i::operator/=(int32_t _scale)
 	{
@@ -960,6 +968,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat4f RMat4f::operator*(float _scale) const noexcept
 	{
 		Mat4 res;
@@ -977,6 +986,7 @@ namespace Sa
 		return res;
 	}
 
+	template <>
 	template <>
 	RMat4f RMat4f::operator/(float _scale) const
 	{
@@ -1107,6 +1117,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat4f& RMat4f::operator*=(float _scale) noexcept
 	{
 		float* const data = Data();
@@ -1124,6 +1135,7 @@ namespace Sa
 		return *this;
 	}
 
+	template <>
 	template <>
 	RMat4f& RMat4f::operator/=(float _scale)
 	{
@@ -1353,6 +1365,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat4f CMat4f::operator*(float _scale) const noexcept
 	{
 		Mat4 res;
@@ -1370,6 +1383,7 @@ namespace Sa
 		return res;
 	}
 
+	template <>
 	template <>
 	CMat4f CMat4f::operator/(float _scale) const
 	{
@@ -1499,6 +1513,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat4f& CMat4f::operator*=(float _scale) noexcept
 	{
 		float* const data = Data();
@@ -1516,6 +1531,7 @@ namespace Sa
 		return *this;
 	}
 
+	template <>
 	template <>
 	CMat4f& CMat4f::operator/=(float _scale)
 	{
@@ -2182,6 +2198,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat4d RMat4d::operator*(double _scale) const noexcept
 	{
 		Mat4 res;
@@ -2206,6 +2223,7 @@ namespace Sa
 		return res;
 	}
 
+	template <>
 	template <>
 	RMat4d RMat4d::operator/(double _scale) const
 	{
@@ -2351,6 +2369,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat4d& RMat4d::operator*=(double _scale) noexcept
 	{
 		double* const data = Data();
@@ -2375,6 +2394,7 @@ namespace Sa
 		return *this;
 	}
 
+	template <>
 	template <>
 	RMat4d& RMat4d::operator/=(double _scale)
 	{
@@ -2642,6 +2662,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat4d CMat4d::operator*(double _scale) const noexcept
 	{
 		Mat4 res;
@@ -2666,6 +2687,7 @@ namespace Sa
 		return res;
 	}
 
+	template <>
 	template <>
 	CMat4d CMat4d::operator/(double _scale) const
 	{
@@ -2812,6 +2834,7 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat4d& CMat4d::operator*=(double _scale) noexcept
 	{
 		double* const data = Data();
@@ -2836,6 +2859,7 @@ namespace Sa
 		return *this;
 	}
 
+	template <>
 	template <>
 	CMat4d& CMat4d::operator/=(double _scale)
 	{

@@ -708,9 +708,11 @@ namespace Sa
 //{ Row Major
 
 	template <>
+	template <>
 	RMat4i RMat4i::operator*(int32_t _scale) const noexcept;
 
 #if SA_INTRISC_SVML
+	template <>
 	template <>
 	RMat4i RMat4i::operator/(int32_t _scale) const;
 #endif
@@ -733,9 +735,11 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat4i& RMat4i::operator*=(int32_t _scale) noexcept;
 
 #if SA_INTRISC_SVML
+	template <>
 	template <>
 	RMat4i& RMat4i::operator/=(int32_t _scale);
 #endif
@@ -751,9 +755,11 @@ namespace Sa
 //{ Column Major
 
 	template <>
+	template <>
 	CMat4i CMat4i::operator*(int32_t _scale) const noexcept;
 
 #if SA_INTRISC_SVML
+	template <>
 	template <>
 	CMat4i CMat4i::operator/(int32_t _scale) const;
 #endif
@@ -776,9 +782,11 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat4i& CMat4i::operator*=(int32_t _scale) noexcept;
 
 #if SA_INTRISC_SVML
+	template <>
 	template <>
 	CMat4i& CMat4i::operator/=(int32_t _scale);
 #endif
@@ -813,8 +821,10 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat4f RMat4f::operator*(float _scale) const noexcept;
 
+	template <>
 	template <>
 	RMat4f RMat4f::operator/(float _scale) const;
 
@@ -836,8 +846,10 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat4f& RMat4f::operator*=(float _scale) noexcept;
 
+	template <>
 	template <>
 	RMat4f& RMat4f::operator/=(float _scale);
 
@@ -871,8 +883,10 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat4f CMat4f::operator*(float _scale) const noexcept;
 
+	template <>
 	template <>
 	CMat4f CMat4f::operator/(float _scale) const;
 
@@ -894,8 +908,10 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat4f& CMat4f::operator*=(float _scale) noexcept;
 
+	template <>
 	template <>
 	CMat4f& CMat4f::operator/=(float _scale);
 
@@ -933,8 +949,10 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat4d RMat4d::operator*(double _scale) const noexcept;
 
+	template <>
 	template <>
 	RMat4d RMat4d::operator/(double _scale) const;
 
@@ -956,8 +974,10 @@ namespace Sa
 
 
 	template <>
+	template <>
 	RMat4d& RMat4d::operator*=(double _scale) noexcept;
 
+	template <>
 	template <>
 	RMat4d& RMat4d::operator/=(double _scale);
 
@@ -991,8 +1011,10 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat4d CMat4d::operator*(double _scale) const noexcept;
 
+	template <>
 	template <>
 	CMat4d CMat4d::operator/(double _scale) const;
 
@@ -1014,8 +1036,10 @@ namespace Sa
 
 
 	template <>
+	template <>
 	CMat4d& CMat4d::operator*=(double _scale) noexcept;
 
+	template <>
 	template <>
 	CMat4d& CMat4d::operator/=(double _scale);
 
