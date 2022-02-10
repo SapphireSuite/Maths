@@ -300,7 +300,7 @@ namespace Sa
 
 
 	template <>
-	Quatf operator/(float _lhs, const Quatf& _rhs) noexcept
+	Quatf operator/(float _lhs, const Quatf& _rhs)
 	{
 		Quatf res;
 
