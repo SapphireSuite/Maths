@@ -105,8 +105,7 @@ namespace Sa
 	template <typename T>
 	T& Vec2<T>::operator[](uint32_t _index)
 	{
-		// TODO: Debug.
-		//SA_ASSERT(OutOfRange, Maths, _index, 0u, 1u);
+		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 1u);
 
 		return Data()[_index];
 	}
@@ -114,8 +113,7 @@ namespace Sa
 	template <typename T>
 	const T& Vec2<T>::operator[](uint32_t _index) const
 	{
-		// TODO: Debug.
-		//SA_ASSERT(OutOfRange, Maths, _index, 0u, 1u);
+		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 1u);
 
 		return Data()[_index];
 	}
@@ -125,7 +123,7 @@ namespace Sa
 //{ Length
 
 	template <typename T>
-	constexpr T Vec2<T>::Length() const noexcept
+	constexpr T Vec2<T>::Length() const
 	{
 		return Maths::Sqrt(SqrLength());
 	}
@@ -138,10 +136,9 @@ namespace Sa
 
 
 	template <typename T>
-	Vec2<T>& Vec2<T>::Normalize() noexcept
+	Vec2<T>& Vec2<T>::Normalize()
 	{
-		// TODO: Debug
-		//SA_WARN(!IsZero(), Maths, L"Normalize null vector!");
+		SA_ASSERT(NotEquals, SA/Maths, *this, Zero, L"Normalize null vector!");
 
 		const T norm = Length();
 
@@ -152,7 +149,7 @@ namespace Sa
 	}
 
 	template <typename T>
-	Vec2<T> Vec2<T>::GetNormalized() const noexcept
+	Vec2<T> Vec2<T>::GetNormalized() const
 	{
 		Vec2 res = *this;
 		res.Normalize();
@@ -185,8 +182,7 @@ namespace Sa
 	template <typename T>
 	Vec2<T> Vec2<T>::ProjectOnToNormal(const Vec2& _normal) const noexcept
 	{
-		// TODO: Debug.
-		//SA_WARN(_normal.IsNormalized(), Maths, L"Normal should be normalized or use ProjectOnTo() instead!");
+		SA_WARN(_normal.IsNormalized(), SA/Maths, L"Normal should be normalized or use ProjectOnTo() instead!");
 
 		return Dot(*this, _normal) *  _normal;
 	}
@@ -234,7 +230,7 @@ namespace Sa
 //{ Dist/Dir
 
 	template <typename T>
-	constexpr T Vec2<T>::Dist(const Vec2& _start, const Vec2& _end) noexcept
+	constexpr T Vec2<T>::Dist(const Vec2& _start, const Vec2& _end)
 	{
 		return (_start - _end).Length();
 	}
@@ -252,7 +248,7 @@ namespace Sa
 	}
 
 	template <typename T>
-	constexpr Vec2<T> Vec2<T>::DirN(const Vec2& _start, const Vec2& _end) noexcept
+	constexpr Vec2<T> Vec2<T>::DirN(const Vec2& _start, const Vec2& _end)
 	{
 		return Dir(_start, _end).GetNormalized();
 	}
@@ -302,10 +298,9 @@ namespace Sa
 	}
 
 	template <typename T>
-	Vec2<T> Vec2<T>::operator/(T _scale) const noexcept
+	Vec2<T> Vec2<T>::operator/(T _scale) const
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale vector by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale vector by 0!");
 
 		return Vec2(x / _scale, y / _scale);
 	}
@@ -329,11 +324,10 @@ namespace Sa
 	}
 
 	template <typename T>
-	Vec2<T> Vec2<T>::operator/(const Vec2& _rhs) const noexcept
+	Vec2<T> Vec2<T>::operator/(const Vec2& _rhs) const
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_rhs.x), Maths, L"Divide X Axis value is 0!");
-		//SA_WARN(!Sa::Equals0(_rhs.y), Maths, L"Divide Y Axis value is 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.x, L"Divide X Axis value is 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.y, L"Divide Y Axis value is 0!");
 
 		return Vec2(x / _rhs.x, y / _rhs.y);
 	}
@@ -361,10 +355,9 @@ namespace Sa
 	}
 
 	template <typename T>
-	Vec2<T>& Vec2<T>::operator/=(T _scale) noexcept
+	Vec2<T>& Vec2<T>::operator/=(T _scale)
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale vector by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale vector by 0!");
 		
 		x /= _scale;
 		y /= _scale;
@@ -400,11 +393,10 @@ namespace Sa
 	}
 
 	template <typename T>
-	Vec2<T> Vec2<T>::operator/=(const Vec2& _rhs) noexcept
+	Vec2<T> Vec2<T>::operator/=(const Vec2& _rhs)
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_rhs.x), Maths, L"Divide X Axis value is 0!");
-		//SA_WARN(!Sa::Equals0(_rhs.y), Maths, L"Divide Y Axis value is 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.x, L"Divide X Axis value is 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.y, L"Divide Y Axis value is 0!");
 
 		x /= _rhs.x;
 		y /= _rhs.y;
@@ -434,11 +426,10 @@ namespace Sa
 	}
 
 	template <typename T>
-	constexpr Vec2<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec2<T>& _rhs) noexcept
+	constexpr Vec2<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec2<T>& _rhs)
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_rhs.x), Maths, L"Inverse scale X Axis by 0!");
-		//SA_WARN(!Sa::Equals0(_rhs.y), Maths, L"Inverse scale Y Axis by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.x, L"Inverse scale X Axis by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.y, L"Inverse scale Y Axis by 0!");
 
 		return Vec2<T>(_lhs / _rhs.x, _lhs / _rhs.y);
 	}

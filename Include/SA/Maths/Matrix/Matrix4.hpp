@@ -7,6 +7,7 @@
 
 #include <limits>
 
+#include <SA/Maths/Debug.hpp>
 #include <SA/Maths/Config.hpp>
 
 #include <SA/Maths/Matrix/Matrix4Base.hpp>
@@ -291,14 +292,14 @@ namespace Sa
 		*
 		*	\return self inversed matrix.
 		*/
-		Mat4& Inverse() noexcept;
+		Mat4& Inverse();
 
 		/**
 		*	\brief \b Inverse this matrix.
 		*
 		*	\return new inversed matrix.
 		*/
-		Mat4 GetInversed() const noexcept;
+		Mat4 GetInversed() const;
 
 //}
 
@@ -479,7 +480,7 @@ namespace Sa
 		*
 		*	\return new matrix inverse-scaled.
 		*/
-		Mat4 operator/(T _scale) const noexcept;
+		Mat4 operator/(T _scale) const;
 
 		/**
 		*	\brief \b Add term by term matrix values.
@@ -515,7 +516,7 @@ namespace Sa
 		*
 		*	\return new matrix result.
 		*/
-		Mat4 operator/(const Mat4& _rhs) const noexcept;
+		Mat4 operator/(const Mat4& _rhs) const;
 
 
 		/**
@@ -555,7 +556,7 @@ namespace Sa
 		*
 		*	\return self matrix inverse-scaled.
 		*/
-		Mat4& operator/=(T _scale) noexcept;
+		Mat4& operator/=(T _scale);
 
 		/**
 		*	\brief \b Add term by term matrix values.
@@ -591,7 +592,7 @@ namespace Sa
 		*
 		*	\return self matrix result.
 		*/
-		Mat4& operator/=(const Mat4& _rhs) noexcept;
+		Mat4& operator/=(const Mat4& _rhs);
 
 //}
 
@@ -639,7 +640,7 @@ namespace Sa
 	*	\return new matrix inverse-scaled.
 	*/
 	template <typename T, MatrixMajor major>
-	Mat4<T, major> operator/(typename std::remove_cv<T>::type _lhs, const Mat4<T, major>& _rhs) noexcept;
+	Mat4<T, major> operator/(typename std::remove_cv<T>::type _lhs, const Mat4<T, major>& _rhs);
 
 //{ Aliases
 
@@ -699,7 +700,7 @@ namespace Sa
 
 #if SA_INTRISC_SVML
 	template <>
-	RMat4i RMat4i::operator/(int32_t _scale) const noexcept;
+	RMat4i RMat4i::operator/(int32_t _scale) const;
 #endif
 
 	template <>
@@ -724,7 +725,7 @@ namespace Sa
 
 #if SA_INTRISC_SVML
 	template <>
-	RMat4i& RMat4i::operator/=(int32_t _scale) noexcept;
+	RMat4i& RMat4i::operator/=(int32_t _scale);
 #endif
 
 	template <>
@@ -742,7 +743,7 @@ namespace Sa
 
 #if SA_INTRISC_SVML
 	template <>
-	CMat4i CMat4i::operator/(int32_t _scale) const noexcept;
+	CMat4i CMat4i::operator/(int32_t _scale) const;
 #endif
 
 	template <>
@@ -767,7 +768,7 @@ namespace Sa
 
 #if SA_INTRISC_SVML
 	template <>
-	CMat4i& CMat4i::operator/=(int32_t _scale) noexcept;
+	CMat4i& CMat4i::operator/=(int32_t _scale);
 #endif
 
 	template <>
@@ -788,7 +789,7 @@ namespace Sa
 	float RMat4f::Determinant() const noexcept;
 
 	template <>
-	RMat4f RMat4f::GetInversed() const noexcept;
+	RMat4f RMat4f::GetInversed() const;
 
 
 	template <>
@@ -803,7 +804,7 @@ namespace Sa
 	RMat4f RMat4f::operator*(float _scale) const noexcept;
 
 	template <>
-	RMat4f RMat4f::operator/(float _scale) const noexcept;
+	RMat4f RMat4f::operator/(float _scale) const;
 
 	template <>
 	RMat4f RMat4f::operator+(const RMat4f& _rhs) const noexcept;
@@ -826,7 +827,7 @@ namespace Sa
 	RMat4f& RMat4f::operator*=(float _scale) noexcept;
 
 	template <>
-	RMat4f& RMat4f::operator/=(float _scale) noexcept;
+	RMat4f& RMat4f::operator/=(float _scale);
 
 	template <>
 	RMat4f& RMat4f::operator+=(const RMat4f& _rhs) noexcept;
@@ -836,7 +837,7 @@ namespace Sa
 
 
 	template <>
-	RMat4f operator/(float _lhs, const RMat4f& _rhs) noexcept;
+	RMat4f operator/(float _lhs, const RMat4f& _rhs);
 
 //}
 
@@ -846,7 +847,7 @@ namespace Sa
 	float CMat4f::Determinant() const noexcept;
 
 	template <>
-	CMat4f CMat4f::GetInversed() const noexcept;
+	CMat4f CMat4f::GetInversed() const;
 
 
 	template <>
@@ -861,7 +862,7 @@ namespace Sa
 	CMat4f CMat4f::operator*(float _scale) const noexcept;
 
 	template <>
-	CMat4f CMat4f::operator/(float _scale) const noexcept;
+	CMat4f CMat4f::operator/(float _scale) const;
 
 	template <>
 	CMat4f CMat4f::operator+(const CMat4f& _rhs) const noexcept;
@@ -884,7 +885,7 @@ namespace Sa
 	CMat4f& CMat4f::operator*=(float _scale) noexcept;
 
 	template <>
-	CMat4f& CMat4f::operator/=(float _scale) noexcept;
+	CMat4f& CMat4f::operator/=(float _scale);
 
 	template <>
 	CMat4f& CMat4f::operator+=(const CMat4f& _rhs) noexcept;
@@ -894,7 +895,7 @@ namespace Sa
 
 
 	template <>
-	CMat4f operator/(float _lhs, const CMat4f& _rhs) noexcept;
+	CMat4f operator/(float _lhs, const CMat4f& _rhs);
 
 //}
 
@@ -908,7 +909,7 @@ namespace Sa
 	double RMat4d::Determinant() const noexcept;
 
 	template <>
-	RMat4d RMat4d::GetInversed() const noexcept;
+	RMat4d RMat4d::GetInversed() const;
 
 
 	template <>
@@ -923,7 +924,7 @@ namespace Sa
 	RMat4d RMat4d::operator*(double _scale) const noexcept;
 
 	template <>
-	RMat4d RMat4d::operator/(double _scale) const noexcept;
+	RMat4d RMat4d::operator/(double _scale) const;
 
 	template <>
 	RMat4d RMat4d::operator+(const RMat4d& _rhs) const noexcept;
@@ -946,7 +947,7 @@ namespace Sa
 	RMat4d& RMat4d::operator*=(double _scale) noexcept;
 
 	template <>
-	RMat4d& RMat4d::operator/=(double _scale) noexcept;
+	RMat4d& RMat4d::operator/=(double _scale);
 
 	template <>
 	RMat4d& RMat4d::operator+=(const RMat4d& _rhs) noexcept;
@@ -956,7 +957,7 @@ namespace Sa
 
 
 	template <>
-	RMat4d operator/(double _lhs, const RMat4d& _rhs) noexcept;
+	RMat4d operator/(double _lhs, const RMat4d& _rhs);
 
 //}
 
@@ -966,7 +967,7 @@ namespace Sa
 	double CMat4d::Determinant() const noexcept;
 
 	template <>
-	CMat4d CMat4d::GetInversed() const noexcept;
+	CMat4d CMat4d::GetInversed() const;
 
 
 	template <>
@@ -981,7 +982,7 @@ namespace Sa
 	CMat4d CMat4d::operator*(double _scale) const noexcept;
 
 	template <>
-	CMat4d CMat4d::operator/(double _scale) const noexcept;
+	CMat4d CMat4d::operator/(double _scale) const;
 
 	template <>
 	CMat4d CMat4d::operator+(const CMat4d& _rhs) const noexcept;
@@ -1004,7 +1005,7 @@ namespace Sa
 	CMat4d& CMat4d::operator*=(double _scale) noexcept;
 
 	template <>
-	CMat4d& CMat4d::operator/=(double _scale) noexcept;
+	CMat4d& CMat4d::operator/=(double _scale);
 
 	template <>
 	CMat4d& CMat4d::operator+=(const CMat4d& _rhs) noexcept;
@@ -1014,7 +1015,7 @@ namespace Sa
 
 
 	template <>
-	CMat4d operator/(double _lhs, const CMat4d& _rhs) noexcept;
+	CMat4d operator/(double _lhs, const CMat4d& _rhs);
 
 //}
 

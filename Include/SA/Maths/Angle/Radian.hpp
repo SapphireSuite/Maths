@@ -7,6 +7,8 @@
 
 #include <cmath>
 
+#include <SA/Maths/Debug.hpp>
+
 #include <SA/Maths/Angle/Constants.hpp>
 #include <SA/Maths/Algorithms/Equals.hpp>
 

@@ -7,6 +7,7 @@
 
 #include <cstdint>
 
+#include <SA/Maths/Debug.hpp>
 #include <SA/Maths/Config.hpp>
 
 #include <SA/Maths/Angle/Degree.hpp>
@@ -210,7 +211,7 @@ namespace Sa
 		*
 		*	\return Length of this quaternion.
 		*/
-		T Length() const noexcept;
+		T Length() const;
 
 		/**
 		*	\brief \e Getter of the <b> Squared Length </b> of this quaternion.
@@ -225,14 +226,14 @@ namespace Sa
 		*
 		*	\return self quaternion normalized.
 		*/
-		Quat& Normalize() noexcept;
+		Quat& Normalize();
 
 		/**
 		*	\brief \b Normalize this quaternion.
 		*
 		*	\return new normalized quaternion.
 		*/
-		Quat GetNormalized() const noexcept;
+		Quat GetNormalized() const;
 
 		/**
 		*	\brief Whether this quaternion is normalized.
@@ -431,7 +432,7 @@ namespace Sa
 		*
 		*	\return interpolation between _start and _end. return _start when _alpha == 0.0f and _end when _alpha == 1.0f.
 		*/
-		static Quat Lerp(const Quat& _start, const Quat& _end, float _alpha) noexcept;
+		static Quat Lerp(const Quat& _start, const Quat& _end, float _alpha);
 
 		/**
 		*	\brief <b> Unclamped Lerp </b> from _start to _end at _alpha.
@@ -446,7 +447,7 @@ namespace Sa
 		*
 		*	\return interpolation between _start and _end. return _start when _alpha == 0.0f and _end when _alpha == 1.0f.
 		*/
-		static Quat LerpUnclamped(const Quat& _start, const Quat& _end, float _alpha) noexcept;
+		static Quat LerpUnclamped(const Quat& _start, const Quat& _end, float _alpha);
 
 		/**
 		*	\brief <b> Clamped SLerp </b> from _start to _end at _alpha.
@@ -461,7 +462,7 @@ namespace Sa
 		*
 		*	\return interpolation between _start and _end. return _start when _alpha == 0.0f and _end when _alpha == 1.0f.
 		*/
-		static Quat SLerp(const Quat& _start, const Quat& _end, float _alpha) noexcept;
+		static Quat SLerp(const Quat& _start, const Quat& _end, float _alpha);
 
 		/**
 		*	\brief <b> Unclamped SLerp </b> from _start to _end at _alpha.
@@ -476,7 +477,7 @@ namespace Sa
 		*
 		*	\return interpolation between _start and _end. return _start when _alpha == 0.0f and _end when _alpha == 1.0f.
 		*/
-		static Quat SLerpUnclamped(const Quat& _start, const Quat& _end, float _alpha) noexcept;
+		static Quat SLerpUnclamped(const Quat& _start, const Quat& _end, float _alpha);
 
 //}
 
@@ -520,7 +521,7 @@ namespace Sa
 		*
 		*	\return new quaternion inverse-scaled.
 		*/
-		Quat operator/(T _scale) const noexcept;
+		Quat operator/(T _scale) const;
 
 		/**
 		*	\brief \b Add term by term quaternion values.
@@ -615,7 +616,7 @@ namespace Sa
 		*
 		*	\return self quaternion inverse-scaled.
 		*/
-		Quat& operator/=(T _scale) noexcept;
+		Quat& operator/=(T _scale);
 
 		/**
 		*	\brief \b Add term by term quaternion values.
@@ -695,7 +696,7 @@ namespace Sa
 	*	\return new quaternion inverse-scaled.
 	*/
 	template <typename T>
-	constexpr Quat<T> operator/(typename std::remove_cv<T>::type _lhs, const Quat<T>& _rhs) noexcept;
+	constexpr Quat<T> operator/(typename std::remove_cv<T>::type _lhs, const Quat<T>& _rhs);
 
 	/**
 	*	\brief \b Rotate _lhs vector by _rhs quaternion.
@@ -757,10 +758,10 @@ namespace Sa
 	float Quatf::SqrLength() const noexcept;
 
 	template <>
-	Quatf& Quatf::Normalize() noexcept;
+	Quatf& Quatf::Normalize();
 
 	template <>
-	Quatf Quatf::GetNormalized() const noexcept;
+	Quatf Quatf::GetNormalized() const;
 
 
 	template <>
@@ -781,7 +782,7 @@ namespace Sa
 	Quatf Quatf::operator*(float _scale) const noexcept;
 
 	template <>
-	Quatf Quatf::operator/(float _scale) const noexcept;
+	Quatf Quatf::operator/(float _scale) const;
 
 	template <>
 	Quatf Quatf::operator+(const Quatf& _rhs) const noexcept;
@@ -794,7 +795,7 @@ namespace Sa
 	Quatf& Quatf::operator*=(float _scale) noexcept;
 
 	template <>
-	Quatf& Quatf::operator/=(float _scale) noexcept;
+	Quatf& Quatf::operator/=(float _scale);
 
 	template <>
 	Quatf& Quatf::operator+=(const Quatf& _rhs) noexcept;
@@ -814,10 +815,10 @@ namespace Sa
 	double Quatd::SqrLength() const noexcept;
 
 	template <>
-	Quatd& Quatd::Normalize() noexcept;
+	Quatd& Quatd::Normalize();
 
 	template <>
-	Quatd Quatd::GetNormalized() const noexcept;
+	Quatd Quatd::GetNormalized() const;
 
 
 	template <>
@@ -839,7 +840,7 @@ namespace Sa
 	Quatd Quatd::operator*(double _scale) const noexcept;
 
 	template <>
-	Quatd Quatd::operator/(double _scale) const noexcept;
+	Quatd Quatd::operator/(double _scale) const;
 
 	template <>
 	Quatd Quatd::operator+(const Quatd& _rhs) const noexcept;
@@ -852,7 +853,7 @@ namespace Sa
 	Quatd& Quatd::operator*=(double _scale) noexcept;
 
 	template <>
-	Quatd& Quatd::operator/=(double _scale) noexcept;
+	Quatd& Quatd::operator/=(double _scale);
 
 	template <>
 	Quatd& Quatd::operator+=(const Quatd& _rhs) noexcept;
@@ -862,7 +863,7 @@ namespace Sa
 
 
 	template <>
-	Quatd operator/(double _lhs, const Quatd& _rhs) noexcept;
+	Quatd operator/(double _lhs, const Quatd& _rhs);
 
 #endif
 

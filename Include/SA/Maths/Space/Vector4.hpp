@@ -8,6 +8,8 @@
 #include <cstdint>
 #include <limits>
 
+#include <SA/Maths/Debug.hpp>
+
 #include <SA/Maths/Algorithms/Equals.hpp>
 
 

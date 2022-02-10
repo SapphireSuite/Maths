@@ -7,6 +7,8 @@
 
 #include <cmath>
 
+#include <SA/Maths/Debug.hpp>
+
 /**
 *	\file Sqrt.hpp
 * 
@@ -33,8 +35,7 @@ namespace Sa
 		template <typename T>
 		T Sqrt(T _in)
 		{
-			// TODO: Debug.
-			//SA_WARN(_in >= T(0), Maths, L"Compute square root of a negative number!");
+			SA_ASSERT(Default, SA/Maths, _in >= T(0), L"Compute square root of a negative number!");
 
 			return std::sqrt(_in);
 		}

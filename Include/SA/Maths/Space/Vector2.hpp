@@ -7,6 +7,8 @@
 
 #include <cstdint>
 
+#include <SA/Maths/Debug.hpp>
+
 #include <SA/Maths/Angle/Degree.hpp>
 #include <SA/Maths/Algorithms/Cos.hpp>
 #include <SA/Maths/Algorithms/Tan.hpp>
@@ -203,7 +205,7 @@ namespace Sa
 		*
 		*	\return Length of this vector.
 		*/
-		constexpr T Length() const noexcept;
+		constexpr T Length() const;
 
 		/**
 		*	\brief \e Getter of the <b> Squared Length </b> of this vector.
@@ -218,14 +220,14 @@ namespace Sa
 		*
 		*	\return self vector normalized.
 		*/
-		Vec2& Normalize() noexcept;
+		Vec2& Normalize();
 
 		/**
 		*	\brief \b Normalize this vector.
 		*
 		*	\return new normalized vector.
 		*/
-		Vec2 GetNormalized() const noexcept;
+		Vec2 GetNormalized() const;
 
 		/**
 		*	\brief Whether this vector is normalized.
@@ -341,7 +343,7 @@ namespace Sa
 		*
 		*	\return <b> Distance </b> between _start and _end.
 		*/
-		static constexpr T Dist(const Vec2& _start, const Vec2& _end) noexcept;
+		static constexpr T Dist(const Vec2& _start, const Vec2& _end);
 
 		/**
 		*	\brief \e Compute the <b> Squared Distance </b> between _start and _end.
@@ -373,7 +375,7 @@ namespace Sa
 		*
 		*	\return <b> Normalized Direction </b> from _start to _end.
 		*/
-		static constexpr Vec2 DirN(const Vec2& _start, const Vec2& _end) noexcept;
+		static constexpr Vec2 DirN(const Vec2& _start, const Vec2& _end);
 
 //}
 
@@ -472,7 +474,7 @@ namespace Sa
 		*
 		*	\return new vector inverse-scaled.
 		*/
-		Vec2 operator/(T _scale) const noexcept;
+		Vec2 operator/(T _scale) const;
 
 		/**
 		*	\brief \b Add term by term vector values.
@@ -508,7 +510,7 @@ namespace Sa
 		*
 		*	\return new vector result.
 		*/
-		Vec2 operator/(const Vec2& _rhs) const noexcept;
+		Vec2 operator/(const Vec2& _rhs) const;
 
 		/**
 		*	\brief \e Compute the <b> Dot product </b> between this and _rhs.
@@ -545,7 +547,7 @@ namespace Sa
 		*
 		*	\return self vector inverse-scaled.
 		*/
-		Vec2& operator/=(T _scale) noexcept;
+		Vec2& operator/=(T _scale);
 
 		/**
 		*	\brief \b Add term by term vector values.
@@ -581,7 +583,7 @@ namespace Sa
 		*
 		*	\return self vector result.
 		*/
-		Vec2 operator/=(const Vec2& _rhs) noexcept;
+		Vec2 operator/=(const Vec2& _rhs);
 
 //}
 
@@ -621,7 +623,7 @@ namespace Sa
 	*	\return new vector inverse-scaled.
 	*/
 	template <typename T>
-	constexpr Vec2<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec2<T>& _rhs) noexcept;
+	constexpr Vec2<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec2<T>& _rhs);
 
 
 //{ Aliases
