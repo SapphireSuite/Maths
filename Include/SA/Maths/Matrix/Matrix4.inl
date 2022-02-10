@@ -644,26 +644,28 @@ namespace Sa
 	}
 
 	template <typename T, MatrixMajor major>
-	Mat4<T, major> Mat4<T, major>::operator*(T _scale) const noexcept
+	template<typename TIn>
+	Mat4<T, major> Mat4<T, major>::operator*(TIn _scale) const noexcept
 	{
 		return Mat4(
-			e00 * _scale, e01 * _scale, e02 * _scale, e03 * _scale,
-			e10 * _scale, e11 * _scale, e12 * _scale, e13 * _scale,
-			e20 * _scale, e21 * _scale, e22 * _scale, e23 * _scale,
-			e30 * _scale, e31 * _scale, e32 * _scale, e33 * _scale
+			(T)(e00 * _scale), (T)(e01 * _scale), (T)(e02 * _scale), (T)(e03 * _scale),
+			(T)(e10 * _scale), (T)(e11 * _scale), (T)(e12 * _scale), (T)(e13 * _scale),
+			(T)(e20 * _scale), (T)(e21 * _scale), (T)(e22 * _scale), (T)(e23 * _scale),
+			(T)(e30 * _scale), (T)(e31 * _scale), (T)(e32 * _scale), (T)(e33 * _scale)
 		);
 	}
 
 	template <typename T, MatrixMajor major>
-	Mat4<T, major> Mat4<T, major>::operator/(T _scale) const
+	template<typename TIn>
+	Mat4<T, major> Mat4<T, major>::operator/(TIn _scale) const
 	{
 		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale matrix by 0 (division by 0)!");
 
 		return Mat4(
-			e00 / _scale, e01 / _scale, e02 / _scale, e03 / _scale,
-			e10 / _scale, e11 / _scale, e12 / _scale, e13 / _scale,
-			e20 / _scale, e21 / _scale, e22 / _scale, e23 / _scale,
-			e30 / _scale, e31 / _scale, e32 / _scale, e33 / _scale
+			(T)(e00 / _scale), (T)(e01 / _scale), (T)(e02 / _scale), (T)(e03 / _scale),
+			(T)(e10 / _scale), (T)(e11 / _scale), (T)(e12 / _scale), (T)(e13 / _scale),
+			(T)(e20 / _scale), (T)(e21 / _scale), (T)(e22 / _scale), (T)(e23 / _scale),
+			(T)(e30 / _scale), (T)(e31 / _scale), (T)(e32 / _scale), (T)(e33 / _scale)
 		);
 	}
 
@@ -745,7 +747,8 @@ namespace Sa
 
 
 	template <typename T, MatrixMajor major>
-	Mat4<T, major>& Mat4<T, major>::operator*=(T _scale) noexcept
+	template<typename TIn>
+	Mat4<T, major>& Mat4<T, major>::operator*=(TIn _scale) noexcept
 	{
 		e00 *= _scale;
 		e01 *= _scale;
@@ -771,7 +774,8 @@ namespace Sa
 	}
 
 	template <typename T, MatrixMajor major>
-	Mat4<T, major>& Mat4<T, major>::operator/=(T _scale)
+	template<typename TIn>
+	Mat4<T, major>& Mat4<T, major>::operator/=(TIn _scale)
 	{
 		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale matrix by 0 (division by 0)!");
 
@@ -898,14 +902,14 @@ namespace Sa
 #endif
 
 
-	template <typename T, MatrixMajor major>
-	Mat4<T, major> operator*(typename std::remove_cv<T>::type _lhs, const Mat4<T, major>& _rhs) noexcept
+	template <typename TIn, typename T, MatrixMajor major>
+	Mat4<T, major> operator*(TIn _lhs, const Mat4<T, major>& _rhs) noexcept
 	{
 		return _rhs * _lhs;
 	}
 
-	template <typename T, MatrixMajor major>
-	Mat4<T, major> operator/(typename std::remove_cv<T>::type _lhs, const Mat4<T, major>& _rhs)
+	template <typename TIn, typename T, MatrixMajor major>
+	Mat4<T, major> operator/(TIn _lhs, const Mat4<T, major>& _rhs)
 	{
 		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e00, L"Inverse scale matrix e00 == 0!");
 		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e01, L"Inverse scale matrix e01 == 0!");

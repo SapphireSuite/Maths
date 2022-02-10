@@ -467,20 +467,24 @@ namespace Sa
 		/**
 		*	\brief \b Scale each matrix component by _scale.
 		*
+		*	\tparam TIn			Type of the input scale.
 		*	\param[in] _scale	Scale value to apply on all components.
 		*
 		*	\return new matrix scaled.
 		*/
-		Mat4 operator*(T _scale) const noexcept;
+		template<typename TIn>
+		Mat4 operator*(TIn _scale) const noexcept;
 
 		/**
 		*	\brief <b> Inverse Scale </b> each matrix component by _scale.
 		*
+		*	\tparam TIn			Type of the input scale.
 		*	\param[in] _scale	Inverse scale value to apply on all components.
 		*
 		*	\return new matrix inverse-scaled.
 		*/
-		Mat4 operator/(T _scale) const;
+		template<typename TIn>
+		Mat4 operator/(TIn _scale) const;
 
 		/**
 		*	\brief \b Add term by term matrix values.
@@ -543,20 +547,24 @@ namespace Sa
 		/**
 		*	\brief \b Scale each matrix component by _scale.
 		*
+		*	\tparam TIn			Type of the input scale.
 		*	\param[in] _scale	Scale value to apply on all components.
 		*
 		*	\return self matrix scaled.
 		*/
-		Mat4& operator*=(T _scale) noexcept;
+		template<typename TIn>
+		Mat4& operator*=(TIn _scale) noexcept;
 
 		/**
 		*	\brief <b> Inverse Scale </b> each matrix component by _scale.
 		*
+		*	\tparam TIn			Type of the input scale.
 		*	\param[in] _scale	Inverse scale value to apply on all components.
 		*
 		*	\return self matrix inverse-scaled.
 		*/
-		Mat4& operator/=(T _scale);
+		template<typename TIn>
+		Mat4& operator/=(TIn _scale);
 
 		/**
 		*	\brief \b Add term by term matrix values.
@@ -623,24 +631,28 @@ namespace Sa
 	/**
 	*	\brief \b Scale each matrix components by _lhs.
 	*
+	*	\tparam TIn			Type of the input scale.
+	* 
 	*	\param[in] _lhs		Scale value to apply on all components.
 	*	\param[in] _rhs		Matrix to scale.
 	*
 	*	\return new matrix scaled.
 	*/
-	template <typename T, MatrixMajor major>
-	Mat4<T, major> operator*(typename std::remove_cv<T>::type _lhs, const Mat4<T, major>& _rhs) noexcept;
+	template <typename TIn, typename T, MatrixMajor major>
+	Mat4<T, major> operator*(TIn _lhs, const Mat4<T, major>& _rhs) noexcept;
 
 	/**
 	*	\brief <b> Inverse Scale </b> each matrix components by _lhs.
+	* 
+	*	\tparam TIn			Type of the input scale.
 	*
 	*	\param[in] _lhs		Inverse scale value to apply on all components.
 	*	\param[in] _rhs		Matrix to scale.
 	*
 	*	\return new matrix inverse-scaled.
 	*/
-	template <typename T, MatrixMajor major>
-	Mat4<T, major> operator/(typename std::remove_cv<T>::type _lhs, const Mat4<T, major>& _rhs);
+	template <typename TIn, typename T, MatrixMajor major>
+	Mat4<T, major> operator/(TIn _lhs, const Mat4<T, major>& _rhs);
 
 //{ Aliases
 
