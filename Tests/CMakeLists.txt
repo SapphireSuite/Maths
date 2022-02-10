@@ -22,6 +22,34 @@ endif()
 
 
 
+# Options
+option(SA_MATHS_TEST_LOGGER_INTEGRATION "Should build tests logger integration" OFF)
+
+if(SA_MATHS_TEST_LOGGER_INTEGRATION)
+
+	# Fetch SA_Logger.
+	if(NOT TARGET SA_Logger)
+
+		message("Fetching SA_Logger...")
+
+		include(FetchContent)
+
+		FetchContent_Declare(
+			SA_Logger
+			GIT_REPOSITORY https://github.com/SapphireSuite/Logger.git
+			GIT_TAG        main
+		)
+
+		FetchContent_MakeAvailable(SA_Logger)
+
+		target_link_libraries(SA_Maths PUBLIC SA_Logger)
+
+	endif()
+
+endif()
+
+
+
 # Entrypoints
 
 add_subdirectory(Prototype)

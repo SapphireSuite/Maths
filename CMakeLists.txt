@@ -28,10 +28,19 @@ file(GLOB_RECURSE SA_MATHS_SOURCES "Source/*")
 ## Static library.
 add_library(SA_Maths STATIC ${SA_MATHS_SOURCES})
 
+
+## Link dependencies.
+### Add SA Logger if added to CMake build tree.
+if(TARGET SA_Logger)
+	target_link_libraries(SA_Maths PUBLIC SA_Logger)
+endif()
+
+
 ## Include directories
 
 target_include_directories(SA_Maths PUBLIC Include)
 target_include_directories(SA_Maths PRIVATE Include/SA)
+
 
 ## Compile features
 
