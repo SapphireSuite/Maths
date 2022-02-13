@@ -17,7 +17,7 @@
           "type": "BOOL"
         },
         {
-          "name": "SA_MATHS_TEST_LOGGER_INTEGRATION",
+          "name": "SA_MATHS_LOCAL_LOGGER_OPT",
           "value": "True",
           "type": "BOOL"
         }
@@ -63,7 +63,7 @@
           "type": "BOOL"
         },
         {
-          "name": "SA_MATHS_TEST_LOGGER_INTEGRATION",
+          "name": "SA_MATHS_LOCAL_LOGGER_OPT",
           "value": "True",
           "type": "BOOL"
         }

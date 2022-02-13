@@ -60,6 +60,33 @@ endif()
 
 # Options
 
+if(NOT TARGET SA_Logger)
+
+	## Add local SA_Logger.
+	option(SA_MATHS_LOCAL_LOGGER_OPT "Should clone local SA_Logger" OFF)
+
+	if(SA_MATHS_LOCAL_LOGGER_OPT)
+
+		# Fetch SA_Logger.
+		message("Fetching SA_Logger...")
+
+		include(FetchContent)
+
+		FetchContent_Declare(
+			SA_Logger
+			GIT_REPOSITORY https://github.com/SapphireSuite/Logger.git
+			GIT_TAG        main
+		)
+
+		FetchContent_MakeAvailable(SA_Logger)
+
+		target_link_libraries(SA_Maths PUBLIC SA_Logger)
+
+	endif()
+
+endif()
+
+
 ## Add SA_Maths's intrinsics implementation.
 option(SA_MATHS_INTRINSICS_OPT "Should build using intrinsics" OFF)
 
