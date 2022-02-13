@@ -20,10 +20,9 @@ namespace Sa
 	}
 
 	template <>
-	Quatf& Quatf::Normalize() noexcept
+	Quatf& Quatf::Normalize()
 	{
-		// TODO: Debug.
-		//SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
+		SA_ASSERT(NotEquals, SA/Maths, *this, Zero, L"Normalize null quaternion!");
 
 		const __m128 lenP = _mm_set_ps1(Length());
 		const __m128 pack = _mm_load_ps(&w);
@@ -35,10 +34,9 @@ namespace Sa
 	}
 
 	template <>
-	Quatf Quatf::GetNormalized() const noexcept
+	Quatf Quatf::GetNormalized() const
 	{
-		// TODO: Debug.
-		//SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
+		SA_ASSERT(NotEquals, SA/Maths, *this, Zero, L"Normalize null quaternion!");
 
 		Quat res;
 
@@ -54,9 +52,8 @@ namespace Sa
 	template <>
 	Quatf Quatf::Rotate(const Quatf& _other) const noexcept
 	{
-		// TODO: Debug.
-		//SA_WARN(IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. This quaternion is not normalized!");
-		//SA_WARN(_other.IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. Other quaternion is not normalized!");
+		SA_WARN(IsNormalized(), SA / Maths, L"Quaternion should be normalized for multiplication. This quaternion is not normalized!");
+		SA_WARN(_other.IsNormalized(), SA / Maths, L"Quaternion should be normalized for multiplication. Other quaternion is not normalized!");
 
 		Quat res;
 
@@ -210,10 +207,9 @@ namespace Sa
 	}
 
 	template <>
-	Quatf Quatf::operator/(float _scale) const noexcept
+	Quatf Quatf::operator/(float _scale) const
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
+		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale quaternion by 0 (division by 0)!");
 
 		Quatf res;
 
@@ -265,10 +261,9 @@ namespace Sa
 	}
 
 	template <>
-	Quatf& Quatf::operator/=(float _scale) noexcept
+	Quatf& Quatf::operator/=(float _scale)
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
+		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale quaternion by 0 (division by 0)!");
 
 		const __m128 scP = _mm_set_ps1(_scale);
 		const __m128 pack = _mm_load_ps(&w);
@@ -305,15 +300,14 @@ namespace Sa
 
 
 	template <>
-	Quatf operator/(float _lhs, const Quatf& _rhs) noexcept
+	Quatf operator/(float _lhs, const Quatf& _rhs)
 	{
 		Quatf res;
 
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_rhs.w), Maths, L"Inverse scale W by 0!");
-		//SA_WARN(!Sa::Equals0(_rhs.x), Maths, L"Inverse scale X Axis by 0!");
-		//SA_WARN(!Sa::Equals0(_rhs.y), Maths, L"Inverse scale Y Axis by 0!");
-		//SA_WARN(!Sa::Equals0(_rhs.z), Maths, L"Inverse scale Z Axis by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.w, L"Inverse scale W by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.x, L"Inverse scale X Axis by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.y, L"Inverse scale Y Axis by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.z, L"Inverse scale Z Axis by 0!");
 
 		const __m128 lPack = _mm_set_ps1(_lhs);
 		const __m128 rPack = _mm_load_ps(&_rhs.w);
@@ -339,10 +333,9 @@ namespace Sa
 	}
 
 	template <>
-	Quatd& Quatd::Normalize() noexcept
+	Quatd& Quatd::Normalize()
 	{
-		// TODO: Debug.
-		//SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
+		SA_ASSERT(NotEquals, SA/Maths, *this, Zero, L"Normalize null quaternion!");
 
 		const __m256d lenP = _mm256_set1_pd(Length());
 		const __m256d pack = _mm256_load_pd(&w);
@@ -354,10 +347,9 @@ namespace Sa
 	}
 
 	template <>
-	Quatd Quatd::GetNormalized() const noexcept
+	Quatd Quatd::GetNormalized() const
 	{
-		// TODO: Debug.
-		//SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
+		SA_ASSERT(NotEquals, SA/Maths, *this, Zero, L"Normalize null quaternion!");
 
 		Quat res;
 
@@ -373,9 +365,8 @@ namespace Sa
 	template <>
 	Quatd Quatd::Rotate(const Quatd& _other) const noexcept
 	{
-		// TODO: Debug.
-		//SA_WARN(IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. This quaternion is not normalized!");
-		//SA_WARN(_other.IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. Other quaternion is not normalized!");
+		SA_WARN(IsNormalized(), SA/Maths, L"Quaternion should be normalized for multiplication. This quaternion is not normalized!");
+		SA_WARN(_other.IsNormalized(), SA/Maths, L"Quaternion should be normalized for multiplication. Other quaternion is not normalized!");
 
 		Quat res;
 
@@ -531,10 +522,9 @@ namespace Sa
 	}
 
 	template <>
-	Quatd Quatd::operator/(double _scale) const noexcept
+	Quatd Quatd::operator/(double _scale) const
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
+		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale quaternion by 0 (division by 0)!");
 		
 		Quat res;
 
@@ -586,10 +576,9 @@ namespace Sa
 	}
 
 	template <>
-	Quatd& Quatd::operator/=(double _scale) noexcept
+	Quatd& Quatd::operator/=(double _scale)
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
+		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale quaternion by 0 (division by 0)!");
 
 		const __m256d scP = _mm256_set1_pd(_scale);
 		const __m256d pack = _mm256_load_pd(&w);
@@ -626,13 +615,12 @@ namespace Sa
 
 
 	template <>
-	Quatd operator/(double _lhs, const Quatd& _rhs) noexcept
+	Quatd operator/(double _lhs, const Quatd& _rhs)
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_rhs.w), Maths, L"Inverse scale W by 0!");
-		//SA_WARN(!Sa::Equals0(_rhs.x), Maths, L"Inverse scale X Axis by 0!");
-		//SA_WARN(!Sa::Equals0(_rhs.y), Maths, L"Inverse scale Y Axis by 0!");
-		//SA_WARN(!Sa::Equals0(_rhs.z), Maths, L"Inverse scale Z Axis by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.w, L"Inverse scale W by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.x, L"Inverse scale X Axis by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.y, L"Inverse scale Y Axis by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.z, L"Inverse scale Z Axis by 0!");
 
 		Quatd res;
 

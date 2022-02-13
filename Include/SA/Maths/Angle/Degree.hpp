@@ -7,6 +7,8 @@
 
 #include <cmath>
 
+#include <SA/Maths/Debug.hpp>
+
 #include <SA/Maths/Angle/Constants.hpp>
 #include <SA/Maths/Algorithms/Equals.hpp>
 
@@ -193,22 +195,29 @@ namespace Sa
 		*	\return handle as \c float without conversion.
 		*/
 		explicit constexpr operator T() const noexcept;
-
-
-	#if SA_LOGGING
-
-		/**
-		*	\brief ToString implementation
-		*
-		*	Convert this degree as a string without conversion.
-		*
-		*	\return this as a string.
-		*/
-		std::string ToString() const noexcept;
-
-	#endif
 	};
 
+
+#if SA_LOGGER_IMPL
+
+	/**
+	*	\brief ToString Deg implementation
+	*
+	*	Convert Deg as a string.
+	*
+	*	\tparam T		Input degree type.
+	*
+	*	\param[in] _d	Input degree.
+	*
+	*	\return input degree as a string.
+	*/
+	template <typename T>
+	std::string ToString(const Deg<T>& _d);
+
+#endif
+
+
+//{ Aliases
 
 	/// Alias for float Deg.
 	using Degf = Deg<float>;
@@ -220,6 +229,7 @@ namespace Sa
 	template <typename T>
 	using Degree = Deg<T>;
 
+//}
 
 	/**
 	*	\brief _deg \b literal operator.

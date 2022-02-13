@@ -40,8 +40,7 @@ namespace Sa
 
 		w = Maths::Cos(halfAngle);
 
-		// TODO: Debug.
-		//SA_WARN(_axis.IsNormalized(), Maths, L"Axis should be normalized!");
+		SA_WARN(_axis.IsNormalized(), SA/Maths, L"Axis should be normalized!");
 
 		// Quaternion imaginary axis.
 		Vec3<T>& imgAxis = ImgAxis();
@@ -106,8 +105,7 @@ namespace Sa
 	template <typename T>
 	T& Quat<T>::operator[](uint32_t _index)
 	{
-		// TODO: Debug.
-		//SA_ASSERT(OutOfRange, Maths, _index, 0u, 3u);
+		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 3u);
 
 		return Data()[_index];
 	}
@@ -115,8 +113,7 @@ namespace Sa
 	template <typename T>
 	T Quat<T>::operator[](uint32_t _index) const
 	{
-		// TODO: Debug.
-		//SA_ASSERT(OutOfRange, Maths, _index, 0u, 3u);
+		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 3u);
 
 		return Data()[_index];
 	}
@@ -126,7 +123,7 @@ namespace Sa
 //{ Length
 
 	template <typename T>
-	T Quat<T>::Length() const noexcept
+	T Quat<T>::Length() const
 	{
 		return Maths::Sqrt(SqrLength());
 	}
@@ -139,10 +136,9 @@ namespace Sa
 
 
 	template <typename T>
-	Quat<T>& Quat<T>::Normalize() noexcept
+	Quat<T>& Quat<T>::Normalize()
 	{
-		// TODO: Debug.
-		//SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
+		SA_ASSERT(NotEquals, SA/Maths, *this, Zero, L"Normalize null quaternion!");
 
 		const T norm = Length();
 
@@ -155,10 +151,9 @@ namespace Sa
 	}
 
 	template <typename T>
-	Quat<T> Quat<T>::GetNormalized() const noexcept
+	Quat<T> Quat<T>::GetNormalized() const
 	{
-		// TODO: Debug.
-		//SA_WARN(!IsZero(), Maths, L"Normalize null quaternion!");
+		SA_ASSERT(NotEquals, SA/Maths, *this, Zero, L"Normalize null quaternion!");
 
 		const T norm = Length();
 
@@ -183,8 +178,7 @@ namespace Sa
 	template <typename T>
 	Quat<T>& Quat<T>::Inverse() noexcept
 	{
-		// TODO: Debug.
-		//SA_WARN(IsNormalized(), Maths, L"Quaternion should be normalized!");
+		SA_WARN(IsNormalized(), SA/Maths, L"Quaternion should be normalized!");
 		
 		// Inverse of normalized quaternion is conjugate.
 
@@ -198,8 +192,7 @@ namespace Sa
 	template <typename T>
 	Quat<T> Quat<T>::GetInversed() const noexcept
 	{
-		// TODO: Debug.
-		//SA_WARN(IsNormalized(), Maths, L"Quaternion should be normalized!");
+		SA_WARN(IsNormalized(), SA/Maths, L"Quaternion should be normalized!");
 
 		// Inverse of normalized quaternion is conjugate.
 
@@ -231,8 +224,7 @@ namespace Sa
 	template <typename T>
 	constexpr Vec3<T> Quat<T>::GetAxis() const noexcept
 	{
-		// TODO: Debug.
-		//SA_WARN(IsIdentity(), Maths, L"Get axis of an idendity quaternion (Vec3::Zero).");
+		SA_WARN(IsIdentity(), SA/Maths, L"Get axis of an idendity quaternion (Vec3::Zero).");
 
 		const Rad<T> halfAngle = Maths::ACos(w);
 
@@ -246,9 +238,8 @@ namespace Sa
 	template <typename T>
 	Quat<T> Quat<T>::Rotate(const Quat<T>& _other) const noexcept
 	{
-		// TODO: Debug.
-		//SA_WARN(IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. This quaternion is not normalized!");
-		//SA_WARN(_other.IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. Other quaternion is not normalized!");
+		SA_WARN(IsNormalized(), SA/Maths, L"Quaternion should be normalized for multiplication. This quaternion is not normalized!");
+		SA_WARN(_other.IsNormalized(), SA/Maths, L"Quaternion should be normalized for multiplication. Other quaternion is not normalized!");
 
 		T resW = w * _other.w - x * _other.x - y * _other.y - z * _other.z;
 		T resX = w * _other.x + x * _other.w + y * _other.z - z * _other.y;
@@ -261,8 +252,7 @@ namespace Sa
 	template <typename T>
 	constexpr Vec3<T> Quat<T>::Rotate(const Vec3<T>& _vec) const noexcept
 	{
-		// TODO: Debug.
-		//SA_WARN(IsNormalized(), Maths, L"Quaternion should be normalized for multiplication. This quaternion is not normalized!");
+		SA_WARN(IsNormalized(), SA/Maths, L"Quaternion should be normalized for multiplication. This quaternion is not normalized!");
 		
 		// Quaternion-vector multiplication optimization:
 		// http://people.csail.mit.edu/bkph/articles/Quaternions.pdf
@@ -451,41 +441,37 @@ namespace Sa
 //{ Lerp
 
 	template <typename T>
-	Quat<T> Quat<T>::Lerp(const Quat& _start, const Quat& _end, float _alpha) noexcept
+	Quat<T> Quat<T>::Lerp(const Quat& _start, const Quat& _end, float _alpha)
 	{
-		// TODO: Debug.
-		//SA_WARN(_start.IsNormalized(), Maths, L"start quaternion should be normalized!");
-		//SA_WARN(_end.IsNormalized(), Maths, L"start quaternion should be normalized!");
+		SA_WARN(_start.IsNormalized(), SA/Maths, L"_start quaternion should be normalized!");
+		SA_WARN(_end.IsNormalized(), SA/Maths, L"_end quaternion should be normalized!");
 
 		return Maths::Lerp(_start, _end, _alpha).GetNormalized();
 	}
 
 	template <typename T>
-	Quat<T> Quat<T>::LerpUnclamped(const Quat& _start, const Quat& _end, float _alpha) noexcept
+	Quat<T> Quat<T>::LerpUnclamped(const Quat& _start, const Quat& _end, float _alpha)
 	{
-		// TODO: Debug.
-		//SA_WARN(_start.IsNormalized(), Maths, L"start quaternion should be normalized!");
-		//SA_WARN(_end.IsNormalized(), Maths, L"start quaternion should be normalized!");
+		SA_WARN(_start.IsNormalized(), SA/Maths, L"_start quaternion should be normalized!");
+		SA_WARN(_end.IsNormalized(), SA/Maths, L"_end quaternion should be normalized!");
 
 		return Maths::LerpUnclamped(_start, _end, _alpha).GetNormalized();
 	}
 
 	template <typename T>
-	Quat<T> Quat<T>::SLerp(const Quat& _start, const Quat& _end, float _alpha) noexcept
+	Quat<T> Quat<T>::SLerp(const Quat& _start, const Quat& _end, float _alpha)
 	{
-		// TODO: Debug.
-		//SA_WARN(_start.IsNormalized(), Maths, L"start quaternion should be normalized!");
-		//SA_WARN(_end.IsNormalized(), Maths, L"start quaternion should be normalized!");
+		SA_WARN(_start.IsNormalized(), SA/Maths, L"_start quaternion should be normalized!");
+		SA_WARN(_end.IsNormalized(), SA/Maths, L"_end quaternion should be normalized!");
 
 		return Maths::SLerp(_start, _end, _alpha).GetNormalized();
 	}
 
 	template <typename T>
-	Quat<T> Quat<T>::SLerpUnclamped(const Quat& _start, const Quat& _end, float _alpha) noexcept
+	Quat<T> Quat<T>::SLerpUnclamped(const Quat& _start, const Quat& _end, float _alpha)
 	{
-		// TODO: Debug.
-		//SA_WARN(_start.IsNormalized(), Maths, L"start quaternion should be normalized!");
-		//SA_WARN(_end.IsNormalized(), Maths, L"start quaternion should be normalized!");
+		SA_WARN(_start.IsNormalized(), SA/Maths, L"_start quaternion should be normalized!");
+		SA_WARN(_end.IsNormalized(), SA/Maths, L"_end quaternion should be normalized!");
 
 		return Maths::SLerpUnclamped(_start, _end, _alpha).GetNormalized();
 	}
@@ -512,10 +498,9 @@ namespace Sa
 	}
 
 	template <typename T>
-	Quat<T> Quat<T>::operator/(T _scale) const noexcept
+	Quat<T> Quat<T>::operator/(T _scale) const
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division vy 0)!");
+		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale quaternion by 0 (division by 0)!");
 
 		return Quat(
 			w / _scale,
@@ -589,10 +574,9 @@ namespace Sa
 	}
 
 	template <typename T>
-	Quat<T>& Quat<T>::operator/=(T _scale) noexcept
+	Quat<T>& Quat<T>::operator/=(T _scale)
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale quaternion by 0 (division by 0)!");
+		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale quaternion by 0 (division by 0)!");
 
 		w /= _scale;
 		x /= _scale;
@@ -639,20 +623,6 @@ namespace Sa
 //}
 
 
-#if SA_LOGGING
-
-	template <typename T>
-	std::string Quat<T>::ToString() const noexcept
-	{
-		return "W: " + Sa::ToString(w) +
-			"\tX: " + Sa::ToString(x) +
-			"\tY: " + Sa::ToString(y) +
-			"\tZ: " + Sa::ToString(z);
-	}
-
-#endif
-
-
 	template <typename T>
 	constexpr Quat<T> operator*(typename std::remove_cv<T>::type _lhs, const Quat<T>& _rhs) noexcept
 	{
@@ -660,13 +630,12 @@ namespace Sa
 	}
 
 	template <typename T>
-	constexpr Quat<T> operator/(typename std::remove_cv<T>::type _lhs, const Quat<T>& _rhs) noexcept
+	constexpr Quat<T> operator/(typename std::remove_cv<T>::type _lhs, const Quat<T>& _rhs)
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_rhs.w), Maths, L"Inverse scale W by 0!");
-		//SA_WARN(!Sa::Equals0(_rhs.x), Maths, L"Inverse scale X Axis by 0!");
-		//SA_WARN(!Sa::Equals0(_rhs.y), Maths, L"Inverse scale Y Axis by 0!");
-		//SA_WARN(!Sa::Equals0(_rhs.z), Maths, L"Inverse scale Z Axis by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.w, L"Inverse scale W by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.x, L"Inverse scale X Axis by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.y, L"Inverse scale Y Axis by 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.z, L"Inverse scale Z Axis by 0!");
 
 		return Quat<T>(
 			_lhs / _rhs.w,
@@ -687,4 +656,18 @@ namespace Sa
 	{
 		return _rhs / _lhs;
 	}
+
+
+#if SA_LOGGER_IMPL
+
+	template <typename T>
+	std::string ToString(const Quat<T>& _q)
+	{
+		return "W: " + Sa::ToString(_q.w) +
+			"\tX: " + Sa::ToString(_q.x) +
+			"\tY: " + Sa::ToString(_q.y) +
+			"\tZ: " + Sa::ToString(_q.z);
+	}
+
+#endif
 }

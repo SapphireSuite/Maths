@@ -13,6 +13,7 @@ on:
       - '!dev_osx'
       - '!dev_macos'
       - '!dev_win'
+      - '!dev_windows'
 
 
 # Settings common to all jobs.
@@ -33,6 +34,7 @@ jobs:
   GNU:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         config: [Debug, Release]
         compiler_v: [9, 10, 11]
@@ -58,6 +60,7 @@ jobs:
   Clang:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         config: [Debug, Release]
         compiler_v: [9, 10, 11, 12]
@@ -75,6 +78,39 @@ jobs:
             echo "CXX=clang++-${{ matrix.compiler_v }}" >> $GITHUB_ENV
       - name: Generate Project
         run: cmake -B Build -DCMAKE_BUILD_TYPE=${{ matrix.config }} ${{ env.CMAKE_OPTIONS }} -G Ninja
+      - name: Build Project
+        run: cmake --build Build --config ${{ matrix.config }} --verbose
+      - name: Run CTests
+        run: cd Build && ctest -C ${{ matrix.config }} -V
+
+
+  Options:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        option:
+          - SA_MATHS_INTRINSICS_OPT
+          - SA_MATHS_TEST_LOGGER_INTEGRATION
+
+        include:
+          - option: SA_MATHS_INTRINSICS_OPT
+            config: Release
+          - option: SA_MATHS_TEST_LOGGER_INTEGRATION
+            config: Debug
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: seanmiddleditch/gha-setup-ninja@master # Install Ninja.
+      - name: "[Package] Install LLVM and Clang"
+        run: |
+            sudo apt-get install clang-12
+            echo "CC=clang-12" >> $GITHUB_ENV
+            echo "CXX=clang++-12" >> $GITHUB_ENV
+      - name: Generate Project
+        run: cmake -B Build -DCMAKE_BUILD_TYPE=${{ matrix.config }} -D${{ matrix.option }}=ON ${{ env.CMAKE_OPTIONS }} -G Ninja
       - name: Build Project
         run: cmake --build Build --config ${{ matrix.config }} --verbose
       - name: Run CTests

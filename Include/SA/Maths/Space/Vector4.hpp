@@ -8,6 +8,8 @@
 #include <cstdint>
 #include <limits>
 
+#include <SA/Maths/Debug.hpp>
+
 #include <SA/Maths/Algorithms/Equals.hpp>
 
 
@@ -221,21 +223,26 @@ namespace Sa
 		Vec4& operator=(const Vec4&) = default;
 
 //}
+	};
 
 
-#if SA_LOGGING
+#if SA_LOGGER_IMPL
 
-		/**
-		*	\brief ToString implementation
-		*
-		*	Convert this vector as a string.
-		*
-		*	\return this as a string.
-		*/
-		std::string ToString() const noexcept;
+	/**
+	*	\brief ToString Vec4 implementation
+	*
+	*	Convert Vec4 as a string.
+	*
+	*	\tparam T		Input vector type.
+	*
+	*	\param[in] _v	Input vector.
+	*
+	*	\return input vector as a string.
+	*/
+	template <typename T>
+	std::string ToString(const Vec4<T>& _v);
 
 #endif
-	};
 
 
 //{ Aliases

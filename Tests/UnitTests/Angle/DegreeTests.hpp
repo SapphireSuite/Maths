@@ -17,7 +17,16 @@ namespace Sa
 	template <typename T>
 	std::ostream& operator<<(std::ostream& _os, const Deg<T>& _d)
 	{
+#if SA_LOGGER_IMPL
+
+		return _os << ToString(_d);
+
+#else
+
 		return _os << std::to_string(_d.Handle()) + "_deg";
+
+#endif
+
 	}
 }
 

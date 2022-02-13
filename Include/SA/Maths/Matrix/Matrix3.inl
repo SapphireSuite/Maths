@@ -116,8 +116,7 @@ namespace Sa
 	template <typename T, MatrixMajor major>
 	T& Mat3<T, major>::At(uint32_t _index)
 	{
-		// TODO: Debug.
-		//SA_ASSERT(OutOfRange, Maths, _index, 0u, 8u);
+		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 8u);
 
 		return Data()[_index];
 	}
@@ -125,8 +124,7 @@ namespace Sa
 	template <typename T, MatrixMajor major>
 	const T& Mat3<T, major>::At(uint32_t _index) const
 	{
-		// TODO: Debug.
-		//SA_ASSERT(OutOfRange, Maths, _index, 0u, 8u);
+		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 8u);
 
 		return Data()[_index];
 	}
@@ -134,9 +132,8 @@ namespace Sa
 	template <typename T, MatrixMajor major>
 	T& Mat3<T, major>::At(uint32_t _x, uint32_t _y)
 	{
-		// TODO: Debug.
-		//SA_ASSERT(OutOfRange, Maths, _x, 0u, 3u);
-		//SA_ASSERT(OutOfRange, Maths, _y, 0u, 3u);
+		SA_ASSERT(OutOfRange, SA/Maths, _x, 0u, 3u);
+		SA_ASSERT(OutOfRange, SA/Maths, _y, 0u, 3u);
 
 		return Data()[_x * 3u + _y];
 	}
@@ -144,9 +141,8 @@ namespace Sa
 	template <typename T, MatrixMajor major>
 	const T& Mat3<T, major>::At(uint32_t _x, uint32_t _y) const
 	{
-		// TODO: Debug.
-		//SA_ASSERT(OutOfRange, Maths, _x, 0u, 3u);
-		//SA_ASSERT(OutOfRange, Maths, _y, 0u, 3u);
+		SA_ASSERT(OutOfRange, SA/Maths, _x, 0u, 3u);
+		SA_ASSERT(OutOfRange, SA/Maths, _y, 0u, 3u);
 
 		return Data()[_x * 3u + _y];
 	}
@@ -208,18 +204,17 @@ namespace Sa
 	}
 
 	template <typename T, MatrixMajor major>
-	Mat3<T, major>& Mat3<T, major>::Inverse() noexcept
+	Mat3<T, major>& Mat3<T, major>::Inverse()
 	{
 		return *this = GetInversed();
 	}
 
 	template <typename T, MatrixMajor major>
-	Mat3<T, major> Mat3<T, major>::GetInversed() const noexcept
+	Mat3<T, major> Mat3<T, major>::GetInversed() const
 	{
 		const T det = Determinant();
 
-		// TODO: Debug.
-		//SA_WARN(!Maths::Equals0(det), Maths, L"Inverse matrix with determinant == 0");
+		SA_ASSERT(NotEquals0, SA/Maths, det, L"Inverse matrix with determinant == 0");
 
 		return (1.0f / det) * Mat3(
 			e11 * e22 - e21 * e12, e02 * e21 - e01 * e22, e01 * e12 - e11 * e02,
@@ -235,26 +230,13 @@ namespace Sa
 	template <typename T, MatrixMajor major>
 	Mat3<T, major> Mat3<T, major>::Lerp(const Mat3& _start, const Mat3& _end, float _alpha) noexcept
 	{
-		// TODO: Debug.
-		//SA_WARN(_alpha >= 0.0f && _alpha <= 1.0f, Maths, L"Alpha[" << _alpha << L"] clamped to range [0, 1]! Use LerpUnclamped if intended instead.");
-
-		return LerpUnclamped(_start, _end, std::clamp(_alpha, 0.0f, 1.0f));
+		return Maths::Lerp(_start, _end, _alpha);
 	}
 
 	template <typename T, MatrixMajor major>
 	Mat3<T, major> Mat3<T, major>::LerpUnclamped(const Mat3& _start, const Mat3& _end, float _alpha) noexcept
 	{
-		return Mat3(
-			Maths::LerpUnclamped(_start.e00, _end.e00, _alpha),
-			Maths::LerpUnclamped(_start.e01, _end.e01, _alpha),
-			Maths::LerpUnclamped(_start.e02, _end.e02, _alpha),
-			Maths::LerpUnclamped(_start.e10, _end.e10, _alpha),
-			Maths::LerpUnclamped(_start.e11, _end.e11, _alpha),
-			Maths::LerpUnclamped(_start.e12, _end.e12, _alpha),
-			Maths::LerpUnclamped(_start.e20, _end.e20, _alpha),
-			Maths::LerpUnclamped(_start.e21, _end.e21, _alpha),
-			Maths::LerpUnclamped(_start.e22, _end.e22, _alpha)
-		);
+		return Maths::LerpUnclamped(_start, _end, _alpha);
 	}
 
 //}
@@ -264,8 +246,7 @@ namespace Sa
 	template <typename T, MatrixMajor major>
 	Mat3<T, major> Mat3<T, major>::MakeRotation(const Quat<T>& _rot) noexcept
 	{
-		// TODO: Debug.
-		//SA_WARN(_rot.IsNormalized(), Maths, L"Quaternion should be normalized!");
+		SA_WARN(_rot.IsNormalized(), SA/Maths, L"Quaternion should be normalized!");
 
 		// Sources: https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation
 
@@ -360,25 +341,26 @@ namespace Sa
 	}
 
 	template <typename T, MatrixMajor major>
-	Mat3<T, major> Mat3<T, major>::operator*(T _scale) const noexcept
+	template <typename TIn>
+	Mat3<T, major> Mat3<T, major>::operator*(TIn _scale) const noexcept
 	{
 		return Mat3(
-			e00 * _scale, e01 * _scale, e02 * _scale,
-			e10 * _scale, e11 * _scale, e12 * _scale,
-			e20 * _scale, e21 * _scale, e22 * _scale
+			(T)(e00 * _scale), (T)(e01 * _scale), (T)(e02 * _scale),
+			(T)(e10 * _scale), (T)(e11 * _scale), (T)(e12 * _scale),
+			(T)(e20 * _scale), (T)(e21 * _scale), (T)(e22 * _scale)
 		);
 	}
 
 	template <typename T, MatrixMajor major>
-	Mat3<T, major> Mat3<T, major>::operator/(T _scale) const noexcept
+	template <typename TIn>
+	Mat3<T, major> Mat3<T, major>::operator/(TIn _scale) const
 	{
-		// TODO: Debug.
-		//SA_WARN(!Maths::Equals0(_scale), Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale matrix by 0 (division by 0)!");
 
 		return Mat3(
-			e00 / _scale, e01 / _scale, e02 / _scale,
-			e10 / _scale, e11 / _scale, e12 / _scale,
-			e20 / _scale, e21 / _scale, e22 / _scale
+			(T)(e00 / _scale), (T)(e01 / _scale), (T)(e02 / _scale),
+			(T)(e10 / _scale), (T)(e11 / _scale), (T)(e12 / _scale),
+			(T)(e20 / _scale), (T)(e21 / _scale), (T)(e22 / _scale)
 		);
 	}
 
@@ -421,7 +403,7 @@ namespace Sa
 	}
 
 	template <typename T, MatrixMajor major>
-	Mat3<T, major> Mat3<T, major>::operator/(const Mat3& _rhs) const noexcept
+	Mat3<T, major> Mat3<T, major>::operator/(const Mat3& _rhs) const
 	{
 		return *this * _rhs.GetInversed();
 	}
@@ -439,7 +421,8 @@ namespace Sa
 
 
 	template <typename T, MatrixMajor major>
-	Mat3<T, major>& Mat3<T, major>::operator*=(T _scale) noexcept
+	template <typename TIn>
+	Mat3<T, major>& Mat3<T, major>::operator*=(TIn _scale) noexcept
 	{
 		e00 *= _scale;
 		e01 *= _scale;
@@ -457,10 +440,10 @@ namespace Sa
 	}
 
 	template <typename T, MatrixMajor major>
-	Mat3<T, major>& Mat3<T, major>::operator/=(T _scale) noexcept
+	template <typename TIn>
+	Mat3<T, major>& Mat3<T, major>::operator/=(TIn _scale)
 	{
-		// TODO: Debug.
-		//SA_WARN(!Maths::Equals0(_scale), Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale matrix by 0 (division by 0)!");
 
 		e00 /= _scale;
 		e01 /= _scale;
@@ -520,7 +503,7 @@ namespace Sa
 	}
 
 	template <typename T, MatrixMajor major>
-	Mat3<T, major>& Mat3<T, major>::operator/=(const Mat3& _rhs) noexcept
+	Mat3<T, major>& Mat3<T, major>::operator/=(const Mat3& _rhs)
 	{
 		return *this = *this / _rhs;
 	}
@@ -528,13 +511,41 @@ namespace Sa
 //}
 
 
-#if SA_LOGGING
+	template <typename TIn, typename T, MatrixMajor major>
+	Mat3<T, major> operator*(TIn _lhs, const Mat3<T, major>& _rhs) noexcept
+	{
+		return _rhs * _lhs;
+	}
 
-	template <typename T, MatrixMajor major>
-	std::string Mat3<T, major>::ToString() const noexcept
+	template <typename TIn, typename T, MatrixMajor major>
+	Mat3<T, major> operator/(TIn _lhs, const Mat3<T, major>& _rhs)
+	{
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e00, L"Inverse scale matrix e00 == 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e01, L"Inverse scale matrix e01 == 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e02, L"Inverse scale matrix e02 == 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e10, L"Inverse scale matrix e10 == 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e11, L"Inverse scale matrix e11 == 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e12, L"Inverse scale matrix e12 == 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e20, L"Inverse scale matrix e20 == 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e21, L"Inverse scale matrix e21 == 0!");
+		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e22, L"Inverse scale matrix e22 == 0!");
+
+
+		return Mat3<T>(
+			_lhs / _rhs.e00, _lhs / _rhs.e01, _lhs / _rhs.e02,
+			_lhs / _rhs.e10, _lhs / _rhs.e11, _lhs / _rhs.e12,
+			_lhs / _rhs.e20, _lhs / _rhs.e21, _lhs / _rhs.e22
+		);
+	}
+
+
+#if SA_LOGGER_IMPL
+
+	template <typename T>
+	std::string ToString(const Mat3<T>& _m)
 	{
 		// Keep memory order (Raw / column major).
-		const T* const data = Data();
+		const T* const data = _m.Data();
 
 		return
 			Sa::ToString(data[0]) + ", " +
@@ -551,33 +562,4 @@ namespace Sa
 	}
 
 #endif
-
-
-	template <typename T, MatrixMajor major>
-	Mat3<T, major> operator*(typename std::remove_cv<T>::type _lhs, const Mat3<T, major>& _rhs) noexcept
-	{
-		return _rhs * _lhs;
-	}
-
-	template <typename T, MatrixMajor major>
-	Mat3<T, major> operator/(typename std::remove_cv<T>::type _lhs, const Mat3<T, major>& _rhs) noexcept
-	{
-		// TODO: Debug.
-		//SA_WARN(!Maths::Equals0(_rhs.e00), Maths, L"Inverse scale matrix e00 == 0!");
-		//SA_WARN(!Maths::Equals0(_rhs.e01), Maths, L"Inverse scale matrix e01 == 0!");
-		//SA_WARN(!Maths::Equals0(_rhs.e02), Maths, L"Inverse scale matrix e02 == 0!");
-		//SA_WARN(!Maths::Equals0(_rhs.e10), Maths, L"Inverse scale matrix e10 == 0!");
-		//SA_WARN(!Maths::Equals0(_rhs.e11), Maths, L"Inverse scale matrix e11 == 0!");
-		//SA_WARN(!Maths::Equals0(_rhs.e12), Maths, L"Inverse scale matrix e12 == 0!");
-		//SA_WARN(!Maths::Equals0(_rhs.e20), Maths, L"Inverse scale matrix e20 == 0!");
-		//SA_WARN(!Maths::Equals0(_rhs.e21), Maths, L"Inverse scale matrix e21 == 0!");
-		//SA_WARN(!Maths::Equals0(_rhs.e22), Maths, L"Inverse scale matrix e22 == 0!");
-
-
-		return Mat3<T>(
-			_lhs / _rhs.e00, _lhs / _rhs.e01, _lhs / _rhs.e02,
-			_lhs / _rhs.e10, _lhs / _rhs.e11, _lhs / _rhs.e12,
-			_lhs / _rhs.e20, _lhs / _rhs.e21, _lhs / _rhs.e22
-		);
-	}
 }

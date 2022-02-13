@@ -7,6 +7,8 @@
 
 #include <algorithm>
 
+#include <SA/Maths/Debug.hpp>
+
 #include <SA/Maths/Algorithms/Cos.hpp>
 #include <SA/Maths/Algorithms/Sin.hpp>
 
@@ -59,8 +61,7 @@ namespace Sa
 		template <typename T>
 		T Lerp(const T& _start, const T& _end, float _alpha) noexcept
 		{
-			// TODO: Debug.
-			//SA_WARN(_alpha >= 0.0f && _alpha <= 1.0f, Maths, L"Alpha[" << _alpha << L"] clamped to range [0, 1]! Use LerpUnclamped if intended instead.");
+			SA_WARN(_alpha >= 0.0f && _alpha <= 1.0f, SA/Maths, L"Alpha[" << _alpha << L"] clamped to range [0, 1]! Use LerpUnclamped if intended instead.");
 
 			return LerpUnclamped(_start, _end, std::clamp(_alpha, 0.0f, 1.0f));
 		}
@@ -138,8 +139,7 @@ namespace Sa
 		template <typename T>
 		T SLerp(const T& _start, const T& _end, float _alpha) noexcept
 		{
-			// TODO: Debug.
-			//SA_WARN(_alpha >= 0.0f && _alpha <= 1.0f, Maths, L"Alpha[" << _alpha << L"] clamped to range [0, 1]! Use SLerpUnclamped if intended instead.");
+			SA_WARN(_alpha >= 0.0f && _alpha <= 1.0f, SA/Maths, L"Alpha[" << _alpha << L"] clamped to range [0, 1]! Use SLerpUnclamped if intended instead.");
 
 			return SLerpUnclamped(_start, _end, std::clamp(_alpha, 0.0f, 1.0f));
 		}

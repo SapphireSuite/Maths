@@ -15,6 +15,11 @@
           "name": "SA_MATHS_BUILD_TESTS_OPT",
           "value": "True",
           "type": "BOOL"
+        },
+        {
+          "name": "SA_MATHS_LOCAL_LOGGER_OPT",
+          "value": "True",
+          "type": "BOOL"
         }
       ]
     },
@@ -54,6 +59,11 @@
       "variables": [
         {
           "name": "SA_MATHS_BUILD_TESTS_OPT",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "SA_MATHS_LOCAL_LOGGER_OPT",
           "value": "True",
           "type": "BOOL"
         }

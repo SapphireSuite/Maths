@@ -2,8 +2,20 @@
 
 #include <gtest/gtest.h>
 
+#include <SA/Maths/Debug.hpp>
+
 int main(int argc, char** argv)
 {
+#if SA_LOGGER_IMPL
+
+	Sa::Logger logger;
+	Sa::ConsoleLogStream cslStr;
+	logger.Register(cslStr);
+
+	Sa::Debug::logger = &logger;
+
+#endif
+
 	::testing::InitGoogleTest(&argc, argv);
 
 	return RUN_ALL_TESTS();

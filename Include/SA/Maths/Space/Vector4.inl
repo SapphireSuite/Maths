@@ -114,8 +114,7 @@ namespace Sa
 	template <typename T>
 	T& Vec4<T>::operator[](uint32_t _index)
 	{
-		// TODO: Debug.
-		//SA_ASSERT(OutOfRange, Maths, _index, 0u, 3u);
+		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 3u);
 
 		return Data()[_index];
 	}
@@ -123,8 +122,7 @@ namespace Sa
 	template <typename T>
 	const T& Vec4<T>::operator[](uint32_t _index) const
 	{
-		// TODO: Debug.
-		//SA_ASSERT(OutOfRange, Maths, _index, 0u, 3u);
+		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 3u);
 
 		return Data()[_index];
 	}
@@ -138,15 +136,15 @@ namespace Sa
 //}
 
 
-#if SA_LOGGING
+#if SA_LOGGER_IMPL
 
 	template <typename T>
-	std::string Vec4<T>::ToString() const noexcept
+	std::string ToString(const Vec4<T>& _v)
 	{
-		return "X: " + Sa::ToString(x) +
-			"\tY: " + Sa::ToString(y) +
-			"\tZ: " + Sa::ToString(z) +
-			"\tW: " + Sa::ToString(w);
+		return "X: " + Sa::ToString(_v.x) +
+			"\tY: " + Sa::ToString(_v.y) +
+			"\tZ: " + Sa::ToString(_v.z) +
+			"\tW: " + Sa::ToString(_v.w);
 	}
 
 #endif

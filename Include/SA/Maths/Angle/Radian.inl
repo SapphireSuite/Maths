@@ -72,8 +72,7 @@ namespace Sa
 	template <typename T>
 	Rad<T> Rad<T>::operator/(T _scale) const
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale Radian by 0 (division by 0).");
+		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale Rad by 0 (division by 0).");
 
 		return Rad(mHandle / _scale);
 	}
@@ -106,8 +105,7 @@ namespace Sa
 	template <typename T>
 	Rad<T>& Rad<T>::operator/=(T _scale)
 	{
-		// TODO: Debug.
-		//SA_WARN(!Sa::Equals0(_scale), Maths, L"Unscale Rad<" << typeid(T).name() << "> by 0 (division by 0).");
+		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale Rad by 0 (division by 0).");
 
 		mHandle /= _scale;
 
@@ -135,12 +133,12 @@ namespace Sa
 	}
 
 
-#if SA_LOGGING
+#if SA_LOGGER_IMPL
 
 	template <typename T>
-	std::string Rad<T>::ToString() const noexcept
+	std::string ToString(const Rad<T>& _r)
 	{
-		return std::to_string(mHandle) + "_rad";
+		return std::to_string(_r.Handle()) + "_rad";
 	}
 
 #endif

@@ -17,7 +17,15 @@ namespace Sa
 	template <typename T>
 	std::ostream& operator<<(std::ostream& _os, const Rad<T>& _r)
 	{
+#if SA_LOGGER_IMPL
+
+		return _os << ToString(_r);
+
+#else
+
 		return _os << std::to_string(_r.Handle()) + "_rad";
+
+#endif
 	}
 }
 
