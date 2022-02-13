@@ -2,18 +2,17 @@
 
 #include <gtest/gtest.h>
 
-#include <SA/Collections/Debug>
-using namespace Sa;
+#include <SA/Maths/Debug.hpp>
 
 int main(int argc, char** argv)
 {
 #if SA_LOGGER_IMPL
 
-	Logger logger;
-	ConsoleLogStream cslStr;
+	Sa::Logger logger;
+	Sa::ConsoleLogStream cslStr;
 	logger.Register(cslStr);
 
-	Debug::logger = &logger;
+	Sa::Debug::logger = &logger;
 
 #endif
 
