@@ -133,12 +133,12 @@ namespace Sa
 	}
 
 
-#if SA_LOGGING
+#if SA_LOGGER_IMPL
 
 	template <typename T>
-	std::string Rad<T>::ToString() const noexcept
+	std::string ToString(const Rad<T>& _r)
 	{
-		return std::to_string(mHandle) + "_rad";
+		return std::to_string(_r.Handle()) + "_rad";
 	}
 
 #endif

@@ -511,31 +511,6 @@ namespace Sa
 //}
 
 
-#if SA_LOGGING
-
-	template <typename T, MatrixMajor major>
-	std::string Mat3<T, major>::ToString() const noexcept
-	{
-		// Keep memory order (Raw / column major).
-		const T* const data = Data();
-
-		return
-			Sa::ToString(data[0]) + ", " +
-			Sa::ToString(data[1]) + ", " +
-			Sa::ToString(data[2]) + ",\n " +
-
-			Sa::ToString(data[3]) + ", " +
-			Sa::ToString(data[4]) + ", " +
-			Sa::ToString(data[5]) + ",\n " +
-
-			Sa::ToString(data[6]) + ", " +
-			Sa::ToString(data[7]) + ", " +
-			Sa::ToString(data[8]);
-	}
-
-#endif
-
-
 	template <typename TIn, typename T, MatrixMajor major>
 	Mat3<T, major> operator*(TIn _lhs, const Mat3<T, major>& _rhs) noexcept
 	{
@@ -562,4 +537,29 @@ namespace Sa
 			_lhs / _rhs.e20, _lhs / _rhs.e21, _lhs / _rhs.e22
 		);
 	}
+
+
+#if SA_LOGGER_IMPL
+
+	template <typename T>
+	std::string ToString(const Mat3<T>& _m)
+	{
+		// Keep memory order (Raw / column major).
+		const T* const data = _m.Data();
+
+		return
+			Sa::ToString(data[0]) + ", " +
+			Sa::ToString(data[1]) + ", " +
+			Sa::ToString(data[2]) + ",\n " +
+
+			Sa::ToString(data[3]) + ", " +
+			Sa::ToString(data[4]) + ", " +
+			Sa::ToString(data[5]) + ",\n " +
+
+			Sa::ToString(data[6]) + ", " +
+			Sa::ToString(data[7]) + ", " +
+			Sa::ToString(data[8]);
+	}
+
+#endif
 }

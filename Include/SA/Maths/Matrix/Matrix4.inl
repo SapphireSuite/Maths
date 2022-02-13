@@ -869,39 +869,6 @@ namespace Sa
 //}
 
 
-#if SA_LOGGING
-
-	template <typename T, MatrixMajor major>
-	std::string Mat4<T, major>::ToString() const noexcept
-	{
-		// Keep memory order (Raw / column major).
-		const T* const data = Data();
-
-		return
-			Sa::ToString(data[0]) + ", " +
-			Sa::ToString(data[1]) + ", " +
-			Sa::ToString(data[2]) + ", " +
-			Sa::ToString(data[3]) + ",\n" +
-
-			Sa::ToString(data[4]) + ", " +
-			Sa::ToString(data[5]) + ", " +
-			Sa::ToString(data[6]) + ", " +
-			Sa::ToString(data[7]) + ",\n" +
-
-			Sa::ToString(data[8]) + ", " +
-			Sa::ToString(data[9]) + ", " +
-			Sa::ToString(data[10]) + ", " +
-			Sa::ToString(data[11]) + ",\n" +
-
-			Sa::ToString(data[12]) + ", " +
-			Sa::ToString(data[13]) + ", " +
-			Sa::ToString(data[14]) + ", " +
-			Sa::ToString(data[15]);
-	}
-
-#endif
-
-
 	template <typename TIn, typename T, MatrixMajor major>
 	Mat4<T, major> operator*(TIn _lhs, const Mat4<T, major>& _rhs) noexcept
 	{
@@ -935,4 +902,37 @@ namespace Sa
 			_lhs / _rhs.e30, _lhs / _rhs.e31, _lhs / _rhs.e32, _lhs / _rhs.e33
 		);
 	}
+
+
+#if SA_LOGGER_IMPL
+
+	template <typename T>
+	std::string ToString(const Mat4<T>& _m)
+	{
+		// Keep memory order (Raw / column major).
+		const T* const data = _m.Data();
+
+		return
+			Sa::ToString(data[0]) + ", " +
+			Sa::ToString(data[1]) + ", " +
+			Sa::ToString(data[2]) + ", " +
+			Sa::ToString(data[3]) + ",\n" +
+
+			Sa::ToString(data[4]) + ", " +
+			Sa::ToString(data[5]) + ", " +
+			Sa::ToString(data[6]) + ", " +
+			Sa::ToString(data[7]) + ",\n" +
+
+			Sa::ToString(data[8]) + ", " +
+			Sa::ToString(data[9]) + ", " +
+			Sa::ToString(data[10]) + ", " +
+			Sa::ToString(data[11]) + ",\n" +
+
+			Sa::ToString(data[12]) + ", " +
+			Sa::ToString(data[13]) + ", " +
+			Sa::ToString(data[14]) + ", " +
+			Sa::ToString(data[15]);
+	}
+
+#endif
 }

@@ -136,15 +136,15 @@ namespace Sa
 //}
 
 
-#if SA_LOGGING
+#if SA_LOGGER_IMPL
 
 	template <typename T>
-	std::string Vec4<T>::ToString() const noexcept
+	std::string ToString(const Vec4<T>& _v)
 	{
-		return "X: " + Sa::ToString(x) +
-			"\tY: " + Sa::ToString(y) +
-			"\tZ: " + Sa::ToString(z) +
-			"\tW: " + Sa::ToString(w);
+		return "X: " + Sa::ToString(_v.x) +
+			"\tY: " + Sa::ToString(_v.y) +
+			"\tZ: " + Sa::ToString(_v.z) +
+			"\tW: " + Sa::ToString(_v.w);
 	}
 
 #endif

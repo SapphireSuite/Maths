@@ -17,10 +17,18 @@ namespace Sa
 	template <typename T>
 	std::ostream& operator<<(std::ostream& _os, const Quat<T>& _q)
 	{
+#if SA_LOGGER_IMPL
+
+		return _os << ToString(_q);
+
+#else
+
 		return _os << "W: " + std::to_string(_q.w) +
 			"\tX: " + std::to_string(_q.x) +
 			"\tY: " + std::to_string(_q.y) +
 			"\tZ: " + std::to_string(_q.z);
+
+#endif
 	}
 }
 

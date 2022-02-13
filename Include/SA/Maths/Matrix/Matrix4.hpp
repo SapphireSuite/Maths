@@ -654,6 +654,26 @@ namespace Sa
 	template <typename TIn, typename T, MatrixMajor major>
 	Mat4<T, major> operator/(TIn _lhs, const Mat4<T, major>& _rhs);
 
+
+#if SA_LOGGER_IMPL
+
+	/**
+	*	\brief ToString Mat4 implementation
+	*
+	*	Convert Mat4 as a string.
+	*
+	*	\tparam T		Input matrix type.
+	*
+	*	\param[in] _m	Input matrix.
+	*
+	*	\return input matrix as a string.
+	*/
+	template <typename T>
+	std::string ToString(const Mat4<T>& _m);
+
+#endif
+
+
 //{ Aliases
 
 	/// Alias for int32 Mat4.

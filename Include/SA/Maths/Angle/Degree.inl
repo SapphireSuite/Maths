@@ -132,12 +132,12 @@ namespace Sa
 	}
 
 
-#if SA_LOGGING
+#if SA_LOGGER_IMPL
 
 	template <typename T>
-	std::string Deg<T>::ToString() const noexcept
+	std::string ToString(const Deg<T>& _d)
 	{
-		return std::to_string(mHandle) + "_deg";
+		return std::to_string(_d.Handle()) + "_deg";
 	}
 
 #endif

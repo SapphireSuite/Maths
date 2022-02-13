@@ -17,6 +17,12 @@ namespace Sa
 	template <typename T, MatrixMajor major>
 	std::ostream& operator<<(std::ostream& _os, const Mat4<T, major>& _m)
 	{
+#if SA_LOGGER_IMPL
+
+		return _os << ToString(_m);
+
+#else
+
 		// Keep memory order (Raw / column major).
 		const T* const data = _m.Data();
 
@@ -40,6 +46,8 @@ namespace Sa
 			std::to_string(data[13]) + ", " +
 			std::to_string(data[14]) + ", " +
 			std::to_string(data[15]);
+
+#endif
 	}
 }
 

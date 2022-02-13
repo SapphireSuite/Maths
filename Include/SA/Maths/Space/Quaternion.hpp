@@ -727,6 +727,25 @@ namespace Sa
 	constexpr Vec3<T> operator/(const Vec3<T>& _lhs, const Quat<T>& _rhs) noexcept;
 
 
+#if SA_LOGGER_IMPL
+
+	/**
+	*	\brief ToString Quat implementation
+	*
+	*	Convert Quat as a string.
+	*
+	*	\tparam T		Input quaternion type.
+	*
+	*	\param[in] _q	Input quaternion.
+	*
+	*	\return input quaternion as a string.
+	*/
+	template <typename T>
+	std::string ToString(const Quat<T>& _q);
+
+#endif
+
+
 //{ Aliases
 
 	/// Alias for float Quat.

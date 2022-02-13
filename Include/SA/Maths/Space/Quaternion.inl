@@ -623,20 +623,6 @@ namespace Sa
 //}
 
 
-#if SA_LOGGING
-
-	template <typename T>
-	std::string Quat<T>::ToString() const noexcept
-	{
-		return "W: " + Sa::ToString(w) +
-			"\tX: " + Sa::ToString(x) +
-			"\tY: " + Sa::ToString(y) +
-			"\tZ: " + Sa::ToString(z);
-	}
-
-#endif
-
-
 	template <typename T>
 	constexpr Quat<T> operator*(typename std::remove_cv<T>::type _lhs, const Quat<T>& _rhs) noexcept
 	{
@@ -670,4 +656,18 @@ namespace Sa
 	{
 		return _rhs / _lhs;
 	}
+
+
+#if SA_LOGGER_IMPL
+
+	template <typename T>
+	std::string ToString(const Quat<T>& _q)
+	{
+		return "W: " + Sa::ToString(_q.w) +
+			"\tX: " + Sa::ToString(_q.x) +
+			"\tY: " + Sa::ToString(_q.y) +
+			"\tZ: " + Sa::ToString(_q.z);
+	}
+
+#endif
 }

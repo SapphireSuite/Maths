@@ -195,22 +195,28 @@ namespace Sa
 		*	\return handle as \c float without conversion.
 		*/
 		explicit constexpr operator T() const noexcept;
-
-
-	#if SA_LOGGING
-
-		/**
-		*	\brief ToString implementation
-		*
-		*	Convert this radian as a string without conversion.
-		*
-		*	\return this as a string.
-		*/
-		std::string ToString() const noexcept;
-
-	#endif
 	};
 
+#if SA_LOGGER_IMPL
+
+	/**
+	*	\brief ToString Rad implementation
+	*
+	*	Convert Rad as a string.
+	*
+	*	\tparam T		Input radian type.
+	*
+	*	\param[in] _r	Input radian.
+	*
+	*	\return input radian as a string.
+	*/
+	template <typename T>
+	std::string ToString(const Rad<T>& _r);
+
+#endif
+
+
+//{ Aliases
 
 	/// Alias for float Rad.
 	using Radf = Rad<float>;
@@ -221,6 +227,9 @@ namespace Sa
 	/// Template alias of Rad
 	template <typename T>
 	using Radian = Rad<T>;
+
+//}
+
 
 	/**
 	*	\brief _rad \b literal operator.

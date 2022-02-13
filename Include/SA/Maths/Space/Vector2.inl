@@ -408,17 +408,6 @@ namespace Sa
 //}
 
 
-#if SA_LOGGING
-
-	template <typename T>
-	std::string Vec2<T>::ToString() const noexcept
-	{
-		return "X: " + Sa::ToString(x) + "\tY: " + Sa::ToString(y);
-	}
-
-#endif
-
-
 	template <typename T>
 	constexpr Vec2<T> operator*(typename std::remove_cv<T>::type _lhs, const Vec2<T>& _rhs) noexcept
 	{
@@ -433,4 +422,15 @@ namespace Sa
 
 		return Vec2<T>(_lhs / _rhs.x, _lhs / _rhs.y);
 	}
+
+
+#if SA_LOGGER_IMPL
+
+	template <typename T>
+	std::string ToString(const Vec2<T>& _v)
+	{
+		return "X: " + Sa::ToString(_v.x) + "\tY: " + Sa::ToString(_v.y);
+	}
+
+#endif
 }

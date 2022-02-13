@@ -17,9 +17,17 @@ namespace Sa
 	template <typename T>
 	std::ostream& operator<<(std::ostream& _os, const Vec3<T>& _v)
 	{
+#if SA_LOGGER_IMPL
+
+		return _os << ToString(_v);
+
+#else
+
 		return _os << "X: " + std::to_string(_v.x) +
 			"\tY: " + std::to_string(_v.y) +
 			"\tZ: " + std::to_string(_v.z);
+
+#endif
 	}
 }
 

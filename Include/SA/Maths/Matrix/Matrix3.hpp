@@ -575,6 +575,27 @@ namespace Sa
 	Mat3<T, major> operator/(TIn _lhs, const Mat3<T, major>& _rhs);
 
 
+#if SA_LOGGER_IMPL
+
+	/**
+	*	\brief ToString Mat3 implementation
+	*
+	*	Convert Mat3 as a string.
+	*
+	*	\tparam T		Input matrix type.
+	*
+	*	\param[in] _m	Input matrix.
+	*
+	*	\return input matrix as a string.
+	*/
+	template <typename T>
+	std::string ToString(const Mat3<T>& _m);
+
+#endif
+
+
+//{ Aliases
+
 	/// Alias for int32 Mat3.
 	using Mat3i = Mat3<int32_t>;
 
@@ -618,6 +639,7 @@ namespace Sa
 	/// Alias for column major double Mat3.
 	using CMat3d = Mat3<double, MatrixMajor::Column>;
 
+//}
 
 	/// \cond Internal
 

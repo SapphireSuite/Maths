@@ -600,20 +600,6 @@ namespace Sa
 		Vec3 operator/=(const Vec3& _rhs);
 
 //}
-
-
-#if SA_LOGGING
-
-		/**
-		*	\brief ToString implementation
-		*
-		*	Convert this vector as a string.
-		*
-		*	\return this as a string.
-		*/
-		std::string ToString() const noexcept;
-
-#endif
 	};
 
 
@@ -638,6 +624,25 @@ namespace Sa
 	*/
 	template <typename T>
 	constexpr Vec3<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec3<T>& _rhs);
+
+
+#if SA_LOGGER_IMPL
+
+	/**
+	*	\brief ToString Vec3 implementation
+	*
+	*	Convert Vec3 as a string.
+	*
+	*	\tparam T		Input vector type.
+	*
+	*	\param[in] _v	Input vector.
+	*
+	*	\return input vector as a string.
+	*/
+	template <typename T>
+	std::string ToString(const Vec3<T>& _v);
+
+#endif
 
 
 //{ Aliases
