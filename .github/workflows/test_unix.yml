@@ -89,15 +89,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        option:
-          - SA_MATHS_INTRINSICS_OPT
-          - SA_MATHS_TEST_LOGGER_INTEGRATION
 
-        include:
-          - option: SA_MATHS_INTRINSICS_OPT
-            config: Release
-          - option: SA_MATHS_TEST_LOGGER_INTEGRATION
-            config: Debug
+        config: [Release]
+        option:
+          - -DSA_MATHS_INTRINSICS_OPT=ON
+          - -DSA_MATHS_USE_LOGGER_OPT=OFF
+          - -DSA_MATHS_INTRINSICS_OPT=ON -DSA_MATHS_USE_LOGGER_OPT=OFF
 
     steps:
       - uses: actions/checkout@v2
@@ -110,7 +107,7 @@ jobs:
             echo "CC=clang-12" >> $GITHUB_ENV
             echo "CXX=clang++-12" >> $GITHUB_ENV
       - name: Generate Project
-        run: cmake -B Build -DCMAKE_BUILD_TYPE=${{ matrix.config }} -D${{ matrix.option }}=ON ${{ env.CMAKE_OPTIONS }} -G Ninja
+        run: cmake -B Build -DCMAKE_BUILD_TYPE=${{ matrix.config }} ${{ matrix.option }} ${{ env.CMAKE_OPTIONS }} -G Ninja
       - name: Build Project
         run: cmake --build Build --config ${{ matrix.config }} --verbose
       - name: Run CTests

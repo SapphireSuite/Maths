@@ -1,8 +1,8 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
-#include <Maths/Space/Quaternion.hpp>
+#include <Space/Quaternion.hpp>
 
-#include <Maths/Space/Vector3.hpp>
+#include <Space/Vector3.hpp>
 
 namespace Sa
 {

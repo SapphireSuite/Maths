@@ -16,6 +16,10 @@ CMakeCache.txt
 Makefile
 *.cmake
 
+# CMake cloned repo
+Logger/
+Support/
+
 
 # Build and Temp files.
 [Bb]uild/
