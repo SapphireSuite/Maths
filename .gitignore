@@ -14,11 +14,11 @@ CMakeFiles/
 CMake/
 CMakeCache.txt
 Makefile
-*.cmake
 
 # CMake cloned repo
 Logger/
 Support/
+googletest/
 
 
 # Build and Temp files.
