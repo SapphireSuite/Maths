@@ -65,6 +65,7 @@ option(SA_MATHS_INTRINSICS_OPT "Should build using intrinsics" OFF)
 
 if(SA_MATHS_INTRINSICS_OPT)
 	target_link_libraries(SA_Maths PUBLIC SA_Support)
+	#SA_SetIntrinsicsFlags(TARGET SA_Maths)
 endif()
 
 
