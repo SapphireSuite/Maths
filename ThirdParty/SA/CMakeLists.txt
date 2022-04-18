@@ -4,17 +4,15 @@
 
 # Entrypoints
 
-include(CMake_FetchModule/SA_FetchModule.cmake)
+add_subdirectory(CMake_Utils)
 
 if(SA_MATHS_USE_LOGGER_OPT)
 
 	SA_FetchModule(Logger)
 
-endif()
+elseif(SA_MATHS_INTRINSICS_OPT)
 
-
-if(NOT TARGET SA_Support AND NOT TARGET SA_Logger)
-
+	# Support required for intrinsics.
 	SA_FetchModule(Support)
 
 endif()
