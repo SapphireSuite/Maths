@@ -50,23 +50,14 @@ target_compile_definitions(SA_Maths PUBLIC SA_MATHS_IMPL)
 
 
 
-# Options
+# Option Definitions
 
 ## Add SA_Maths's use SA_Logger.
 option(SA_MATHS_USE_LOGGER_OPT "Should compile and use SA_Logger" ON)
 
-if(SA_MATHS_USE_LOGGER_OPT)
-	target_link_libraries(SA_Maths PUBLIC SA_Logger)
-endif()
-
 
 ## Add SA_Maths's intrinsics implementation.
 option(SA_MATHS_INTRINSICS_OPT "Should build using intrinsics" OFF)
-
-if(SA_MATHS_INTRINSICS_OPT)
-	target_link_libraries(SA_Maths PUBLIC SA_Support)
-	#SA_SetIntrinsicsFlags(TARGET SA_Maths)
-endif()
 
 
 ## Add SA_Maths's tests to build tree.
@@ -88,4 +79,19 @@ if(SA_MATHS_BUILD_TESTS_OPT)
 	enable_testing()
 
 	add_subdirectory(Tests)
+endif()
+
+
+
+# Option Application
+
+if(SA_MATHS_USE_LOGGER_OPT)
+	target_link_libraries(SA_Maths PUBLIC SA_Logger)
+endif()
+
+
+if(SA_MATHS_INTRINSICS_OPT)
+	target_link_libraries(SA_Maths PUBLIC SA_Support)
+	target_compile_definitions(SA_Maths PUBLIC SA_MATHS_INTRINSICS_OPT)
+	SA_SetIntrinsicsFlags(TARGET SA_Maths)
 endif()

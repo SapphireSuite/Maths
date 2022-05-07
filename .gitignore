@@ -22,6 +22,7 @@ Makefile
 Logger/
 Support/
 googletest/
+googlebenchmark/
 
 
 # Build and Temp files.
