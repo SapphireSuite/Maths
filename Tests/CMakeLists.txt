@@ -1,7 +1,7 @@
 # Copyright (c) 2022 Sapphire's Suite. All Rights Reserved.
 
 
-SA_SetMaxWarningLevel(TARGET SA_Maths)
+SA_SetupTargetForTesting(TARGET SA_Maths)
 
 
 
