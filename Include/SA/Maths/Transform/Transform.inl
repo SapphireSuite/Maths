@@ -232,6 +232,33 @@ namespace Sa
 //}
 
 
+//{ Cast
+
+	template <typename T, template <typename> typename... Args>
+	template <typename TrIn, typename CurrT, typename... PArgs>
+	void Tr<T, Args...>::CastPacked(TrIn& _res) noexcept
+	{
+		if constexpr (std::is_base_of<CurrT, TrIn>::value)
+			(CurrT&)_res = (const CurrT&)*this;
+
+		if constexpr (sizeof...(PArgs))
+			CastPacked<PArgs...>(_res);
+	}
+
+	template <typename T, template <typename> typename... Args>
+	template <typename TIn, template <typename> typename... ArgsIn>
+	Tr<T, Args...>::operator Tr<TIn, ArgsIn...>() const noexcept
+	{
+		Tr<TIn, ArgsIn...> res;
+
+		CastPacked<Args<T>...>(res);
+
+		return res;
+	}
+
+//}
+
+
 #if SA_LOGGER_IMPL
 
 	template <typename T, template <typename> typename... Args>

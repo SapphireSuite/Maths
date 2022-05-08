@@ -188,19 +188,23 @@ namespace Sa
 		template <template <typename> typename... InArgs>
 		Tr operator/=(const Tr<T, InArgs...>& _rhs) const;
 
-
-		// /**
-		// *	\brief \e Cast operator into other Transf type.
-		// *
-		// *	\tparam TIn		Type of the casted transform.
-		// *	\tparam CIn		Type of the casted TrComp.
-		// *
-		// *	\return \e Casted result.
-		// */
-		// template <typename TIn, TrComp CIn>
-		// constexpr operator Transf<TIn, CIn>() const noexcept;
 	//}
 
+
+	//{ Cast
+
+		/**
+		*	\brief \e Cast operator into other Transf type.
+		*
+		*	\tparam TIn		Type of the casted transform.
+		*	\tparam ArgsIn	Args Type of the casted transform.
+		*
+		*	\return \e Casted result.
+		*/
+		template <typename TIn, template <typename> typename... ArgsIn>
+		operator Tr<TIn, ArgsIn...>() const noexcept;
+
+	//}
 
 	private:
 
@@ -226,6 +230,10 @@ namespace Sa
 		template <typename TrIn, typename CurrT, typename... PArgs>
 		void DividePacked(const Tr& _lhs, const TrIn& _rhs) noexcept;
 	
+
+		template <typename TrIn, typename CurrT, typename... PArgs>
+		void CastPacked(TrIn& _res) noexcept;
+
 	//}
 
 
