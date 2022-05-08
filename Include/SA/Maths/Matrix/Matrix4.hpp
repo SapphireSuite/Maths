@@ -336,15 +336,24 @@ namespace Sa
 //{ Transform
 
 		/**
+		 * @brief Set the Translation in this matrix.
+		 * 
+		 * @param _transl 	Translation vector.
+		 * @return this matrix with new translation.
+		 */
+		Mat4& SetTranslation(const Vec3<T>& _transl) noexcept;
+
+		/**
 		*	\brief \b Optimized translation from Vec3.
 		*
-		*	Use this to apply scale instead of MakeTranslation() * m;
+		*	Use this to apply translation instead of MakeTranslation() * m;
 		*
 		*	\param[in] _transl	Vector to translate
 		*
 		*	\return this matrix translated.
 		*/
 		Mat4& ApplyTranslation(const Vec3<T>& _transl) noexcept;
+
 
 		/**
 		*	\brief \b Optimized scale from Vec3.
@@ -392,7 +401,7 @@ namespace Sa
 		*	\brief Make <b> transform matrix </b>.
 		*
 		*	\param[in] _transl		Vector for translation.
-		*	\param[in] _rot	Quaternion for rotation.
+		*	\param[in] _rot			Quaternion for rotation.
 		*
 		*	\return transform matrix.
 		*/
@@ -411,7 +420,7 @@ namespace Sa
 		/**
 		*	\brief Make <b> transform matrix </b>.
 		*
-		*	\param[in] _rot	Quaternion for rotation.
+		*	\param[in] _rot			Quaternion for rotation.
 		*	\param[in] _scale		Vector for scale.
 		*
 		*	\return transform matrix.
@@ -422,7 +431,7 @@ namespace Sa
 		*	\brief Make <b> transform matrix </b>.
 		*
 		*	\param[in] _transl		Vector for translation.
-		*	\param[in] _rot	Quaternion for rotation.
+		*	\param[in] _rot			Quaternion for rotation.
 		*	\param[in] _scale		Vector for scale.
 		*
 		*	\return transform matrix.

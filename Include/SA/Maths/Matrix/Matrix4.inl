@@ -456,6 +456,17 @@ namespace Sa
 //{ Transform
 
 	template <typename T, MatrixMajor major>
+	Mat4<T, major>& Mat4<T, major>::SetTranslation(const Vec3<T>& _transl) noexcept
+	{
+		e03 = _transl.x;
+		e13 = _transl.y;
+		e23 = _transl.z;
+
+		return *this;
+	}
+
+
+	template <typename T, MatrixMajor major>
 	Mat4<T, major>& Mat4<T, major>::ApplyTranslation(const Vec3<T>& _transl) noexcept
 	{
 		e03 += _transl.x;
@@ -492,9 +503,7 @@ namespace Sa
 	{
 		Mat4 result = Mat4::Identity;
 
-		result.e03 = _transl.x;
-		result.e13 = _transl.y;
-		result.e23 = _transl.z;
+		result.SetTranslation(_transl);
 
 		return result;
 	}
@@ -541,12 +550,7 @@ namespace Sa
 	template <typename T, MatrixMajor major>
 	Mat4<T, major>  Mat4<T, major>::MakeTransform(const Vec3<T>& _transl, const Quat<T>& _rotation) noexcept
 	{
-		Mat4<T, major> result = MakeRotation(_rotation);
-
-		// Set translation.
-		result.e03 = _transl.x;
-		result.e13 = _transl.y;
-		result.e23 = _transl.z;
+		Mat4<T, major> result = MakeRotation(_rotation).SetTranslation(_transl);
 
 		return result;
 	}
@@ -554,12 +558,7 @@ namespace Sa
 	template <typename T, MatrixMajor major>
 	Mat4<T, major>  Mat4<T, major>::MakeTransform(const Vec3<T>& _transl, const Vec3<T>& _scale) noexcept
 	{
-		Mat4<T, major> result = MakeScale(_scale);
-
-		// Set translation.
-		result.e03 = _transl.x;
-		result.e13 = _transl.y;
-		result.e23 = _transl.z;
+		Mat4<T, major> result = MakeScale(_scale).SetTranslation(_transl);
 
 		return result;
 	}
@@ -573,12 +572,7 @@ namespace Sa
 	template <typename T, MatrixMajor major>
 	Mat4<T, major>  Mat4<T, major>::MakeTransform(const Vec3<T>& _transl, const Quat<T>& _rotation, const Vec3<T>& _scale) noexcept
 	{
-		Mat4<T, major> result = MakeRotation(_rotation).ApplyScale(_scale);
-
-		// Set Translation.
-		result.e03 = _transl.x;
-		result.e13 = _transl.y;
-		result.e23 = _transl.z;
+		Mat4<T, major> result = MakeRotation(_rotation).ApplyScale(_scale).SetTranslation(_transl);
 
 		return result;
 	}

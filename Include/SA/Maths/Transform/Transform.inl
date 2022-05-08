@@ -76,33 +76,62 @@ namespace Sa
 //}
 
 
-// //{ Transformation
+//{ Transformation
 
-// 	template <typename T, template <typename> typename... Args>
-// 	Vec3<T> Tr<T, Args...>::Right() const
-// 	{
+	template <typename T, template <typename> typename... Args>
+	Vec3<T> Tr<T, Args...>::Right() const
+	{
+		if constexpr (std::is_base_of<TrRotation<T>, Tr<T, Args...>>::value)
+			return TrRotation<T>::rotation.RightVector();
+		else
+			return Vec3<T>::Right;
+	}
 
-// 	}
+	template <typename T, template <typename> typename... Args>
+	Vec3<T> Tr<T, Args...>::Up() const
+	{
+		if constexpr (std::is_base_of<TrRotation<T>, Tr<T, Args...>>::value)
+			return TrRotation<T>::rotation.UpVector();
+		else
+			return Vec3<T>::Up;
+	}
 
-// 	template <typename T, template <typename> typename... Args>
-// 	Vec3<T> Tr<T, Args...>::Up() const
-// 	{
+	template <typename T, template <typename> typename... Args>
+	Vec3<T> Tr<T, Args...>::Forward() const
+	{
+		if constexpr (std::is_base_of<TrRotation<T>, Tr<T, Args...>>::value)
+			return TrRotation<T>::rotation.ForwardVector();
+		else
+			return Vec3<T>::Forward;
+	}
 
-// 	}
 
-// 	template <typename T, template <typename> typename... Args>
-// 	Vec3<T> Tr<T, Args...>::Forward() const
-// 	{
+	template <typename T, template <typename> typename... Args>
+	template <typename ChildT>
+	void Tr<T, Args...>::ConstructMatrixComponent(Mat4<T>& _out) const noexcept
+	{
+		ChildT::ConstructMatrix(_out);
+	}
 
-// 	}
+	template <typename T, template <typename> typename... Args>
+	Mat4<T> Tr<T, Args...>::Matrix() const noexcept
+	{
+		return Matrix(TrDefaultOrderT<Tr<T, Args...>>(*this));
+	}
 
-// 	template <typename T, template <typename> typename... Args>
-// 	Mat4<T> Tr<T, Args...>::Matrix() const
-// 	{
+	template <typename T, template <typename> typename... Args>
+	template <template <typename> typename... TrOrderArgs>
+	Mat4<T> Tr<T, Args...>::Matrix(TrOrderT<Tr<T, Args...>, TrOrderArgs...> _order) const noexcept
+	{
+		Mat4<T> out = Mat4<T>::Identity;
 
-// 	}
+		_order.template MatrixOrderPacked<Args<T>...>(out);
+		_order.template MatrixOthersPacked<Args<T>...>(out);
 
-// //}
+		return out;
+	}
+
+//}
 
 
 //{ Lerp

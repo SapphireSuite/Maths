@@ -5,8 +5,7 @@
 #ifndef SAPPHIRE_MATHS_TRANSFORM_USCALE_GUARD
 #define SAPPHIRE_MATHS_TRANSFORM_USCALE_GUARD
 
-#include <SA/Maths/Algorithms/Equals.hpp>
-#include <SA/Maths/Algorithms/Lerp.hpp>
+#include <SA/Maths/Matrix/Matrix4.hpp>
 
 namespace Sa
 {
@@ -17,7 +16,7 @@ namespace Sa
 
 	protected:
 
-//{ Equals
+	//{ Equals
 
 		constexpr bool IsZero() const noexcept
 		{
@@ -35,65 +34,75 @@ namespace Sa
 			return Maths::Equals(uScale, _other.uScale, _epsilon);
 		}
 
-//}
+	//}
 
 
-//{ Lerp
+	//{ Transformation
 
-	static TrUScale LerpUnclamped(const TrUScale& _start, const TrUScale& _end, float _alpha) noexcept
-	{
-		return TrUScale{ Maths::LerpUnclamped(_start.uScale, _end.uScale, _alpha) };
-	}
-
-//}
-
-
-//{ Operators
-
-	template <typename RhsT>
-	static TrUScale Multiply(const TrUScale& _lhs, const RhsT& _rhs) noexcept
-	{
-		if constexpr (std::is_base_of<TrUScale, RhsT>::value)
+		void ConstructMatrix(Mat4<T>& _out) const noexcept
 		{
-			// UScale component found.
-
-			return TrUScale{ _lhs.uScale * _rhs.uScale };
+			_out.ApplyScale(uScale);
 		}
-		else
+
+	//}
+
+
+	//{ Lerp
+
+		static TrUScale LerpUnclamped(const TrUScale& _start, const TrUScale& _end, float _alpha) noexcept
 		{
-			// Default: forward component (lhs always has this component).
-
-			return _lhs;
+			return TrUScale{ Maths::LerpUnclamped(_start.uScale, _end.uScale, _alpha) };
 		}
-	}
 
-	template <typename RhsT>
-	static TrUScale Divide(const TrUScale& _lhs, const RhsT& _rhs) noexcept
-	{
-		if constexpr (std::is_base_of<TrUScale, RhsT>::value)
+	//}
+
+
+	//{ Operators
+
+		template <typename RhsT>
+		static TrUScale Multiply(const TrUScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			// UScale component found.
+			if constexpr (std::is_base_of<TrUScale, RhsT>::value)
+			{
+				// UScale component found.
 
-			return TrUScale{ _lhs.uScale / _rhs.uScale };
+				return TrUScale{ _lhs.uScale * _rhs.uScale };
+			}
+			else
+			{
+				// Default: forward component (lhs always has this component).
+
+				return _lhs;
+			}
 		}
-		else
+
+		template <typename RhsT>
+		static TrUScale Divide(const TrUScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			// Default: forward component (lhs always has this component).
+			if constexpr (std::is_base_of<TrUScale, RhsT>::value)
+			{
+				// UScale component found.
 
-			return _lhs;
+				return TrUScale{ _lhs.uScale / _rhs.uScale };
+			}
+			else
+			{
+				// Default: forward component (lhs always has this component).
+
+				return _lhs;
+			}
 		}
-	}
 
-//}
+	//}
 
-#if SA_LOGGER_IMPL
+	#if SA_LOGGER_IMPL
 
-	std::string ToString() const
-	{
-		return "UScale: " + Sa::ToString(uScale);
-	}
+		std::string ToString() const
+		{
+			return "UScale: " + Sa::ToString(uScale);
+		}
 
-#endif
+	#endif
 
 	};
 }

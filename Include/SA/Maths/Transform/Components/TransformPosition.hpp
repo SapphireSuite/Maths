@@ -18,7 +18,8 @@ namespace Sa
 
 	protected:
 
-//{ Equals
+	//{ Equals
+
 		constexpr bool IsZero() const noexcept
 		{
 			return position.IsZero();
@@ -36,90 +37,100 @@ namespace Sa
 			return position.Equals(_other.position, _epsilon);
 		}
 
-//}
+	//}
 
 
-//{ Lerp
+	//{ Transformation
 
-	static TrPosition LerpUnclamped(const TrPosition& _start, const TrPosition& _end, float _alpha) noexcept
-	{
-		return TrPosition{ Vec3<T>::LerpUnclamped(_start.position, _end.position, _alpha) };
-	}
-
-//}
-
-
-//{ Operators
-
-	template <typename LhsT, typename RhsT>
-	static TrPosition Multiply(const LhsT& _lhs, const RhsT& _rhs) noexcept
-	{
-		if constexpr (std::is_base_of<TrPosition, RhsT>::value)
+		void ConstructMatrix(Mat4<T>& _out) const noexcept
 		{
-			// Position component found.
+			_out.SetTranslation(position);
+		}
 
-			if constexpr (std::is_base_of<TrRotation<T>, LhsT>::value)
+	//}
+
+
+	//{ Lerp
+
+		static TrPosition LerpUnclamped(const TrPosition& _start, const TrPosition& _end, float _alpha) noexcept
+		{
+			return TrPosition{ Vec3<T>::LerpUnclamped(_start.position, _end.position, _alpha) };
+		}
+
+	//}
+
+
+	//{ Operators
+
+		template <typename LhsT, typename RhsT>
+		static TrPosition Multiply(const LhsT& _lhs, const RhsT& _rhs) noexcept
+		{
+			if constexpr (std::is_base_of<TrPosition, RhsT>::value)
 			{
-				// Self rotation component found.
-				// Apply translation with rotation:
-				// position + rotation.Rotate(_other.position)
+				// Position component found.
 
-				return TrPosition{ _lhs.position + _lhs.rotation.Rotate(_rhs.position) };
+				if constexpr (std::is_base_of<TrRotation<T>, LhsT>::value)
+				{
+					// Self rotation component found.
+					// Apply translation with rotation:
+					// position + rotation.Rotate(_other.position)
+
+					return TrPosition{ _lhs.position + _lhs.rotation.Rotate(_rhs.position) };
+				}
+				else
+				{
+					// No rotation: apply translation.
+					return TrPosition{ _lhs.position + _rhs.position };
+				}
 			}
 			else
 			{
-				// No rotation: apply translation.
-				return TrPosition{ _lhs.position + _rhs.position };
+				// Default: forward component (lhs always has this component).
+
+				return _lhs;
 			}
 		}
-		else
+
+
+		template <typename LhsT, typename RhsT>
+		static TrPosition Divide(const LhsT& _lhs, const RhsT& _rhs) noexcept
 		{
-			// Default: forward component (lhs always has this component).
-
-			return _lhs;
-		}
-	}
-
-
-	template <typename LhsT, typename RhsT>
-	static TrPosition Divide(const LhsT& _lhs, const RhsT& _rhs) noexcept
-	{
-		if constexpr (std::is_base_of<TrPosition, RhsT>::value)
-		{
-			// Position component found.
-
-			if constexpr (std::is_base_of<TrRotation<T>, LhsT>::value)
+			if constexpr (std::is_base_of<TrPosition, RhsT>::value)
 			{
-				// Self rotation component found.
-				// Apply inverse translation with rotation:
-				// position - rotation.Rotate(_other.position)
+				// Position component found.
 
-				return TrPosition{ _lhs.position - _lhs.rotation.Rotate(_rhs.position) };
+				if constexpr (std::is_base_of<TrRotation<T>, LhsT>::value)
+				{
+					// Self rotation component found.
+					// Apply inverse translation with rotation:
+					// position - rotation.Rotate(_other.position)
+
+					return TrPosition{ _lhs.position - _lhs.rotation.Rotate(_rhs.position) };
+				}
+				else
+				{
+					// No rotation: apply inverse translation.
+					return TrPosition{ _lhs.position - _rhs.position };
+				}
 			}
 			else
 			{
-				// No rotation: apply inverse translation.
-				return TrPosition{ _lhs.position - _rhs.position };
+				// Default: forward component (lhs always has this component).
+
+				return _lhs;
 			}
 		}
-		else
+
+	//}
+
+	#if SA_LOGGER_IMPL
+
+		std::string ToString() const
 		{
-			// Default: forward component (lhs always has this component).
-
-			return _lhs;
+			return "Pos: " + Sa::ToString(position);
 		}
-	}
 
-//}
-
-#if SA_LOGGER_IMPL
-
-	std::string ToString() const
-	{
-		return "Pos: " + Sa::ToString(position);
-	}
-
-#endif
+	#endif
 
 	};
 }

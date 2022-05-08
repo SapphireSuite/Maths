@@ -6,6 +6,7 @@
 #define SAPPHIRE_MATHS_TRANSFORM_SCALE_GUARD
 
 #include <SA/Maths/Space/Vector3.hpp>
+#include <SA/Maths/Matrix/Matrix4.hpp>
 
 #include <SA/Maths/Transform/Transform.hpp>
 #include <SA/Maths/Transform/Components/TransformUScale.hpp>
@@ -19,7 +20,7 @@ namespace Sa
 
 	protected:
 
-//{ Equals
+	//{ Equals
 
 		constexpr bool IsZero() const noexcept
 		{
@@ -37,74 +38,84 @@ namespace Sa
 			return scale.Equals(_other.scale, _epsilon);
 		}
 
-//}
+	//}
 
 
-//{ Lerp
+	//{ Transformation
 
-	static TrScale LerpUnclamped(const TrScale& _start, const TrScale& _end, float _alpha) noexcept
-	{
-		return TrScale{ Vec3<T>::LerpUnclamped(_start.scale, _end.scale, _alpha) };
-	}
-
-//}
-
-
-//{ Operators
-
-	template <typename RhsT>
-	static TrScale Multiply(const TrScale& _lhs, const RhsT& _rhs) noexcept
-	{
-		if constexpr (std::is_base_of<TrScale, RhsT>::value)
+		void ConstructMatrix(Mat4<T>& _out) const noexcept
 		{
-			// Scale component found.
-			return TrScale{ _lhs.scale * _rhs.scale };
+			_out.ApplyScale(scale);
 		}
-		else if constexpr (std::is_base_of<TrUScale<T>, RhsT>::value)
+
+	//}
+
+
+	//{ Lerp
+
+		static TrScale LerpUnclamped(const TrScale& _start, const TrScale& _end, float _alpha) noexcept
 		{
-			// UScale component found instead.
-			return TrScale{ _lhs.scale * _rhs.uScale };
+			return TrScale{ Vec3<T>::LerpUnclamped(_start.scale, _end.scale, _alpha) };
 		}
-		else
+
+	//}
+
+
+	//{ Operators
+
+		template <typename RhsT>
+		static TrScale Multiply(const TrScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			// Default: forward component (lhs always has this component).
+			if constexpr (std::is_base_of<TrScale, RhsT>::value)
+			{
+				// Scale component found.
+				return TrScale{ _lhs.scale * _rhs.scale };
+			}
+			else if constexpr (std::is_base_of<TrUScale<T>, RhsT>::value)
+			{
+				// UScale component found instead.
+				return TrScale{ _lhs.scale * _rhs.uScale };
+			}
+			else
+			{
+				// Default: forward component (lhs always has this component).
 
-			return _lhs;
+				return _lhs;
+			}
 		}
-	}
 
-	
-	template <typename RhsT>
-	static TrScale Divide(const TrScale& _lhs, const RhsT& _rhs) noexcept
-	{
-		if constexpr (std::is_base_of<TrScale, RhsT>::value)
+		
+		template <typename RhsT>
+		static TrScale Divide(const TrScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			// Scale component found.
-			return TrScale{ _lhs.scale / _rhs.scale };
+			if constexpr (std::is_base_of<TrScale, RhsT>::value)
+			{
+				// Scale component found.
+				return TrScale{ _lhs.scale / _rhs.scale };
+			}
+			else if constexpr (std::is_base_of<TrUScale<T>, RhsT>::value)
+			{
+				// UScale component found instead.
+				return TrScale{ _lhs.scale / _rhs.uScale };
+			}
+			else
+			{
+				// Default: forward component (lhs always has this component).
+
+				return _lhs;
+			}
 		}
-		else if constexpr (std::is_base_of<TrUScale<T>, RhsT>::value)
+
+	//}
+
+	#if SA_LOGGER_IMPL
+
+		std::string ToString() const
 		{
-			// UScale component found instead.
-			return TrScale{ _lhs.scale / _rhs.uScale };
+			return "Scale: " + Sa::ToString(scale);
 		}
-		else
-		{
-			// Default: forward component (lhs always has this component).
 
-			return _lhs;
-		}
-	}
-
-//}
-
-#if SA_LOGGER_IMPL
-
-	std::string ToString() const
-	{
-		return "Scale: " + Sa::ToString(scale);
-	}
-
-#endif
+	#endif
 
 	};
 }

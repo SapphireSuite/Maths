@@ -7,8 +7,7 @@
 
 #include <SA/Maths/Debug.hpp>
 
-#include <SA/Maths/Space/Vector3.hpp>
-#include <SA/Maths/Matrix/Matrix4.hpp>
+#include <SA/Maths/Transform/TransformOrder.hpp>
 
 namespace Sa
 {
@@ -21,9 +20,9 @@ namespace Sa
 	template <typename T, template <typename> typename... Args>
 	struct Tr : public Args<T>...
 	{
-	public:
+		using Type = T;
 
-//{ Equals
+	//{ Equals
 
 		/**
 		*	\brief Whether this transform is a zero transform.
@@ -68,43 +67,55 @@ namespace Sa
 		*/
 		bool operator!=(const Tr& _rhs) noexcept;
 
-//}
+	//}
 
 
-// //{ Transformation
+	//{ Transformation
 
-// 		/**
-// 		*	\brief \e Getter of \b right vector (X axis) of this transform.
-// 		*
-// 		*	\return transformed right vector normalized.
-// 		*/
-// 		Vec3<T> Right() const;
+		/**
+		*	\brief \e Getter of \b right vector (X axis) of this transform.
+		*
+		*	\return transformed right vector normalized.
+		*/
+		Vec3<T> Right() const;
 
-// 		/**
-// 		*	\brief \e Getter of \b up vector (Y axis) of this transform.
-// 		*
-// 		*	\return transformed up vector normalized.
-// 		*/
-// 		Vec3<T> Up() const;
+		/**
+		*	\brief \e Getter of \b up vector (Y axis) of this transform.
+		*
+		*	\return transformed up vector normalized.
+		*/
+		Vec3<T> Up() const;
 
-// 		/**
-// 		*	\brief \e Getter of \b forward vector (Z axis) of this transform.
-// 		*
-// 		*	\return transformed forward vector normalized.
-// 		*/
-// 		Vec3<T> Forward() const;
-
-// 		/**
-// 		*	\brief \e Getter of Matrix
-// 		*
-// 		*	\return transformed forward vector normalized.
-// 		*/
-// 		Mat4<T> Matrix() const;
-
-// //}
+		/**
+		*	\brief \e Getter of \b forward vector (Z axis) of this transform.
+		*
+		*	\return transformed forward vector normalized.
+		*/
+		Vec3<T> Forward() const;
 
 
-//{ Lerp
+		template <typename ChildT>
+		void ConstructMatrixComponent(Mat4<T>& _out) const noexcept;
+
+		/**
+		*	\brief \e Getter of Matrix
+		*
+		*	\return transformed forward vector normalized.
+		*/
+		Mat4<T> Matrix() const noexcept;
+
+		/**
+		*	\brief \e Getter of Matrix
+		*
+		*	\return transformed forward vector normalized.
+		*/
+		template <template <typename> typename... TrOrderArgs>
+		Mat4<T> Matrix(TrOrderT<Tr<T, Args...>, TrOrderArgs...> _order) const noexcept;
+
+	//}
+
+
+	//{ Lerp
 
 		/**
 		*	\brief <b> Clamped Lerp </b> from _start to _end at _alpha.
@@ -132,10 +143,10 @@ namespace Sa
 		*/
 		static Tr LerpUnclamped(const Tr& _start, const Tr& _end, float _alpha) noexcept;
 
-//}
+	//}
 
 
-//{ Operators
+	//{ Operators
 
 		/**
 		*	\brief \b Multiply transform to compute transformation.
@@ -178,7 +189,6 @@ namespace Sa
 		Tr operator/=(const Tr<T, InArgs...>& _rhs) const;
 
 
-
 		// /**
 		// *	\brief \e Cast operator into other Transf type.
 		// *
@@ -189,12 +199,12 @@ namespace Sa
 		// */
 		// template <typename TIn, TrComp CIn>
 		// constexpr operator Transf<TIn, CIn>() const noexcept;
-//}
+	//}
 
 
 	private:
 
-//{ Packed
+	//{ Packed
 
 		template <typename CurrT, typename... PArgs>
 		bool IsZeroPacked() const noexcept;
@@ -216,8 +226,10 @@ namespace Sa
 		template <typename TrIn, typename CurrT, typename... PArgs>
 		void DividePacked(const Tr& _lhs, const TrIn& _rhs) noexcept;
 	
+	//}
 
-#if SA_LOGGER_IMPL
+
+	#if SA_LOGGER_IMPL
 
 		template <typename CurrT, typename... PArgs>
 		std::string ToStringPacked() const noexcept;
@@ -226,10 +238,7 @@ namespace Sa
 
 		std::string ToString() const noexcept;
 
-#endif
-
-//}
-
+	#endif
 	};
 
 
