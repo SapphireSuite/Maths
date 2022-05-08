@@ -269,6 +269,144 @@ namespace Sa
 
 #endif
 
+
+//{ Aliases
+
+//{ Tr aliases
+
+	/// Alias for Position Tranf.
+	template <typename T>
+	using TrP = Tr<T, TrPosition>;
+
+	/// Alias for Rotation Tranf.
+	template <typename T>
+	using TrR = Tr<T, TrRotation>;
+
+	/// Alias for Scale Tranf.
+	template <typename T>
+	using TrS = Tr<T, TrScale>;
+
+	/// Alias for Position Rotation Tranf.
+	template <typename T>
+	using TrPR = Tr<T, TrPosition, TrRotation>;
+
+	/// Alias for Position Rotation Scale Tranf.
+	template <typename T>
+	using TrPRS = Tr<T, TrPosition, TrRotation, TrScale>;
+
+
+//{ Float
+
+	/// Alias for Position Tranf float.
+	using TrPf = Tr<float, TrPosition>;
+
+	/// Alias for Rotation Tranf float.
+	using TrRf = Tr<float, TrRotation>;
+
+	/// Alias for Scale Tranf float.
+	using TrSf = Tr<float, TrScale>;
+
+	/// Alias for Position Rotation Tranf float.
+	using TrPRf = Tr<float, TrPosition, TrRotation>;
+
+	/// Alias for Position Rotation Scale Tranf float.
+	using TrPRSf = Tr<float, TrPosition, TrRotation, TrScale>;
+
+//}
+
+
+//{ Double
+
+	/// Alias for Position Tranf double.
+	using TrPd = Tr<double, TrPosition>;
+
+	/// Alias for Rotation Tranf double.
+	using TrRd = Tr<double, TrRotation>;
+
+	/// Alias for Scale Tranf double.
+	using TrSd = Tr<double, TrScale>;
+
+	/// Alias for Position Rotation Tranf double.
+	using TrPRd = Tr<double, TrPosition, TrRotation>;
+
+	/// Alias for Position Rotation Scale Tranf double.
+	using TrPRSd = Tr<double, TrPosition, TrRotation, TrScale>;
+
+//}
+
+//}
+
+
+//{ Transform aliases
+
+	/// Template alias of Tr
+	template <typename T, template <typename> typename... Args>
+	using Transform = Tr<T, Args...>;
+
+	/// Alias for Position Transform.
+	template <typename T>
+	using TransformP = Transform<T, TrPosition>;
+
+	/// Alias for Rotation Transform.
+	template <typename T>
+	using TransformR = Transform<T, TrRotation>;
+
+	/// Alias for Scale Transform.
+	template <typename T>
+	using TransformS = Transform<T, TrScale>;
+
+	/// Alias for Position Rotation Transform.
+	template <typename T>
+	using TransformPR = Transform<T, TrPosition, TrRotation>;
+
+	/// Alias for Position Rotation Scale Transform.
+	template <typename T>
+	using TransformPRS = Transform<T, TrPosition, TrRotation, TrScale>;
+
+
+//{ Float
+
+	/// Alias for Position Transform float.
+	using TransformPf = Transform<float, TrPosition>;
+
+	/// Alias for Rotation Transform float.
+	using TransformRf = Transform<float, TrRotation>;
+
+	/// Alias for Scale Transform float.
+	using TransformSf = Transform<float, TrScale>;
+
+	/// Alias for Position Rotation Transform float.
+	using TransformPRf = Transform<float, TrPosition, TrRotation>;
+
+	/// Alias for Position Rotation Scale Transform float.
+	using TransformPRSf = Transform<float, TrPosition, TrRotation, TrScale>;
+
+//}
+
+
+//{ Double
+
+	/// Alias for Position Transform double.
+	using TransformPd = Transform<double, TrPosition>;
+
+	/// Alias for Rotation Transform double.
+	using TransformRd = Transform<double, TrRotation>;
+
+	/// Alias for Scale Transform double.
+	using TransformSd = Transform<double, TrScale>;
+
+	/// Alias for Position Rotation Transform double.
+	using TransformPRd = Transform<double, TrPosition, TrRotation>;
+
+	/// Alias for Position Rotation Scale Transform double.
+	using TransformPRSd = Transform<double, TrPosition, TrRotation, TrScale>;
+
+//}
+
+//}
+
+//}
+
 }
 
 #include <SA/Maths/Transform/Transform.inl>

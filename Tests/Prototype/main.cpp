@@ -9,7 +9,7 @@ using namespace Sa;
 
 int main()
 {
-	Tr<float, TrPosition, TrRotation, TrScale> tr1 {
+	TrPRSf tr1 {
 		{ Vec3f(6.3f, 5.14f, 9.25f) },
 		{ Quatf(40_deg, Vec3f::Up) },
 		{ Vec3f(1.0f, 2.0f, 3.0f) }
