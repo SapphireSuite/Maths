@@ -34,7 +34,7 @@ namespace Sa
 		*	\return	True on equality, otherwise false.
 		*/
 		template <typename T, typename EpsT = T>
-		bool Equals(const T& _lhs, const T& _rhs, EpsT _epsilon = std::numeric_limits<EpsT>::epsilon())
+		constexpr bool Equals(const T& _lhs, const T& _rhs, EpsT _epsilon = std::numeric_limits<EpsT>::epsilon())
 		{
 			// Don't use std::abs for unsigned compatibility.
 
