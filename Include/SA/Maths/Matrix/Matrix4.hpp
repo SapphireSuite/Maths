@@ -335,40 +335,6 @@ namespace Sa
 
 //{ Transform
 
-		/**
-		 * @brief Set the Translation in this matrix.
-		 * 
-		 * @param _transl 	Translation vector.
-		 * @return this matrix with new translation.
-		 */
-		Mat4& SetTranslation(const Vec3<T>& _transl) noexcept;
-
-		/**
-		*	\brief \b Optimized translation from Vec3.
-		*
-		*	Use this to apply translation instead of MakeTranslation() * m;
-		*
-		*	\param[in] _transl	Vector to translate
-		*
-		*	\return this matrix translated.
-		*/
-		Mat4& ApplyTranslation(const Vec3<T>& _transl) noexcept;
-
-
-		/**
-		*	\brief \b Optimized scale from Vec3.
-		*
-		*	Apply x scale on row 0.
-		*	Apply y scale on row 1.
-		*	Apply z scale on row 2.
-		*	Use this to apply scale instead of MakeScale() * m;
-		*
-		*	\param[in] _scale	Vector for scaling.
-		*
-		*	\return this matrix scaled.
-		*/
-		Mat4& ApplyScale(const Vec3<T>& _scale) noexcept;
-
 
 		/**
 		*	\brief Make <b> translation matrix </b> from vector3.
@@ -396,48 +362,6 @@ namespace Sa
 		*	\return scale matrix.
 		*/
 		static Mat4 MakeScale(const Vec3<T>& _scale) noexcept;
-
-		/**
-		*	\brief Make <b> transform matrix </b>.
-		*
-		*	\param[in] _transl		Vector for translation.
-		*	\param[in] _rot			Quaternion for rotation.
-		*
-		*	\return transform matrix.
-		*/
-		static Mat4 MakeTransform(const Vec3<T>& _transl, const Quat<T>& _rot) noexcept;
-
-		/**
-		*	\brief Make <b> transform matrix </b>.
-		*
-		*	\param[in] _transl		Vector for translation.
-		*	\param[in] _scale		Vector for scale.
-		*
-		*	\return transform matrix.
-		*/
-		static Mat4 MakeTransform(const Vec3<T>& _transl, const Vec3<T>& _scale) noexcept;
-
-		/**
-		*	\brief Make <b> transform matrix </b>.
-		*
-		*	\param[in] _rot			Quaternion for rotation.
-		*	\param[in] _scale		Vector for scale.
-		*
-		*	\return transform matrix.
-		*/
-		static Mat4 MakeTransform(const Quat<T>& _rot, const Vec3<T>& _scale) noexcept;
-
-		/**
-		*	\brief Make <b> transform matrix </b>.
-		*
-		*	\param[in] _transl		Vector for translation.
-		*	\param[in] _rot			Quaternion for rotation.
-		*	\param[in] _scale		Vector for scale.
-		*
-		*	\return transform matrix.
-		*/
-		static Mat4 MakeTransform(const Vec3<T>& _transl, const Quat<T>& _rot, const Vec3<T>& _scale) noexcept;
-
 
 		/**
 		*	\brief Make <b> perspective matrix </b>.
@@ -672,13 +596,14 @@ namespace Sa
 	*	Convert Mat4 as a string.
 	*
 	*	\tparam T		Input matrix type.
+	*	\tparam major	Input matrix major.
 	*
 	*	\param[in] _m	Input matrix.
 	*
 	*	\return input matrix as a string.
 	*/
-	template <typename T>
-	std::string ToString(const Mat4<T>& _m);
+	template <typename T, MatrixMajor major>
+	std::string ToString(const Mat4<T, major>& _m);
 
 #endif
 

@@ -281,31 +281,8 @@ namespace Sa
 		return result;
 	}
 
-	template <typename T, MatrixMajor major>
-	Mat3<T, major>  Mat3<T, major>::MakeTransform(const Quat<T>& _rot, const Vec3<T>& _scale) noexcept
-	{
-		return MakeRotation(_rot).ApplyScale(_scale);
-	}
-
-	template <typename T, MatrixMajor major>
-	Mat3<T, major>& Mat3<T, major>::ApplyScale(const Vec3<T>& _scale) noexcept
-	{
-		e00 *= _scale.x;
-		e01 *= _scale.x;
-		e02 *= _scale.x;
-
-		e10 *= _scale.y;
-		e11 *= _scale.y;
-		e12 *= _scale.y;
-
-		e20 *= _scale.z;
-		e21 *= _scale.z;
-		e22 *= _scale.z;
-
-		return *this;
-	}
-
 //}
+
 
 //{ Operators
 

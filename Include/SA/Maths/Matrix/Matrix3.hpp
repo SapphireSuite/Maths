@@ -345,30 +345,6 @@ namespace Sa
 		*/
 		static Mat3 MakeScale(const Vec3<T>& _scale) noexcept;
 
-		/**
-		*	\brief Make <b> transform matrix </b>.
-		*
-		*	\param[in] _rot			Quaternion for rotation.
-		*	\param[in] _scale		Vector for scale.
-		*
-		*	\return transform matrix.
-		*/
-		static Mat3 MakeTransform(const Quat<T>& _rot, const Vec3<T>& _scale) noexcept;
-
-		/**
-		*	\brief \b Optimized scale from Vec3.
-		*
-		*	Apply x scale on row 0.
-		*	Apply y scale on row 1.
-		*	Apply z scale on row 2.
-		*	Use this to apply scale instead of MakeScale() * m;
-		*
-		*	\param[in] _scale	Vector for scaling.
-		*
-		*	\return this matrix scaled.
-		*/
-		Mat3& ApplyScale(const Vec3<T>& _scale) noexcept;
-
 //}
 
 //{ Operators
