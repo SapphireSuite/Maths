@@ -286,6 +286,10 @@ namespace Sa
 	template <typename T>
 	using TrS = Tr<T, TrScale>;
 
+	/// Alias for UScale Tranf.
+	template <typename T>
+	using TrUS = Tr<T, TrUScale>;
+
 	/// Alias for Position Rotation Tranf.
 	template <typename T>
 	using TrPR = Tr<T, TrPosition, TrRotation>;
@@ -294,6 +298,9 @@ namespace Sa
 	template <typename T>
 	using TrPRS = Tr<T, TrPosition, TrRotation, TrScale>;
 
+	/// Alias for Position Rotation UScale Tranf.
+	template <typename T>
+	using TrPRUS = Tr<T, TrPosition, TrRotation, TrUScale>;
 
 //{ Float
 
@@ -306,11 +313,17 @@ namespace Sa
 	/// Alias for Scale Tranf float.
 	using TrSf = Tr<float, TrScale>;
 
+	/// Alias for UScale Tranf float.
+	using TrUSf = Tr<float, TrUScale>;
+
 	/// Alias for Position Rotation Tranf float.
 	using TrPRf = Tr<float, TrPosition, TrRotation>;
 
 	/// Alias for Position Rotation Scale Tranf float.
 	using TrPRSf = Tr<float, TrPosition, TrRotation, TrScale>;
+
+	/// Alias for Position Rotation UScale Tranf float.
+	using TrPRUSf = Tr<float, TrPosition, TrRotation, TrUScale>;
 
 //}
 
@@ -326,11 +339,17 @@ namespace Sa
 	/// Alias for Scale Tranf double.
 	using TrSd = Tr<double, TrScale>;
 
+	/// Alias for UScale Tranf double.
+	using TrUSd = Tr<double, TrUScale>;
+
 	/// Alias for Position Rotation Tranf double.
 	using TrPRd = Tr<double, TrPosition, TrRotation>;
 
 	/// Alias for Position Rotation Scale Tranf double.
 	using TrPRSd = Tr<double, TrPosition, TrRotation, TrScale>;
+
+	/// Alias for Position Rotation UScale Tranf double.
+	using TrPRUSd = Tr<double, TrPosition, TrRotation, TrUScale>;
 
 //}
 
@@ -355,6 +374,10 @@ namespace Sa
 	template <typename T>
 	using TransformS = Transform<T, TrScale>;
 
+	/// Alias for UScale Transform.
+	template <typename T>
+	using TransformUS = Transform<T, TrUScale>;
+
 	/// Alias for Position Rotation Transform.
 	template <typename T>
 	using TransformPR = Transform<T, TrPosition, TrRotation>;
@@ -363,6 +386,9 @@ namespace Sa
 	template <typename T>
 	using TransformPRS = Transform<T, TrPosition, TrRotation, TrScale>;
 
+	/// Alias for Position Rotation UScale Transform.
+	template <typename T>
+	using TransformPRUS = Transform<T, TrPosition, TrRotation, TrUScale>;
 
 //{ Float
 
@@ -375,11 +401,17 @@ namespace Sa
 	/// Alias for Scale Transform float.
 	using TransformSf = Transform<float, TrScale>;
 
+	/// Alias for UScale Transform float.
+	using TransformUSf = Transform<float, TrUScale>;
+
 	/// Alias for Position Rotation Transform float.
 	using TransformPRf = Transform<float, TrPosition, TrRotation>;
 
 	/// Alias for Position Rotation Scale Transform float.
 	using TransformPRSf = Transform<float, TrPosition, TrRotation, TrScale>;
+
+	/// Alias for Position Rotation UScale Transform float.
+	using TransformPRUSf = Transform<float, TrPosition, TrRotation, TrUScale>;
 
 //}
 
@@ -395,11 +427,17 @@ namespace Sa
 	/// Alias for Scale Transform double.
 	using TransformSd = Transform<double, TrScale>;
 
+	/// Alias for UScale Transform double.
+	using TransformUSd = Transform<double, TrUScale>;
+
 	/// Alias for Position Rotation Transform double.
 	using TransformPRd = Transform<double, TrPosition, TrRotation>;
 
 	/// Alias for Position Rotation Scale Transform double.
 	using TransformPRSd = Transform<double, TrPosition, TrRotation, TrScale>;
+
+	/// Alias for Position Rotation UScale Transform double.
+	using TransformPRUSd = Transform<double, TrPosition, TrRotation, TrUScale>;
 
 //}
 
