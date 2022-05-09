@@ -75,7 +75,7 @@ namespace Sa
 		template <typename RhsT>
 		static TrUScale Multiply(const TrUScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (TrTHasComponent(RhsT)<TrUScale>())
+			if constexpr (TrTHasComponent(RhsT)<Sa::TrUScale>())
 			{
 				// UScale component found.
 
@@ -92,7 +92,7 @@ namespace Sa
 		template <typename RhsT>
 		static TrUScale Divide(const TrUScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (TrTHasComponent(RhsT)<TrUScale>())
+			if constexpr (TrTHasComponent(RhsT)<Sa::TrUScale>())
 			{
 				// UScale component found.
 

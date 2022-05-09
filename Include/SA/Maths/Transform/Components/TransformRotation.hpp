@@ -76,7 +76,7 @@ namespace Sa
 		template <typename RhsT>
 		static TrRotation Multiply(const TrRotation& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (TrTHasComponent(RhsT)<TrRotation>())
+			if constexpr (TrTHasComponent(RhsT)<Sa::TrRotation>())
 			{
 				// Rotation component found.
 
@@ -93,7 +93,7 @@ namespace Sa
 		template <typename RhsT>
 		static TrRotation Divide(const TrRotation& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (TrTHasComponent(RhsT)<TrRotation>())
+			if constexpr (TrTHasComponent(RhsT)<Sa::TrRotation>())
 			{
 				// Rotation component found.
 
