@@ -39,20 +39,6 @@ namespace Sa::Benchmark
 
 
     template <typename T>
-    static void Mat4_ApplyScale(benchmark::State& _state)
-    {
-        Mat4<T> mres;
-
-        for (auto _ : _state)
-            benchmark::DoNotOptimize(mres += RMat4.ApplyScale(RVec3));
-    }
-
-    BENCHMARK_TEMPLATE(Mat4_ApplyScale, int32_t);
-    BENCHMARK_TEMPLATE(Mat4_ApplyScale, float);
-    BENCHMARK_TEMPLATE(Mat4_ApplyScale, double);
-
-
-    template <typename T>
     static void Mat4_MakeRotation(benchmark::State& _state)
     {
         Mat4<T> mres;

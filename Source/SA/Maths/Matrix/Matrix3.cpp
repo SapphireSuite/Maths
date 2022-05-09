@@ -441,21 +441,6 @@ namespace Sa
 		return res;
 	}
 
-	template <>
-	RMat3f& RMat3f::ApplyScale(const Vec3<float>& _scale) noexcept
-	{
-		// Compute 8 first elems.
-		const __m256 pScale = _mm256_set_ps(_scale.z, _scale.z, _scale.y, _scale.y, _scale.y, _scale.x, _scale.x, _scale.x);
-
-		const __m256 resP = _mm256_mul_ps(pScale, _mm256_load_ps(&e00));
-		_mm256_store_ps(&e00, resP);
-
-		// Last elem.
-		e22 *= _scale.z;
-
-		return *this;
-	}
-
 
 	template <>
 	RMat3f RMat3f::MakeRotation(const Quat<float>& _rot) noexcept
@@ -810,21 +795,6 @@ namespace Sa
 		return res;
 	}
 
-	template <>
-	CMat3f& CMat3f::ApplyScale(const Vec3<float>& _scale) noexcept
-	{
-		// Compute 8 first elems.
-		const __m256 pScale = _mm256_set_ps(_scale.y, _scale.x, _scale.z, _scale.y, _scale.x, _scale.z, _scale.y, _scale.x);
-
-		const __m256 resP = _mm256_mul_ps(pScale, _mm256_load_ps(&e00));
-		_mm256_store_ps(&e00, resP);
-
-		// Last elem.
-		e22 *= _scale.z;
-
-		return *this;
-	}
-
 
 	template <>
 	template <>
@@ -1173,27 +1143,6 @@ namespace Sa
 		res.e22 = 1.0 - 2.0 * (_rot.x * _rot.x + _rot.y * _rot.y);
 
 		return res;
-	}
-
-	template <>
-	RMat3d& RMat3d::ApplyScale(const Vec3<double>& _scale) noexcept
-	{
-		// Compute first 4 elems.
-		const __m256d pScaleY3X = _mm256_set_pd(_scale.y, _scale.x, _scale.x, _scale.x);
-
-		const __m256d res1234 = _mm256_mul_pd(pScaleY3X, _mm256_load_pd(&e00));
-		_mm256_store_pd(&e00, res1234);
-
-		// Compute next 4 elems.
-		const __m256d pScale2Z2Y = _mm256_set_pd(_scale.z, _scale.z, _scale.y, _scale.y);
-
-		const __m256d res5678 = _mm256_mul_pd(pScale2Z2Y, _mm256_load_pd(&e11));
-		_mm256_store_pd(&e11, res5678);
-
-		// Last elem.
-		e22 *= _scale.z;
-
-		return *this;
 	}
 
 
@@ -1585,28 +1534,6 @@ namespace Sa
 		res.e22 = 1.0 - 2.0 * (_rot.x * _rot.x + _rot.y * _rot.y);
 
 		return res;
-	}
-
-	template <>
-	CMat3d& CMat3d::ApplyScale(const Vec3<double>& _scale) noexcept
-	{
-		// Compute first 4 elems.
-		const __m256d pScale01 = _mm256_set_pd(_scale.x, _scale.z, _scale.y, _scale.x);
-
-		const __m256d res1234 = _mm256_mul_pd(pScale01, _mm256_load_pd(&e00));
-		_mm256_store_pd(&e00, res1234);
-
-
-		// Compute next 4 elems.
-		const __m256d pScale23 = _mm256_set_pd(_scale.y, _scale.x, _scale.z, _scale.y);
-
-		const __m256d res5678 = _mm256_mul_pd(pScale23, _mm256_load_pd(&e11));
-		_mm256_store_pd(&e11, res5678);
-
-		// Last elem.
-		e22 *= _scale.z;
-
-		return *this;
 	}
 
 

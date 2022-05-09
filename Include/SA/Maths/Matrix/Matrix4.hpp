@@ -767,10 +767,6 @@ namespace Sa
 
 
 	template <>
-	RMat4f& RMat4f::ApplyScale(const Vec3<float>& _scale) noexcept;
-
-
-	template <>
 	RMat4f RMat4f::MakeRotation(const Quat<float>& _rot) noexcept;
 
 
@@ -826,10 +822,6 @@ namespace Sa
 
 	template <>
 	CMat4f CMat4f::GetInversed() const;
-
-
-	template <>
-	CMat4f& CMat4f::ApplyScale(const Vec3<float>& _scale) noexcept;
 
 
 	template <>
@@ -895,10 +887,6 @@ namespace Sa
 
 
 	template <>
-	RMat4d& RMat4d::ApplyScale(const Vec3<double>& _scale) noexcept;
-
-
-	template <>
 	RMat4d RMat4d::MakeRotation(const Quat<double>& _rot) noexcept;
 
 
@@ -954,10 +942,6 @@ namespace Sa
 
 	template <>
 	CMat4d CMat4d::GetInversed() const;
-
-
-	template <>
-	CMat4d& CMat4d::ApplyScale(const Vec3<double>& _scale) noexcept;
 
 
 	template <>

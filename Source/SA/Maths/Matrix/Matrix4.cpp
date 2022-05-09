@@ -893,28 +893,6 @@ namespace Sa
 
 	
 	template <>
-	RMat4f& RMat4f::ApplyScale(const Vec3<float>& _scale) noexcept
-	{
-		float* const data = Data();
-
-		// Compute row 01
-		const __m256 pScaleXY = _mm256_set_ps(_scale.y, _scale.y, _scale.y, _scale.y, _scale.x, _scale.x, _scale.x, _scale.x);
-
-		const __m256 res01 = _mm256_mul_ps(pScaleXY, _mm256_load_ps(&data[0]));
-		_mm256_store_ps(&data[0], res01);
-
-
-		// Compute row 2
-		const __m128 pScaleZ = _mm_set1_ps(_scale.z);
-
-		const __m128 res2 = _mm_mul_ps(pScaleZ, _mm_load_ps(&data[8]));
-		_mm_store_ps(&data[8], res2);
-
-		return *this;
-	}
-
-	
-	template <>
 	RMat4f RMat4f::MakeRotation(const Quat<float>& _rot) noexcept
 	{
 		SA_WARN(_rot.IsNormalized(), SA/Maths, L"Quaternion should be normalized!");
@@ -1287,28 +1265,6 @@ namespace Sa
 
 		// Inverse row major and transpose to column.
 		return rMat.GetInversed();
-	}
-
-
-	template <>
-	CMat4f& CMat4f::ApplyScale(const Vec3<float>& _scale) noexcept
-	{
-		float* const data = Data();
-
-		// Compute row 01
-		const __m256 pScaleXY = _mm256_set_ps(1.0f, _scale.z, _scale.y, _scale.x, 1.0f, _scale.z, _scale.y, _scale.x);
-
-		const __m256 res01 = _mm256_mul_ps(pScaleXY, _mm256_load_ps(&data[0]));
-		_mm256_store_ps(&data[0], res01);
-
-
-		// Compute row 2
-		const __m128 pScaleZ = _mm_set_ps(1.0f, _scale.z, _scale.y, _scale.x);
-
-		const __m128 res2 = _mm_mul_ps(pScaleZ, _mm_load_ps(&data[8]));
-		_mm_store_ps(&data[8], res2);
-
-		return *this;
 	}
 
 
@@ -2105,35 +2061,6 @@ namespace Sa
 
 
 	template <>
-	RMat4d& RMat4d::ApplyScale(const Vec3<double>& _scale) noexcept
-	{
-		double* const data = Data();
-
-		// Compute row 0
-		const __m256d pScaleX = _mm256_set1_pd(_scale.x);
-	
-		const __m256d row0 = _mm256_mul_pd(pScaleX, _mm256_load_pd(&data[0]));
-		_mm256_store_pd(&data[0], row0);
-
-
-		// Compute row 1
-		const __m256d pScaleY = _mm256_set1_pd(_scale.y);
-
-		const __m256d row1 = _mm256_mul_pd(pScaleY, _mm256_load_pd(&data[4]));
-		_mm256_store_pd(&data[4], row1);
-
-
-		// Compute row 2
-		const __m256d pScaleZ = _mm256_set1_pd(_scale.z);
-
-		const __m256d row2 = _mm256_mul_pd(pScaleZ, _mm256_load_pd(&data[8]));
-		_mm256_store_pd(&data[8], row2);
-
-		return *this;
-	}
-
-
-	template <>
 	RMat4d RMat4d::MakeRotation(const Quat<double>& _rot) noexcept
 	{
 		SA_WARN(_rot.IsNormalized(), SA/Maths, L"Quaternion should be normalized!");
@@ -2571,29 +2498,6 @@ namespace Sa
 
 		// Inverse row major and transpose to column.
 		return rMat.GetInversed();
-	}
-
-
-	template <>
-	CMat4d& CMat4d::ApplyScale(const Vec3<double>& _scale) noexcept
-	{
-		double* const data = Data();
-
-		const __m256d pScale = _mm256_set_pd(1.0, _scale.z, _scale.y, _scale.x);
-
-		// Compute row 0
-		const __m256d row0 = _mm256_mul_pd(pScale, _mm256_load_pd(&data[0]));
-		_mm256_store_pd(&data[0], row0);
-
-		// Compute row 1
-		const __m256d row1 = _mm256_mul_pd(pScale, _mm256_load_pd(&data[4]));
-		_mm256_store_pd(&data[4], row1);
-
-		// Compute row 2
-		const __m256d row2 = _mm256_mul_pd(pScale, _mm256_load_pd(&data[8]));
-		_mm256_store_pd(&data[8], row2);
-
-		return *this;
 	}
 
 

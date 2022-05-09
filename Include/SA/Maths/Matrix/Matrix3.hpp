@@ -725,9 +725,6 @@ namespace Sa
 	template <>
 	RMat3f RMat3f::MakeRotation(const Quat<float>& _rot) noexcept;
 
-	template <>
-	RMat3f& RMat3f::ApplyScale(const Vec3<float>& _scale) noexcept;
-
 
 	template <>
 	template <>
@@ -782,9 +779,6 @@ namespace Sa
 
 	template <>
 	CMat3f CMat3f::MakeRotation(const Quat<float>& _rot) noexcept;
-
-	template <>
-	CMat3f& CMat3f::ApplyScale(const Vec3<float>& _scale) noexcept;
 
 
 	template <>
@@ -845,9 +839,6 @@ namespace Sa
 	template <>
 	RMat3d RMat3d::MakeRotation(const Quat<double>& _rot) noexcept;
 
-	template <>
-	RMat3d& RMat3d::ApplyScale(const Vec3<double>& _scale) noexcept;
-
 
 	template <>
 	template <>
@@ -902,9 +893,6 @@ namespace Sa
 
 	template <>
 	CMat3d CMat3d::MakeRotation(const Quat<double>& _rot) noexcept;
-
-	template <>
-	CMat3d& CMat3d::ApplyScale(const Vec3<double>& _scale) noexcept;
 
 
 	template <>
