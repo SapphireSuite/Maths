@@ -389,14 +389,6 @@ namespace Sa::UT::Matrix3
 		mScale.e11 *= vScale.y;
 		mScale.e22 *= vScale.z;
 		EXPECT_EQ((Mat3T::MakeScale(vScale)), mScale);
-
-
-		// Rotation + Scale.
-		const Mat3T mRotScale = mScale * mRot;
-		(void)mRotScale;
-
-		if constexpr (std::is_floating_point_v<T>) // No test for int types.
-			EXPECT_MAT3_NEAR((Mat3T::MakeTransform(q1, vScale)), mRotScale, 0.001);
 	}
 
 	TYPED_TEST(Matrix3Test, Operators)

@@ -456,47 +456,15 @@ namespace Sa
 //{ Transform
 
 	template <typename T, MatrixMajor major>
-	Mat4<T, major>& Mat4<T, major>::ApplyTranslation(const Vec3<T>& _transl) noexcept
-	{
-		e03 += _transl.x;
-		e13 += _transl.y;
-		e23 += _transl.z;
-
-		return *this;
-	}
-
-	template <typename T, MatrixMajor major>
-	Mat4<T, major>& Mat4<T, major>::ApplyScale(const Vec3<T>& _scale) noexcept
-	{
-		e00 *= _scale.x;
-		e01 *= _scale.x;
-		e02 *= _scale.x;
-		e03 *= _scale.x;
-
-		e10 *= _scale.y;
-		e11 *= _scale.y;
-		e12 *= _scale.y;
-		e13 *= _scale.y;
-
-		e20 *= _scale.z;
-		e21 *= _scale.z;
-		e22 *= _scale.z;
-		e23 *= _scale.z;
-
-		return *this;
-	}
-
-
-	template <typename T, MatrixMajor major>
 	Mat4<T, major> Mat4<T, major>::MakeTranslation(const Vec3<T>& _transl) noexcept
 	{
-		Mat4 result = Mat4::Identity;
+		Mat4 res = Mat4::Identity;
 
-		result.e03 = _transl.x;
-		result.e13 = _transl.y;
-		result.e23 = _transl.z;
+		res.e03 = _transl.x;
+		res.e13 = _transl.y;
+		res.e23 = _transl.z;
 
-		return result;
+		return res;
 	}
 
 	template <typename T, MatrixMajor major>
@@ -534,51 +502,6 @@ namespace Sa
 		result.e00 = _scale.x;
 		result.e11 = _scale.y;
 		result.e22 = _scale.z;
-
-		return result;
-	}
-
-	template <typename T, MatrixMajor major>
-	Mat4<T, major>  Mat4<T, major>::MakeTransform(const Vec3<T>& _transl, const Quat<T>& _rotation) noexcept
-	{
-		Mat4<T, major> result = MakeRotation(_rotation);
-
-		// Set translation.
-		result.e03 = _transl.x;
-		result.e13 = _transl.y;
-		result.e23 = _transl.z;
-
-		return result;
-	}
-
-	template <typename T, MatrixMajor major>
-	Mat4<T, major>  Mat4<T, major>::MakeTransform(const Vec3<T>& _transl, const Vec3<T>& _scale) noexcept
-	{
-		Mat4<T, major> result = MakeScale(_scale);
-
-		// Set translation.
-		result.e03 = _transl.x;
-		result.e13 = _transl.y;
-		result.e23 = _transl.z;
-
-		return result;
-	}
-
-	template <typename T, MatrixMajor major>
-	Mat4<T, major>  Mat4<T, major>::MakeTransform(const Quat<T>& _rotation, const Vec3<T>& _scale) noexcept
-	{
-		return MakeRotation(_rotation).ApplyScale(_scale);
-	}
-
-	template <typename T, MatrixMajor major>
-	Mat4<T, major>  Mat4<T, major>::MakeTransform(const Vec3<T>& _transl, const Quat<T>& _rotation, const Vec3<T>& _scale) noexcept
-	{
-		Mat4<T, major> result = MakeRotation(_rotation).ApplyScale(_scale);
-
-		// Set Translation.
-		result.e03 = _transl.x;
-		result.e13 = _transl.y;
-		result.e23 = _transl.z;
 
 		return result;
 	}
@@ -906,8 +829,8 @@ namespace Sa
 
 #if SA_LOGGER_IMPL
 
-	template <typename T>
-	std::string ToString(const Mat4<T>& _m)
+	template <typename T, MatrixMajor major>
+	std::string ToString(const Mat4<T, major>& _m)
 	{
 		// Keep memory order (Raw / column major).
 		const T* const data = _m.Data();

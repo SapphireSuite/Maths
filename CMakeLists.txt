@@ -53,7 +53,7 @@ target_compile_definitions(SA_Maths PUBLIC SA_MATHS_IMPL)
 # Option Definitions
 
 ## Add SA_Maths's use SA_Logger.
-option(SA_MATHS_USE_LOGGER_OPT "Should compile and use SA_Logger" ON)
+option(SA_MATHS_USE_LOGGER_OPT "Should compile and use SA_Logger" OFF)
 
 
 ## Add SA_Maths's intrinsics implementation.

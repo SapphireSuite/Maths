@@ -4,7 +4,6 @@
 
 #define LOG(_str) std::cout << _str << std::endl;
 
-
 int main()
 {
 	return 0;

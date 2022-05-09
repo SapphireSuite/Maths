@@ -345,30 +345,6 @@ namespace Sa
 		*/
 		static Mat3 MakeScale(const Vec3<T>& _scale) noexcept;
 
-		/**
-		*	\brief Make <b> transform matrix </b>.
-		*
-		*	\param[in] _rot			Quaternion for rotation.
-		*	\param[in] _scale		Vector for scale.
-		*
-		*	\return transform matrix.
-		*/
-		static Mat3 MakeTransform(const Quat<T>& _rot, const Vec3<T>& _scale) noexcept;
-
-		/**
-		*	\brief \b Optimized scale from Vec3.
-		*
-		*	Apply x scale on row 0.
-		*	Apply y scale on row 1.
-		*	Apply z scale on row 2.
-		*	Use this to apply scale instead of MakeScale() * m;
-		*
-		*	\param[in] _scale	Vector for scaling.
-		*
-		*	\return this matrix scaled.
-		*/
-		Mat3& ApplyScale(const Vec3<T>& _scale) noexcept;
-
 //}
 
 //{ Operators
@@ -749,9 +725,6 @@ namespace Sa
 	template <>
 	RMat3f RMat3f::MakeRotation(const Quat<float>& _rot) noexcept;
 
-	template <>
-	RMat3f& RMat3f::ApplyScale(const Vec3<float>& _scale) noexcept;
-
 
 	template <>
 	template <>
@@ -806,9 +779,6 @@ namespace Sa
 
 	template <>
 	CMat3f CMat3f::MakeRotation(const Quat<float>& _rot) noexcept;
-
-	template <>
-	CMat3f& CMat3f::ApplyScale(const Vec3<float>& _scale) noexcept;
 
 
 	template <>
@@ -869,9 +839,6 @@ namespace Sa
 	template <>
 	RMat3d RMat3d::MakeRotation(const Quat<double>& _rot) noexcept;
 
-	template <>
-	RMat3d& RMat3d::ApplyScale(const Vec3<double>& _scale) noexcept;
-
 
 	template <>
 	template <>
@@ -926,9 +893,6 @@ namespace Sa
 
 	template <>
 	CMat3d CMat3d::MakeRotation(const Quat<double>& _rot) noexcept;
-
-	template <>
-	CMat3d& CMat3d::ApplyScale(const Vec3<double>& _scale) noexcept;
 
 
 	template <>

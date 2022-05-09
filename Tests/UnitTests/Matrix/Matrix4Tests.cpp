@@ -454,11 +454,6 @@ namespace Sa::UT::Matrix4
 		EXPECT_EQ((Mat4T::MakeTranslation(vTr)), mTr);
 
 
-		Mat4T mTr2 = Mat4T::Identity;
-		mTr2.ApplyTranslation(vTr);
-		EXPECT_EQ(mTr2, mTr);
-
-
 		// Rotation.
 
 		/**
@@ -492,42 +487,6 @@ namespace Sa::UT::Matrix4
 		mScale.e11 *= vScale.y;
 		mScale.e22 *= vScale.z;
 		EXPECT_EQ((Mat4T::MakeScale(vScale)), mScale);
-
-
-		// Translation + Rotation.
-
-		Mat4T mTrRot = mRot;
-		mTrRot.e03 = vTr.x;
-		mTrRot.e13 = vTr.y;
-		mTrRot.e23 = vTr.z;
-
-		if constexpr (std::is_floating_point_v<T>) // No test for int types.
-			EXPECT_MAT4_NEAR((Mat4T::MakeTransform(vTr, q1)), mTrRot, 0.000001);
-
-
-		// Translation + Scale.
-		Mat4T mTrScale = mScale;
-		mTrScale.e03 = vTr.x;
-		mTrScale.e13 = vTr.y;
-		mTrScale.e23 = vTr.z;
-		EXPECT_EQ((Mat4T::MakeTransform(vTr, vScale)), mTrScale);
-
-
-		// Rotation + Scale.
-		const Mat4T mRotScale = mScale * mRot;
-
-		if constexpr (std::is_floating_point_v<T>) // No test for int types.
-			EXPECT_MAT4_NEAR((Mat4T::MakeTransform(q1, vScale)), mRotScale, 0.001);
-
-
-		// Translation + Rotation + Scale.
-		Mat4T mTrRotScale = mRotScale;
-		mTrRotScale.e03 = vTr.x;
-		mTrRotScale.e13 = vTr.y;
-		mTrRotScale.e23 = vTr.z;
-
-		if constexpr (std::is_floating_point_v<T>) // No test for int types.
-			EXPECT_MAT4_NEAR((Mat4T::MakeTransform(vTr, q1, vScale)), mTrRotScale, 0.001)
 	}
 
 	TYPED_TEST(Matrix4Test, Operators)
