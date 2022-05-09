@@ -85,9 +85,9 @@ jobs:
 
         config: [Release]
         option:
+          - -DSA_MATHS_USE_LOGGER_OPT=ON
           - -DSA_MATHS_INTRINSICS_OPT=ON
-          - -DSA_MATHS_USE_LOGGER_OPT=OFF
-          - -DSA_MATHS_INTRINSICS_OPT=ON -DSA_MATHS_USE_LOGGER_OPT=OFF
+          - -DSA_MATHS_USE_LOGGER_OPT=ON -DSA_MATHS_INTRINSICS_OPT=ON
 
     steps:
       - uses: actions/checkout@v2
