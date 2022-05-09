@@ -56,7 +56,7 @@ namespace Sa
 		*
 		*	\return Whether this and _rhs are equal.
 		*/
-		bool operator==(const Tr& _rhs) noexcept;
+		bool operator==(const Tr& _rhs) const noexcept;
 
 		/**
 		*	\brief \e Compare 2 transform inequality.
@@ -65,7 +65,7 @@ namespace Sa
 		*
 		*	\return Whether this and _rhs are non-equal.
 		*/
-		bool operator!=(const Tr& _rhs) noexcept;
+		bool operator!=(const Tr& _rhs) const noexcept;
 
 	//}
 

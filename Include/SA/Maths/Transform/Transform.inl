@@ -35,7 +35,7 @@ namespace Sa
 		bool bPack = true;
 
 		if constexpr(sizeof...(PArgs))
-			bPack = EqualsPacked<PArgs...>();
+			bPack = EqualsPacked<PArgs...>(_other);
 
 		return bPack && CurrT::Equals(_other);
 	}
@@ -62,15 +62,15 @@ namespace Sa
 
 
 	template <typename T, template <typename> typename... Args>
-	bool Tr<T, Args...>::operator==(const Tr& _rhs) noexcept
+	bool Tr<T, Args...>::operator==(const Tr& _rhs) const noexcept
 	{
 		return Equals(_rhs);
 	}
 
 	template <typename T, template <typename> typename... Args>
-	bool Tr<T, Args...>::operator!=(const Tr& _rhs) noexcept
+	bool Tr<T, Args...>::operator!=(const Tr& _rhs) const noexcept
 	{
-		return !(this == _rhs);
+		return !(*this == _rhs);
 	}
 
 //}
@@ -152,8 +152,7 @@ namespace Sa
 	{
 		SA_WARN(_alpha >= 0.0f && _alpha <= 1.0f, SA/Maths, L"Alpha[" << _alpha << L"] clamped to range [0, 1]! Use LerpUnclamped if intended instead.");
 
-
-		return LerpUnclamped(_start, _end, _alpha);
+		return LerpUnclamped(_start, _end, std::clamp(_alpha, 0.0f, 1.0f));
 	}
 
 	template <typename T, template <typename> typename... Args>
