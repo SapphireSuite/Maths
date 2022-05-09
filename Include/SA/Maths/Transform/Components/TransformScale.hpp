@@ -6,9 +6,8 @@
 #define SAPPHIRE_MATHS_TRANSFORM_SCALE_GUARD
 
 #include <SA/Maths/Space/Vector3.hpp>
-#include <SA/Maths/Matrix/Matrix4.hpp>
 
-#include <SA/Maths/Transform/Transform.hpp>
+#include <SA/Maths/Transform/Components/TransformComponent.hpp>
 #include <SA/Maths/Transform/Components/TransformUScale.hpp>
 
 namespace Sa
@@ -49,16 +48,6 @@ namespace Sa
 	//}
 
 
-	//{ Transformation
-
-		void ConstructMatrix(Mat4<T>& _out) const noexcept
-		{
-			_out.ApplyScale(scale);
-		}
-
-	//}
-
-
 	//{ Lerp
 
 		static TrScale LerpUnclamped(const TrScale& _start, const TrScale& _end, float _alpha) noexcept
@@ -74,12 +63,12 @@ namespace Sa
 		template <typename RhsT>
 		static TrScale Multiply(const TrScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (std::is_base_of<TrScale, RhsT>::value)
+			if constexpr (TrTHasComponent(RhsT)<TrScale>())
 			{
 				// Scale component found.
 				return TrScale{ _lhs.scale * _rhs.scale };
 			}
-			else if constexpr (std::is_base_of<TrUScale<T>, RhsT>::value)
+			else if constexpr (TrTHasComponent(RhsT)<TrUScale>())
 			{
 				// UScale component found instead.
 				return TrScale{ _lhs.scale * _rhs.uScale };
@@ -96,12 +85,12 @@ namespace Sa
 		template <typename RhsT>
 		static TrScale Divide(const TrScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (std::is_base_of<TrScale, RhsT>::value)
+			if constexpr (TrTHasComponent(RhsT)<TrScale>())
 			{
 				// Scale component found.
 				return TrScale{ _lhs.scale / _rhs.scale };
 			}
-			else if constexpr (std::is_base_of<TrUScale<T>, RhsT>::value)
+			else if constexpr (TrTHasComponent(RhsT)<TrUScale>())
 			{
 				// UScale component found instead.
 				return TrScale{ _lhs.scale / _rhs.uScale };

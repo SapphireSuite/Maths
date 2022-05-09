@@ -6,7 +6,8 @@
 #define SAPPHIRE_MATHS_TRANSFORM_ROTATION_GUARD
 
 #include <SA/Maths/Space/Quaternion.hpp>
-#include <SA/Maths/Matrix/Matrix4.hpp>
+
+#include <SA/Maths/Transform/Components/TransformComponent.hpp>
 
 namespace Sa
 {
@@ -46,18 +47,6 @@ namespace Sa
 	//}
 
 
-	//{ Transformation
-
-		void ConstructMatrix(Mat4<T>& _out) const noexcept
-		{
-			SA_WARN(_out == Mat4<T>::Identity, L"Construct rotation matrix from non-identity. Previous values erased.");
-
-			_out = Mat4<T>::MakeRotation(rotation);
-		}
-
-	//}
-
-
 	//{ Lerp
 
 		static TrRotation LerpUnclamped(const TrRotation& _start, const TrRotation& _end, float _alpha) noexcept
@@ -73,7 +62,7 @@ namespace Sa
 		template <typename RhsT>
 		static TrRotation Multiply(const TrRotation& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (std::is_base_of<TrRotation, RhsT>::value)
+			if constexpr (TrTHasComponent(RhsT)<TrRotation>())
 			{
 				// Rotation component found.
 
@@ -90,7 +79,7 @@ namespace Sa
 		template <typename RhsT>
 		static TrRotation Divide(const TrRotation& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (std::is_base_of<TrRotation, RhsT>::value)
+			if constexpr (TrTHasComponent(RhsT)<TrRotation>())
 			{
 				// Rotation component found.
 

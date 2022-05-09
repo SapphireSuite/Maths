@@ -2,6 +2,13 @@
 
 namespace Sa
 {
+	template <typename T, template <typename> typename... Args>
+	template <template <typename> typename Comp>
+	constexpr bool Tr<T, Args...>::HasComponent() noexcept
+	{
+		return std::is_base_of<Comp<T>, Tr<T, Args...>>::value;
+	}
+
 //{ Equals
 
 	template <typename T, template <typename> typename... Args>
@@ -107,28 +114,16 @@ namespace Sa
 
 
 	template <typename T, template <typename> typename... Args>
-	template <typename ChildT>
-	void Tr<T, Args...>::ConstructMatrixComponent(Mat4<T>& _out) const noexcept
-	{
-		ChildT::ConstructMatrix(_out);
-	}
-
-	template <typename T, template <typename> typename... Args>
 	Mat4<T> Tr<T, Args...>::Matrix() const noexcept
 	{
-		return Matrix(TrDefaultOrderT<Tr<T, Args...>>(*this));
+		return Matrix(TrOrderTRS());
 	}
 
 	template <typename T, template <typename> typename... Args>
-	template <template <typename> typename... TrOrderArgs>
-	Mat4<T> Tr<T, Args...>::Matrix(TrOrderT<Tr<T, Args...>, TrOrderArgs...> _order) const noexcept
+	template <template <typename> typename... OrderArgs>
+	Mat4<T> Tr<T, Args...>::Matrix(TrOrder<OrderArgs...> _order) const noexcept
 	{
-		Mat4<T> out = Mat4<T>::Identity;
-
-		_order.template MatrixOrderPacked<Args<T>...>(out);
-		_order.template MatrixOthersPacked<Args<T>...>(out);
-
-		return out;
+		return _order.ComputeMatrix(*this);
 	}
 
 //}

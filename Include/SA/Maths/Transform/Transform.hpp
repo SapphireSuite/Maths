@@ -7,7 +7,7 @@
 
 #include <SA/Maths/Debug.hpp>
 
-#include <SA/Maths/Transform/TransformOrder.hpp>
+#include <SA/Maths/Transform/Orders/TransformOrderTRS.hpp>
 
 namespace Sa
 {
@@ -21,6 +21,11 @@ namespace Sa
 	struct Tr : public Args<T>...
 	{
 		using Type = T;
+
+
+		template <template <typename> typename Comp>
+		static constexpr bool HasComponent() noexcept;
+
 
 	//{ Equals
 
@@ -94,23 +99,23 @@ namespace Sa
 		Vec3<T> Forward() const;
 
 
-		template <typename ChildT>
-		void ConstructMatrixComponent(Mat4<T>& _out) const noexcept;
-
 		/**
-		*	\brief \e Getter of Matrix
-		*
-		*	\return transformed forward vector normalized.
-		*/
+		 * @brief \b Compute matrix from transform
+		 * Use default TRS order application.
+		 * 
+		 * @return transformation matrix.
+		 */
 		Mat4<T> Matrix() const noexcept;
 
 		/**
-		*	\brief \e Getter of Matrix
-		*
-		*	\return transformed forward vector normalized.
-		*/
-		template <template <typename> typename... TrOrderArgs>
-		Mat4<T> Matrix(TrOrderT<Tr<T, Args...>, TrOrderArgs...> _order) const noexcept;
+		 * @brief \b Compute matrix from transform.
+		 * 
+		 * 	@param _order	transform order application implementation.
+		 * 
+		 * 	@return transformation matrix.
+		 */
+		template <template <typename> typename... OrderArgs>
+		Mat4<T> Matrix(TrOrder<OrderArgs...> _order) const noexcept;
 
 	//}
 

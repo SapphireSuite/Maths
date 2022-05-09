@@ -5,7 +5,7 @@
 #ifndef SAPPHIRE_MATHS_TRANSFORM_USCALE_GUARD
 #define SAPPHIRE_MATHS_TRANSFORM_USCALE_GUARD
 
-#include <SA/Maths/Matrix/Matrix4.hpp>
+#include <SA/Maths/Transform/Components/TransformComponent.hpp>
 
 namespace Sa
 {
@@ -45,16 +45,6 @@ namespace Sa
 	//}
 
 
-	//{ Transformation
-
-		void ConstructMatrix(Mat4<T>& _out) const noexcept
-		{
-			_out.ApplyScale(uScale);
-		}
-
-	//}
-
-
 	//{ Lerp
 
 		static TrUScale LerpUnclamped(const TrUScale& _start, const TrUScale& _end, float _alpha) noexcept
@@ -70,7 +60,7 @@ namespace Sa
 		template <typename RhsT>
 		static TrUScale Multiply(const TrUScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (std::is_base_of<TrUScale, RhsT>::value)
+			if constexpr (TrTHasComponent(RhsT)<TrUScale>())
 			{
 				// UScale component found.
 
@@ -87,7 +77,7 @@ namespace Sa
 		template <typename RhsT>
 		static TrUScale Divide(const TrUScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (std::is_base_of<TrUScale, RhsT>::value)
+			if constexpr (TrTHasComponent(RhsT)<TrUScale>())
 			{
 				// UScale component found.
 

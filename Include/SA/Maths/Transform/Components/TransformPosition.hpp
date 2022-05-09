@@ -7,6 +7,7 @@
 
 #include <SA/Maths/Space/Vector3.hpp>
 
+#include <SA/Maths/Transform/Components/TransformComponent.hpp>
 #include <SA/Maths/Transform/Components/TransformRotation.hpp>
 
 namespace Sa
@@ -48,16 +49,6 @@ namespace Sa
 	//}
 
 
-	//{ Transformation
-
-		void ConstructMatrix(Mat4<T>& _out) const noexcept
-		{
-			_out.SetTranslation(position);
-		}
-
-	//}
-
-
 	//{ Lerp
 
 		static TrPosition LerpUnclamped(const TrPosition& _start, const TrPosition& _end, float _alpha) noexcept
@@ -73,11 +64,11 @@ namespace Sa
 		template <typename LhsT, typename RhsT>
 		static TrPosition Multiply(const LhsT& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (std::is_base_of<TrPosition, RhsT>::value)
+			if constexpr (TrTHasComponent(RhsT)<TrPosition>())
 			{
 				// Position component found.
 
-				if constexpr (std::is_base_of<TrRotation<T>, LhsT>::value)
+				if constexpr (TrTHasComponent(LhsT)<TrRotation>())
 				{
 					// Self rotation component found.
 					// Apply translation with rotation:
@@ -103,11 +94,11 @@ namespace Sa
 		template <typename LhsT, typename RhsT>
 		static TrPosition Divide(const LhsT& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (std::is_base_of<TrPosition, RhsT>::value)
+			if constexpr (TrTHasComponent(RhsT)<TrPosition>())
 			{
 				// Position component found.
 
-				if constexpr (std::is_base_of<TrRotation<T>, LhsT>::value)
+				if constexpr (TrTHasComponent(LhsT)<TrRotation>())
 				{
 					// Self rotation component found.
 					// Apply inverse translation with rotation:

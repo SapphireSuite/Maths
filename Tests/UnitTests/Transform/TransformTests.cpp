@@ -154,13 +154,16 @@ namespace Sa::UT::Transform
 		EXPECT_EQ(trUS.Matrix(), (Mat4T::MakeScale(Vec3T(uScale))));
 
 		const TrPR<TypeParam> trPR { transl, rot };
-		EXPECT_EQ(trPR.Matrix(), (Mat4T::MakeTransform(transl, rot)));
+		const Mat4T matPR = Mat4T::MakeTranslation(transl) * Mat4T::MakeRotation(rot);
+		EXPECT_EQ(trPR.Matrix(), matPR);
 
 		const TrPRS<TypeParam> trPRS { transl, rot, scale };
-		EXPECT_EQ(trPRS.Matrix(), (Mat4T::MakeTransform(transl, rot, scale)));
+		const Mat4T matPRS = Mat4T::MakeTranslation(transl) * Mat4T::MakeRotation(rot) * Mat4T::MakeScale(scale);
+		EXPECT_EQ(trPRS.Matrix(), matPRS);
 
 		const TrPRUS<TypeParam> trPRUS { transl, rot, uScale };
-		EXPECT_EQ(trPRUS.Matrix(), (Mat4T::MakeTransform(transl, rot, Vec3T(uScale))));
+		const Mat4T matPRUS = Mat4T::MakeTranslation(transl) * Mat4T::MakeRotation(rot) * Mat4T::MakeScale(Vec3T(uScale));
+		EXPECT_EQ(trPRUS.Matrix(), matPRUS);
 	}
 
 	TYPED_TEST(TransformTest, Lerp)
