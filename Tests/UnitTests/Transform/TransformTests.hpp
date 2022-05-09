@@ -24,11 +24,13 @@ namespace Sa
 		if constexpr (std::is_base_of<TrPosition<T>, Tr<T, Args...>>::value)
 			_os << "\nPos: " << _tr.position;
 		if constexpr (std::is_base_of<TrRotation<T>, Tr<T, Args...>>::value)
-			_os << "\nRot: " << _tr.position;
+			_os << "\nRot: " << _tr.rotation;
 		if constexpr (std::is_base_of<TrScale<T>, Tr<T, Args...>>::value)
 			_os << "\nScale: " << _tr.scale;
 		if constexpr (std::is_base_of<TrUScale<T>, Tr<T, Args...>>::value)
 			_os << "\nUScale: " << _tr.uScale;
+
+		return _os;
 
 #endif
 	}
@@ -43,11 +45,19 @@ namespace Sa
 	auto tr2V = (_tr2);\
 \
 	if constexpr (decltype(tr1V)::template HasComponent<TrPosition>())\
+	{\
 		EXPECT_VEC3_NEAR(tr1V.position, tr2V.position, eps);\
+	}\
 	if constexpr (decltype(tr1V)::template HasComponent<TrRotation>())\
+	{\
 		EXPECT_QUAT_NEAR(tr1V.rotation, tr2V.rotation, eps);\
+	}\
 	if constexpr (decltype(tr1V)::template HasComponent<TrScale>())\
+	{\
 		EXPECT_VEC3_NEAR(tr1V.scale, tr2V.scale, eps);\
+	}\
 	if constexpr (decltype(tr1V)::template HasComponent<TrUScale>())\
+	{\
 		EXPECT_NEAR(tr1V.uScale, tr2V.uScale, eps);\
+	}\
 }
