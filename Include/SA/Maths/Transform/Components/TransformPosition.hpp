@@ -16,6 +16,14 @@ namespace Sa
 	{
 		Vec3<T> position;
 
+
+		TrPosition() = default;
+
+		TrPosition(const Vec3<T>& _pos) noexcept :
+			position{ _pos }
+		{
+		}
+
 	protected:
 
 	//{ Equals

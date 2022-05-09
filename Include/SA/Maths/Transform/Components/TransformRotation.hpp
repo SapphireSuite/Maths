@@ -15,6 +15,14 @@ namespace Sa
 	{
 		Quat<T> rotation = Quat<T>::Identity;
 
+
+		TrRotation() = default;
+
+		TrRotation(const Quat<T>& _rot) noexcept :
+			rotation{ _rot }
+		{
+		}
+
 	protected:
 
 	//{ Equals

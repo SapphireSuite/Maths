@@ -10,9 +10,9 @@ using namespace Sa;
 int main()
 {
 	TrPRSf tr1 {
-		{ Vec3f(6.3f, 5.14f, 9.25f) },
-		{ Quatf(40_deg, Vec3f::Up) },
-		{ Vec3f(1.0f, 2.0f, 3.0f) }
+		Vec3f(6.3f, 5.14f, 9.25f),
+		Quatf(40_deg, Vec3f::Up),
+		Vec3f(1.0f, 2.0f, 3.0f)
 	};
 
 	Mat4f mTr = Mat4f::MakeTransform(Vec3f(6.3f, 5.14f, 9.25f), Quatf(40_deg, Vec3f::Up), Vec3f(1.0f, 2.0f, 3.0f));

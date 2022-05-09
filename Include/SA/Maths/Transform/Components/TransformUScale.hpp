@@ -14,6 +14,14 @@ namespace Sa
 	{
 		T uScale = T(1);
 
+
+		TrUScale() = default;
+
+		TrUScale(T _uscale) noexcept :
+			uScale{ _uscale }
+		{
+		}
+
 	protected:
 
 	//{ Equals
