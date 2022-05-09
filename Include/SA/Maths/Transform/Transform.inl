@@ -17,7 +17,7 @@ namespace Sa
 	{
 		bool bPack = true;
 
-		if constexpr(sizeof...(PArgs))
+		if constexpr(sizeof...(PArgs) != 0)
 			bPack = IsZeroPacked<PArgs...>();
 
 		return bPack && CurrT::IsZero();
@@ -29,7 +29,7 @@ namespace Sa
 	{
 		bool bPack = true;
 
-		if constexpr(sizeof...(PArgs))
+		if constexpr(sizeof...(PArgs) != 0)
 			bPack = IsIdentityPacked<PArgs...>();
 
 		return bPack && CurrT::IsIdentity();
@@ -41,7 +41,7 @@ namespace Sa
 	{
 		bool bPack = true;
 
-		if constexpr(sizeof...(PArgs))
+		if constexpr(sizeof...(PArgs) != 0)
 			bPack = EqualsPacked<PArgs...>(_other, _epsilon);
 
 		return bPack && CurrT::Equals(_other, _epsilon);
@@ -137,7 +137,7 @@ namespace Sa
 	{
 		((CurrT&)*this) = CurrT::LerpUnclamped(_start, _end, _alpha);
 
-		if constexpr(sizeof...(PArgs))
+		if constexpr(sizeof...(PArgs) != 0)
 			LerpUnclampedPacked<PArgs...>(_start, _end, _alpha);
 	}
 
@@ -171,7 +171,7 @@ namespace Sa
 	{
 		((CurrT&)*this) = CurrT::Multiply(_lhs, _rhs);
 
-		if constexpr(sizeof...(PArgs))
+		if constexpr(sizeof...(PArgs) != 0)
 			MultiplyPacked<TrIn, PArgs...>(_lhs, _rhs);
 	}
 
@@ -181,7 +181,7 @@ namespace Sa
 	{
 		((CurrT&)*this) = CurrT::Divide(_lhs, _rhs);
 
-		if constexpr(sizeof...(PArgs))
+		if constexpr(sizeof...(PArgs) != 0)
 			DividePacked<TrIn, PArgs...>(_lhs, _rhs);
 	}
 
@@ -239,7 +239,7 @@ namespace Sa
 				if constexpr (std::is_base_of<CurrT<OutTrT>, OutT>::value)
 					(CurrT<OutTrT>&)_outTr = (const CurrT<ThisTrT>&)_thisTr;
 
-				if constexpr (sizeof...(PArgs))
+				if constexpr (sizeof...(PArgs) != 0)
 					TrTypeCaster<ThisTrT, OutTrT, PArgs...>().ApplyCurr(_thisTr, _outTr);
 			}
 		};
@@ -267,7 +267,7 @@ namespace Sa
 	{
 		std::string res = CurrT::ToString();
 
-		if constexpr (sizeof...(PArgs))
+		if constexpr (sizeof...(PArgs) != 0)
 		{
 			res += "\n\t";
 			res += ToStringPacked<PArgs...>();
