@@ -18,12 +18,27 @@ namespace Sa
 		Vec3<T> position;
 
 
+	//{ Constructors
+	
 		TrPosition() = default;
 
 		TrPosition(const Vec3<T>& _pos) noexcept :
 			position{ _pos }
 		{
 		}
+	
+	//}
+
+
+	//{ Cast
+
+		template <typename TOut>
+		operator TrPosition<TOut>() const noexcept
+		{
+			return TrPosition<TOut>(position);
+		}
+
+	//}
 
 	protected:
 
@@ -121,6 +136,7 @@ namespace Sa
 		}
 
 	//}
+
 
 	#if SA_LOGGER_IMPL
 

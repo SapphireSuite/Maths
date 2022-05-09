@@ -17,12 +17,26 @@ namespace Sa
 		Quat<T> rotation = Quat<T>::Identity;
 
 
+	//{ Constructors
+
 		TrRotation() = default;
 
 		TrRotation(const Quat<T>& _rot) noexcept :
 			rotation{ _rot }
 		{
 		}
+	
+	//}
+
+	//{ Cast
+
+		template <typename TOut>
+		operator TrRotation<TOut>() const noexcept
+		{
+			return TrRotation<TOut>(rotation);
+		}
+
+	//}
 
 	protected:
 

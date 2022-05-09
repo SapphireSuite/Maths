@@ -51,7 +51,7 @@ namespace Sa
 		*
 		*	\return Whether this and _other are equal.
 		*/
-		bool Equals(const Tr& _other) const noexcept;
+		bool Equals(const Tr& _other, T _epsilon = std::numeric_limits<T>::epsilon()) const noexcept;
 
 
 		/**
@@ -181,7 +181,7 @@ namespace Sa
 		*	\return self transform result.
 		*/
 		template <template <typename> typename... InArgs>
-		Tr operator*=(const Tr<T, InArgs...>& _rhs) const;
+		Tr& operator*=(const Tr<T, InArgs...>& _rhs);
 
 		/**
 		*	\brief \b Divide transform to compute inverse-transformation.
@@ -191,7 +191,7 @@ namespace Sa
 		*	\return self transform result.
 		*/
 		template <template <typename> typename... InArgs>
-		Tr operator/=(const Tr<T, InArgs...>& _rhs) const;
+		Tr& operator/=(const Tr<T, InArgs...>& _rhs);
 
 	//}
 
@@ -201,13 +201,13 @@ namespace Sa
 		/**
 		*	\brief \e Cast operator into other Transf type.
 		*
-		*	\tparam TIn		Type of the casted transform.
-		*	\tparam ArgsIn	Args Type of the casted transform.
+		*	\tparam TOut		Type of the casted transform.
+		*	\tparam ArgsOut		Args Type of the casted transform.
 		*
 		*	\return \e Casted result.
 		*/
-		template <typename TIn, template <typename> typename... ArgsIn>
-		operator Tr<TIn, ArgsIn...>() const noexcept;
+		template <typename TOut, template <typename> typename... ArgsOut>
+		operator Tr<TOut, ArgsOut...>() const noexcept;
 
 	//}
 
@@ -222,7 +222,7 @@ namespace Sa
 		bool IsIdentityPacked() const noexcept;
 
 		template <typename CurrT, typename... PArgs>
-		bool EqualsPacked(const Tr& _other) const noexcept;
+		bool EqualsPacked(const Tr& _other, T _epsilon) const noexcept;
 
 
 		template <typename CurrT, typename... PArgs>
@@ -234,10 +234,6 @@ namespace Sa
 
 		template <typename TrIn, typename CurrT, typename... PArgs>
 		void DividePacked(const Tr& _lhs, const TrIn& _rhs) noexcept;
-	
-
-		template <typename TrIn, typename CurrT, typename... PArgs>
-		void CastPacked(TrIn& _res) noexcept;
 
 	//}
 

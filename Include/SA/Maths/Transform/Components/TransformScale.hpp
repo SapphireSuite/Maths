@@ -18,12 +18,28 @@ namespace Sa
 		Vec3<T> scale = Vec3<T>::One;
 
 
+	//{ Constructors
+	
 		TrScale() = default;
 
 		TrScale(const Vec3<T>& _scale) noexcept :
 			scale{ _scale }
 		{
 		}
+	
+	//}
+
+
+	//{ Cast
+
+		template <typename TOut>
+		operator TrScale<TOut>() const noexcept
+		{
+			return TrScale<TOut>(scale);
+		}
+
+	//}
+
 
 	protected:
 

@@ -157,6 +157,10 @@ namespace Sa::UT::Transform
 		const Mat4T matPR = Mat4T::MakeTranslation(transl) * Mat4T::MakeRotation(rot);
 		EXPECT_EQ(trPR.Matrix(), matPR);
 
+		const Tr<TypeParam, TrPosition, TrScale> trPS { transl, scale };
+		const Mat4T matPS = Mat4T::MakeTranslation(transl) * Mat4T::MakeScale(scale);
+		EXPECT_EQ(trPS.Matrix(), matPS);
+
 		const TrPRS<TypeParam> trPRS { transl, rot, scale };
 		const Mat4T matPRS = Mat4T::MakeTranslation(transl) * Mat4T::MakeRotation(rot) * Mat4T::MakeScale(scale);
 		EXPECT_EQ(trPRS.Matrix(), matPRS);
@@ -187,5 +191,207 @@ namespace Sa::UT::Transform
 
 		EXPECT_TR_NEAR(TrT::Lerp(start, end, 0.5f), res, TypeParam{ 0.00001 });
 		EXPECT_TR_NEAR(TrT::Lerp(start, end, 10.0f), end, TypeParam{ 0.00001 });
+	}
+
+	TYPED_TEST(TransformTest, Multiply)
+	{
+		const QuatT q1(90_deg, Vec3T::Right);
+		const QuatT q2(90_deg, Vec3T::Up);
+
+
+		// Translation
+		{
+			const TrP<TypeParam> tr1{ Vec3T(1, 2, 3) };
+			const TrP<TypeParam> tr_res{ Vec3T(2, 4, 6) };
+
+			EXPECT_EQ(tr1 * tr1, tr_res);
+		}
+
+		// Rotation
+		{
+			const TrR<TypeParam> tr1{ q1 };
+			const TrR<TypeParam> tr2{ q2 };
+
+			const TrR<TypeParam> tr12_res{ q1 * q2 };
+
+			EXPECT_EQ(tr1 * tr2, tr12_res);
+		}
+
+
+		// Scale
+		{
+			const TrS<TypeParam> tr1{ Vec3T(3, 4, 7) };
+			const TrS<TypeParam> tr_res{ Vec3T(9, 16, 49) };
+
+			EXPECT_EQ(tr1 * tr1, tr_res);
+		}
+
+
+		// UScale
+		{
+			const TrUS<TypeParam> tr1{ 7 };
+			const TrUS<TypeParam> tr_res{ 49 };
+
+			EXPECT_EQ(tr1 * tr1, tr_res);
+		}
+
+
+		// Translation Rotation
+		{
+			const TrPR<TypeParam> trParent{ Vec3T(1, 2, 3), q1 };
+			const TrPR<TypeParam> trChild{ Vec3T(4, 5, 9), q2 };
+			const TrPR<TypeParam> tr_res{ Vec3T(5, -7, 8), q1 * q2 };
+
+			EXPECT_TR_NEAR(trParent * trChild, tr_res, TypeParam{ 0.00001 });
+		}
+
+
+		// Translation Rotation Scale
+		{
+			const TrPRS<TypeParam> trParent{ Vec3T(1, 2, 3), q1, Vec3T(4, 6, 7) };
+			const TrPRS<TypeParam> trChild{ Vec3T(4, 5, 9), q2, Vec3T(10, 20, 30) };
+			const TrPRS<TypeParam> tr_res{ Vec3T(5, -7, 8), q1 * q2, Vec3T(40, 120, 210) };
+
+			EXPECT_TR_NEAR(trParent * trChild, tr_res, TypeParam{ 0.00001 });
+
+
+			TrPRS<TypeParam> trCopy = trParent;
+			trCopy *= trChild;
+
+			EXPECT_TR_NEAR(trCopy, tr_res, TypeParam{ 0.00001 });
+		}
+
+
+		// Translation Rotation UScale
+		{
+			const TrPRUS<TypeParam> trParent{ Vec3T(1, 2, 3), q1, TypeParam{ 7 } };
+			const TrPRUS<TypeParam> trChild{ Vec3T(4, 5, 9), q2, TypeParam{ 10 } };
+			const TrPRUS<TypeParam> tr_res{ Vec3T(5, -7, 8), q1 * q2, TypeParam{ 70 } };
+
+			EXPECT_TR_NEAR(trParent * trChild, tr_res, TypeParam{ 0.00001 });
+		}
+
+
+		// Translation Rotation Scale UScale
+		{
+			using TrPRSUS = Tr<TypeParam, TrPosition, TrRotation, TrScale, TrUScale>;
+
+			const TrPRSUS trParent{ Vec3T(1, 2, 3), q1, Vec3T(4, 6, 7), TypeParam{ 4 } };
+			const TrPRSUS trChild{ Vec3T(4, 5, 9), q2, Vec3T(10, 20, 30), TypeParam{ 10 } };
+			const TrPRSUS tr_res{ Vec3T(5, -7, 8), q1 * q2, Vec3T(40, 120, 210), TypeParam{ 40 } };
+
+			EXPECT_TR_NEAR(trParent * trChild, tr_res, TypeParam{ 0.00001 });
+		}
+	}
+
+	TYPED_TEST(TransformTest, Divide)
+	{
+		const QuatT q1(90_deg, Vec3T::Right);
+		const QuatT q2(90_deg, Vec3T::Up);
+
+
+		// Translation
+		{
+			const TrP<TypeParam> tr1{ Vec3T(1, 2, 3) };
+			const TrP<TypeParam> tr2{ Vec3T(12, 1, 9) };
+			const TrP<TypeParam> tr_res{ Vec3T(-11, 1, -6) };
+
+			EXPECT_EQ(tr1 / tr2, tr_res);
+		}
+
+		// Rotation
+		{
+			const TrR<TypeParam> tr1{ q1 };
+			const TrR<TypeParam> tr2{ q2 };
+
+			const TrR<TypeParam> tr12_res{ q1 / q2 };
+
+			EXPECT_EQ(tr1 / tr2, tr12_res);
+		}
+
+
+		// Scale
+		{
+			const TrS<TypeParam> tr1{ Vec3T(3, 4, 7) };
+			const TrS<TypeParam> tr2{ Vec3T(3, 8, 1) };
+			const TrS<TypeParam> tr_res{ Vec3T(1, 0.5f, 7) };
+
+			EXPECT_EQ(tr1 / tr2, tr_res);
+		}
+
+
+		// UScale
+		{
+			const TrUS<TypeParam> tr1{ 14 };
+			const TrUS<TypeParam> tr2{ 7 };
+			const TrUS<TypeParam> tr_res{ 2 };
+
+			EXPECT_EQ(tr1 / tr2, tr_res);
+		}
+
+
+		// Translation Rotation
+		{
+			const TrPR<TypeParam> trParent{ Vec3T(1, 2, 3), q1 };
+			const TrPR<TypeParam> trChild{ Vec3T(4, 5, 9), q2 };
+			const TrPR<TypeParam> tr_res{ Vec3T(-3, 11, -2), q1 / q2 };
+
+			EXPECT_TR_NEAR(trParent / trChild, tr_res, TypeParam{ 0.00001 });
+		}
+
+
+		// Translation Rotation Scale
+		{
+			const TrPRS<TypeParam> trParent{ Vec3T(1, 2, 3), q1, Vec3T(4, 6, 25) };
+			const TrPRS<TypeParam> trChild{ Vec3T(4, 5, 9), q2, Vec3T(10, 20, 5) };
+			const TrPRS<TypeParam> tr_res{ Vec3T(-3, 11, -2), q1 / q2, Vec3T(0.4f, 0.3f, 5) };
+
+			EXPECT_TR_NEAR(trParent / trChild, tr_res, TypeParam{ 0.00001 });
+
+
+			TrPRS<TypeParam> trCopy = trParent;
+			trCopy /= trChild;
+
+			EXPECT_TR_NEAR(trCopy, tr_res, TypeParam{ 0.00001 });
+		}
+
+
+		// Translation Rotation UScale
+		{
+			const TrPRUS<TypeParam> trParent{ Vec3T(1, 2, 3), q1, TypeParam{ 7 } };
+			const TrPRUS<TypeParam> trChild{ Vec3T(4, 5, 9), q2, TypeParam{ 10 } };
+			const TrPRUS<TypeParam> tr_res{ Vec3T(-3, 11, -2), q1 / q2, TypeParam{ 0.7 } };
+
+			EXPECT_TR_NEAR(trParent / trChild, tr_res, TypeParam{ 0.00001 });
+		}
+
+
+		// Translation Rotation Scale UScale
+		{
+			using TrPRSUS = Tr<TypeParam, TrPosition, TrRotation, TrScale, TrUScale>;
+
+			const TrPRSUS trParent{ Vec3T(1, 2, 3), q1, Vec3T(4, 6, 25), TypeParam{ 40 } };
+			const TrPRSUS trChild{ Vec3T(4, 5, 9), q2, Vec3T(10, 20, 5), TypeParam{ 10 } };
+			const TrPRSUS tr_res{ Vec3T(-3, 11, -2), q1 / q2, Vec3T(0.4f, 0.3f, 5), TypeParam{ 4 } };
+
+			EXPECT_TR_NEAR(trParent / trChild, tr_res, TypeParam{ 0.00001 });
+		}
+	}
+
+	TYPED_TEST(TransformTest, Cast)
+	{
+		const QuatT q1(90_deg, Vec3T::Right);
+
+		const TrPRS<TypeParam> tr1{ Vec3T(1, 2, 3), q1, Vec3T(4, 6, 25) };
+		const TrPRUS<TypeParam> tr2 = tr1;
+		const TrPRUS<TypeParam> tr2_res{ Vec3T(1, 2, 3), q1, TypeParam{ 1 } };
+
+		EXPECT_EQ(tr2, tr2_res);
+
+
+		const Tr<int32_t, TrPosition, TrScale> tr3i = tr1;
+		const Tr<int32_t, TrPosition, TrScale> tr3i_res{ Vec3<int32_t>(1, 2, 3), Vec3<int32_t>(4, 6, 25) };
+		
+		EXPECT_EQ(tr3i, tr3i_res);
 	}
 }

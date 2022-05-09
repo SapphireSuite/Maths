@@ -42,7 +42,12 @@ namespace Sa
 	auto tr1V = (_tr1);\
 	auto tr2V = (_tr2);\
 \
-	EXPECT_VEC3_NEAR(tr1V.position, tr2V.position, eps);\
-	EXPECT_QUAT_NEAR(tr1V.rotation, tr2V.rotation, eps);\
-	EXPECT_VEC3_NEAR(tr1V.scale, tr2V.scale, eps);\
+	if constexpr (decltype(tr1V)::template HasComponent<TrPosition>())\
+		EXPECT_VEC3_NEAR(tr1V.position, tr2V.position, eps);\
+	if constexpr (decltype(tr1V)::template HasComponent<TrRotation>())\
+		EXPECT_QUAT_NEAR(tr1V.rotation, tr2V.rotation, eps);\
+	if constexpr (decltype(tr1V)::template HasComponent<TrScale>())\
+		EXPECT_VEC3_NEAR(tr1V.scale, tr2V.scale, eps);\
+	if constexpr (decltype(tr1V)::template HasComponent<TrUScale>())\
+		EXPECT_NEAR(tr1V.uScale, tr2V.uScale, eps);\
 }

@@ -37,14 +37,14 @@ namespace Sa
 
 	template <typename T, template <typename> typename... Args>
 	template <typename CurrT, typename... PArgs>
-	bool Tr<T, Args...>::EqualsPacked(const Tr& _other) const noexcept
+	bool Tr<T, Args...>::EqualsPacked(const Tr& _other, T _epsilon) const noexcept
 	{
 		bool bPack = true;
 
 		if constexpr(sizeof...(PArgs))
-			bPack = EqualsPacked<PArgs...>(_other);
+			bPack = EqualsPacked<PArgs...>(_other, _epsilon);
 
-		return bPack && CurrT::Equals(_other);
+		return bPack && CurrT::Equals(_other, _epsilon);
 	}
 
 
@@ -62,9 +62,9 @@ namespace Sa
 
 
 	template <typename T, template <typename> typename... Args>
-	bool Tr<T, Args...>::Equals(const Tr& _other) const noexcept
+	bool Tr<T, Args...>::Equals(const Tr& _other, T _epsilon) const noexcept
 	{
-		return EqualsPacked<Args<T>...>(_other);
+		return EqualsPacked<Args<T>...>(_other, _epsilon);
 	}
 
 
@@ -211,16 +211,16 @@ namespace Sa
 
 	template <typename T, template <typename> typename... Args>
 	template <template <typename> typename... InArgs>
-	Tr<T, Args...> Tr<T, Args...>::operator*=(const Tr<T, InArgs...>& _rhs) const
+	Tr<T, Args...>& Tr<T, Args...>::operator*=(const Tr<T, InArgs...>& _rhs)
 	{
-		*this = *this * _rhs;
+		return *this = *this * _rhs;
 	}
 
 	template <typename T, template <typename> typename... Args>
 	template <template <typename> typename... InArgs>
-	Tr<T, Args...> Tr<T, Args...>::operator/=(const Tr<T, InArgs...>& _rhs) const
+	Tr<T, Args...>& Tr<T, Args...>::operator/=(const Tr<T, InArgs...>& _rhs)
 	{
-		*this = *this * _rhs;
+		return *this = *this / _rhs;
 	}
 
 //}
@@ -228,24 +228,30 @@ namespace Sa
 
 //{ Cast
 
-	template <typename T, template <typename> typename... Args>
-	template <typename TrIn, typename CurrT, typename... PArgs>
-	void Tr<T, Args...>::CastPacked(TrIn& _res) noexcept
+	namespace Intl
 	{
-		if constexpr (std::is_base_of<CurrT, TrIn>::value)
-			(CurrT&)_res = (const CurrT&)*this;
+		template <typename ThisTrT, typename OutTrT, template <typename> typename CurrT, template <typename> typename... PArgs>
+		struct TrTypeCaster
+		{
+			template <typename ThisT, typename OutT>
+			void ApplyCurr(const ThisT& _thisTr, OutT& _outTr)
+			{
+				if constexpr (std::is_base_of<CurrT<OutTrT>, OutT>::value)
+					(CurrT<OutTrT>&)_outTr = (const CurrT<ThisTrT>&)_thisTr;
 
-		if constexpr (sizeof...(PArgs))
-			CastPacked<PArgs...>(_res);
+				if constexpr (sizeof...(PArgs))
+					TrTypeCaster<ThisTrT, OutTrT, PArgs...>().ApplyCurr(_thisTr, _outTr);
+			}
+		};
 	}
 
 	template <typename T, template <typename> typename... Args>
-	template <typename TIn, template <typename> typename... ArgsIn>
-	Tr<T, Args...>::operator Tr<TIn, ArgsIn...>() const noexcept
+	template <typename TOut, template <typename> typename... ArgsOut>
+	Tr<T, Args...>::operator Tr<TOut, ArgsOut...>() const noexcept
 	{
-		Tr<TIn, ArgsIn...> res;
+		Tr<TOut, ArgsOut...> res;
 
-		CastPacked<Args<T>...>(res);
+		Intl::TrTypeCaster<T, TOut, Args...>().ApplyCurr(*this, res);
 
 		return res;
 	}

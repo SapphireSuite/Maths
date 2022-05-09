@@ -15,12 +15,27 @@ namespace Sa
 		T uScale = T(1);
 
 
+	//{ Constructors
+
 		TrUScale() = default;
 
 		TrUScale(T _uscale) noexcept :
 			uScale{ _uscale }
 		{
 		}
+	
+	//}
+
+
+	//{ Cast
+
+		template <typename TOut>
+		operator TrUScale<TOut>() const noexcept
+		{
+			return TrUScale<TOut>(uScale);
+		}
+
+	//}
 
 	protected:
 
