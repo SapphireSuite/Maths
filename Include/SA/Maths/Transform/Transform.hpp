@@ -10,6 +10,16 @@
 #include <SA/Maths/Transform/Functors/TransformTRSMatrixFunctor.hpp>
 #include <SA/Maths/Transform/Functors/TransformRotateAxisFunctor.hpp>
 
+/**
+ * @file Transform.hpp
+ * 
+ * @brief \b Transform type definition
+ * 
+ * @ingroup Maths_Transform
+ * @{ 
+ */
+
+
 namespace Sa
 {
 	/**
@@ -21,9 +31,16 @@ namespace Sa
 	template <typename T, template <typename> typename... Args>
 	struct Tr : public Args<T>...
 	{
+		/// Transform type alias.
 		using Type = T;
 
 
+		/**
+		 * @brief \e compile-time HasComponent.
+		 * 
+		 * @tparam Comp Transform Component type
+		 * @return Wether this has 'Comp' component.
+		 */
 		template <template <typename> typename Comp>
 		static constexpr bool HasComponent() noexcept;
 
@@ -442,6 +459,13 @@ namespace Sa
 //}
 
 }
+
+/**
+*	@example TransformTests.cpp
+*	Examples and Unitary Tests for Transform.
+*/
+
+/** @} */
 
 #include <SA/Maths/Transform/Transform.inl>
 

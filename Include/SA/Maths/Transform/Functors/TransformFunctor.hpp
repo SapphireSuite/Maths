@@ -5,6 +5,15 @@
 #ifndef SAPPHIRE_MATHS_TRANSFORM_FUNCTOR_GUARD
 #define SAPPHIRE_MATHS_TRANSFORM_FUNCTOR_GUARD
 
+/**
+ * @file TransformFunctor.hpp
+ * 
+ * @brief Transform Functor base helper definition.
+ * 
+ * @ingroup Maths_Transform
+ * @{
+ */
+
 namespace Sa
 {
 	// Forward declaration for children.
@@ -17,5 +26,8 @@ namespace Sa
 	 */
 	class TrFunctor;
 }
+
+
+/** @} */
 
 #endif // GUARD

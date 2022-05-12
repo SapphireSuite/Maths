@@ -5,6 +5,16 @@
 #ifndef SAPPHIRE_MATHS_TRANSFORM_COMPONENT_GUARD
 #define SAPPHIRE_MATHS_TRANSFORM_COMPONENT_GUARD
 
+/**
+ * @file TransformComponent.hpp
+ * 
+ * @brief Transform Component base helper definition
+ * 
+ * @ingroup Maths_Transform
+ * @{
+ */
+
+
 namespace Sa
 {
 	/// Helper macro for transform HasComponent check in templated functions.
@@ -13,5 +23,7 @@ namespace Sa
 	/// Helper macro for transform HasComponent check in templated functions.
 	#define TrHasComponent Tr<T, TrArgs...>::template HasComponent
 }
+
+/** @} */
 
 #endif // GUARD

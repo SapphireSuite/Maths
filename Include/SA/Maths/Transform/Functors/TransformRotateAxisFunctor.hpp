@@ -11,6 +11,15 @@
 
 #include <SA/Maths/Transform/Components/TransformRotation.hpp>
 
+/**
+ * @file TransformRotateAxisFunctor.hpp
+ * 
+ * @brief Transform rotate axis functor definition.
+ * 
+ * @ingroup Maths_Transform
+ */
+
+
 namespace Sa
 {
 	/**
@@ -39,5 +48,8 @@ namespace Sa
 		}
 	};
 }
+
+
+/** @} */
 
 #endif // GUARD

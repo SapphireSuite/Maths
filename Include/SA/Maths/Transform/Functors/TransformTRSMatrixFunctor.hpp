@@ -14,6 +14,15 @@
 #include <SA/Maths/Transform/Components/TransformScale.hpp>
 #include <SA/Maths/Transform/Components/TransformUScale.hpp>
 
+/**
+ * @file TransformTRSMatrixFunctor.hpp
+ * 
+ * @brief Transform TRS Matrix functor definition.
+ * 
+ * @ingroup Maths_Transform
+ */
+
+
 namespace Sa
 {
 	/**
@@ -141,5 +150,8 @@ namespace Sa
 		}
 	};
 }
+
+
+/** @} */
 
 #endif // GUARD
