@@ -7,7 +7,8 @@
 
 #include <SA/Maths/Debug.hpp>
 
-#include <SA/Maths/Transform/Orders/TransformOrderTRS.hpp>
+#include <SA/Maths/Transform/Functors/TransformTRSMatrixFunctor.hpp>
+#include <SA/Maths/Transform/Functors/TransformRotateAxisFunctor.hpp>
 
 namespace Sa
 {
@@ -82,21 +83,24 @@ namespace Sa
 		*
 		*	\return transformed right vector normalized.
 		*/
-		Vec3<T> Right() const;
+		template <typename TrFunc = TrRotateAxisFunctor>
+		Vec3<T> Right(TrFunc _functor = TrFunc()) const;
 
 		/**
 		*	\brief \e Getter of \b up vector (Y axis) of this transform.
 		*
 		*	\return transformed up vector normalized.
 		*/
-		Vec3<T> Up() const;
+		template <typename TrFunc = TrRotateAxisFunctor>
+		Vec3<T> Up(TrFunc _functor = TrFunc()) const;
 
 		/**
 		*	\brief \e Getter of \b forward vector (Z axis) of this transform.
 		*
 		*	\return transformed forward vector normalized.
 		*/
-		Vec3<T> Forward() const;
+		template <typename TrFunc = TrRotateAxisFunctor>
+		Vec3<T> Forward(TrFunc _functor = TrFunc()) const;
 
 
 		/**
@@ -105,17 +109,8 @@ namespace Sa
 		 * 
 		 * @return transformation matrix.
 		 */
-		Mat4<T> Matrix() const noexcept;
-
-		/**
-		 * @brief \b Compute matrix from transform.
-		 * 
-		 * 	@param _order	transform order application implementation.
-		 * 
-		 * 	@return transformation matrix.
-		 */
-		template <template <typename> typename... OrderArgs>
-		Mat4<T> Matrix(TrOrder<OrderArgs...> _order) const noexcept;
+		template <typename TrFunc = TrTRSMatrixFunctor>
+		Mat4<T> Matrix(TrFunc _functor = TrFunc()) const noexcept;
 
 	//}
 

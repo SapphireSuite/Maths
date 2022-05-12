@@ -2,10 +2,10 @@
 
 #pragma once
 
-#ifndef SAPPHIRE_MATHS_TRANSFORM_ORDER_TRS_GUARD
-#define SAPPHIRE_MATHS_TRANSFORM_ORDER_TRS_GUARD
+#ifndef SAPPHIRE_MATHS_TRANSFORM_TRS_MATRIX_FUNCTOR_GUARD
+#define SAPPHIRE_MATHS_TRANSFORM_TRS_MATRIX_FUNCTOR_GUARD
 
-#include <SA/Maths/Transform/Orders/TransformOrder.hpp>
+#include <SA/Maths/Transform/Functors/TransformFunctor.hpp>
 
 #include <SA/Maths/Matrix/Matrix4.hpp>
 
@@ -16,10 +16,13 @@
 
 namespace Sa
 {
-	template<>
-	class TrOrder<TrPosition, TrRotation, TrUScale, TrScale>
+	/**
+	 * @brief Compute TRS Matrix from Transform.
+	 * Order is applied from right to left: (T * (R * S)).
+	 * Functor implementation.
+	 */
+	class TrTRSMatrixFunctor
 	{
-	public:
 		template <typename T, template <typename> typename... TrArgs>
 		Vec3<T> ComputeScale(const Tr<T, TrArgs...>& _tr)
 		{
@@ -39,7 +42,6 @@ namespace Sa
 		void ApplyScaleToRotation(const Vec3<T>& _scale, Mat4<T>& _rot)
 		{
 			/*
-			*
 			*	Optimization of R * S.
 			*
 			*	R {						S {
@@ -100,8 +102,18 @@ namespace Sa
 			_rot.e23 = _trsl.z;
 		}
 
+	public:
+		/**
+		 * @brief Compute matrix from input transform.
+		 * Functor implementation.
+		 * 
+		 * @tparam T 		Transform type.
+		 * @tparam TrArgs 	Transform components.
+		 * @param _tr 		Input transform.
+		 * @return Mat4<T> 	Computed matrix from transform.
+		 */
 		template <typename T, template <typename> typename... TrArgs>
-		Mat4<T> ComputeMatrix(const Tr<T, TrArgs...>& _tr)
+		Mat4<T> operator()(const Tr<T, TrArgs...>& _tr)
 		{
 			Mat4<T> out = Mat4<T>::Identity;
 
@@ -128,8 +140,6 @@ namespace Sa
 			return out;
 		}
 	};
-
-	using TrOrderTRS = TrOrder<TrPosition, TrRotation, TrUScale, TrScale>;
 }
 
 #endif // GUARD
