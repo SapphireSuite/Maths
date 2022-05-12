@@ -7,41 +7,79 @@
 
 #include <SA/Maths/Space/Vector2.hpp>
 
+/**
+*	\file Rectangle2D.hpp
+*
+*	\brief <b>Rectangle 2D</b> type implementation.
+*
+*	\ingroup Maths_Geometry
+*	\{
+*/
+
+
 namespace Sa
 {
+	/**
+	*	\brief \e Rectangle2D Sapphire's class.
+	*
+	*	\tparam T	Type of the rectangle..
+	*/
 	template <typename T>
 	struct Rect2D
 	{
 		union
 		{
+			/// offset.
 			Vec2<T> offset = Vec2<T>();
 
 			struct
 			{
+				/// alias for offset.x
 				T x;
+
+				/// alias for offset.y
 				T y;
 			};
 		};
 
 		union
 		{
+			/// extents.
 			Vec2<T> extent = Vec2<T>();
 
 			struct
 			{
+				/// alias for extent.x
 				T width;
+
+				/// alias for extent.y
 				T height;
 			};
 		};
 
+		/// Default constructor.
 		Rect2D() = default;
 
+		/**
+		 * @brief Constructor from offset and extent.
+		 * 
+		 * @param _offset Offset
+		 * @param _extent Extent
+		 */
 		Rect2D(const Vec2<T>& _offset, const Vec2<T>& _extent) noexcept :
 			offset{ _offset },
 			extent{ _extent }
 		{
 		}
 
+		/**
+		 * @brief Constructor from (x, y) (offset) and (width, height) (extent).
+		 * 
+		 * @param _x 		X offset value.
+		 * @param _y 		Y offset value
+		 * @param _width 	Width extent value.
+		 * @param _height 	Height extent value.
+		 */
 		Rect2D(T _x, T _y, T _width, T _height) noexcept :
 			offset{ _x, _y },
 			extent{ _width, _height }
@@ -84,5 +122,8 @@ namespace Sa
 
 //}
 }
+
+
+/** \} */
 
 #endif // GUARD

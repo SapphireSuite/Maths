@@ -40,7 +40,19 @@
 
 /**
 *	\defgroup Maths_Angle Angle
-*	Sapphire Suite's Angle Angle.
+*	Sapphire Suite's Maths Angle.
+*	\ingroup Maths
+*/
+
+/**
+*	\defgroup Maths_Geometry Geometry
+*	Sapphire Suite's Maths Geometry.
+*	\ingroup Maths
+*/
+
+/**
+*	\defgroup Maths_Transform Transform
+*	Sapphire Suite's Maths Transform.
 *	\ingroup Maths
 */
 

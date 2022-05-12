@@ -7,7 +7,18 @@
 
 #include <SA/Maths/Debug.hpp>
 
-#include <SA/Maths/Transform/Orders/TransformOrderTRS.hpp>
+#include <SA/Maths/Transform/Functors/TransformTRSMatrixFunctor.hpp>
+#include <SA/Maths/Transform/Functors/TransformRotateAxisFunctor.hpp>
+
+/**
+ * @file Transform.hpp
+ * 
+ * @brief \b Transform type definition
+ * 
+ * @ingroup Maths_Transform
+ * @{ 
+ */
+
 
 namespace Sa
 {
@@ -20,9 +31,16 @@ namespace Sa
 	template <typename T, template <typename> typename... Args>
 	struct Tr : public Args<T>...
 	{
+		/// Transform type alias.
 		using Type = T;
 
 
+		/**
+		 * @brief \e compile-time HasComponent.
+		 * 
+		 * @tparam Comp Transform Component type
+		 * @return Wether this has 'Comp' component.
+		 */
 		template <template <typename> typename Comp>
 		static constexpr bool HasComponent() noexcept;
 
@@ -82,21 +100,24 @@ namespace Sa
 		*
 		*	\return transformed right vector normalized.
 		*/
-		Vec3<T> Right() const;
+		template <typename TrFunc = TrRotateAxisFunctor>
+		Vec3<T> Right(TrFunc _functor = TrFunc()) const;
 
 		/**
 		*	\brief \e Getter of \b up vector (Y axis) of this transform.
 		*
 		*	\return transformed up vector normalized.
 		*/
-		Vec3<T> Up() const;
+		template <typename TrFunc = TrRotateAxisFunctor>
+		Vec3<T> Up(TrFunc _functor = TrFunc()) const;
 
 		/**
 		*	\brief \e Getter of \b forward vector (Z axis) of this transform.
 		*
 		*	\return transformed forward vector normalized.
 		*/
-		Vec3<T> Forward() const;
+		template <typename TrFunc = TrRotateAxisFunctor>
+		Vec3<T> Forward(TrFunc _functor = TrFunc()) const;
 
 
 		/**
@@ -105,17 +126,8 @@ namespace Sa
 		 * 
 		 * @return transformation matrix.
 		 */
-		Mat4<T> Matrix() const noexcept;
-
-		/**
-		 * @brief \b Compute matrix from transform.
-		 * 
-		 * 	@param _order	transform order application implementation.
-		 * 
-		 * 	@return transformation matrix.
-		 */
-		template <template <typename> typename... OrderArgs>
-		Mat4<T> Matrix(TrOrder<OrderArgs...> _order) const noexcept;
+		template <typename TrFunc = TrTRSMatrixFunctor>
+		Mat4<T> Matrix(TrFunc _functor = TrFunc()) const noexcept;
 
 	//}
 
@@ -447,6 +459,13 @@ namespace Sa
 //}
 
 }
+
+/**
+*	@example TransformTests.cpp
+*	Examples and Unitary Tests for Transform.
+*/
+
+/** @} */
 
 #include <SA/Maths/Transform/Transform.inl>
 

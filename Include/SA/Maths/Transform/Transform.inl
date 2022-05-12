@@ -86,44 +86,32 @@ namespace Sa
 //{ Transformation
 
 	template <typename T, template <typename> typename... Args>
-	Vec3<T> Tr<T, Args...>::Right() const
+	template <typename TrFunc>
+	Vec3<T> Tr<T, Args...>::Right(TrFunc _functor) const
 	{
-		if constexpr (std::is_base_of<TrRotation<T>, Tr<T, Args...>>::value)
-			return TrRotation<T>::rotation.RightVector();
-		else
-			return Vec3<T>::Right;
+		return _functor(*this, Vec3<T>::Right);
 	}
 
 	template <typename T, template <typename> typename... Args>
-	Vec3<T> Tr<T, Args...>::Up() const
+	template <typename TrFunc>
+	Vec3<T> Tr<T, Args...>::Up(TrFunc _functor) const
 	{
-		if constexpr (std::is_base_of<TrRotation<T>, Tr<T, Args...>>::value)
-			return TrRotation<T>::rotation.UpVector();
-		else
-			return Vec3<T>::Up;
+		return _functor(*this, Vec3<T>::Up);
 	}
 
 	template <typename T, template <typename> typename... Args>
-	Vec3<T> Tr<T, Args...>::Forward() const
+	template <typename TrFunc>
+	Vec3<T> Tr<T, Args...>::Forward(TrFunc _functor) const
 	{
-		if constexpr (std::is_base_of<TrRotation<T>, Tr<T, Args...>>::value)
-			return TrRotation<T>::rotation.ForwardVector();
-		else
-			return Vec3<T>::Forward;
+		return _functor(*this, Vec3<T>::Forward);
 	}
 
 
 	template <typename T, template <typename> typename... Args>
-	Mat4<T> Tr<T, Args...>::Matrix() const noexcept
+	template <typename TrFunc>
+	Mat4<T> Tr<T, Args...>::Matrix(TrFunc _functor) const noexcept
 	{
-		return Matrix(TrOrderTRS());
-	}
-
-	template <typename T, template <typename> typename... Args>
-	template <template <typename> typename... OrderArgs>
-	Mat4<T> Tr<T, Args...>::Matrix(TrOrder<OrderArgs...> _order) const noexcept
-	{
-		return _order.ComputeMatrix(*this);
+		return _functor(*this);
 	}
 
 //}
