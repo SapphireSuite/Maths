@@ -14,7 +14,7 @@
  * @{
  */
 
-namespace Sa
+namespace SA
 {
 	// Forward declaration for children.
 	template <typename T, template <typename> typename... Args>

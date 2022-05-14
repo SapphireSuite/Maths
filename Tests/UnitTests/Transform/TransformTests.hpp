@@ -9,9 +9,9 @@
 #include "../Space/Vector3Tests.hpp"
 #include "../Space/QuaternionTests.hpp"
 
-namespace Sa
+namespace SA
 {
-	/* Must be declared in Sa:: */
+	/* Must be declared in SA:: */
 	template <typename T, template <typename> typename... Args>
 	std::ostream& operator<<(std::ostream& _os, const Tr<T, Args...>& _tr)
 	{

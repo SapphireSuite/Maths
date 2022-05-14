@@ -4,7 +4,7 @@
 
 #include <SA/Maths/Space/Vector3.hpp>
 
-namespace Sa::UT::Vector2
+namespace SA::UT::Vector2
 {
 	template <typename T>
 	class Vector2Test : public testing::Test

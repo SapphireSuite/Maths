@@ -7,7 +7,7 @@
 
 #if SA_MATHS_QUATERNION_SIMD || SA_CI
 
-namespace Sa::Benchmark
+namespace SA::Benchmark
 {
     template <typename T>
     static void Quat_SqrLength(benchmark::State& _state)

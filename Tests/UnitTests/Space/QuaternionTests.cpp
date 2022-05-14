@@ -6,7 +6,7 @@
 #include "../Angle/DegreeTests.hpp"
 #include "../Angle/RadianTests.hpp"
 
-namespace Sa::UT::Quaternion
+namespace SA::UT::Quaternion
 {
 	template <typename T>
 	class QuaternionTest : public testing::Test

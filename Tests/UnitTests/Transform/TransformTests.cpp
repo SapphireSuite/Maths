@@ -7,7 +7,7 @@
 #undef Mat4T
 #define Mat4T Mat4<TypeParam>
 
-namespace Sa::UT::Transform
+namespace SA::UT::Transform
 {
 	template <typename T>
 	class TransformTest : public testing::Test

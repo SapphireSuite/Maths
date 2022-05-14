@@ -17,7 +17,7 @@
 */
 
 
-namespace Sa
+namespace SA
 {
 	/**
 	*	\brief \e Rectangle2D Sapphire's class.

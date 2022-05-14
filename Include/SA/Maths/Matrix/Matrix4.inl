@@ -1,6 +1,6 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
-namespace Sa
+namespace SA
 {
 //{ Constants
 
@@ -836,25 +836,25 @@ namespace Sa
 		const T* const data = _m.Data();
 
 		return
-			Sa::ToString(data[0]) + ", " +
-			Sa::ToString(data[1]) + ", " +
-			Sa::ToString(data[2]) + ", " +
-			Sa::ToString(data[3]) + ",\n" +
+			SA::ToString(data[0]) + ", " +
+			SA::ToString(data[1]) + ", " +
+			SA::ToString(data[2]) + ", " +
+			SA::ToString(data[3]) + ",\n" +
 
-			Sa::ToString(data[4]) + ", " +
-			Sa::ToString(data[5]) + ", " +
-			Sa::ToString(data[6]) + ", " +
-			Sa::ToString(data[7]) + ",\n" +
+			SA::ToString(data[4]) + ", " +
+			SA::ToString(data[5]) + ", " +
+			SA::ToString(data[6]) + ", " +
+			SA::ToString(data[7]) + ",\n" +
 
-			Sa::ToString(data[8]) + ", " +
-			Sa::ToString(data[9]) + ", " +
-			Sa::ToString(data[10]) + ", " +
-			Sa::ToString(data[11]) + ",\n" +
+			SA::ToString(data[8]) + ", " +
+			SA::ToString(data[9]) + ", " +
+			SA::ToString(data[10]) + ", " +
+			SA::ToString(data[11]) + ",\n" +
 
-			Sa::ToString(data[12]) + ", " +
-			Sa::ToString(data[13]) + ", " +
-			Sa::ToString(data[14]) + ", " +
-			Sa::ToString(data[15]);
+			SA::ToString(data[12]) + ", " +
+			SA::ToString(data[13]) + ", " +
+			SA::ToString(data[14]) + ", " +
+			SA::ToString(data[15]);
 	}
 
 #endif

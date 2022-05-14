@@ -4,7 +4,7 @@
 
 #include <Space/Vector3.hpp>
 
-namespace Sa
+namespace SA
 {
 #if SA_MATHS_QUATERNION_SIMD && SA_INTRISC_SSE // SIMD float.
 

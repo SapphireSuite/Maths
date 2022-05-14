@@ -17,7 +17,7 @@
 
 #if SA_MATHS_BENCHMARK_INV_SQRT
 
-namespace Sa::Benchmark
+namespace SA::Benchmark
 {
 #if !SA_MATHS_INTRINSICS_OPT
 

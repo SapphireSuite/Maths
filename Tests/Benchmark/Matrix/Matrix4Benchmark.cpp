@@ -8,7 +8,7 @@
 
 #if SA_MATHS_MATRIX4_SIMD || SA_CI
 
-namespace Sa::Benchmark
+namespace SA::Benchmark
 {
     template <typename T>
     static void Mat4_Determinant(benchmark::State& _state)

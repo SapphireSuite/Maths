@@ -1,6 +1,6 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
-namespace Sa
+namespace SA
 {
 	template <typename T>
 	constexpr Rad<T>::Rad(T _rad) noexcept : mHandle{ _rad }

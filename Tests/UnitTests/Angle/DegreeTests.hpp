@@ -11,9 +11,9 @@
 
 #include <SA/Maths/Angle/Degree.hpp>
 
-namespace Sa
+namespace SA
 {
-	/* Must be declared in Sa:: */
+	/* Must be declared in SA:: */
 	template <typename T>
 	std::ostream& operator<<(std::ostream& _os, const Deg<T>& _d)
 	{

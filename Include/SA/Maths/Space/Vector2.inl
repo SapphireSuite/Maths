@@ -1,6 +1,6 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
-namespace Sa
+namespace SA
 {
 //{ Constants
 
@@ -429,7 +429,7 @@ namespace Sa
 	template <typename T>
 	std::string ToString(const Vec2<T>& _v)
 	{
-		return "X: " + Sa::ToString(_v.x) + "\tY: " + Sa::ToString(_v.y);
+		return "X: " + SA::ToString(_v.x) + "\tY: " + SA::ToString(_v.y);
 	}
 
 #endif

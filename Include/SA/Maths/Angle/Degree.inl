@@ -1,6 +1,6 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
-namespace Sa
+namespace SA
 {
 	template <typename T>
 	constexpr Deg<T>::Deg(T _deg) noexcept : mHandle{ _deg }

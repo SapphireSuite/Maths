@@ -7,7 +7,7 @@
 
 #include <SA/Maths/Matrix/MatrixMajor.hpp>
 
-namespace Sa
+namespace SA
 {
 	/// \cond Internal
 

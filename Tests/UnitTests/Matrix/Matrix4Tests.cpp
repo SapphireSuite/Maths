@@ -6,7 +6,7 @@
 #include "../Space/Vector3Tests.hpp"
 #include "../Space/Vector4Tests.hpp"
 
-namespace Sa::UT::Matrix4
+namespace SA::UT::Matrix4
 {
 	template <typename InType, MatMaj Major>
 	struct TypeDef

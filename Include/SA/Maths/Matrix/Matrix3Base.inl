@@ -1,6 +1,6 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
-namespace Sa::Intl
+namespace SA::Intl
 {
 	/// \cond Internal
 

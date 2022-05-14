@@ -15,7 +15,7 @@
 */
 
 
-namespace Sa
+namespace SA
 {
 	namespace Maths
 	{

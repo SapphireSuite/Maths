@@ -1,6 +1,6 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
-namespace Sa
+namespace SA
 {
 //{ Constructors
 
@@ -141,10 +141,10 @@ namespace Sa
 	template <typename T>
 	std::string ToString(const Vec4<T>& _v)
 	{
-		return "X: " + Sa::ToString(_v.x) +
-			"\tY: " + Sa::ToString(_v.y) +
-			"\tZ: " + Sa::ToString(_v.z) +
-			"\tW: " + Sa::ToString(_v.w);
+		return "X: " + SA::ToString(_v.x) +
+			"\tY: " + SA::ToString(_v.y) +
+			"\tZ: " + SA::ToString(_v.z) +
+			"\tW: " + SA::ToString(_v.w);
 	}
 
 #endif

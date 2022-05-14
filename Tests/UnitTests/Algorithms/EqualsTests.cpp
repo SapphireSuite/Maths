@@ -4,7 +4,7 @@
 
 #include <SA/Maths/Algorithms/Equals.hpp>
 
-namespace Sa::UT::Equals
+namespace SA::UT::Equals
 {
 	template <typename T>
 	class EqualsTest : public testing::Test

@@ -20,7 +20,7 @@
  */
 
 
-namespace Sa
+namespace SA
 {
 	/**
 	 * @brief \e Transform Sapphire's class.

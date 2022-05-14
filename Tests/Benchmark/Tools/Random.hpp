@@ -8,7 +8,7 @@
 #include <ctime>
 #include <cstdlib>
 
-namespace Sa::Benchmark
+namespace SA::Benchmark
 {
     static bool randomInit = []() { srand((unsigned int)time(nullptr)); return true; }();
 

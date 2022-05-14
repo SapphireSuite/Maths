@@ -20,7 +20,7 @@
  */
 
 
-namespace Sa
+namespace SA
 {
 	/**
 	 * @brief Transform rotation component.
@@ -141,7 +141,7 @@ namespace Sa
 		template <typename RhsT>
 		static TrRotation Multiply(const TrRotation& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (TrTHasComponent(RhsT)<Sa::TrRotation>())
+			if constexpr (TrTHasComponent(RhsT)<SA::TrRotation>())
 			{
 				// Rotation component found.
 
@@ -166,7 +166,7 @@ namespace Sa
 		template <typename RhsT>
 		static TrRotation Divide(const TrRotation& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (TrTHasComponent(RhsT)<Sa::TrRotation>())
+			if constexpr (TrTHasComponent(RhsT)<SA::TrRotation>())
 			{
 				// Rotation component found.
 
@@ -191,7 +191,7 @@ namespace Sa
 		 */
 		std::string ToString() const
 		{
-			return "Rot: " + Sa::ToString(rotation);
+			return "Rot: " + SA::ToString(rotation);
 		}
 
 	#endif

@@ -17,7 +17,7 @@
  */
 
 
-namespace Sa
+namespace SA
 {
 	/**
 	 * @brief Transform uniform scale component.
@@ -76,7 +76,7 @@ namespace Sa
 		 */
 		constexpr bool IsZero() const noexcept
 		{
-			return Sa::Maths::Equals0(uScale);
+			return SA::Maths::Equals0(uScale);
 		}
 
 		/**
@@ -87,7 +87,7 @@ namespace Sa
 		 */
 		constexpr bool IsIdentity() const noexcept
 		{
-			return Sa::Maths::Equals1(uScale);
+			return SA::Maths::Equals1(uScale);
 		}
 
 		/**
@@ -138,7 +138,7 @@ namespace Sa
 		template <typename RhsT>
 		static TrUScale Multiply(const TrUScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (TrTHasComponent(RhsT)<Sa::TrUScale>())
+			if constexpr (TrTHasComponent(RhsT)<SA::TrUScale>())
 			{
 				// UScale component found.
 
@@ -163,7 +163,7 @@ namespace Sa
 		template <typename RhsT>
 		static TrUScale Divide(const TrUScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (TrTHasComponent(RhsT)<Sa::TrUScale>())
+			if constexpr (TrTHasComponent(RhsT)<SA::TrUScale>())
 			{
 				// UScale component found.
 
@@ -188,7 +188,7 @@ namespace Sa
 		 */
 		std::string ToString() const
 		{
-			return "UScale: " + Sa::ToString(uScale);
+			return "UScale: " + SA::ToString(uScale);
 		}
 
 	#endif

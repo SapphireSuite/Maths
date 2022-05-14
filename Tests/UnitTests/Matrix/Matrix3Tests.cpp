@@ -5,7 +5,7 @@
 #include "../Space/QuaternionTests.hpp"
 #include "../Space/Vector3Tests.hpp"
 
-namespace Sa::UT::Matrix3
+namespace SA::UT::Matrix3
 {
 	template <typename InType, MatMaj Major>
 	struct TypeDef

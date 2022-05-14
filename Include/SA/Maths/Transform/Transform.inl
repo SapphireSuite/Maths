@@ -1,6 +1,6 @@
 // Copyright (c) 2022 Sapphire Development Team. All Rights Reserved.
 
-namespace Sa
+namespace SA
 {
 	template <typename T, template <typename> typename... Args>
 	template <template <typename> typename Comp>

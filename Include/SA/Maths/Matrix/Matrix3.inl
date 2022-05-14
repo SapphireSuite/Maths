@@ -1,6 +1,6 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
-namespace Sa
+namespace SA
 {
 //{ Constants
 
@@ -525,17 +525,17 @@ namespace Sa
 		const T* const data = _m.Data();
 
 		return
-			Sa::ToString(data[0]) + ", " +
-			Sa::ToString(data[1]) + ", " +
-			Sa::ToString(data[2]) + ",\n " +
+			SA::ToString(data[0]) + ", " +
+			SA::ToString(data[1]) + ", " +
+			SA::ToString(data[2]) + ",\n " +
 
-			Sa::ToString(data[3]) + ", " +
-			Sa::ToString(data[4]) + ", " +
-			Sa::ToString(data[5]) + ",\n " +
+			SA::ToString(data[3]) + ", " +
+			SA::ToString(data[4]) + ", " +
+			SA::ToString(data[5]) + ",\n " +
 
-			Sa::ToString(data[6]) + ", " +
-			Sa::ToString(data[7]) + ", " +
-			Sa::ToString(data[8]);
+			SA::ToString(data[6]) + ", " +
+			SA::ToString(data[7]) + ", " +
+			SA::ToString(data[8]);
 	}
 
 #endif

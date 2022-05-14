@@ -20,7 +20,7 @@
  */
 
 
-namespace Sa
+namespace SA
 {
 	/**
 	 * @brief Transform scale component.
@@ -145,12 +145,12 @@ namespace Sa
 		template <typename RhsT>
 		static TrScale Multiply(const TrScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (TrTHasComponent(RhsT)<Sa::TrScale>())
+			if constexpr (TrTHasComponent(RhsT)<SA::TrScale>())
 			{
 				// Scale component found.
 				return TrScale{ _lhs.scale * _rhs.scale };
 			}
-			else if constexpr (TrTHasComponent(RhsT)<Sa::TrUScale>())
+			else if constexpr (TrTHasComponent(RhsT)<SA::TrUScale>())
 			{
 				// UScale component found instead.
 				return TrScale{ _lhs.scale * _rhs.uScale };
@@ -178,12 +178,12 @@ namespace Sa
 		template <typename RhsT>
 		static TrScale Divide(const TrScale& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (TrTHasComponent(RhsT)<Sa::TrScale>())
+			if constexpr (TrTHasComponent(RhsT)<SA::TrScale>())
 			{
 				// Scale component found.
 				return TrScale{ _lhs.scale / _rhs.scale };
 			}
-			else if constexpr (TrTHasComponent(RhsT)<Sa::TrUScale>())
+			else if constexpr (TrTHasComponent(RhsT)<SA::TrUScale>())
 			{
 				// UScale component found instead.
 				return TrScale{ _lhs.scale / _rhs.uScale };
@@ -207,7 +207,7 @@ namespace Sa
 		 */
 		std::string ToString() const
 		{
-			return "Scale: " + Sa::ToString(scale);
+			return "Scale: " + SA::ToString(scale);
 		}
 
 	#endif

@@ -9,7 +9,7 @@
 
 #include "../Tools/Random.hpp"
 
-namespace Sa::Benchmark
+namespace SA::Benchmark
 {
     template <typename T>
     static Vec3<T> Vec3_Random()

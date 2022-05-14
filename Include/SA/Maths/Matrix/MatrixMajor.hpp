@@ -17,7 +17,7 @@
 */
 
 
-namespace Sa
+namespace SA
 {
 	/// Matrix major enum.
 	enum class MatrixMajor : uint8_t

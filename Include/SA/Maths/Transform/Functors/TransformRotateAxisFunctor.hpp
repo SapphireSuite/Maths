@@ -20,7 +20,7 @@
  */
 
 
-namespace Sa
+namespace SA
 {
 	/**
 	 * @brief Compute rotated axis from transform.

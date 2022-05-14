@@ -11,9 +11,9 @@
 
 #include <SA/Maths/Space/Vector2.hpp>
 
-namespace Sa
+namespace SA
 {
-	/* Must be declared in Sa:: */
+	/* Must be declared in SA:: */
 	template <typename T>
 	std::ostream& operator<<(std::ostream& _os, const Vec2<T>& _v)
 	{

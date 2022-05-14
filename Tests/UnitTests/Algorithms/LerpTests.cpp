@@ -4,7 +4,7 @@
 
 #include <SA/Maths/Algorithms/Lerp.hpp>
 
-namespace Sa::UT::Lerp
+namespace SA::UT::Lerp
 {
 	template <typename T>
 	class LerpTest : public testing::Test

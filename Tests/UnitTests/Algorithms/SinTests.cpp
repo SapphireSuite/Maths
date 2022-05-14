@@ -5,7 +5,7 @@
 #include <SA/Maths/Angle/Degree.hpp>
 #include <SA/Maths/Algorithms/Sin.hpp>
 
-namespace Sa::UT::Sin
+namespace SA::UT::Sin
 {
 	TEST(Sinus, SinusFloat)
 	{

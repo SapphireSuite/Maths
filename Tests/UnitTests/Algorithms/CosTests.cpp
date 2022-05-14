@@ -5,7 +5,7 @@
 #include <SA/Maths/Angle/Degree.hpp>
 #include <SA/Maths/Algorithms/Cos.hpp>
 
-namespace Sa::UT::Cos
+namespace SA::UT::Cos
 {
 	TEST(Cosinus, CosinusFloat)
 	{

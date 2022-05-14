@@ -5,7 +5,7 @@
 #include <SA/Maths/Angle/Degree.hpp>
 #include <SA/Maths/Algorithms/Tan.hpp>
 
-namespace Sa::UT::Tan
+namespace SA::UT::Tan
 {
 	TEST(Tangent, TangentFloat)
 	{

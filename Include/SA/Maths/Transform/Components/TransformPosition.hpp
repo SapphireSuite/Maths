@@ -20,7 +20,7 @@
  */
 
 
-namespace Sa
+namespace SA
 {
 	/**
 	 * @brief Transform position component.
@@ -146,7 +146,7 @@ namespace Sa
 		template <typename LhsT, typename RhsT>
 		static TrPosition Multiply(const LhsT& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (TrTHasComponent(RhsT)<Sa::TrPosition>())
+			if constexpr (TrTHasComponent(RhsT)<SA::TrPosition>())
 			{
 				// Position component found.
 
@@ -188,7 +188,7 @@ namespace Sa
 		template <typename LhsT, typename RhsT>
 		static TrPosition Divide(const LhsT& _lhs, const RhsT& _rhs) noexcept
 		{
-			if constexpr (TrTHasComponent(RhsT)<Sa::TrPosition>())
+			if constexpr (TrTHasComponent(RhsT)<SA::TrPosition>())
 			{
 				// Position component found.
 
@@ -226,7 +226,7 @@ namespace Sa
 		 */
 		std::string ToString() const
 		{
-			return "Pos: " + Sa::ToString(position);
+			return "Pos: " + SA::ToString(position);
 		}
 
 	#endif

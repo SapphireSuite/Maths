@@ -3,7 +3,7 @@
 #include "RadianTests.hpp"
 #include "DegreeTests.hpp"
 
-namespace Sa::UT::Radian
+namespace SA::UT::Radian
 {
 	template <typename T>
 	class RadianTest : public testing::Test

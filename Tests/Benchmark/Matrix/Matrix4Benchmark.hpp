@@ -9,7 +9,7 @@
 
 #include "../Tools/Random.hpp"
 
-namespace Sa::Benchmark
+namespace SA::Benchmark
 {
     template <typename T, MatrixMajor major = MatrixMajor::Default>
     static Mat4<T, major> Mat4_Random()

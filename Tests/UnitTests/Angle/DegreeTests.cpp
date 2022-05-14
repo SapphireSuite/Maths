@@ -3,7 +3,7 @@
 #include "DegreeTests.hpp"
 #include "RadianTests.hpp"
 
-namespace Sa::UT::Degree
+namespace SA::UT::Degree
 {
 	#define DegT Deg<TypeParam>
 

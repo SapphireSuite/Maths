@@ -15,7 +15,7 @@
  */
 
 
-namespace Sa
+namespace SA
 {
 	/// Helper macro for transform HasComponent check in templated functions.
 	#define TrTHasComponent(_trT) _trT::template HasComponent

@@ -4,7 +4,7 @@
 
 #include <SA/Maths/Algorithms/Sqrt.hpp>
 
-namespace Sa::UT::Sqrt
+namespace SA::UT::Sqrt
 {
 	template <typename T>
 	class SqrtTest : public testing::Test

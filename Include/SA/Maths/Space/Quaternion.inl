@@ -1,6 +1,6 @@
 // Copyright (c) 2022 Sapphire development team. All Rights Reserved.
 
-namespace Sa
+namespace SA
 {
 //{ Constants
 
@@ -663,10 +663,10 @@ namespace Sa
 	template <typename T>
 	std::string ToString(const Quat<T>& _q)
 	{
-		return "W: " + Sa::ToString(_q.w) +
-			"\tX: " + Sa::ToString(_q.x) +
-			"\tY: " + Sa::ToString(_q.y) +
-			"\tZ: " + Sa::ToString(_q.z);
+		return "W: " + SA::ToString(_q.w) +
+			"\tX: " + SA::ToString(_q.x) +
+			"\tY: " + SA::ToString(_q.y) +
+			"\tZ: " + SA::ToString(_q.z);
 	}
 
 #endif

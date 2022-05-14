@@ -23,7 +23,7 @@
  */
 
 
-namespace Sa
+namespace SA
 {
 	/**
 	 * @brief Compute TRS Matrix from Transform.

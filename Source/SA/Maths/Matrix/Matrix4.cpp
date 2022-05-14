@@ -6,7 +6,7 @@
 #include <Space/Vector4.hpp>
 #include <Space/Quaternion.hpp>
 
-namespace Sa
+namespace SA
 {
 #if SA_MATHS_MATRIX4_SIMD && SA_INTRISC_AVX // SIMD int32
 

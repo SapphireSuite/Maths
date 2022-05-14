@@ -25,7 +25,7 @@
 */
 
 
-namespace Sa
+namespace SA
 {
 	template <typename T>
 	struct Vec2;
