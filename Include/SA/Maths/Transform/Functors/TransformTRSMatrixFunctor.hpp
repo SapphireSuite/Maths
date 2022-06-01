@@ -20,6 +20,7 @@
  * @brief Transform TRS Matrix functor definition.
  * 
  * @ingroup Maths_Transform
+ * @{
  */
 
 

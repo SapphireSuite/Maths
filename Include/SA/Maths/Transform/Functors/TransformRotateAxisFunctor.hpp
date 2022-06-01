@@ -17,6 +17,7 @@
  * @brief Transform rotate axis functor definition.
  * 
  * @ingroup Maths_Transform
+ * @{
  */
 
 
