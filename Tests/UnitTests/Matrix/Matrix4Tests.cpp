@@ -639,7 +639,7 @@ namespace SA::UT::Matrix4
 				(T)3675.163086, (T)36085.500000, (T)6987.745605, (T)766.518494
 			);
 
-			EXPECT_MAT4_NEAR(m3 * m4, m3multm4, 0.003);
+			EXPECT_MAT4_NEAR(m3 * m4, m3multm4, 0.004);
 
 			m3divm4 = Mat4T(
 				(T)0.028285, (T)-0.038804, (T)0.015961, (T)0.781553,
