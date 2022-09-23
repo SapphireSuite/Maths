@@ -18,8 +18,8 @@ SA_ConfigureProject(SA_Maths)
 
 add_library(SA_Maths STATIC)
 
-SA_ConfigureTarget(TARGET SA_Maths)
-SA_TargetSources(TARGET SA_Maths)
+SA_ConfigureTarget(SA_Maths)
+SA_TargetSources(SA_Maths)
 
 
 
@@ -39,7 +39,7 @@ option(SA_MATHS_INTRINSICS_OPT "Should build using intrinsics" OFF)
 if(SA_MATHS_INTRINSICS_OPT)
 	target_link_libraries(SA_Maths PUBLIC SA_Support)
 	target_compile_definitions(SA_Maths PUBLIC SA_MATHS_INTRINSICS_OPT)
-	SA_SetIntrinsicsFlags(TARGET SA_Maths)
+	SA_SetIntrinsicsFlags(SA_Maths)
 endif()
 
 
