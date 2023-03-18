@@ -260,7 +260,7 @@ namespace SA
 		*
 		*	\return new quaternion inversed.
 		*/
-		Quat GetInversed() const noexcept;
+		constexpr Quat GetInversed() const noexcept;
 
 //}
 
@@ -413,7 +413,7 @@ namespace SA
 		*
 		*	\return <b> Dot product </b> between _lhs and _rhs.
 		*/
-		static T Dot(const Quat& _lhs, const Quat& _rhs) noexcept;
+		static constexpr T Dot(const Quat& _lhs, const Quat& _rhs) noexcept;
 
 //}
 
@@ -512,7 +512,7 @@ namespace SA
 		*
 		*	\return new quaternion scaled.
 		*/
-		Quat operator*(T _scale) const noexcept;
+		constexpr Quat operator*(T _scale) const noexcept;
 
 		/**
 		*	\brief <b> Inverse Scale </b> each quaternion components by _scale.
@@ -530,7 +530,7 @@ namespace SA
 		*
 		*	\return new quaternion result.
 		*/
-		Quat operator+(const Quat& _rhs) const noexcept;
+		constexpr Quat operator+(const Quat& _rhs) const noexcept;
 
 		/**
 		*	\brief \b Subtract term by term quaternion values.
@@ -539,7 +539,7 @@ namespace SA
 		*
 		*	\return new quaternion result.
 		*/
-		Quat operator-(const Quat& _rhs) const noexcept;
+		constexpr Quat operator-(const Quat& _rhs) const noexcept;
 
 		/**
 		*	\brief \b Multiply quaternion to compute rotation.
@@ -596,7 +596,7 @@ namespace SA
 		*
 		*	\return <b> Dot product </b> between this quaternion and _other.
 		*/
-		T operator|(const Quat& _rhs) const noexcept;
+		constexpr T operator|(const Quat& _rhs) const noexcept;
 
 		/**
 		*	\brief \b Scale each quaternion values by _scale.
@@ -696,7 +696,7 @@ namespace SA
 	*	\return new quaternion inverse-scaled.
 	*/
 	template <typename T>
-	constexpr Quat<T> operator/(typename std::remove_cv<T>::type _lhs, const Quat<T>& _rhs);
+	Quat<T> operator/(typename std::remove_cv<T>::type _lhs, const Quat<T>& _rhs);
 
 	/**
 	*	\brief \b Rotate _lhs vector by _rhs quaternion.

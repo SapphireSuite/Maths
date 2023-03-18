@@ -371,7 +371,7 @@ namespace SA
 	}
 
 	template <typename T>
-	constexpr  Vec3<T> Vec3<T>::operator/(const Vec3& _rhs) const
+	Vec3<T> Vec3<T>::operator/(const Vec3& _rhs) const
 	{
 		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths, L"Divide X Axis value by 0!");
 		SA_ASSERT((NotEquals0, _rhs.y), SA.Maths, L"Divide Y Axis value by 0!");
@@ -473,7 +473,7 @@ namespace SA
 	}
 
 	template <typename T>
-	constexpr Vec3<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec3<T>& _rhs)
+	Vec3<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec3<T>& _rhs)
 	{
 		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths, L"Divide X Axis value by 0!");
 		SA_ASSERT((NotEquals0, _rhs.y), SA.Maths, L"Divide Y Axis value by 0!");

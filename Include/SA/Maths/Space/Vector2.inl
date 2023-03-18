@@ -415,7 +415,7 @@ namespace SA
 	}
 
 	template <typename T>
-	constexpr Vec2<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec2<T>& _rhs)
+	Vec2<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec2<T>& _rhs)
 	{
 		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths, L"Inverse scale X Axis by 0!");
 		SA_ASSERT((NotEquals0, _rhs.y), SA.Maths, L"Inverse scale Y Axis by 0!");

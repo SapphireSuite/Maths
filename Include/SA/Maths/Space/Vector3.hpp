@@ -524,7 +524,7 @@ namespace SA
 		*
 		*	\return new vector result.
 		*/
-		constexpr Vec3 operator/(const Vec3& _rhs) const;
+		Vec3 operator/(const Vec3& _rhs) const;
 
 		/**
 		*	\brief \e Compute the <b> Dot product </b> between this and _rhs.
@@ -623,7 +623,7 @@ namespace SA
 	*	\return new vector inverse-scaled.
 	*/
 	template <typename T>
-	constexpr Vec3<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec3<T>& _rhs);
+	Vec3<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec3<T>& _rhs);
 
 
 #if SA_LOGGER_IMPL

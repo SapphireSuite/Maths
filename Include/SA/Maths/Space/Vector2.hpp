@@ -609,7 +609,7 @@ namespace SA
 	*	\return new vector inverse-scaled.
 	*/
 	template <typename T>
-	constexpr Vec2<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec2<T>& _rhs);
+	Vec2<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec2<T>& _rhs);
 
 
 #if SA_LOGGER_IMPL

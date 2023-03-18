@@ -190,7 +190,7 @@ namespace SA
 	}
 
 	template <typename T>
-	Quat<T> Quat<T>::GetInversed() const noexcept
+	constexpr Quat<T> Quat<T>::GetInversed() const noexcept
 	{
 		SA_WARN(IsNormalized(), SA.Maths, L"Quaternion should be normalized!");
 
@@ -428,7 +428,7 @@ namespace SA
 //{ Dot
 
 	template <typename T>
-	T Quat<T>::Dot(const Quat<T>& _lhs, const Quat& _rhs) noexcept
+	constexpr T Quat<T>::Dot(const Quat<T>& _lhs, const Quat& _rhs) noexcept
 	{
 		return _lhs.w * _rhs.w +
 			_lhs.x * _rhs.x +
@@ -487,7 +487,7 @@ namespace SA
 	}
 
 	template <typename T>
-	Quat<T> Quat<T>::operator*(T _scale) const noexcept
+	constexpr Quat<T> Quat<T>::operator*(T _scale) const noexcept
 	{
 		return Quat(
 			w * _scale,
@@ -511,7 +511,7 @@ namespace SA
 	}
 
 	template <typename T>
-	Quat<T> Quat<T>::operator+(const Quat<T>& _rhs) const noexcept
+	constexpr Quat<T> Quat<T>::operator+(const Quat<T>& _rhs) const noexcept
 	{
 		return Quat(
 			w + _rhs.w,
@@ -522,7 +522,7 @@ namespace SA
 	}
 
 	template <typename T>
-	Quat<T> Quat<T>::operator-(const Quat<T>& _rhs) const noexcept
+	constexpr Quat<T> Quat<T>::operator-(const Quat<T>& _rhs) const noexcept
 	{
 		return Quat(
 			w - _rhs.w,
@@ -557,7 +557,7 @@ namespace SA
 	}
 
 	template <typename T>
-	T Quat<T>::operator|(const Quat& _rhs) const noexcept
+	constexpr T Quat<T>::operator|(const Quat& _rhs) const noexcept
 	{
 		return Dot(*this, _rhs);
 	}
@@ -630,7 +630,7 @@ namespace SA
 	}
 
 	template <typename T>
-	constexpr Quat<T> operator/(typename std::remove_cv<T>::type _lhs, const Quat<T>& _rhs)
+	Quat<T> operator/(typename std::remove_cv<T>::type _lhs, const Quat<T>& _rhs)
 	{
 		SA_ASSERT((NotEquals0, _rhs.w), SA.Maths, L"Inverse scale W by 0!");
 		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths, L"Inverse scale X Axis by 0!");
