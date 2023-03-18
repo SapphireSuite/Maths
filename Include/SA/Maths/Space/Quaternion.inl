@@ -428,7 +428,7 @@ namespace SA
 //{ Dot
 
 	template <typename T>
-	constexpr T Quat<T>::Dot(const Quat<T>& _lhs, const Quat& _rhs) noexcept
+	T Quat<T>::Dot(const Quat<T>& _lhs, const Quat& _rhs) noexcept
 	{
 		return _lhs.w * _rhs.w +
 			_lhs.x * _rhs.x +
@@ -487,7 +487,7 @@ namespace SA
 	}
 
 	template <typename T>
-	constexpr Quat<T> Quat<T>::operator*(T _scale) const noexcept
+	Quat<T> Quat<T>::operator*(T _scale) const noexcept
 	{
 		return Quat(
 			w * _scale,
@@ -511,7 +511,7 @@ namespace SA
 	}
 
 	template <typename T>
-	constexpr Quat<T> Quat<T>::operator+(const Quat<T>& _rhs) const noexcept
+	Quat<T> Quat<T>::operator+(const Quat<T>& _rhs) const noexcept
 	{
 		return Quat(
 			w + _rhs.w,
@@ -522,7 +522,7 @@ namespace SA
 	}
 
 	template <typename T>
-	constexpr Quat<T> Quat<T>::operator-(const Quat<T>& _rhs) const noexcept
+	Quat<T> Quat<T>::operator-(const Quat<T>& _rhs) const noexcept
 	{
 		return Quat(
 			w - _rhs.w,

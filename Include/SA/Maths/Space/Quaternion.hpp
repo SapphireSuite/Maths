@@ -413,7 +413,7 @@ namespace SA
 		*
 		*	\return <b> Dot product </b> between _lhs and _rhs.
 		*/
-		static constexpr T Dot(const Quat& _lhs, const Quat& _rhs) noexcept;
+		static T Dot(const Quat& _lhs, const Quat& _rhs) noexcept;
 
 //}
 
@@ -512,7 +512,7 @@ namespace SA
 		*
 		*	\return new quaternion scaled.
 		*/
-		constexpr Quat operator*(T _scale) const noexcept;
+		Quat operator*(T _scale) const noexcept;
 
 		/**
 		*	\brief <b> Inverse Scale </b> each quaternion components by _scale.
@@ -530,7 +530,7 @@ namespace SA
 		*
 		*	\return new quaternion result.
 		*/
-		constexpr Quat operator+(const Quat& _rhs) const noexcept;
+		Quat operator+(const Quat& _rhs) const noexcept;
 
 		/**
 		*	\brief \b Subtract term by term quaternion values.
@@ -539,7 +539,7 @@ namespace SA
 		*
 		*	\return new quaternion result.
 		*/
-		constexpr Quat operator-(const Quat& _rhs) const noexcept;
+		Quat operator-(const Quat& _rhs) const noexcept;
 
 		/**
 		*	\brief \b Multiply quaternion to compute rotation.
@@ -788,7 +788,7 @@ namespace SA
 
 
 	template <>
-	constexpr float Quatf::Dot(const Quatf& _lhs, const Quatf& _rhs) noexcept;
+	float Quatf::Dot(const Quatf& _lhs, const Quatf& _rhs) noexcept;
 
 	template <>
 	Vec3<Degf> Quatf::ToEuler() const noexcept;
@@ -798,16 +798,16 @@ namespace SA
 
 
 	template <>
-	constexpr Quatf Quatf::operator*(float _scale) const noexcept;
+	Quatf Quatf::operator*(float _scale) const noexcept;
 
 	template <>
 	Quatf Quatf::operator/(float _scale) const;
 
 	template <>
-	constexpr Quatf Quatf::operator+(const Quatf& _rhs) const noexcept;
+	Quatf Quatf::operator+(const Quatf& _rhs) const noexcept;
 
 	template <>
-	constexpr Quatf Quatf::operator-(const Quatf& _rhs) const noexcept;
+	Quatf Quatf::operator-(const Quatf& _rhs) const noexcept;
 
 
 	template <>
@@ -845,7 +845,7 @@ namespace SA
 
 
 	template <>
-	constexpr double Quatd::Dot(const Quatd& _lhs, const Quatd& _rhs) noexcept;
+	double Quatd::Dot(const Quatd& _lhs, const Quatd& _rhs) noexcept;
 
 
 	template <>
@@ -856,16 +856,16 @@ namespace SA
 
 
 	template <>
-	constexpr Quatd Quatd::operator*(double _scale) const noexcept;
+	Quatd Quatd::operator*(double _scale) const noexcept;
 
 	template <>
 	Quatd Quatd::operator/(double _scale) const;
 
 	template <>
-	constexpr Quatd Quatd::operator+(const Quatd& _rhs) const noexcept;
+	Quatd Quatd::operator+(const Quatd& _rhs) const noexcept;
 
 	template <>
-	constexpr Quatd Quatd::operator-(const Quatd& _rhs) const noexcept;
+	Quatd Quatd::operator-(const Quatd& _rhs) const noexcept;
 
 
 	template <>

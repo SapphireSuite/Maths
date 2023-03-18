@@ -79,7 +79,7 @@ namespace SA
 
 
 	template <>
-	constexpr float Quatf::Dot(const Quatf& _lhs, const Quatf& _rhs) noexcept
+	float Quatf::Dot(const Quatf& _lhs, const Quatf& _rhs) noexcept
 	{
 		const __m128 lPack = _mm_load_ps(&_lhs.w);
 		const __m128 rPack = _mm_load_ps(&_rhs.w);
@@ -194,7 +194,7 @@ namespace SA
 
 
 	template <>
-	constexpr Quatf Quatf::operator*(float _scale) const noexcept
+	Quatf Quatf::operator*(float _scale) const noexcept
 	{
 		Quatf res;
 
@@ -222,7 +222,7 @@ namespace SA
 	}
 
 	template <>
-	constexpr Quatf Quatf::operator+(const Quatf& _rhs) const noexcept
+	Quatf Quatf::operator+(const Quatf& _rhs) const noexcept
 	{
 		Quat res;
 
@@ -235,7 +235,7 @@ namespace SA
 	}
 
 	template <>
-	constexpr Quatf Quatf::operator-(const Quatf& _rhs) const noexcept
+	Quatf Quatf::operator-(const Quatf& _rhs) const noexcept
 	{
 		Quat res;
 
@@ -392,7 +392,7 @@ namespace SA
 
 
 	template <>
-	constexpr double Quatd::Dot(const Quatd& _lhs, const Quatd& _rhs) noexcept
+	double Quatd::Dot(const Quatd& _lhs, const Quatd& _rhs) noexcept
 	{
 		const __m256d lPack = _mm256_load_pd(&_lhs.w);
 		const __m256d rPack = _mm256_load_pd(&_rhs.w);
@@ -509,7 +509,7 @@ namespace SA
 
 
 	template <>
-	constexpr Quatd Quatd::operator*(double _scale) const noexcept
+	Quatd Quatd::operator*(double _scale) const noexcept
 	{
 		Quat res;
 		
@@ -537,7 +537,7 @@ namespace SA
 	}
 
 	template <>
-	constexpr Quatd Quatd::operator+(const Quatd& _rhs) const noexcept
+	Quatd Quatd::operator+(const Quatd& _rhs) const noexcept
 	{
 		Quat res;
 
@@ -550,7 +550,7 @@ namespace SA
 	}
 
 	template <>
-	constexpr Quatd Quatd::operator-(const Quatd& _rhs) const noexcept
+	Quatd Quatd::operator-(const Quatd& _rhs) const noexcept
 	{
 		Quat res;
 
