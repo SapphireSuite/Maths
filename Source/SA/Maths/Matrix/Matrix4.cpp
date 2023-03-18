@@ -37,7 +37,7 @@ namespace SA
 	template <>
 	RMat4i RMat4i::operator/(int32_t _scale) const
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Mat4, L"Unscale matrix by 0 (division by 0)!");
 
 		Mat4 res;
 		int32_t* const fres = res.Data();
@@ -190,7 +190,7 @@ namespace SA
 	template <>
 	RMat4i& RMat4i::operator/=(int32_t _scale)
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Mat4, L"Unscale matrix by 0 (division by 0)!");
 
 		int32_t* const data = Data();
 
@@ -269,7 +269,7 @@ namespace SA
 	template <>
 	CMat4i CMat4i::operator/(int32_t _scale) const
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Mat4, L"Unscale matrix by 0 (division by 0)!");
 
 		Mat4 res;
 		int32_t* const fres = res.Data();
@@ -422,7 +422,7 @@ namespace SA
 	template <>
 	CMat4i& CMat4i::operator/=(int32_t _scale)
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Mat4, L"Unscale matrix by 0 (division by 0)!");
 
 		int32_t* const data = Data();
 
@@ -534,7 +534,7 @@ namespace SA
 		float* const data = res.Data();
 		const float det = Determinant();
 
-		SA_ASSERT((NotEquals0, det), SA.Maths, L"Determinant must be != 0 to compute inverse matrix");
+		SA_ASSERT((NotEquals0, det), SA.Maths.Mat4, L"Determinant must be != 0 to compute inverse matrix");
 
 		const float invDet = 1.0f / det;
 		const __m256 invDetP = _mm256_set1_ps(invDet);
@@ -895,7 +895,7 @@ namespace SA
 	template <>
 	RMat4f RMat4f::MakeRotation(const Quat<float>& _rot) noexcept
 	{
-		SA_WARN(_rot.IsNormalized(), SA.Maths, L"Quaternion should be normalized!");
+		SA_WARN(_rot.IsNormalized(), SA.Maths.Mat4, L"Quaternion should be normalized!");
 
 		/*
 			return Mat3f(
@@ -968,7 +968,7 @@ namespace SA
 	template <>
 	RMat4f RMat4f::operator/(float _scale) const
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Mat4, L"Unscale matrix by 0 (division by 0)!");
 
 		Mat4 res;
 		float* const fres = res.Data();
@@ -1117,7 +1117,7 @@ namespace SA
 	template <>
 	RMat4f& RMat4f::operator/=(float _scale)
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Mat4, L"Unscale matrix by 0 (division by 0)!");
 
 		float* const data = Data();
 
@@ -1172,22 +1172,22 @@ namespace SA
 	template <>
 	RMat4f operator/(float _lhs, const RMat4f& _rhs)
 	{
-		SA_ASSERT((NotEquals0, _rhs.e00), SA.Maths, L"Inverse scale matrix e00 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e01), SA.Maths, L"Inverse scale matrix e01 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e02), SA.Maths, L"Inverse scale matrix e02 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e03), SA.Maths, L"Inverse scale matrix e03 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e10), SA.Maths, L"Inverse scale matrix e10 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e11), SA.Maths, L"Inverse scale matrix e11 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e12), SA.Maths, L"Inverse scale matrix e12 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e13), SA.Maths, L"Inverse scale matrix e13 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e20), SA.Maths, L"Inverse scale matrix e20 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e21), SA.Maths, L"Inverse scale matrix e21 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e22), SA.Maths, L"Inverse scale matrix e22 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e23), SA.Maths, L"Inverse scale matrix e23 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e30), SA.Maths, L"Inverse scale matrix e30 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e31), SA.Maths, L"Inverse scale matrix e31 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e32), SA.Maths, L"Inverse scale matrix e32 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e33), SA.Maths, L"Inverse scale matrix e33 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e00), SA.Maths.Mat4, L"Inverse scale matrix e00 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e01), SA.Maths.Mat4, L"Inverse scale matrix e01 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e02), SA.Maths.Mat4, L"Inverse scale matrix e02 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e03), SA.Maths.Mat4, L"Inverse scale matrix e03 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e10), SA.Maths.Mat4, L"Inverse scale matrix e10 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e11), SA.Maths.Mat4, L"Inverse scale matrix e11 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e12), SA.Maths.Mat4, L"Inverse scale matrix e12 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e13), SA.Maths.Mat4, L"Inverse scale matrix e13 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e20), SA.Maths.Mat4, L"Inverse scale matrix e20 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e21), SA.Maths.Mat4, L"Inverse scale matrix e21 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e22), SA.Maths.Mat4, L"Inverse scale matrix e22 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e23), SA.Maths.Mat4, L"Inverse scale matrix e23 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e30), SA.Maths.Mat4, L"Inverse scale matrix e30 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e31), SA.Maths.Mat4, L"Inverse scale matrix e31 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e32), SA.Maths.Mat4, L"Inverse scale matrix e32 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e33), SA.Maths.Mat4, L"Inverse scale matrix e33 == 0!");
 
 
 		RMat4f res;
@@ -1271,7 +1271,7 @@ namespace SA
 	template <>
 	CMat4f CMat4f::MakeRotation(const Quat<float>& _rot) noexcept
 	{
-		SA_WARN(_rot.IsNormalized(), SA.Maths, L"Quaternion should be normalized!");
+		SA_WARN(_rot.IsNormalized(), SA.Maths.Mat4, L"Quaternion should be normalized!");
 
 		/*
 			return Mat3f(
@@ -1343,7 +1343,7 @@ namespace SA
 	template <>
 	CMat4f CMat4f::operator/(float _scale) const
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Mat4, L"Unscale matrix by 0 (division by 0)!");
 
 		Mat4 res;
 		float* const fres = res.Data();
@@ -1491,7 +1491,7 @@ namespace SA
 	template <>
 	CMat4f& CMat4f::operator/=(float _scale)
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Mat4, L"Unscale matrix by 0 (division by 0)!");
 
 		float* const data = Data();
 
@@ -1546,22 +1546,22 @@ namespace SA
 	template <>
 	CMat4f operator/(float _lhs, const CMat4f& _rhs)
 	{
-		SA_ASSERT((NotEquals0, _rhs.e00), SA.Maths, L"Inverse scale matrix e00 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e01), SA.Maths, L"Inverse scale matrix e01 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e02), SA.Maths, L"Inverse scale matrix e02 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e03), SA.Maths, L"Inverse scale matrix e03 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e10), SA.Maths, L"Inverse scale matrix e10 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e11), SA.Maths, L"Inverse scale matrix e11 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e12), SA.Maths, L"Inverse scale matrix e12 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e13), SA.Maths, L"Inverse scale matrix e13 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e20), SA.Maths, L"Inverse scale matrix e20 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e21), SA.Maths, L"Inverse scale matrix e21 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e22), SA.Maths, L"Inverse scale matrix e22 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e23), SA.Maths, L"Inverse scale matrix e23 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e30), SA.Maths, L"Inverse scale matrix e30 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e31), SA.Maths, L"Inverse scale matrix e31 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e32), SA.Maths, L"Inverse scale matrix e32 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e33), SA.Maths, L"Inverse scale matrix e33 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e00), SA.Maths.Mat4, L"Inverse scale matrix e00 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e01), SA.Maths.Mat4, L"Inverse scale matrix e01 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e02), SA.Maths.Mat4, L"Inverse scale matrix e02 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e03), SA.Maths.Mat4, L"Inverse scale matrix e03 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e10), SA.Maths.Mat4, L"Inverse scale matrix e10 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e11), SA.Maths.Mat4, L"Inverse scale matrix e11 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e12), SA.Maths.Mat4, L"Inverse scale matrix e12 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e13), SA.Maths.Mat4, L"Inverse scale matrix e13 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e20), SA.Maths.Mat4, L"Inverse scale matrix e20 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e21), SA.Maths.Mat4, L"Inverse scale matrix e21 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e22), SA.Maths.Mat4, L"Inverse scale matrix e22 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e23), SA.Maths.Mat4, L"Inverse scale matrix e23 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e30), SA.Maths.Mat4, L"Inverse scale matrix e30 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e31), SA.Maths.Mat4, L"Inverse scale matrix e31 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e32), SA.Maths.Mat4, L"Inverse scale matrix e32 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e33), SA.Maths.Mat4, L"Inverse scale matrix e33 == 0!");
 
 
 		CMat4f res;
@@ -1637,7 +1637,7 @@ namespace SA
 		double* const data = res.Data();
 		const double det = Determinant();
 
-		SA_ASSERT((NotEquals0, det), SA.Maths, L"Determinant must be != 0 to compute inverse matrix");
+		SA_ASSERT((NotEquals0, det), SA.Maths.Mat4, L"Determinant must be != 0 to compute inverse matrix");
 
 		const double invDet = 1.0f / det;
 		const __m256d invDetP = _mm256_set1_pd(invDet);
@@ -2063,7 +2063,7 @@ namespace SA
 	template <>
 	RMat4d RMat4d::MakeRotation(const Quat<double>& _rot) noexcept
 	{
-		SA_WARN(_rot.IsNormalized(), SA.Maths, L"Quaternion should be normalized!");
+		SA_WARN(_rot.IsNormalized(), SA.Maths.Mat4, L"Quaternion should be normalized!");
 
 		/*
 			return Mat3f(
@@ -2154,7 +2154,7 @@ namespace SA
 	template <>
 	RMat4d RMat4d::operator/(double _scale) const
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Mat4, L"Unscale matrix by 0 (division by 0)!");
 
 		Mat4 res;
 		double* const fres = res.Data();
@@ -2325,7 +2325,7 @@ namespace SA
 	template <>
 	RMat4d& RMat4d::operator/=(double _scale)
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Mat4, L"Unscale matrix by 0 (division by 0)!");
 
 		double* const data = Data();
 		const __m256d sPack = _mm256_set1_pd(_scale);
@@ -2403,22 +2403,22 @@ namespace SA
 	template <>
 	RMat4d operator/(double _lhs, const RMat4d& _rhs)
 	{
-		SA_ASSERT((NotEquals0, _rhs.e00), SA.Maths, L"Inverse scale matrix e00 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e01), SA.Maths, L"Inverse scale matrix e01 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e02), SA.Maths, L"Inverse scale matrix e02 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e03), SA.Maths, L"Inverse scale matrix e03 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e10), SA.Maths, L"Inverse scale matrix e10 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e11), SA.Maths, L"Inverse scale matrix e11 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e12), SA.Maths, L"Inverse scale matrix e12 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e13), SA.Maths, L"Inverse scale matrix e13 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e20), SA.Maths, L"Inverse scale matrix e20 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e21), SA.Maths, L"Inverse scale matrix e21 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e22), SA.Maths, L"Inverse scale matrix e22 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e23), SA.Maths, L"Inverse scale matrix e23 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e30), SA.Maths, L"Inverse scale matrix e30 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e31), SA.Maths, L"Inverse scale matrix e31 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e32), SA.Maths, L"Inverse scale matrix e32 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e33), SA.Maths, L"Inverse scale matrix e33 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e00), SA.Maths.Mat4, L"Inverse scale matrix e00 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e01), SA.Maths.Mat4, L"Inverse scale matrix e01 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e02), SA.Maths.Mat4, L"Inverse scale matrix e02 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e03), SA.Maths.Mat4, L"Inverse scale matrix e03 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e10), SA.Maths.Mat4, L"Inverse scale matrix e10 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e11), SA.Maths.Mat4, L"Inverse scale matrix e11 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e12), SA.Maths.Mat4, L"Inverse scale matrix e12 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e13), SA.Maths.Mat4, L"Inverse scale matrix e13 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e20), SA.Maths.Mat4, L"Inverse scale matrix e20 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e21), SA.Maths.Mat4, L"Inverse scale matrix e21 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e22), SA.Maths.Mat4, L"Inverse scale matrix e22 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e23), SA.Maths.Mat4, L"Inverse scale matrix e23 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e30), SA.Maths.Mat4, L"Inverse scale matrix e30 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e31), SA.Maths.Mat4, L"Inverse scale matrix e31 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e32), SA.Maths.Mat4, L"Inverse scale matrix e32 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e33), SA.Maths.Mat4, L"Inverse scale matrix e33 == 0!");
 
 		RMat4d res;
 		double* const fres = res.Data();
@@ -2504,7 +2504,7 @@ namespace SA
 	template <>
 	CMat4d CMat4d::MakeRotation(const Quat<double>& _rot) noexcept
 	{
-		SA_WARN(_rot.IsNormalized(), SA.Maths, L"Quaternion should be normalized!");
+		SA_WARN(_rot.IsNormalized(), SA.Maths.Mat4, L"Quaternion should be normalized!");
 
 		/*
 			return Mat3f(
@@ -2595,7 +2595,7 @@ namespace SA
 	template <>
 	CMat4d CMat4d::operator/(double _scale) const
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Mat4, L"Unscale matrix by 0 (division by 0)!");
 
 		Mat4 res;
 		double* const fres = res.Data();
@@ -2767,7 +2767,7 @@ namespace SA
 	template <>
 	CMat4d& CMat4d::operator/=(double _scale)
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Mat4, L"Unscale matrix by 0 (division by 0)!");
 
 		double* const data = Data();
 		const __m256d sPack = _mm256_set1_pd(_scale);
@@ -2845,22 +2845,22 @@ namespace SA
 	template <>
 	CMat4d operator/(double _lhs, const CMat4d& _rhs)
 	{
-		SA_ASSERT((NotEquals0, _rhs.e00), SA.Maths, L"Inverse scale matrix e00 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e01), SA.Maths, L"Inverse scale matrix e01 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e02), SA.Maths, L"Inverse scale matrix e02 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e03), SA.Maths, L"Inverse scale matrix e03 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e10), SA.Maths, L"Inverse scale matrix e10 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e11), SA.Maths, L"Inverse scale matrix e11 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e12), SA.Maths, L"Inverse scale matrix e12 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e13), SA.Maths, L"Inverse scale matrix e13 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e20), SA.Maths, L"Inverse scale matrix e20 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e21), SA.Maths, L"Inverse scale matrix e21 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e22), SA.Maths, L"Inverse scale matrix e22 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e23), SA.Maths, L"Inverse scale matrix e23 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e30), SA.Maths, L"Inverse scale matrix e30 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e31), SA.Maths, L"Inverse scale matrix e31 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e32), SA.Maths, L"Inverse scale matrix e32 == 0!");
-		SA_ASSERT((NotEquals0, _rhs.e33), SA.Maths, L"Inverse scale matrix e33 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e00), SA.Maths.Mat4, L"Inverse scale matrix e00 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e01), SA.Maths.Mat4, L"Inverse scale matrix e01 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e02), SA.Maths.Mat4, L"Inverse scale matrix e02 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e03), SA.Maths.Mat4, L"Inverse scale matrix e03 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e10), SA.Maths.Mat4, L"Inverse scale matrix e10 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e11), SA.Maths.Mat4, L"Inverse scale matrix e11 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e12), SA.Maths.Mat4, L"Inverse scale matrix e12 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e13), SA.Maths.Mat4, L"Inverse scale matrix e13 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e20), SA.Maths.Mat4, L"Inverse scale matrix e20 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e21), SA.Maths.Mat4, L"Inverse scale matrix e21 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e22), SA.Maths.Mat4, L"Inverse scale matrix e22 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e23), SA.Maths.Mat4, L"Inverse scale matrix e23 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e30), SA.Maths.Mat4, L"Inverse scale matrix e30 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e31), SA.Maths.Mat4, L"Inverse scale matrix e31 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e32), SA.Maths.Mat4, L"Inverse scale matrix e32 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e33), SA.Maths.Mat4, L"Inverse scale matrix e33 == 0!");
 
 		CMat4d res;
 		double* const fres = res.Data();

@@ -133,7 +133,7 @@ namespace SA
 	template <typename T, template <typename> typename... Args>
 	Tr<T, Args...> Tr<T, Args...>::Lerp(const Tr& _start, const Tr& _end, float _alpha) noexcept
 	{
-		SA_WARN(_alpha >= 0.0f && _alpha <= 1.0f, SA.Maths, (L"Alpha[%1] clamped to range [0, 1]! Use LerpUnclamped if intended instead."), _alpha);
+		SA_WARN(_alpha >= 0.0f && _alpha <= 1.0f, SA.Maths, (L"Alpha[%1] clamped to range [0, 1]! Use LerpUnclamped if intended instead.", _alpha));
 
 		return LerpUnclamped(_start, _end, std::clamp(_alpha, 0.0f, 1.0f));
 	}

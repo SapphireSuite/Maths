@@ -138,7 +138,7 @@ namespace SA
 	template <typename T>
 	Vec2<T>& Vec2<T>::Normalize()
 	{
-		SA_ASSERT((NotEquals, *this, Zero), SA.Maths, L"Normalize null vector!");
+		SA_ASSERT((NotEquals, *this, Zero), SA.Maths.Vec2, L"Normalize null vector!");
 
 		const T norm = Length();
 
@@ -182,7 +182,7 @@ namespace SA
 	template <typename T>
 	Vec2<T> Vec2<T>::ProjectOnToNormal(const Vec2& _normal) const noexcept
 	{
-		SA_WARN(_normal.IsNormalized(), SA.Maths, L"Normal should be normalized or use ProjectOnTo() instead!");
+		SA_WARN(_normal.IsNormalized(), SA.Maths.Vec2, L"Normal should be normalized or use ProjectOnTo() instead!");
 
 		return Dot(*this, _normal) *  _normal;
 	}
@@ -300,7 +300,7 @@ namespace SA
 	template <typename T>
 	Vec2<T> Vec2<T>::operator/(T _scale) const
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale vector by 0!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Vec2, L"Unscale vector by 0!");
 
 		return Vec2(x / _scale, y / _scale);
 	}
@@ -326,8 +326,8 @@ namespace SA
 	template <typename T>
 	Vec2<T> Vec2<T>::operator/(const Vec2& _rhs) const
 	{
-		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths, L"Divide X Axis value is 0!");
-		SA_ASSERT((NotEquals0, _rhs.y), SA.Maths, L"Divide Y Axis value is 0!");
+		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths.Vec2, L"Divide X Axis value is 0!");
+		SA_ASSERT((NotEquals0, _rhs.y), SA.Maths.Vec2, L"Divide Y Axis value is 0!");
 
 		return Vec2(x / _rhs.x, y / _rhs.y);
 	}
@@ -357,7 +357,7 @@ namespace SA
 	template <typename T>
 	Vec2<T>& Vec2<T>::operator/=(T _scale)
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale vector by 0!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Vec2, L"Unscale vector by 0!");
 		
 		x /= _scale;
 		y /= _scale;
@@ -395,8 +395,8 @@ namespace SA
 	template <typename T>
 	Vec2<T> Vec2<T>::operator/=(const Vec2& _rhs)
 	{
-		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths, L"Divide X Axis value is 0!");
-		SA_ASSERT((NotEquals0, _rhs.y), SA.Maths, L"Divide Y Axis value is 0!");
+		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths.Vec2, L"Divide X Axis value is 0!");
+		SA_ASSERT((NotEquals0, _rhs.y), SA.Maths.Vec2, L"Divide Y Axis value is 0!");
 
 		x /= _rhs.x;
 		y /= _rhs.y;
@@ -417,8 +417,8 @@ namespace SA
 	template <typename T>
 	Vec2<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec2<T>& _rhs)
 	{
-		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths, L"Inverse scale X Axis by 0!");
-		SA_ASSERT((NotEquals0, _rhs.y), SA.Maths, L"Inverse scale Y Axis by 0!");
+		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths.Vec2, L"Inverse scale X Axis by 0!");
+		SA_ASSERT((NotEquals0, _rhs.y), SA.Maths.Vec2, L"Inverse scale Y Axis by 0!");
 
 		return Vec2<T>(_lhs / _rhs.x, _lhs / _rhs.y);
 	}
