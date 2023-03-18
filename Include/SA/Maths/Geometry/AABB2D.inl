@@ -9,11 +9,11 @@ namespace SA
 		min{ _min },
 		max{ _max }
 	{
-		SA_ASSERT(Default, SA/Maths/AABB, IsValid(), L"Initialize AABB with invalid parameters: min must be < to max.", ToWString(*this));
+		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Initialize AABB with invalid parameters: min must be < to max!");
 	}
 
 	template <typename T>
-	AABB2D<T>::AABB2D(const AABB2D& _first, const AABB2D& _second) noexcept
+	AABB2D<T>::AABB2D(const AABB2D& _first, const AABB2D& _second)
 	{
 		*this = Merge(_first, _second);
 	}
@@ -65,7 +65,8 @@ namespace SA
 	template <typename T>
 	bool AABB2D<T>::IsCollidingX(const AABB2D& _other) const
 	{
-		SA_ASSERT(Default, SA/Maths/AABB, IsValid(), L"Invalid AABB: min must be < to max.", ToWString(*this));
+		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT((IsValid, _other), SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
 
 		// Check out of X bound.
 		return !(min.x > _other.max.x || max.x < _other.min.x);
@@ -74,7 +75,8 @@ namespace SA
 	template <typename T>
 	bool AABB2D<T>::IsCollidingY(const AABB2D& _other) const
 	{
-		SA_ASSERT(Default, SA/Maths/AABB, IsValid(), L"Invalid AABB: min must be < to max.", ToWString(*this));
+		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT((IsValid, _other), SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
 
 		// Check out of Y bound.
 		return !(min.y > _other.max.y || max.y < _other.min.y);
@@ -94,7 +96,7 @@ namespace SA
 	template <typename T>
 	float AABB2D<T>::Width() const
 	{
-		SA_ASSERT(Default, SA/Maths/AABB, IsValid(), L"Invalid AABB: min must be < to max.", ToWString(*this));
+		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
 
 		return max.x - min.x;
 	}
@@ -102,7 +104,7 @@ namespace SA
 	template <typename T>
 	float AABB2D<T>::Height() const
 	{
-		SA_ASSERT(Default, SA/Maths/AABB, IsValid(), L"Invalid AABB: min must be < to max.", ToWString(*this));
+		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
 
 		return max.y - min.y;
 	}
@@ -110,7 +112,7 @@ namespace SA
 	template <typename T>
 	Vec2<T> AABB2D<T>::Center() const
 	{
-		SA_ASSERT(Default, SA/Maths/AABB, IsValid(), L"Invalid AABB: min must be < to max.", ToWString(*this));
+		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
 
 		return min + (max - min) / 2.0f;
 	}
@@ -125,10 +127,10 @@ namespace SA
 
 
 	template <typename T>
-	AABB2D<T> AABB2D<T>::Merge(const AABB2D& _first, const AABB2D& _second) noexcept
+	AABB2D<T> AABB2D<T>::Merge(const AABB2D& _first, const AABB2D& _second)
 	{
-		SA_ASSERT(Default, SA/Maths/AABB, _first.IsValid(), L"Invalid AABB: min must be < to max.", ToWString(_first));
-		SA_ASSERT(Default, SA/Maths/AABB, _second.IsValid(), L"Invalid AABB: min must be < to max.", ToWString(_second));
+		SA_ASSERT((IsValid, _first), SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT((IsValid, _second), SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
 
 		AABB2D merged;
 

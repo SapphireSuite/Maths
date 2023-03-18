@@ -136,7 +136,7 @@ namespace SA
 	template <typename T, MatrixMajor major>
 	T& Mat4<T, major>::At(uint32_t _index)
 	{
-		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 15u);
+		SA_ASSERT((OutOfRange, _index, 0u, 15u), SA.Maths);
 
 		return Data()[_index];
 
@@ -145,7 +145,7 @@ namespace SA
 	template <typename T, MatrixMajor major>
 	const T& Mat4<T, major>::At(uint32_t _index) const
 	{
-		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 15u);
+		SA_ASSERT((OutOfRange, _index, 0u, 15u), SA.Maths);
 
 		return Data()[_index];
 	}
@@ -153,8 +153,8 @@ namespace SA
 	template <typename T, MatrixMajor major>
 	T& Mat4<T, major>::At(uint32_t _x, uint32_t _y)
 	{
-		SA_ASSERT(OutOfRange, SA/Maths, _x, 0u, 4u);
-		SA_ASSERT(OutOfRange, SA/Maths, _y, 0u, 4u);
+		SA_ASSERT((OutOfRange, _x, 0u, 4u), SA.Maths);
+		SA_ASSERT((OutOfRange, _y, 0u, 4u), SA.Maths);
 
 		return Data()[_x * 4u + _y];
 	}
@@ -162,8 +162,8 @@ namespace SA
 	template <typename T, MatrixMajor major>
 	const T& Mat4<T, major>::At(uint32_t _x, uint32_t _y) const
 	{
-		SA_ASSERT(OutOfRange, SA/Maths, _x, 0u, 4u);
-		SA_ASSERT(OutOfRange, SA/Maths, _y, 0u, 4u);
+		SA_ASSERT((OutOfRange, _x, 0u, 4u), SA.Maths);
+		SA_ASSERT((OutOfRange, _y, 0u, 4u), SA.Maths);
 
 		return Data()[_x * 4u + _y];
 	}
@@ -245,7 +245,7 @@ namespace SA
 	{
 		const T det = Determinant();
 
-		SA_ASSERT(NotEquals0, SA/Maths, det, L"Inverse matrix with determinant == 0");
+		SA_ASSERT((NotEquals0, det), SA.Maths, L"Determinant must be != 0 to compute inverse matrix");
 
 		Mat4 result;
 
@@ -470,7 +470,7 @@ namespace SA
 	template <typename T, MatrixMajor major>
 	Mat4<T, major> Mat4<T, major>::MakeRotation(const Quat<T>& _rotation) noexcept
 	{
-		SA_WARN(_rotation.IsNormalized(), SA/Maths, L"Quaternion should be normalized!");
+		SA_WARN(_rotation.IsNormalized(), SA.Maths, L"Quaternion should be normalized!");
 
 		// Sources: https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation
 
@@ -582,7 +582,7 @@ namespace SA
 	template<typename TIn>
 	Mat4<T, major> Mat4<T, major>::operator/(TIn _scale) const
 	{
-		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
 
 		return Mat4(
 			(T)(e00 / _scale), (T)(e01 / _scale), (T)(e02 / _scale), (T)(e03 / _scale),
@@ -700,7 +700,7 @@ namespace SA
 	template<typename TIn>
 	Mat4<T, major>& Mat4<T, major>::operator/=(TIn _scale)
 	{
-		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale matrix by 0 (division by 0)!");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale matrix by 0 (division by 0)!");
 
 		e00 /= _scale;
 		e01 /= _scale;
@@ -801,22 +801,22 @@ namespace SA
 	template <typename TIn, typename T, MatrixMajor major>
 	Mat4<T, major> operator/(TIn _lhs, const Mat4<T, major>& _rhs)
 	{
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e00, L"Inverse scale matrix e00 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e01, L"Inverse scale matrix e01 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e02, L"Inverse scale matrix e02 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e03, L"Inverse scale matrix e03 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e10, L"Inverse scale matrix e10 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e11, L"Inverse scale matrix e11 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e12, L"Inverse scale matrix e12 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e13, L"Inverse scale matrix e13 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e20, L"Inverse scale matrix e20 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e21, L"Inverse scale matrix e21 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e22, L"Inverse scale matrix e22 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e23, L"Inverse scale matrix e23 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e30, L"Inverse scale matrix e30 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e31, L"Inverse scale matrix e31 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e32, L"Inverse scale matrix e32 == 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.e33, L"Inverse scale matrix e33 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e00), SA.Maths, L"Inverse scale matrix e00 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e01), SA.Maths, L"Inverse scale matrix e01 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e02), SA.Maths, L"Inverse scale matrix e02 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e03), SA.Maths, L"Inverse scale matrix e03 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e10), SA.Maths, L"Inverse scale matrix e10 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e11), SA.Maths, L"Inverse scale matrix e11 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e12), SA.Maths, L"Inverse scale matrix e12 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e13), SA.Maths, L"Inverse scale matrix e13 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e20), SA.Maths, L"Inverse scale matrix e20 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e21), SA.Maths, L"Inverse scale matrix e21 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e22), SA.Maths, L"Inverse scale matrix e22 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e23), SA.Maths, L"Inverse scale matrix e23 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e30), SA.Maths, L"Inverse scale matrix e30 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e31), SA.Maths, L"Inverse scale matrix e31 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e32), SA.Maths, L"Inverse scale matrix e32 == 0!");
+		SA_ASSERT((NotEquals0, _rhs.e33), SA.Maths, L"Inverse scale matrix e33 == 0!");
 
 		return Mat4<T, major>(
 			_lhs / _rhs.e00, _lhs / _rhs.e01, _lhs / _rhs.e02, _lhs / _rhs.e03,

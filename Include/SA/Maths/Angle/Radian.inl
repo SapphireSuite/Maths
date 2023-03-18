@@ -72,7 +72,7 @@ namespace SA
 	template <typename T>
 	Rad<T> Rad<T>::operator/(T _scale) const
 	{
-		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale Rad by 0 (division by 0).");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale Rad by 0 (division by 0).");
 
 		return Rad(mHandle / _scale);
 	}
@@ -105,7 +105,7 @@ namespace SA
 	template <typename T>
 	Rad<T>& Rad<T>::operator/=(T _scale)
 	{
-		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale Rad by 0 (division by 0).");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale Rad by 0 (division by 0).");
 
 		mHandle /= _scale;
 

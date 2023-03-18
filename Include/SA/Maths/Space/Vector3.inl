@@ -124,7 +124,7 @@ namespace SA
 	template <typename T>
 	T& Vec3<T>::operator[](uint32_t _index)
 	{
-		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 2u);
+		SA_ASSERT((OutOfRange, _index, 0u, 2u), SA.Maths);
 
 		return Data()[_index];
 	}
@@ -132,7 +132,7 @@ namespace SA
 	template <typename T>
 	const T& Vec3<T>::operator[](uint32_t _index) const
 	{
-		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 2u);
+		SA_ASSERT((OutOfRange, _index, 0u, 2u), SA.Maths);
 
 		return Data()[_index];
 	}
@@ -157,7 +157,7 @@ namespace SA
 	template <typename T>
 	Vec3<T>& Vec3<T>::Normalize()
 	{
-		SA_ASSERT(NotEquals, SA/Maths, *this, Zero, L"Normalize null vector!");
+		SA_ASSERT((NotEquals, *this, Zero), SA.Maths, L"Normalize null vector!");
 
 		const T norm = Length();
 
@@ -202,7 +202,7 @@ namespace SA
 	template <typename T>
 	Vec3<T> Vec3<T>::ProjectOnToNormal(const Vec3& _normal) const noexcept
 	{
-		SA_WARN(_normal.IsNormalized(), SA/Maths, L"Normal should be normalized or use ProjectOnTo() instead!");
+		SA_WARN(_normal.IsNormalized(), SA.Maths, L"Normal should be normalized or use ProjectOnTo() instead!");
 
 		return Dot(*this, _normal) * _normal;
 	}
@@ -331,7 +331,7 @@ namespace SA
 	template <typename T>
 	Vec3<T> Vec3<T>::operator/(T _scale) const
 	{
-		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale vector by 0 (division by 0).");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale vector by 0 (division by 0).");
 
 		return Vec3(
 			x / _scale,
@@ -373,9 +373,9 @@ namespace SA
 	template <typename T>
 	constexpr  Vec3<T> Vec3<T>::operator/(const Vec3& _rhs) const
 	{
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.x, L"Divide X Axis value by 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.y, L"Divide Y Axis value by 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.z, L"Divide Z Axis value by 0!");
+		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths, L"Divide X Axis value by 0!");
+		SA_ASSERT((NotEquals0, _rhs.y), SA.Maths, L"Divide Y Axis value by 0!");
+		SA_ASSERT((NotEquals0, _rhs.z), SA.Maths, L"Divide Z Axis value by 0!");
 
 		return Vec3(
 			x / _rhs.x,
@@ -410,7 +410,7 @@ namespace SA
 	template <typename T>
 	Vec3<T>& Vec3<T>::operator/=(T _scale)
 	{
-		SA_ASSERT(NotEquals0, SA/Maths, _scale, L"Unscale vector by 0 (division by 0).");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale vector by 0 (division by 0).");
 
 		x /= _scale;
 		y /= _scale;
@@ -452,9 +452,9 @@ namespace SA
 	template <typename T>
 	Vec3<T> Vec3<T>::operator/=(const Vec3& _rhs)
 	{
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.x, L"Divide X Axis value by 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.y, L"Divide Y Axis value by 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.z, L"Divide Z Axis value by 0!");
+		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths, L"Divide X Axis value by 0!");
+		SA_ASSERT((NotEquals0, _rhs.y), SA.Maths, L"Divide Y Axis value by 0!");
+		SA_ASSERT((NotEquals0, _rhs.z), SA.Maths, L"Divide Z Axis value by 0!");
 
 		x /= _rhs.x;
 		y /= _rhs.y;
@@ -475,9 +475,9 @@ namespace SA
 	template <typename T>
 	constexpr Vec3<T> operator/(typename std::remove_cv<T>::type _lhs, const Vec3<T>& _rhs)
 	{
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.x, L"Divide X Axis value by 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.y, L"Divide Y Axis value by 0!");
-		SA_ASSERT(NotEquals0, SA/Maths, _rhs.z, L"Divide Z Axis value by 0!");
+		SA_ASSERT((NotEquals0, _rhs.x), SA.Maths, L"Divide X Axis value by 0!");
+		SA_ASSERT((NotEquals0, _rhs.y), SA.Maths, L"Divide Y Axis value by 0!");
+		SA_ASSERT((NotEquals0, _rhs.z), SA.Maths, L"Divide Z Axis value by 0!");
 
 		return Vec3<T>(_lhs / _rhs.x, _lhs / _rhs.y, _lhs / _rhs.z);
 	}

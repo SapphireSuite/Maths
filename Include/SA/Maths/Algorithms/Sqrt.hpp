@@ -35,7 +35,7 @@ namespace SA
 		template <typename T>
 		T Sqrt(T _in)
 		{
-			SA_ASSERT(Default, SA/Maths, _in >= T(0), L"Compute square root of a negative number!");
+			SA_ASSERT((Default, _in >= T(0)), SA.Maths, (L"Compute square root of negative number: [%1]", _in));
 
 			return std::sqrt(_in);
 		}

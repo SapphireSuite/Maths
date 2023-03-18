@@ -55,7 +55,7 @@ namespace SA
 		 * @param _first 	First AABB to merge.
 		 * @param _second 	Second AABB to merge.
 		 */
-		AABB3D(const AABB3D& _first, const AABB3D& _second) noexcept;
+		AABB3D(const AABB3D& _first, const AABB3D& _second);
 
 		/**
 		 * @brief Constructor from AABB2D.
@@ -198,7 +198,7 @@ namespace SA
 		 * 
 		 * @return AABB3D 	Big AABB box from merge.
 		 */
-		static AABB3D Merge(const AABB3D& _first, const AABB3D& _second) noexcept;
+		static AABB3D Merge(const AABB3D& _first, const AABB3D& _second);
 
 	};
 

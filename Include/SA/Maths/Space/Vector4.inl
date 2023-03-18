@@ -114,7 +114,7 @@ namespace SA
 	template <typename T>
 	T& Vec4<T>::operator[](uint32_t _index)
 	{
-		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 3u);
+		SA_ASSERT((OutOfRange, _index, 0u, 3u), SA.Maths);
 
 		return Data()[_index];
 	}
@@ -122,7 +122,7 @@ namespace SA
 	template <typename T>
 	const T& Vec4<T>::operator[](uint32_t _index) const
 	{
-		SA_ASSERT(OutOfRange, SA/Maths, _index, 0u, 3u);
+		SA_ASSERT((OutOfRange, _index, 0u, 3u), SA.Maths);
 
 		return Data()[_index];
 	}

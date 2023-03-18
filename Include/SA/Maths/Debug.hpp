@@ -18,7 +18,7 @@
 
 /// @cond ignore
 
-#if SA_LOGGER_IMPL
+#if SA_LOGGER_IMPL || defined(DOXYGEN)
 
 	// Add Sapphire Logger if implementation linked
 	#include <SA/Collections/Debug>
@@ -35,8 +35,6 @@
 
 
 	#define SA_ASSERT(...) {}
-
-	#define SA_ASSERT_EXEC(_type, _chan, _exec, ...) { _exec; }
 
 #endif
 
