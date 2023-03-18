@@ -71,7 +71,7 @@ namespace SA
 	template <typename T>
 	Deg<T> Deg<T>::operator/(T _scale) const
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale Deg by 0 (division by 0).");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Deg, L"Unscale Deg by 0 (division by 0).");
 
 		return Deg(mHandle / _scale);
 	}
@@ -104,7 +104,7 @@ namespace SA
 	template <typename T>
 	Deg<T>& Deg<T>::operator/=(T _scale)
 	{
-		SA_ASSERT((NotEquals0, _scale), SA.Maths, L"Unscale Deg by 0 (division by 0).");
+		SA_ASSERT((NotEquals0, _scale), SA.Maths.Deg, L"Unscale Deg by 0 (division by 0).");
 
 		mHandle /= _scale;
 

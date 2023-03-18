@@ -9,7 +9,7 @@ namespace SA
 		min{ _min },
 		max{ _max }
 	{
-		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Initialize AABB with invalid parameters: min must be < to max!");
+		SA_ASSERT(IsThisValid, SA.Maths.AABB.3D, L"Initialize AABB with invalid parameters: min must be < to max!");
 	}
 
 	template <typename T>
@@ -64,8 +64,8 @@ namespace SA
 	template <typename T>
 	bool AABB3D<T>::IsCollidingX(const AABB3D& _other) const
 	{
-		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
-		SA_ASSERT((IsValid, _other), SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT(IsThisValid, SA.Maths.AABB.3D, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT((IsValid, _other), SA.Maths.AABB.3D, L"Invalid AABB: min must be < to max!");
 
 		// Check out of X bound.
 		return !(min.x > _other.max.x || max.x < _other.min.x);
@@ -74,8 +74,8 @@ namespace SA
 	template <typename T>
 	bool AABB3D<T>::IsCollidingY(const AABB3D& _other) const
 	{
-		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
-		SA_ASSERT((IsValid, _other), SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT(IsThisValid, SA.Maths.AABB.3D, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT((IsValid, _other), SA.Maths.AABB.3D, L"Invalid AABB: min must be < to max!");
 
 		// Check out of Y bound.
 		return !(min.y > _other.max.y || max.y < _other.min.y);
@@ -84,8 +84,8 @@ namespace SA
 	template <typename T>
 	bool AABB3D<T>::IsCollidingZ(const AABB3D& _other) const
 	{
-		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
-		SA_ASSERT((IsValid, _other), SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT(IsThisValid, SA.Maths.AABB.3D, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT((IsValid, _other), SA.Maths.AABB.3D, L"Invalid AABB: min must be < to max!");
 
 		// Check out of Z bound.
 		return !(min.z > _other.max.z || max.z < _other.min.z);
@@ -105,7 +105,7 @@ namespace SA
 	template <typename T>
 	float AABB3D<T>::Width() const
 	{
-		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT(IsThisValid, SA.Maths.AABB.3D, L"Invalid AABB: min must be < to max!");
 
 		return max.x - min.x;
 	}
@@ -113,7 +113,7 @@ namespace SA
 	template <typename T>
 	float AABB3D<T>::Height() const
 	{
-		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT(IsThisValid, SA.Maths.AABB.3D, L"Invalid AABB: min must be < to max!");
 
 		return max.y - min.y;
 	}
@@ -121,7 +121,7 @@ namespace SA
 	template <typename T>
 	float AABB3D<T>::Depth() const
 	{
-		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT(IsThisValid, SA.Maths.AABB.3D, L"Invalid AABB: min must be < to max!");
 
 		return max.z - min.z;
 	}
@@ -129,7 +129,7 @@ namespace SA
 	template <typename T>
 	Vec3<T> AABB3D<T>::Center() const
 	{
-		SA_ASSERT(IsThisValid, SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT(IsThisValid, SA.Maths.AABB.3D, L"Invalid AABB: min must be < to max!");
 
 		return min + (max - min) / 2.0f;
 	}
@@ -146,8 +146,8 @@ namespace SA
 	template <typename T>
 	AABB3D<T> AABB3D<T>::Merge(const AABB3D& _first, const AABB3D& _second)
 	{
-		SA_ASSERT((IsValid, _first), SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
-		SA_ASSERT((IsValid, _second), SA/Maths/AABB, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT((IsValid, _first), SA.Maths.AABB.3D, L"Invalid AABB: min must be < to max!");
+		SA_ASSERT((IsValid, _second), SA.Maths.AABB.3D, L"Invalid AABB: min must be < to max!");
 
 		AABB3D merged;
 
