@@ -30,6 +30,10 @@ target_link_libraries(<target> <link> SA_Maths)
 
 
 
-## Authors
+# Authors
 
 **Maxime "mrouffet" ROUFFET** - main developer (maximerouffet@gmail.com)
+
+## Special Thanks
+
+[Guillaume JUSTE](https://github.com/GuillaumeJuste) - LookAt/View/InverseView matrix optimization.

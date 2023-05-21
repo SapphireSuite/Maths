@@ -364,6 +364,39 @@ namespace SA
 		static Mat4 MakeScale(const Vec3<T>& _scale) noexcept;
 
 		/**
+		 *	\brief Make <b> LookAt matrix </b> from center, target and up.
+		 * 
+		 *	\param[in] _eye		Center (camera).
+		 *	\param[in] _target	Target to look at.
+		 *	\param[in] _up		Up vector (camera).
+		 *
+		 * 	\returns LookAt matrix.
+		*/
+		static Mat4 MakeLookAt(const Vec3<T>& _eye, const Vec3<T>& _target, const Vec3<T>& _up);
+
+		/**
+		 * \brief Make <b> view matrix </b> for camera.
+		 * 
+		 * @param _eye 			Camera's world position
+		 * @param _forward 		Camera forward vector
+		 * @param _up 			Camera's up vector.
+		 * 
+		 * @return Inverse View matrix. 
+		 */
+		// static Mat4 MakeView(const Vec3<T>& _eye, const Vec3<T>& _forward, const Vec3<T>& _up);
+
+		/**
+		 * \brief Make <b> inverse view matrix </b> for camera.
+		 * 
+		 * @param _eye 			Camera's world position
+		 * @param _forward 		Camera forward vector
+		 * @param _up 			Camera's up vector.
+		 * 
+		 * @return Inverse View matrix. 
+		 */
+		static Mat4 MakeInverseView(const Vec3<T>& _eye, const Vec3<T>& _forward, const Vec3<T>& _up);
+
+		/**
 		*	\brief Make <b> perspective matrix </b>.
 		*
 		*	\param[in] _fov			Perspective FOV.

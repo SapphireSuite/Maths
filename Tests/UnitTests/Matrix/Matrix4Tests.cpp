@@ -487,6 +487,17 @@ namespace SA::UT::Matrix4
 		mScale.e11 *= vScale.y;
 		mScale.e22 *= vScale.z;
 		EXPECT_EQ((Mat4T::MakeScale(vScale)), mScale);
+
+
+		// Camera
+		if constexpr (std::is_floating_point_v<T>)
+		{
+			const Mat4T mCameraTransform = mTr * mRot;
+
+			// EXPECT_MAT4_NEAR((Mat4T::MakeView(vTr, q1 * Vec3<T>::forward, q1 * Vec3<T>::up)), mCameraTransform, 0.00001);
+			EXPECT_MAT4_NEAR((Mat4T::MakeInverseView(vTr, q1 * Vec3<T>::Forward, q1 * Vec3<T>::Up)),
+				mCameraTransform.GetInversed(), 0.00001);
+		}
 	}
 
 	TYPED_TEST(Matrix4Test, Operators)

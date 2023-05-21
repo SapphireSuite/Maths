@@ -508,6 +508,49 @@ namespace SA
 
 
 	template <typename T, MatrixMajor major>
+	Mat4<T, major> Mat4<T, major>::MakeLookAt(const Vec3<T>& _eye, const Vec3<T>& _target, const Vec3<T>& _up)
+	{
+		const Vec3<T> forward = (_target - _eye).Normalize();
+
+		return MakeInverseView(_eye, forward, _up);
+	}
+
+	/*
+	template <typename T, MatrixMajor major>
+	Mat4<T, major> Mat4<T, major>::MakeView(const Vec3<T>& _eye, const Vec3<T>& _forward, const Vec3<T>& _up)
+	{
+		const Vec3<T> right = Vec3<T>::Cross(_up, _forward).Normalize();
+
+		return Mat4(
+			right.x, _up.x, _forward.x, _eye.x,
+			right.y, _up.y, _forward.y, _eye.y,
+			right.z, _up.z, _forward.z, _eye.z,
+			T(0), T(0), T(0) , T(1)
+		);
+	}
+	*/
+
+	template <typename T, MatrixMajor major>
+	Mat4<T, major> Mat4<T, major>::MakeInverseView(const Vec3<T>& _eye, const Vec3<T>& _forward, const Vec3<T>& _up)
+	{
+		const Vec3<T> right = Vec3<T>::Cross(_up, _forward).Normalize();
+
+		const Vec3<T> translation = Vec3(
+			Vec3<T>::Dot(_eye, right),
+			Vec3<T>::Dot(_eye, _up),
+			Vec3<T>::Dot(_eye, _forward)
+		);
+
+		return Mat4(
+			right.x,	right.y,	right.z,	-translation.x,
+			_up.x,		_up.y,		_up.z,		-translation.y,
+			_forward.x,	_forward.y,	_forward.z,	-translation.z,
+			T(0),		 T(0),		T(0),		T(1)
+		);
+	}
+
+
+	template <typename T, MatrixMajor major>
 	Mat4<T, major> Mat4<T, major>::MakePerspective(T _fov, T _aspect, T _near, T _far) noexcept
 	{
 		// TODO: Clean.
