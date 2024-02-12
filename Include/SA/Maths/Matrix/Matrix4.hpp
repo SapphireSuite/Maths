@@ -406,7 +406,7 @@ namespace SA
 		*
 		*	\return perspective matrix.
 		*/
-		static Mat4 MakePerspective(T _fov = T(90.0), T _aspect = T(1.0), T _near = T(0.35), T _far = T(10.0)) noexcept;
+		static Mat4 MakePerspective(T _fov = T(90.0), T _aspect = T(1.0), T _near = T(0.35), T _far = T(10.0), bool _bInvertedZ = false) noexcept;
 
 //}
 
