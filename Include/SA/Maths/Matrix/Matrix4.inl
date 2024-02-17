@@ -551,34 +551,22 @@ namespace SA
 
 
 	template <typename T, MatrixMajor major>
-	Mat4<T, major> Mat4<T, major>::MakePerspective(T _fov, T _aspect, T _near, T _far, bool _bInvertedZ) noexcept
+	Mat4<T, major> Mat4<T, major>::MakePerspective(T _fov, T _aspect, T _near, T _far) noexcept
 	{
 		const T focalLength = T(1) / std::tan(Maths::DegToRad<T> * _fov / T(2));
 
-		if (_bInvertedZ)
-		{
-			//const T A = _near / (_far - _near);
-			//const T B = (_far * _near) / (_far - _near);
+		/**
+		*	Vulkan/DX12 matrix
+		*	Sources: https://youtu.be/U0_ONQQ5ZNM
+		*	https://computergraphics.stackexchange.com/questions/12448/vulkan-perspective-matrix-vs-opengl-perspective-matrix
+		*/
 
-			return Mat4(
-				_aspect / focalLength,	0,						0,		0,
-				0,						T(1) / focalLength,		0,		0,
-				0,						0,						0,		(_far - _near) / (_far * _near) /* 1 / B */,
-				0,						0,						-1,		(_far - _near) / (_far * _far - _far) /* A / B */
-			);
-
-		}
-		else
-		{
-			// GLM implementation.
-
-			return Mat4(
-				focalLength / _aspect,	0,					0,									0,
-				0,						focalLength,		0,									0,
-				0,						0,					-(_far + _near) / (_far - _near),	-(2 * _far * _near) / (_far - _near),
-				0,						0,					-1,									0
-			);
-		}
+		return Mat4(
+			focalLength / _aspect,	0,					0,									0,
+			0,						focalLength,		0,									0,
+			0,						0,					_far / (_far - _near),				-(_far * _near) / (_far - _near),
+			0,						0,					1,									0
+		);
 	}
 
 //}
