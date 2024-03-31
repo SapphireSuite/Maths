@@ -7,6 +7,8 @@
 
 #include <SA/Maths/Space/Vector2.hpp>
 
+#include <SA/Support/Pragma.hpp>
+
 /**
 *	\file Rectangle2D.hpp
 *
@@ -27,6 +29,8 @@ namespace SA
 	template <typename T>
 	struct Rect2D
 	{
+		SA_PRAGMA_SDWARN_MSVC(4201)
+
 		union
 		{
 			/// offset.
@@ -56,6 +60,8 @@ namespace SA
 				T height;
 			};
 		};
+
+		SA_PRAGMA_EDWARN_MSVC()
 
 		/// Default constructor.
 		Rect2D() = default;

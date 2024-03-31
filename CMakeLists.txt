@@ -21,6 +21,9 @@ add_library(SA_Maths STATIC)
 SA_ConfigureTarget(SA_Maths)
 SA_TargetSources(SA_Maths)
 
+### Temp required to fix MSVC C4201 in Rectangle2D.hpp
+target_link_libraries(SA_Maths PUBLIC SA_Support)
+
 
 
 # Option
@@ -37,7 +40,7 @@ endif()
 option(SA_MATHS_INTRINSICS_OPT "Should build using intrinsics" OFF)
 
 if(SA_MATHS_INTRINSICS_OPT)
-	target_link_libraries(SA_Maths PUBLIC SA_Support)
+	#target_link_libraries(SA_Maths PUBLIC SA_Support)
 	target_compile_definitions(SA_Maths PUBLIC SA_MATHS_INTRINSICS_OPT)
 	SA_SetIntrinsicsFlags(SA_Maths)
 endif()
